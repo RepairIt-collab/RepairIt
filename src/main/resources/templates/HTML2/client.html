@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/Outil.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Maintenance.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <title>Repair-It</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+        var t=document.querySelectorAll(".TaMe");
+        console.log(t.length)  
+    </script>
+
+</head>
+<body class="bg custom-bg2">
+    
+      <!-- NAV -->
+    <nav class=" navbar navbar-expand-lg position-fixed w-100" style="background-color: #021c44; z-index: 10;">
+        <div class="container-fluid">
+            <div class="col-md-2">
+                <a th:href="@{/Accueil}" class="navbar-brand" > 
+                    <img th:src="@{/images/Outil.png}"> 
+                    <img th:src="@{/images/Repair-It 1.png}">
+                    <i class=""></i>
+                </a>
+            </div>            
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" style="background-color: #00b2ff;">
+                <span class="fas fa-wrench" style="color: #021c44;"></span>
+            </button>
+             <div class="collapse navbar-collapse justify-content-center" id="menu">
+                <ul class="navbar-nav m">
+                    <li class="nav-item">
+                        <button  id="nav1" class="nav-link"> Maintenance</button >
+                    </li>
+                    <li class="nav-item me-3">
+                        <button   id="nav2" class="nav-link " >Equipements</button >
+                    </li>
+                    <li class="nav-item me-3">
+                        <a th:href="@{/pageChat}" id="nav3" class="nav-link " >Message</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <button  class="nav-link ">Formation</button>
+                    </li>
+                    <li class="nav-item me-3">
+                        <button   class="nav-link ">Boutique</button>
+                    </li>
+                </ul>
+             </div>
+             <ul class="navbar-icons mt-3">
+                <img th:src="@{/images/ecrou.png}" alt="Icon" class="navbar-icon me-2" style="width: 20px;height: 20px;">
+                <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon" style="width: 25px;height: 25px;">
+             </ul>
+             <button class="btn" onclick="openPopup()">
+                <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon">
+             </button>
+        </div>
+    </nav>
+    
+    <!-- Menu -->
+    <div id="notifications" style="color: red;"></div>
+    <div id="smen" class="sous-menu">
+        <div class="action" style="display: none;">
+            <div class="row" >
+                <div class="col-md-3 ms-2" style="margin-top: 4.7rem;">
+                    <p>TACHE DE MANTENANCE</p>
+                    <div>
+                        <button id="b1" data-bs-toggle="modal" data-bs-target="#Modal1" onclick="mafonc()">CREER</button>
+                    </div>       
+                </div>
+                <div class="col-md-4 " style="margin-top: 4.7rem;">
+                    <p>CALENDRIER DE MAINTENANCE</p>
+                    <div>
+                        <button id="b2" onclick="redirectToController()" >VOIR</button>
+                        
+                    </div>       
+                </div>
+                <div class="col-md-4" style="margin-top: 4.7rem;">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <i class="fa fa-search " aria-hidden="false"> </i>
+                        </div>  
+                        <div class="col-md-10">
+                            <input type="text" placeholder="Recherche">
+                        </div>                   
+                </div>
+                    <div class="row">
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Bienvenu  -->
+     <div class="bienvenu">
+        <p>BIENVENU SUR VOTRE PAGE</p>
+    </div>
+
+     <br>
+     
+    <!-- Demande de maintenance -->
+    <div id="1" class="maintenance" style="display: none;">
+        <div class="row my-4 ms-5">
+            <div class="col-md-4">
+                <div id="td1">
+                    <input type="text" value="NOUVELLES TÂCHES" disabled>
+                </div>
+                <br>
+                <div class="todo">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item" th:if="${tache.etat == 0}" th:each="tache: ${taches}">
+                            <h2 class="accordion-header" >
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                    aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElements' + ${tache.id} + '\')'" >
+                                    
+                                </button>
+                            </h2>
+                            <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-4" >
+                                                <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElements'+ ${tache.id}" style="width: 100%; height: 100%;">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body lola">
+                                                    <h5 class="card-title" th:text="${tache.type.value}"></h5>
+                                                    <p class="card-text" th:text="${tache.description}"></p>
+                                                    <i class="fas fa-trash-alt fa-2x" style="color:#ad0808;" th:attr="onclick='SupprimerTache(\'' + ${tache.id} + '\')'"></i>   <!-- Icône de poubelle -->
+                                                    <i class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
+                                                    <button th:id="'T' + ${tache.id}" class="TaMe"><i class="fas fa-envelope fa-2x"></i>CHATTER</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- th:attr="onclick='download(\'' + ${evaluation.typeEval} + '\', \'' + ${evaluation.ue.code} + '\',\'' + ${evaluation.semestre} + '\')'" -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="td2">
+                    <input type="text" value="TÂCHES EN COURS" disabled>
+                </div>
+                <br>
+                <div class="todo">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item" th:if="${tache.etat == 1}"  th:each="tache: ${taches}">
+                            <h2 class="accordion-header" >
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                    aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementss' + ${tache.id} + '\')'" >
+                                    
+                                </button>
+                            </h2>
+                            <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementss'+ ${tache.id}" style="width: 100%; height: 100%;">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body lola">
+                                                    <h5 class="card-title" th:text="${tache.type.value}"></h5>
+                                                    <p class="card-text" th:text="${tache.description}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="td3">
+                    <input type="text" value="TÂCHES EFFECTUÉES" disabled>
+                </div>
+                <br>
+                <div class="todo">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item" th:if="${tache.etat == 2}"  th:each="tache, iterStat: ${taches}">
+                            <h2 class="accordion-header" >
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                    aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementsss' + ${tache.id} + '\')'" > 
+                                    
+                                </button>
+                            </h2>
+                            <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementsss'+ ${tache.id}" style="width: 100%; height: 100%;">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body lola">
+                                                    <h5 class="card-title" th:text="${tache.type.value}"></h5>
+                                                    <p class="card-text" th:text="${tache.description}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+      <!-- Formulaire de Maintenance-->
+
+    <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="Modal1Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title me-5" id="Modal1Label">Tache de Maintenance</h2>
+                    <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="equipement" class="form-label">Nom de l'Equipement</label>
+                            <input type="text" class="form-control" id="equipement" placeholder="Entrer le nom d'enregistrement de cet equipement">
+                        </div>
+                        <div id="photo-frame">.
+                            <button type="button" class="btn btn-primary" onclick="openFilePicker()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+                            <input type="file" id="file-picker" accept="image/*" style="display: none;">
+                        </div>
+                        <img id="preview-image" src="#" alt="Aperçu de l'image" style="display: none;">
+                        <br>
+                        <div class="mb-3">
+                            <label for="type-appareil" class="form-label">Type d'appareil</label>
+                            <p class="form-control" id="type-appareil"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description du problème</label>
+                            <textarea class="form-control" id="description" rows="3" style="resize: none;"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="localisation" class="form-label">Localisation</label>                            
+                            <div class="row">   
+                                <h5 style="color: #00b2ff;"> <i class="fas fa-map fa-2x" onclick="OpenMap()" style="color: #00b2ff;">  </i> Cliquer sur la Map</h5>  
+                                <input type="checkbox" id="localisation" onclick="requestLocationPermission()" />    <label for="localisation"> :choisir ma localisation actuelle</label>    
+                            </div>
+                            <!-- <div style="display: none;">
+                                <label for="longitude" class="form-label">Longitude</label>
+                                <input type="text" class="form-control" id="longitude" >
+                                <label for="latitude" class="form-label">Latitude</label>
+                                <input type="text" class="form-control" id="latitude" >
+                            </div> -->
+                            
+                            <br>
+                            <div id="map" style="display: none; height:400px; width: 100%;"></div>  
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" id="creer" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+       
+    <!-- Ouvrir la map 
+   /* <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true" style="width: 800px; height: 800px;">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="mapModalLabel">Carte</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div id="map" style="width: 90%; height: 400px;"></div>
+            </div>
+          
+          </div>
+        </div>
+      </div>-->
+   
+
+    <!-- Enregistement Equipements -->
+    <div id="2" class="equipements" style="margin-top: 3.5rem; display: none;">
+         <div class="row">
+            <div class="col-md-3 ms-2">
+                <h4 style="color:#00b2ff;"><i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#Modal2"></i> Equipements</h4>
+            </div>
+            <div class="col-md-8">
+                <div id="ListeEquip" class="ListeEquip">
+                   
+                </div>
+            </div>
+         </div>
+    </div>
+
+    <!-- Formulaire Equipements -->
+    <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="Modal2Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title me-5" id="Modal2Label">Equipements</h2>
+                    <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="equipement1" class="form-label">Nom de l'Equipement</label>
+                            <input type="text" class="form-control" id="equipement1" placeholder="Entrer le nom d'enregistrement de cet equipement">
+                        </div>
+                        <div id="photo-frame2">.
+                            <button type="button" class="btn btn-primary" onclick="openFilePicker2()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+                            <input type="file" id="file-picker2" accept="image/*" style="display: none;">
+                        </div>
+                        <img id="preview-image2" src="#" alt="Aperçu de l'image" style="display: none;">
+                        <br>
+                        <div class="mb-3">
+                            <label for="type-appareil2" class="form-label">Type d'appareil</label>
+                            <input type="text" class="form-control" id="type-appareil2">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" id="creerEquip" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div id="3" class="messagerie" style="visibility: hidden;" >
+        <div class="row my-5">
+            <div class="col-md-4 ms-3">
+                <div class="row my-3">
+                    <div class="col-md-1">
+                        <i class="fa fa-search fa-2x" style="color: #00b2ff;" aria-hidden="false"> </i>
+                    </div>  
+                    <div class="col-md-10">
+                        <input type="text" placeholder="Recherche">
+                    </div> 
+                </div> 
+                <br>
+                <div class="contact my-3" style="max-height: max-content;">
+                    <h3 style="color: #00b2ff;">CONTACT</h3>
+                    <div style="border: #00b2ff solid;"></div> 
+                </div>
+            </div>
+            <div class="col-md-7 ms-4">
+                <div class="container message">
+                    <div id="chat" class="row">
+                        <div class="maintenancier">
+                            <div class="sender">Jane Smith</div>
+                             <div class="timestamp">10/29/2023 1:15 PM</div>
+                            <div class="content">Ça va bien, merci ! Et toi ?</div>
+                         </div>
+                         <br>
+                         <div class="maintenancier">
+                            <div class="sender">Jane Smith</div>
+                             <div class="timestamp">10/29/2023 1:15 PM</div>
+                            <div class="content">Ça va bien, merci ! Et toi ?</div>
+                         </div>
+                         <div class="maintenancier1">
+                            <div class="sender">Jane Smith</div>
+                             <div class="timestamp">10/29/2023 1:15 PM</div>
+                            <div class="content">Ça va bien, merci ! Et toi ?</div>
+                         </div>
+                    </div>
+                </div>
+             
+                <br>
+                <div id="send" class="row">
+                    <div class="col-md-1">
+                        <div> 
+                            <button ><i class="fa fa-camera fa-2x"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-9 ms-2">
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
+                    </div>
+                    <div class="col-md-1 ms-5">
+                        <button id="envoi"><i class="fa fa-paper-plane fa-2x"></i></button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+ 
+       <!-- LE FOOTER -->
+  <footer>
+    <div class="container-fluid bg custom-bg4 ">
+         <div class="row mt-5 justify-content-center text-center">
+            <div class="col-md-8 mt-5">
+                <img th:src="@{/images/Repair-It.png}"></a>
+            </div>
+         </div>
+         <div class="row mt-5 ">
+            <div class="col-md-3 my-3">
+                <h4>A PROPOS</h4>
+                 <ul class="mark">
+                    <li><a>Qui sommes nous?</a></li>
+                    <li><a>Notre equipe</a></li>
+                    <li><a>Nos objectifs</a></li>
+                    <li><a>Notre histoire</a></li> 
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>NOS SERVICES</h4>
+                <ul class="mark">
+                    <li><a>Pour nos Clients</a></li>
+                    <li><a>Pour les Maintenanciers</a></li>
+                    <li><a>Pour les Particuliers</a></li>
+                    <li><a>Notre Boutique</a></li>
+                    <li><a>La Formation</a></li>
+                    <li><a>le service Premium</a></li>
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>CONTRAT D'UTILISATION</h4>
+                <ul class="mark">
+                    <li><a>Contrat Pour les maintenancier</a></li>
+                    <li><a>Contrat client</a></li>
+                    <li><a>Contrat de paiement</a></li>
+                    <li><a>Contrat pour la formation</a></li>
+                    <li><a>Contrat pour les particulier</a></li>
+                    <button onclick="sendNotification()">Envoyer une notification</button>
+                    
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>NOS INFORMATIONS</h4>
+                <ul class="mark">
+                    <li><a><img th:src="@{/images/telephone.jpg}"> +237 621572708 </a></li> 
+                    <img th:src="@{/images/mail.jpg}"><input type="email" value=" Repair-It@gmail.com ">
+                    <li><a><img th:src="@{/images/localisation.jpg}"> BP9048 NGOA-EKELLE </a></li> 
+                 </ul>
+            </div>
+         </div>
+         <div class="row mt-5 justify-content-center text-center">
+            <div class="col-md-8">
+                <P style="color: #00b2ff; font-size: 20px;">Nous suivre</P>
+            </div>
+            <div class="col-md-8 mt-2">
+                <a href="#" class="fab fa-facebook fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-linkedin fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-whatsapp fa-3x " style="color: white;"></a>
+                <a href="#"class="fab fa-github fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-youtube fa-3x " style="color: white;"></a>
+            </div>
+         </div>
+        
+    </div>
+
+  </footer>
+
+    <script th:src="@{/javascript/notification.js}" ></script>
+    <script th:src="@{/javascript/Ctache.js}" ></script>
+    <script th:src="@{/javascript/Clients.js}" ></script>
+    <script th:src="@{/javascript/calendar.js}"></script>
+    <script th:src="@{/javascript/CRUDEquipements.js}"></script>
+    <script th:src="@{/javascript/Map.js}"></script>
+    <script th:src="@{/javascript/localisation.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-7NtOePbbMHPOsLd7uXQjVVnunmdlPPQ&libraries=places"></script> -->
+   c
+    <script>
+        function Message()
+{
+  var el1 = document.querySelector(".sous-menu");
+  var el2 = document.querySelector(".maintenance");
+  var el3 = document.querySelector(".equipements");
+  var el4 = document.querySelector(".messagerie");
+  var el5 = document.querySelector(".bienvenu");
+
+  el1.style.display = "none";
+  el2.style.display = "none";
+  el3.style.display = "none";
+  el4.style.display = "block";
+  el5.style.display = "none";
+}
+</script>
+
+</body>
+</body>
+</html>

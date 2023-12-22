@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/Outil.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/accueil.css}"/>
+    <title>Aide</title>
+</head>
+<body>
+    <div id="Aide" style="background-color: #021c44;">
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+           <h3><span>R</span>epair-<span>I</span>t <span>A</span>ide</h3>
+        </div> 
+    </div>
+
+    <main id="help">
+        <div class="mt-4"  style="display: flex; justify-content: center; align-items: center;">
+            <h1>BIENVENUE SUR <span>R</span>EPAIR-<span>I</span>T <span>A</span>IDE</h1>    
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+           <img th:src="@{/images/Aide.png}">     
+        </div>
+        <br>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+         <div class="accordion-item">
+           <h2 class="accordion-header" id="flush-headingOne">
+             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+               <h2>1-CREATION DE COMPTE</h2>
+             </button>
+           </h2>
+           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+             <div class="accordion-body">
+               <p>
+                  Bienvenue sur Repair-It ! Voici comment creer un compte en quelques étapes simples : 
+                 <li>Accédez à <a th:href="@{Accueil}">RepairIt/Accueil</a></li>
+                 <li>Cliquez sur "SignUp".</li>
+                  <img th:src="@{/images/signUp.png}" alt="">
+                 <li>Selectionner sur la page connexion le type de compte qui vous interesse.</li>
+                 <li> Renseignez vos information, lisez et accepter le contrat de licence enfin valider</li> 
+                 <li> C'est tout ! Connectez-vous dès maintenant et bénéficiez de nos services exceptionnels sur Repair-It. Si vous avez besoin d'aide, n'hésitez pas à nous contacter.</li>
+               </p>
+                 <p>Explorez votre compte et profitez de nos services.</p> 
+             </div>
+           </div>
+         </div>
+         <div class="accordion-item">
+           <h2 class="accordion-header" id="flush-headingTwo">
+             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>2-LOGIN</h2>
+             </button>
+           </h2>
+           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+             <div class="accordion-body">
+              <p>
+                Bienvenue sur Repair-It ! Voici comment cous connecter en quelques étapes simples : 
+               <li>Accédez à <a th:href="@{Accueil}">RepairIt/Accueil</a></li>
+               <li>Cliquez sur "se Connecter".</li>
+                <img th:src="@{/images/signUp.png}" alt="">
+               <li>Selectionner sur quel type de compte que vous voulez vous connecter.</li>
+                <img th:src="@{/images/Login1.png}" alt="">
+               <li> Renseignez vos information et valider</li> 
+                <img th:src="@{/images/Login2.png}" alt="">
+               <li> C'est tout ! Connectez-vous dès maintenant et bénéficiez de nos services exceptionnels sur Repair-It. Si vous avez besoin d'aide, n'hésitez pas à nous contacter.</li>
+             </p>
+               <p>Explorez votre compte et profitez de nos services.</p> 
+             </div>
+           </div>
+         </div>
+         <div class="accordion-item">
+           <h2 class="accordion-header" id="flush-headingTwo">
+             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>3-PAGE CLIENT</h2>
+             </button>
+           </h2>
+           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+             <div class="accordion-body">
+               
+             </div>
+           </div>
+         </div>
+         <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>4-PAGE MAINTENANCIER</h2>
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                
+              </div>
+            </div>
+         </div>
+         <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>5-BOUTIQUE</h2>
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                
+              </div>
+            </div>
+         </div>
+         <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>6-FORMATION</h2>
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                
+              </div>
+            </div>
+         </div>
+         <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>7-PAIEMENT</h2>
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                
+              </div>
+            </div>
+         </div>
+         <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <h2>8-LES CONTRATS</h2>
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                
+              </div>
+            </div>
+         </div>
+        
+       </div>        
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>

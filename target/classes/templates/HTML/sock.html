@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notification Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script>
+        var stompClient = null;
+
+        function connect() {
+            var socket = new SockJS('/websocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                    stompClient.subscribe("/topic/notification", function (message) {
+                        console.log("ok")
+                    showNotification(message.body);
+                    // sendNotificationf(message.body)
+                });
+            });
+        }
+
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            console.log("Disconnected");
+        }
+
+        function sendNotification() {
+            stompClient.send("/app/notification/1", {}, '');
+        }
+
+        function showNotification(message) {
+            var notificationsDiv = document.getElementById("notifications");
+            notificationsDiv.innerHTML += "<p>" + message + "</p>";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            connect();
+        });
+
+        function sendNotificationf(notification) {
+            Notification.requestPermission()
+            // Vérifier si le navigateur prend en charge les notifications
+            if ('Notification' in window && Notification.permission === 'granted') {
+            // Créer une nouvelle notification
+            var options = {
+                body: notification,
+                icon: 'public/images/Outil.png' // Spécifiez le chemin vers l'icône de la notification
+            };
+            var notification = new Notification('Nouvelle taches', options);
+
+    // new Notification(title, { body: body });
+        
+            // Gérer les événements de la notification (clic, fermeture, etc.)
+            notification.onclick = function(event) {
+                // Gérer le clic sur la notification
+            };
+        
+            notification.onclose = function(event) {
+                // Gérer la fermeture de la notification
+            };
+        
+            // ...
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Notification Example</h1>
+    <button onclick="sendNotification()">Envoyer une notification</button>
+    <div id="notifications"></div>
+</body>
+</html>
+
+

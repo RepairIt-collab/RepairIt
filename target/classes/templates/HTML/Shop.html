@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="icon" th:href="@{/images/Outil.png}">
+  <link rel="stylesheet" th:href="@{/css/Shop.css}">
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-custom">
+  
+    <div id="Menu" >
+      <div class="row">
+        <div class="col-md-2">
+          <div class="container mt-4">
+            <a th:href="@{/RepairIt/Accueil}" class="navbar-brand "> 
+                  <img th:src="@{/images/Outil.png}"> 
+                  <img th:src="@{/images/Repair-It Boutique.png}" style="width: 180px;height: 35px;">
+            </a>
+           </div>
+        </div>
+        <div class="col-md-8" >
+          <div class="row">
+            <div class="col-md-10 mt-4">
+              <div id="choix1">
+                <div class="d-flex" >
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 70%; margin-left: 22%;">
+                  <button class="btn btn-outline-success" id="Found">Search</button>
+                </div>
+              </div>      
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mt-3">
+              <nav class="navbar navbar-expand-lg" id="choix2">
+                <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#burger1" aria-controls="burger1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <br>
+                  <div class="collapse navbar-collapse" id="burger1">
+                    <ul class="navbar-nav" style="margin-left: 5%;">
+                      <li><a class="nav-item active" id="Me1" href="#"><i class="fa fa-blender"></i>Electromenager</a></li>
+                      <li><a class="nav-item"id="Me2" href="#"><i class="fa fa-cog"></i>Mecanique</a></li>
+                      <li><a class="nav-item" id="Me3" href="#"> <i class="fa fa-mobile"></i>Telephonie</a></li> 
+                      <li><a class="nav-item" id="Me4" href="#"> <i class="fa fa-laptop"></i>Ordinateur</a></li> 
+                      <li><a class="nav-item" id="Me5" href="#"> <i class="fa fa-toolbox"></i>Outils</a></li> 
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            
+          </div>       
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-center">
+              <p style="margin: 10px;" id="cart" ><i class="fa fa-shopping-cart"></i><a href="#" style="font-size: 1rem;"> Panier</a></p>  
+              <p style="margin: 10px;" id="product" class="activer"><i class="fa fa-box"></i><a href="#"  style="font-size: 1rem;"> Produit</a></p>  
+        </div>
+      </div>
+      
+      
+    </div>
+  </header>
+
+
+  <!-- Contenu principal -->
+  <main id="produit" class="container-fluid"style="margin-left: 0%;">
+    <div class="row" >
+      <!-- Produits -->
+      <div class="col-md-12" style="overflow-y: scroll; height: 470px;">
+        <br>
+        <h2>Nouveaux produits</h2>
+        <div class="row">
+          <div class="col-md-12">
+            <div id="products" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="card" style="width: 100%; height: 440px;">
+                            <img th:src="@{/images/appareils.jpg}" alt="">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card" style="width: 100%; height: 440px;">
+                          <img th:src="@{/images/appareils.jpg}" alt="">
+                        </div>
+                    </div>
+                  </div>       
+                </div>
+                <div class="carousel-item">
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" style="width: 100%; height: 440px;">
+                          <img th:src="@{/images/Maintenancier.png}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card" style="width: 100%; height: 440px;">
+                        <img th:src="@{/images/Maintenancier.png}" alt="">
+                      </div>
+                  </div>
+                </div>       
+                </div>
+                <div class="carousel-item">
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" style="width: 100%; height: 440px;">
+                          <img th:src="@{/images/appareils.jpg}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card" style="width: 100%; height: 440px;">
+                        <img th:src="@{/images/appareils.jpg}" alt="">
+                      </div>
+                  </div>
+                </div>       
+                </div>
+              </div>
+              <button class="carousel-control-prev " type="button" data-bs-target="#products" data-bs-slide="prev" style="margin-top: 5cap;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#products" data-bs-slide="next"style="margin-top: 5cap; widht: 4px;">
+                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+          </div>
+          </div>
+        </div>
+        <br>
+        <h2>Notre Catalogue</h2>
+          <div id="Electro">
+            <div class="row">
+              <div class="col-md-3" th:each = "elt:${p1}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <p th:text = "${elt.prix}"></p>
+                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
+                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+            </div>   
+          </div>
+          <div id="Mecani" style="display: none;">
+            <div class="row">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique'}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <p th:text = "${elt.prix}"></p>
+                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
+                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Tele" style="display: none;">
+            <div class="row">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone'}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <p th:text = "${elt.prix}"></p>
+                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
+                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Ordin" style="display: none;">
+            <div class="row">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur'}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <p th:text = "${elt.prix}"></p>
+                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
+                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="outi" style="display: none;">
+            <div class="row">
+              <div class="col-md-3" th:each = "elt:${p1}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <p th:text = "${elt.prix}"></p>
+                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
+                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Ajoutez d'autres produits ici -->
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- <input type="button" onclick="creation()"> -->
+  
+  <main id="found" class="container-fluid mt-4" style="display: none; height: 450px;">
+    <h2>PRODUITS TROUVES</h2>
+  </main>
+
+  <main id="panier" class="container-fluid mt-4" style="display: none;">
+    <h2>VOTRE PANIER</h2>
+  
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-white py-4" style="background-color: #021c44;">
+    <div class="container">
+      <p class="text-center">&copy; 2023 <span>R</span>epait-<span>I</span>t <span>B</span>outique. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script th:src="@{/js/Shop.js}"></script>
+  <script th:src="@{/js/Generer.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</body>
+</html>

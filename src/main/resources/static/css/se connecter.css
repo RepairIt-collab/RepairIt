@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Margarine';
+    src: url('Margarine-Regular.ttf') format('truetype');
+   }
+
+input{
+    outline: none;
+}
+
+h1{
+    color:#00b2ff;
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+h2{
+    color: #00b2ff;
+    font-size: 3rem;
+}
+
+span{
+    color: #00b2ff;
+    font-size: 3.2rem;
+}
+
+body{
+    font-family: 'Margarine';
+    background-color: rgba(0, 5, 51, 0.7);
+}
+
+.containerDiv{
+    margin-top: 0.1%;
+    width: 59%;
+    margin-left: 20%;
+
+}
+
+button{
+    color: #fff;
+    background-color: #00b2ff;
+    height: 30%;
+    border-radius: 13%;
+    font-size: 0.7rem;
+
+}
+
+h3{
+    color: #00b2ff;
+    font-size: 1.2rem;
+}
+.custom-border-top{
+    border-top: 1.8px solid #00b2ff;
+    border-color: #ffffff;
+    border-width: 0.8rem;
+    border-radius: 40%;
+ }
+
+ p{
+    color: #fff;
+ }
+
+#form1 .form-control{
+    width: 100%;
+ }
+
+ #form2 .form-control{
+    width: 100%;
+}
+
+select{
+    width: 100%;
+    background-color: #fff;
+    height: 38%;
+    color: #021c44;
+    border-radius: 5px;
+}
+ 
+.row.my-2{
+    background-color: #021c44;
+    display:none;
+}
+
+input{
+   width: 100%;
+}
+
+#connect h5{
+    font-size: 3rem;
+    color: #fff;
+}
+
+#connect p{
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+#connect span{
+    font-size: 3.2rem;
+    color: #00b2ff;
+}

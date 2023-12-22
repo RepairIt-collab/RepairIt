@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public/images/Outil.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="CSS/boutique.css"/>
+    <title>Repair-It</title>
+</head>
+<body class="bg custom-bg2">
+    
+    <!-- NAV -->
+    <nav class=" navbar navbar-expand-lg position-fixed w-100" style="background-color: #021c44; z-index: 10;">
+        <div class="container-fluid">
+            <div class="col-md-2">
+                <a href="Accueil1.html" class="navbar-brand"> 
+                    <img src="public/images/Outil.png"> 
+                    <img src="public/images/Repair-It 1.png">
+                    <i class=""></i>
+                </a>
+            </div>            
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" style="background-color: #00b2ff;">
+                <span class="fas fa-wrench" style="color: #021c44;"></span>
+            </button>
+             <div class="collapse navbar-collapse justify-content-center" id="menu">
+                <ul class="navbar-nav m">
+                    <li class="nav-item">
+                        <a href="maintenance1.html" class="nav-link " onclick="handleClick(event)"> Maintenance</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="Entreprise.html" class="nav-link" onclick="handleClick(event)">Particulier</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a a href="Formation.html" class="nav-link" onclick="handleClick(event)">Formation</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="Maintenancier.html" class="nav-link " onclick="handleClick(event)">Maintenancier</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="#contenu" class="nav-link active">Boutique</a>
+                    </li>
+                </ul>
+             </div>
+             <ul class="navbar-nav m-md-auto">
+                <li class="nav-items">
+                    <a href="#" class="nav-link "> Aide</a>
+                </li>
+            </ul>
+             <button class="btn btn custom-btn" onclick="openPopup()">
+                 <img src="public/images/cadena-2.png">
+                 <a href="#">Se Connecter</a>
+             </button>
+        </div>
+    </nav>
+
+    <br><br>
+  
+
+       <!-- LE FOOTER -->
+  <footer>
+    <div class="container-fluid bg custom-bg4 ">
+         <div class="row mt-5 justify-content-center text-center">
+            <div class="col-md-8 mt-5">
+                <img src="public/images/Repair-It.png"></a>
+            </div>
+         </div>
+         <div class="row mt-5 ">
+            <div class="col-md-3 my-3">
+                <h4>A PROPOS</h4>
+                 <ul class="mark">
+                    <li><a>Qui sommes nous?</a></li>
+                    <li><a>Notre equipe</a></li>
+                    <li><a>Nos objectifs</a></li>
+                    <li><a>Notre histoire</a></li> 
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>NOS SERVICES</h4>
+                <ul class="mark">
+                    <li><a>Pour nos Clients</a></li>
+                    <li><a>Pour les Maintenanciers</a></li>
+                    <li><a>Pour les Particuliers</a></li>
+                    <li><a>Notre Boutique</a></li>
+                    <li><a>La Formation</a></li>
+                    <li><a>le service Premium</a></li>
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>CONTRAT D'UTILISATION</h4>
+                <ul class="mark">
+                    <li><a>Contrat Pour les maintenancier</a></li>
+                    <li><a>Contrat client</a></li>
+                    <li><a>Contrat de paiement</a></li>
+                    <li><a>Contrat pour la formation</a></li>
+                    <li><a>Contrat pour les particulier</a></li>
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>NOS INFORMATIONS</h4>
+                <ul class="mark">
+                    <li><a><img src="public/images/telephone.jpg"> +237 621572708 </a></li> 
+                    <img src="public/images/mail.jpg"><input type="email" value=" Repair-It@gmail.com ">
+                    <li><a><img src="public/images/localisation.jpg"> BP9048 NGOA-EKELLE </a></li> 
+                 </ul>
+            </div>
+         </div>
+         <div class="row mt-5 justify-content-center text-center">
+            <div class="col-md-8">
+                <P style="color: #00b2ff; font-size: 20px;">Nous suivre</P>
+            </div>
+            <div class="col-md-8 mt-2">
+                <a href="#" class="fab fa-facebook fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-linkedin fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-whatsapp fa-3x " style="color: white;"></a>
+                <a href="#"class="fab fa-github fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-youtube fa-3x " style="color: white;"></a>
+            </div>
+         </div>
+        
+    </div>
+
+  </footer>
+
+   <script src="accueil.js"></script> 
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
