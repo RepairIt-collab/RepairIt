@@ -84,8 +84,8 @@ public class Maintenance {
         Maintenancier maintenancier = maintenancierRepository.findById(id).orElse(null);
             List<Notification> notifications = notificationRepository.findByMaintenanciers(maintenancier);
             Iterable<Notification> notificationsI=notifications;
-            Evaluation evaluation = evaluationRepository.findByMaintenanciers(maintenancier);
-            model.addAttribute("evaluation", evaluation);
+       //     Evaluation evaluation = evaluationRepository.findByMaintenanciers(maintenancier);
+      //      model.addAttribute("evaluation", evaluation);
             List<Notification> notification2 = notificationRepository.findByIdMaintenancier(id);
             Iterable<Notification> noIterable = notification2;
             model.addAttribute("notifM", noIterable);

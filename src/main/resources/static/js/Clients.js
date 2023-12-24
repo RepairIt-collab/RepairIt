@@ -102,13 +102,85 @@ document.getElementById("c").addEventListener("click", function() {
 document.getElementById("btncompte").addEventListener('click',function(){
   document.getElementById('PROF').style.display="block";
   document.getElementById("btncompte").style.display="none";
-  document.getElementById('CLTS').classList.replace('col-md-12', 'col-md-10');
-  document.getElementById('ButtonSelec').style.display="none";
+  document.getElementById('PROF').classList.add("active");
+  document.getElementById("content").style.pointerEvents="none";
 });
 
 document.getElementById("return").addEventListener('click',function(){
   document.getElementById('PROF').style.display="none";
   document.getElementById("btncompte").style.display="block";
-  document.getElementById('CLTS').classList.replace('col-md-10', 'col-md-12');
-  document.getElementById('ButtonSelec').style.display="block";
+  document.getElementById('PROF').classList.remove("active");
+  document.getElementById("content").style.pointerEvents="auto";;
 });
+
+function calender()
+{
+  window.location.href="/RepairIt/Utilisateur/Calendrier";
+}
+
+document.getElementById("ChoiceN").addEventListener('click',function(){
+    var a= document.getElementById("todoN");
+    var b= document.getElementById("todoC");
+    var c= document.getElementById("todoF");
+    a.style.display="none";
+    b.className="col-md-6";
+    c.className="col-md-6";
+    if(b.style.display=="none")
+    {
+      c.className="col-md-8 me-4";
+    }
+    if(c.style.display=="none")
+    {
+      b.className="col-md-8 me-4";
+    }
+})
+
+
+document.getElementById("ChoiceC").addEventListener('click',function(){
+  var b= document.getElementById("todoN");
+  var a= document.getElementById("todoC");
+  var c= document.getElementById("todoF");
+  a.style.display="none";
+  b.className="col-md-6";
+  c.className="col-md-6";
+  if(b.style.display=="none")
+  {
+    c.className="col-md-8 me-4";
+  }
+  if(c.style.display=="none")
+  {
+    b.className="col-md-8 me-4";
+  }
+})
+
+
+document.getElementById("ChoiceT").addEventListener('click',function(){
+  var b= document.getElementById("todoN");
+  var c= document.getElementById("todoC");
+  var a= document.getElementById("todoF");
+  a.style.display="none";
+  b.className="col-md-6";
+  c.className="col-md-6";
+  if(b.style.display=="none")
+  {
+    c.className="col-md-8 me-4";
+  }
+  if(c.style.display=="none")
+  {
+    b.className="col-md-8 me-4";
+  }
+})
+
+
+document.getElementById("ChoiceD").addEventListener('click',function(){
+  var b= document.getElementById("todoN");
+  var c= document.getElementById("todoC");
+  var a= document.getElementById("todoF");
+  a.style.display="block";
+  b.style.display="block";
+  c.style.display="block";
+  b.className="col-md-4";
+  c.className="col-md-4";
+  a.className="col-md-4";
+
+})

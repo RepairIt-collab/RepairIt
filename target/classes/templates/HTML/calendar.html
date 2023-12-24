@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <style>
+      /* Style pour le conteneur du calendrier */
+.fc {
+  background-color: #021c44;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Style pour la barre d'outils du calendrier */
+.fc-header-toolbar {
+  background-color: #0c4681;
+  padding: 10px;
+}
+
+/* Style pour le titre du calendrier */
+#calendar .fc-header-title {
+  font-size: 30px;
+  font-weight: bold !important;
+  color: #ffffff !important;;
+  margin: 0;
+}
+
+/* Style pour le titre du mois */
+.fc-toolbar-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Style pour les boutons de navigation */
+/* Style pour les boutons de navigation avec !important */
+#calendar .fc-prev-button,
+#calendar .fc-next-button,
+#calendar .fc-today-button {
+  background-color: #007bff !important;
+  color: #a00606 !important;
+  border: none !important;
+  border-radius: 3px !important;
+  padding: 5px 10px !important;
+  cursor: pointer !important;
+}
+
+/* Style pour les en-têtes de jour de la semaine */
+#calendar .fc-day-header {
+  background-color: #235c09 !important;
+  color: #fa0f0f !important;;
+}
+
+/* Style pour les cellules de jour du calendrier */
+.fc-day {
+  border: 1px solid #9c0d0d;
+  background-color: #021c44;
+}
+
+/* Style pour les événements du calendrier */
+.fc-event {
+  background-color: #007bff;
+  color: #ad0808;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Style pour le titre de l'événement */
+.fc-event-title {
+  font-weight: bold;
+}
+    </style>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.9/index.global.min.js'></script>
+    <script src=" https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js "></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.9/index.global.min.js'></script>
+   
+   <script>
+ 
+         
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+         $.ajax({
+              url: '/RepairIt/Calendar',
+              method: 'GET',
+              success: function(data) {
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    events: []
+                });
+
+                // Parcourir chaque élément du tableau "data"
+                for (var i = 0; i < data.length; i++) {
+                    var eventData = data[i];
+                    // Ajouter un nouvel événement au calendrier pour chaque élément du tableau
+                    calendar.addEvent({
+                        title: eventData.type,
+                        start: eventData.date,
+                        extendedProps: {
+                             description: 'Demande de reparation'
+                       }
+                    });
+                }
+
+                calendar.render();
+            },
+              error: function(jqXHR, textStatus, errorThrown) {
+                 console.log("error");
+              }
+          });
+      });
+   
+    </script>
+  </head>
+  <body>
+    <div id='calendar'></div>
+  </body>
+</html>

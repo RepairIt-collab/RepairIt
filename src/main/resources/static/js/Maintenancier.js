@@ -543,3 +543,18 @@ function soumettrePrix() {
       console.error(error);
     });
 }
+
+// GERE LE PROFIL
+document.getElementById("btncompte").addEventListener('click',function(){
+  document.getElementById('PROF').style.display="block";
+  document.getElementById("btncompte").style.display="none";
+  document.getElementById('PROF').classList.add("active");
+  document.getElementById("content").style.pointerEvents="none";
+});
+
+document.getElementById("return").addEventListener('click',function(){
+  document.getElementById('PROF').style.display="none";
+  document.getElementById("btncompte").style.display="block";
+  document.getElementById('PROF').classList.remove("active");
+  document.getElementById("content").style.pointerEvents="auto";;
+});

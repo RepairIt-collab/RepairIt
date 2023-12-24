@@ -31,6 +31,11 @@ public class Accueil {
         return "HTML/Accueil"; 
     }
 
+    @GetMapping("/Formation")
+    public String Formation()
+    {
+        return "HTML/Formation";
+    }
 
     @GetMapping("/Apropos")
     public String apropos(){
@@ -54,5 +59,5 @@ public class Accueil {
         return "HTML/Documents/ContractC";
     }
 
-    
+     
 }

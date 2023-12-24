@@ -181,6 +181,7 @@ public class ChatController{
 
                     task.setId1(tache.getId());
                     task.setDate(tache.getDate());
+                    task.setEtat(tache.getEtat());
 
                     tasks.add(task);
                 }

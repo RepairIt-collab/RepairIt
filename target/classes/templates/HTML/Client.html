@@ -15,425 +15,412 @@
  
 </head>
 <body class="bg custom-bg2">
-  
-    <div>
-        <div class="row">
-            <div id="CLTS" class="col-md-12">
-                <!-- NAV -->
-                    <nav id="NAVB" class=" navbar navbar-expand-lg w-100" style="background-color: #021c44; z-index: 10;">
-                        <div class="container-fluid">
-                            <div class="col-md-2">
-                                <a th:href="@{/Accueil}" class="navbar-brand" > 
-                                    <img th:src="@{/images/Outil.png}"> 
-                                    <img th:src="@{/images/Repair-It 1.png}">
-                                    <i class=""></i>
-                                </a>
-                            </div>            
-                            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #00b2ff;">
-                                <span class="fas fa-wrench" style="color: #021c44;"></span>
-                            </button>
-                            <div class="collapse navbar-collapse justify-content-center" id="menu" style="background-color: #021c44;">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <button  id="nav1" class="nav-link"> Maintenance</button >
-                                    </li>
-                                    <li class="nav-item me-3">
-                                        <button   id="nav2" class="nav-link " >Equipements</button >
-                                    </li>
-                                    <li class="nav-item me-3">
-                                        <a th:href="@{/pageChat}" id="nav3" class="nav-link " >Message</a>
-                                    </li>
-                                    <li class="nav-item me-3">
-                                        <button  class="nav-link "><a th:href="@{/RepairIt/Formation}">Formation</a></button>
-                                    </li>
-                                    <li class="nav-item me-3">
-                                        <button   class="nav-link "><a th:href="@{/RepairIt/Boutique}">Boutique</a></button>
-                                    </li>
-                                </ul>
+    <main id="content">
+        <nav id="NAVB" class=" navbar navbar-expand-lg w-100" style="background-color: #021c44; z-index: 10;">
+            <div class="container-fluid">
+                <div class="col-md-2">
+                    <a th:href="@{/RepairIt/Accueil}" class="navbar-brand" > 
+                        <img th:src="@{/images/Outil.png}"> 
+                        <img th:src="@{/images/Repair-It 1.png}">
+                        <i class=""></i>
+                    </a>
+                </div>            
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #00b2ff;">
+                    <span class="fas fa-wrench" style="color: #021c44;"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="menu" style="background-color: #021c44;">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button  id="nav1" class="nav-link"> Maintenance</button >
+                        </li>
+                        <li class="nav-item me-3">
+                            <button   id="nav2" class="nav-link " >Equipements</button >
+                        </li>
+                        <li class="nav-item me-3">
+                            <a th:href="@{/pageChat}" id="nav3" class="nav-link " >Message</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <button  class="nav-link "><a th:href="@{/RepairIt/Formation}">Formation</a></button>
+                        </li>
+                        <li class="nav-item me-3">
+                            <button   class="nav-link "><a th:href="@{/RepairIt/Boutique}">Boutique</a></button>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="navbar-nav mt-3" >
+                    <img th:src="@{/images/ecrou.png}" alt="Icon" class="navbar-icon mb-3 ms-2" style="width: 20px;height: 20px;">
+                </ul>
+                <ul class="navbar-nav mt-3">
+                    <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon mb-3 " style="width: 25px;height: 25px;">
+                </ul>
+                <button id="btncompte" class="btn">
+                    <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px;">
+                </button>
+            </div>
+        </nav>
+    
+        <!-- Menu -->
+        <div id="smen" class="sous-menu">
+            <div class="action" style="display: none;">
+                <div class="row" >
+                    <div class="col-md-3" style="margin-top: 2%">
+                        <p>TACHE DE MANTENANCE</p>
+                        <div>
+                            <button id="b1" class="mb-3" data-bs-toggle="modal" data-bs-target="#Modal1">CREER</button>
+                        </div>       
+                    </div>
+                    <div class="col-md-3 " style="margin-top: 2%">
+                        <p>CALENDRIER DE MAINTENANCE</p>
+                        <div>
+                            <button id="b2" class="mb-3"  onclick="calender()" >VOIR</button>       
+                        </div>       
+                    </div>
+                    <div class="col-md-1 ms-2" style="margin-top: 2%">
+                        <p>MASQUER</p>      
+                    </div>
+                    <div class="col-md-4" style="margin-top: 0.5%">
+                        <div class="row my-3 ">
+                            <div class="col-md-6">
+                                <h5 id="ChoiceN" style="color: darkgreen;"><i class="fas fa-plus-circle"></i> Nouvelles Tâches</h5>
                             </div>
-                            <ul class="navbar-nav mt-3" >
-                                <img th:src="@{/images/ecrou.png}" alt="Icon" class="navbar-icon mb-3 ms-2" style="width: 20px;height: 20px;">
-                            </ul>
-                            <ul class="navbar-nav mt-3">
-                                <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon mb-3 " style="width: 25px;height: 25px;">
-                            </ul>
-                            <button id="btncompte" class="btn">
-                                <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px;">
-                            </button>
-                        </div>
-                    </nav>
-
-                <div  style="height: 400px; overflow-y: scroll; ">    
-                    <!-- Menu -->
-                    <!-- <div id="notifications" style="color: red;"></div> -->
-                    <div id="smen" class="sous-menu">
-                        <div class="action" style="display: none;">
-                            <div class="row" >
-                                <div class="col-md-3 ms-2" style="margin-top: 2%">
-                                    <p>TACHE DE MANTENANCE</p>
-                                    <div>
-                                        <button id="b1" class="mb-3" data-bs-toggle="modal" data-bs-target="#Modal1">CREER</button>
-                                    </div>       
-                                </div>
-                                <div class="col-md-3 " style="margin-top: 2%">
-                                    <p>CALENDRIER DE MAINTENANCE</p>
-                                    <div>
-                                        <button id="b2" class="mb-3"  onclick="redirectToController()" >VOIR</button>       
-                                    </div>       
-                                </div>
-                                <div class="col-md-3" style="margin-top: 2%">
-                                    <div class="row">
-                                        <div class="col-md-1">
-                                            <i class="fa fa-search " aria-hidden="false"> </i>
-                                        </div>  
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Recherche">
-                                        </div>                   
-                                </div>
-                                    <div class="row">
-                                        
-                                    </div>
-                                </div>
+                            <div class="col-md-6">
+                                <h5 id="ChoiceC" style="color: darkgoldenrod;"><i class="fas fa-spinner"></i> Tâches en Cours</h5>
                             </div>
                         </div>
+                        <div class="row my-3 ">
+                            <div class="col-md-6">
+                                <h5 id="ChoiceT" style="color: darkred;"><i class="fas fa-check-circle"></i>Tâches Terminées</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 id="ChoiceD" style="color: #00b2ff;"><i class="fas fa-check-circle"></i>Reinitialiser</h5>
+                            </div>
+                        </div>                
                     </div>
-
-                    <!-- Bienvenu  -->
-                    <div class="bienvenu my-5">
-                        <p>BIENVENU SUR VOTRE PAGE</p>
-                        <p>VOUS POUVEZ COMMENCER A TRAVAILLER</p>
-                    </div>
-
-                    <br>
-                    
-                    <!-- Demande de maintenance -->
-                    <div id="1" class="maintenance" style="display: none;">
-                        <div class="row my-4 ms-2">
-                            <div class="col-md-4">
-                                <div id="td1">
-                                    <input type="text" value="NOUVELLES TÂCHES" disabled>
-                                </div>
-                                <br>
-                                <div class="todoN mb-2">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                                        <div class="accordion-item" th:if="${tache.etat == 0}" th:each="tache: ${taches}">
-                                            <h2 class="accordion-header" >
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
-                                                    aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElements' + ${tache.id} + '\')'" >
-                                                    
-                                                </button>
-                                            </h2>
-                                            <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">
-                                                    <div class="card mb-3">
-                                                        <div class="row g-0">
-                                                            <div class="col-md-4" >
-                                                                <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElements'+ ${tache.id}" style="width: 100%; height: 100%;">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body lola">
-                                                                    <h5 class="card-title" th:text="${tache.type.value}"></h5>
-                                                                    <p class="card-text" th:text="${tache.description}"></p>
-                                                                    <i class="fas fa-trash-alt fa-2x" style="color:#ad0808;" th:attr="onclick='SupprimerTache(\'' + ${tache.id} + '\')'"></i>   <!-- Icône de poubelle -->
-                                    <i class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- th:attr="onclick='download(\'' + ${evaluation.typeEval} + '\', \'' + ${evaluation.ue.code} + '\',\'' + ${evaluation.semestre} + '\')'" -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="td2">
-                                    <input type="text" value="TÂCHES EN COURS" disabled>
-                                </div>
-                                <br>
-                                <div class="todoC mb-2">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                                        <div class="accordion-item" th:if="${tache.etat == 1}"  th:each="tache: ${taches}">
-                                            <h2 class="accordion-header" >
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
-                                                    aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementss' + ${tache.id} + '\')'" >
-                                                    
-                                                </button>
-                                            </h2>
-                                            <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">
-                                                    <div class="card mb-3">
-                                                        <div class="row g-0">
-                                                            <div class="col-md-4">
-                                                                <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementss'+ ${tache.id}" style="width: 100%; height: 100%;">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body lola">
-                                                                    <h5 class="card-title" th:text="${tache.type.value}"></h5>
-                                                                    <p class="card-text" th:text="${tache.description}"></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="td3">
-                                    <input type="text" value="TÂCHES EFFECTUÉES" disabled>
-                                </div>
-                                <br>
-                                <div class="todoF mb-2">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                                        <div class="accordion-item" th:if="${tache.etat == 2}"  th:each="tache, iterStat: ${taches}">
-                                            <h2 class="accordion-header" >
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
-                                                    aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementsss' + ${tache.id} + '\')'" > 
-                                                    
-                                                </button>
-                                            </h2>
-                                            <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">
-                                                    <div class="card mb-3">
-                                                        <div class="row g-0">
-                                                            <div class="col-md-4">
-                                                                <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementsss'+ ${tache.id}" style="width: 100%; height: 100%;">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body lola">
-                                                                    <h5 class="card-title" th:text="${tache.type.value}"></h5>
-                                                                    <p class="card-text" th:text="${tache.description}"></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+            </div>
+        </div>  
+            
+            <!-- <div id="notifications" style="color: red;"></div> -->
+            
+    
+            <!-- Bienvenu  -->
+            <div class="bienvenu my-5" style="height: 350px;">
+                
+            </div>
+    
+            <br>
+            
+            <!-- Demande de maintenance -->
+            <div id="1" class="maintenance" style="display: none; overflow-x: hidden;">
+                <div class="row my-4 ms-2">
+                    <div id="todoN" class="col-md-4">
+                        <div id="td1">
+                            <input type="text" value="NOUVELLES TÂCHES" disabled>
                         </div>
-                    </div>
-
-
-
-                    <!-- Formulaire de Maintenance-->
-
-                    <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="Modal1Label" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h2 class="modal-title me-5" id="Modal1Label">Tache de Maintenance</h2>
-                                    <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="equipement" class="form-label">NOM DE L'EQUIPEMENT</label>
-                                            <input type="text" class="form-control" id="equipement" placeholder="Entrer le nom d'enregistrement de cet equipement">
-                                        </div>
-                                        <div id="photo-frame">.
-                                            <button type="button" class="btn btn-primary" onclick="openFilePicker()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
-                                            <input type="file" id="file-picker" accept="image/*" style="display: none;">
-                                        </div>
-                                        <img id="preview-image" src="#" alt="Aperçu de l'image" style="display: none;">
-                                        <br>
-                                        <div class="mb-3">
-                                            <label for="type-appareil" class="form-label">TYPE D'APPAREIL</label>
-                                            <p class="form-control" id="type-appareil"></p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="description" class="form-label">DESCRIPTION DU PROBLEME</label>
-                                            <textarea class="form-control" id="description" rows="3" style="resize: none;"></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="date" class="form-label">DATE</label>
-                                            <input type="date" class="form-control" id="date">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="localisation" class="form-label">LOCALISATION</label>                            
-                                            <div class="row">  
-                                                <p style="color: #00b2ff;"><input type="checkbox" id="localisation" onclick="requestLocationPermission()" /> Choisir votre position Actuelle</p>      
-                                                <p style="color: #00b2ff;"> <i class="fas fa-map" onclick="OpenMap()" style="color: #00b2ff;">  </i> Cliquer sur la Map</p>  
-                                            </div>
-                                            <div style="display: none;">
-                                                <label for="longitude" class="form-label">Longitude</label>
-                                                <input type="text" class="form-control" id="longitude" >
-                                                <label for="latitude" class="form-label">Latitude</label>
-                                                <input type="text" class="form-control" id="latitude" >
-                                            </div>
+                        <br>
+                        <div  class="todoN mb-2">
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item" th:if="${tache.etat == 0}" th:each="tache: ${taches}">
+                                    <h2 class="accordion-header" >
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                            aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElements' + ${tache.id} + '\')'" >
                                             
-                                            <br>
-                                            <div id="map" style="display: none; height:400px"></div>  
+                                        </button>
+                                    </h2>
+                                    <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                    <div class="col-md-4" >
+                                                        <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElements'+ ${tache.id}" style="width: 100%; height: 100%;">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body lola">
+                                                            <h5 class="card-title" th:text="${tache.type.value}"></h5>
+                                                            <p class="card-text" th:text="${tache.description}"></p>
+                                                            <i class="fas fa-trash-alt fa-2x" style="color:#ad0808;" th:attr="onclick='SupprimerTache(\'' + ${tache.id} + '\')'"></i>   <!-- Icône de poubelle -->
+                            <i class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
-                                    <button type="button" id="creer" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
-                                </div>
+                                <!-- th:attr="onclick='download(\'' + ${evaluation.typeEval} + '\', \'' + ${evaluation.ue.code} + '\',\'' + ${evaluation.semestre} + '\')'" -->
                             </div>
                         </div>
                     </div>
-
-                    
-                    <!-- Ouvrir la map 
-                /* <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true" style="width: 800px; height: 800px;">
-                        <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="mapModalLabel">Carte</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <div id="todoC" class="col-md-4">
+                        <div id="td2">
+                            <input type="text" value="TÂCHES EN COURS" disabled>
+                        </div>
+                        <br>
+                        <div  class="todoC mb-2">
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item" th:if="${tache.etat == 1}"  th:each="tache: ${taches}">
+                                    <h2 class="accordion-header" >
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                            aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementss' + ${tache.id} + '\')'" >
+                                            
+                                        </button>
+                                    </h2>
+                                    <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                    <div class="col-md-4">
+                                                        <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementss'+ ${tache.id}" style="width: 100%; height: 100%;">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body lola">
+                                                            <h5 class="card-title" th:text="${tache.type.value}"></h5>
+                                                            <p class="card-text" th:text="${tache.description}"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
                             </div>
-                            <div class="modal-body">
-                                <div id="map" style="width: 90%; height: 400px;"></div>
+                        </div>
+                    </div>
+                    <div id="todoF" class="col-md-4">
+                        <div id="td3">
+                            <input type="text" value="TÂCHES EFFECTUÉES" disabled>
+                        </div>
+                        <br>
+                        <div  class="todoF mb-2">
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item" th:if="${tache.etat == 2}"  th:each="tache, iterStat: ${taches}">
+                                    <h2 class="accordion-header" >
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                            aria-controls="flush-collapseOne" th:text="${tache.id}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementsss' + ${tache.id} + '\')'" > 
+                                            
+                                        </button>
+                                    </h2>
+                                    <div th:id="'flush-collapse' + ${tache.id}" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                    <div class="col-md-4">
+                                                        <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementsss'+ ${tache.id}" style="width: 100%; height: 100%;">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body lola">
+                                                            <h5 class="card-title" th:text="${tache.type.value}"></h5>
+                                                            <p class="card-text" th:text="${tache.description}"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+            <!-- Formulaire de Maintenance-->
+    
+            <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="Modal1Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title me-5" id="Modal1Label">Tache de Maintenance</h2>
+                            <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="equipement" class="form-label">NOM DE L'EQUIPEMENT</label>
+                                    <input type="text" class="form-control" id="equipement" placeholder="Entrer le nom d'enregistrement de cet equipement">
+                                </div>
+                                <div id="photo-frame">.
+                                    <button type="button" class="btn btn-primary" onclick="openFilePicker()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+                                    <input type="file" id="file-picker" accept="image/*" style="display: none;">
+                                </div>
+                                <img id="preview-image" src="#" alt="Aperçu de l'image" style="display: none;">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="type-appareil" class="form-label">TYPE D'APPAREIL</label>
+                                    <p class="form-control" id="type-appareil"></p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">DESCRIPTION DU PROBLEME</label>
+                                    <textarea class="form-control" id="description" rows="3" style="resize: none;"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="date" class="form-label">DATE</label>
+                                    <input type="date" class="form-control" id="date">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="localisation" class="form-label">LOCALISATION</label>                            
+                                    <div class="row">  
+                                        <p style="color: #00b2ff;"><input type="checkbox" id="localisation" onclick="requestLocationPermission()" /> Choisir votre position Actuelle</p>      
+                                        <p style="color: #00b2ff;"> <i class="fas fa-map" onclick="OpenMap()" style="color: #00b2ff;">  </i> Cliquer sur la Map</p>  
+                                    </div>
+                                    <div style="display: none;">
+                                        <label for="longitude" class="form-label">Longitude</label>
+                                        <input type="text" class="form-control" id="longitude" >
+                                        <label for="latitude" class="form-label">Latitude</label>
+                                        <input type="text" class="form-control" id="latitude" >
+                                    </div>
+                                    
+                                    <br>
+                                    <div id="map" style="display: none; height:400px"></div>  
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" id="creer" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            
+            <!-- Ouvrir la map 
+        /* <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true" style="width: 800px; height: 800px;">
+                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">Carte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="map" style="width: 90%; height: 400px;"></div>
+                    </div>
+                
+                </div>
+                </div>
+            </div>-->
+        
+    
+            <!-- Enregistement Equipements -->
+            <div id="2" class="equipements" style="margin-top: 3.5rem; display: none;">
+                <div class="row">
+                    <div class="col-md-3 ms-2">
+                        <h4 style="color:#00b2ff;"><i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#Modal2"></i> Equipements</h4>
+                    </div>
+                    <div class="col-md-8">
+                        <div id="ListeEquip" class="ListeEquip">
                         
                         </div>
-                        </div>
-                    </div>-->
-                
-
-                    <!-- Enregistement Equipements -->
-                    <div id="2" class="equipements" style="margin-top: 3.5rem; display: none;">
-                        <div class="row">
-                            <div class="col-md-3 ms-2">
-                                <h4 style="color:#00b2ff;"><i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#Modal2"></i> Equipements</h4>
-                            </div>
-                            <div class="col-md-8">
-                                <div id="ListeEquip" class="ListeEquip">
-                                
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
-                    <!-- Formulaire Equipements -->
-                    <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="Modal2Label" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h2 class="modal-title me-5" id="Modal2Label">Equipements</h2>
-                                    <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="equipement1" class="form-label">Nom de l'Equipement</label>
-                                            <input type="text" class="form-control" id="equipement1" placeholder="Entrer le nom d'enregistrement de cet equipement">
-                                        </div>
-                                        <div id="photo-frame2">.
-                                            <button type="button" class="btn btn-primary" onclick="openFilePicker2()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
-                                            <input type="file" id="file-picker2" accept="image/*" style="display: none;">
-                                        </div>
-                                        <img id="preview-image2" src="#" alt="Aperçu de l'image" style="display: none;">
-                                        <br>
-                                        <div class="mb-3">
-                                            <label for="type-appareil2" class="form-label">Type d'appareil</label>
-                                            <input type="text" class="form-control" id="type-appareil2">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
-                                    <button type="button" id="creerEquip" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
-                                </div>
-                            </div>
+                </div>
+            </div>
+    
+            <!-- Formulaire Equipements -->
+            <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="Modal2Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title me-5" id="Modal2Label">Equipements</h2>
+                            <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </div>
-
-                    <!-- Message -->
-                    <div id="3" class="messagerie" style="display: none;" >
-                        <div class="row my-5">
-                            <div class="col-md-4 ms-3">
-                                <div class="row my-3">
-                                    <div class="col-md-1">
-                                        <i class="fa fa-search fa-2x" style="color: #00b2ff;" aria-hidden="false"> </i>
-                                    </div>  
-                                    <div class="col-md-10">
-                                        <input type="text" placeholder="Recherche">
-                                    </div> 
-                                </div> 
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="equipement1" class="form-label">Nom de l'Equipement</label>
+                                    <input type="text" class="form-control" id="equipement1" placeholder="Entrer le nom d'enregistrement de cet equipement">
+                                </div>
+                                <div id="photo-frame2">.
+                                    <button type="button" class="btn btn-primary" onclick="openFilePicker2()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+                                    <input type="file" id="file-picker2" accept="image/*" style="display: none;">
+                                </div>
+                                <img id="preview-image2" src="#" alt="Aperçu de l'image" style="display: none;">
                                 <br>
-                                <div class="contact my-3" style="max-height: max-content;">
-                                    <h3 style="color: #00b2ff;">CONTACT</h3>
-                                    <div style="border: #00b2ff solid;"></div> 
+                                <div class="mb-3">
+                                    <label for="type-appareil2" class="form-label">Type d'appareil</label>
+                                    <input type="text" class="form-control" id="type-appareil2">
                                 </div>
-                            </div>
-                            <div class="col-md-7 ms-4">
-                                <div class="container message">
-                                    <div id="chat" class="row">
-                                        <div class="maintenancier">
-                                            <div class="sender">Jane Smith</div>
-                                            <div class="timestamp">10/29/2023 1:15 PM</div>
-                                            <div class="content">Ça va bien, merci ! Et toi ?</div>
-                                        </div>
-                                        <br>
-                                        <div class="maintenancier">
-                                            <div class="sender">Jane Smith</div>
-                                            <div class="timestamp">10/29/2023 1:15 PM</div>
-                                            <div class="content">Ça va bien, merci ! Et toi ?</div>
-                                        </div>
-                                        <div class="maintenancier1">
-                                            <div class="sender">Jane Smith</div>
-                                            <div class="timestamp">10/29/2023 1:15 PM</div>
-                                            <div class="content">Ça va bien, merci ! Et toi ?</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <br>
-                                <div id="send" class="row">
-                                    <div class="col-md-1">
-                                        <div> 
-                                            <button ><i class="fa fa-camera fa-2x"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9 ms-2">
-                                        <textarea name="" id="monMessage" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
-                                    </div>
-                                    <div class="col-md-1 ms-5">
-                                        <button id="envoi"><i class="fa fa-paper-plane fa-2x"></i></button>
-                                    </div>
-                                </div>
-                                
-                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" id="creerEquip" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="PROF" class="col-md-2" style="background-color: #021c44; display: none;">
-                <div class="row">
-                    <div class="col-md-2">
-                        <i id="return" class="fa fa-arrow-left" style="color: #00b2ff;"></i>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="mt-3"  style="display: flex; justify-content: center; align-items: center;">
-                            <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px;">   
+    
+            <!-- Message -->
+            <div id="3" class="messagerie" style="display: none;" >
+                <div class="row my-5">
+                    <div class="col-md-4 ms-3">
+                        <div class="row my-3">
+                            <div class="col-md-1">
+                                <i class="fa fa-search fa-2x" style="color: #00b2ff;" aria-hidden="false"> </i>
+                            </div>  
+                            <div class="col-md-10">
+                                <input type="text" placeholder="Recherche">
+                            </div> 
+                        </div> 
+                        <br>
+                        <div class="contact my-3" style="max-height: max-content;">
+                            <h3 style="color: #00b2ff;">CONTACT</h3>
+                            <div style="border: #00b2ff solid;"></div> 
                         </div>
                     </div>
+                    <div class="col-md-7 ms-4">
+                        <div class="container message">
+                            <div id="chat" class="row">
+                                <div class="maintenancier">
+                                    <div class="sender">Jane Smith</div>
+                                    <div class="timestamp">10/29/2023 1:15 PM</div>
+                                    <div class="content">Ça va bien, merci ! Et toi ?</div>
+                                </div>
+                                <br>
+                                <div class="maintenancier">
+                                    <div class="sender">Jane Smith</div>
+                                    <div class="timestamp">10/29/2023 1:15 PM</div>
+                                    <div class="content">Ça va bien, merci ! Et toi ?</div>
+                                </div>
+                                <div class="maintenancier1">
+                                    <div class="sender">Jane Smith</div>
+                                    <div class="timestamp">10/29/2023 1:15 PM</div>
+                                    <div class="content">Ça va bien, merci ! Et toi ?</div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <br>
+                        <div id="send" class="row">
+                            <div class="col-md-1">
+                                <div> 
+                                    <button ><i class="fa fa-camera fa-2x"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-9 ms-2">
+                                <textarea name="" id="monMessage" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
+                            </div>
+                            <div class="col-md-1 ms-5">
+                                <button id="envoi"><i class="fa fa-paper-plane fa-2x"></i></button>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
-            
             </div>
-        </div>
-    </div>
 
-       <!-- LE FOOTER -->
+                <!-- LE FOOTER -->
     <footer>
         <div class="container-fluid">
              <div class="row mt-5 ">
@@ -477,6 +464,50 @@
         </div>
 
    </footer>
+</main>
+   
+    
+            
+    <div id="PROF" class="overlay">
+        <div class="row">
+            <div class="col-md-2">
+                <i id="return" class="fa fa-arrow-left" style="color: #00b2ff;"></i>
+            </div>
+            <div class="col-md-10">
+                <div class="mt-3"  style="display: flex; justify-content: center; align-items: center;">
+                    <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon" style="width:80px;height: 80px;">  
+                </div>
+                <div  style="display: flex; justify-content: center; align-items: center;">
+                    <input type="text" value="name" style="width: 30%;background-color: #021c44; color: #ffffff;">  
+                </div>
+                <br>
+                <br>
+                <div>
+                    <button>Mon profil</button>   
+                </div>
+                <br>
+                <div>
+                    <button>Modifier Mon profil</button>
+                </div>
+                <br>
+                <div>
+                    <button>Historiques des Taches</button>
+                </div>
+                <br>
+                <div>
+                    <button>Mes filleuls</button>
+                </div>
+                <br>
+                <div>
+                    <button>Mes chats</button>
+                </div>
+               
+            </div>
+        </div>
+    
+    </div>
+
+   
 
 
     <script th:src="@{/js/notification.js}" ></script>

@@ -51,11 +51,13 @@ function fetchTask(){
     });
 }
 // Je veux afficher les taches dans la zone de contact
-function DisplayChatContact(data){
-    data.forEach(task =>{
-        var divChat = document.createElement("div");
-        // divChat.classList.add("chatContent");
-        divChat.innerHTML = `<div id="TA${task.id1}" class="chatContent" style="border-radius:15px;">
+function DisplayChatContact(data) {
+    data.forEach(task => {
+        if (task.etat == 1) {
+            var divChat = document.createElement("div");
+            // divChat.classList.add("chatContent");
+
+            divChat.innerHTML = `<div id="TA${task.id1}" class="chatContent" style="border-radius:15px;">
                                     <div>
                                         <h4> TACHE ${task.id1}</h4>
                                         <li>${task.type}</li>
@@ -66,16 +68,15 @@ function DisplayChatContact(data){
                                         ${task.selectedUsername}
                                     </div>
                                 </div>`;
-        divChat.addEventListener("click", ()=>{
-                                                TaskId = task.id1;
-                                                selectedUsername = task.selectedUsername;
-                                                console.log(TaskId + clientUsername + selectedUsername);
-                                                fetchAndDisplayUserChat();
-                                            }
-                                )
-        Taches.appendChild(divChat);
+            divChat.addEventListener("click", () => {
+                TaskId = task.id1;
+                selectedUsername = task.selectedUsername;
+                console.log(TaskId + clientUsername + selectedUsername);
+                fetchAndDisplayUserChat();
+            });
+            Taches.appendChild(divChat);
+        }
     })
-   
 }
 
 //Je veux charger et afficher les messages relatifs a une tache

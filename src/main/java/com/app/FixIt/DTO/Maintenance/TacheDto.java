@@ -17,7 +17,7 @@ public class TacheDto {
     private double latitude; 
     private String clientUsername;
     private String selectedUsername;
-
+    private Integer etat;
 
 
 
@@ -89,5 +89,13 @@ public class TacheDto {
     }
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Integer getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Integer etat) {
+        this.etat = etat;
     }
 }
