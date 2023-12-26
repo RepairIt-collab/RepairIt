@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/Maintenancier.css}"/>
-    <script th:src="@{/javascript/calendar.js}"></script>
+    <script th:src="@{/js/calendar.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
@@ -52,12 +52,12 @@
              <ul class="navbar-nav mt-3" >
                 <img th:src="@{/images/ecrou.png}" alt="Icon" class="navbar-icon mb-3 ms-2" style="width: 20px;height: 20px;">
             </ul>
-            <ul class="navbar-nav mt-3">
+            <ul class="navbar-nav mt-3" id="btnNotification">
                 <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon mb-3 " style="width: 25px;height: 25px;">
             </ul>
-            <button id="btncompte" class="btn">
-                <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px;">
-            </button>
+            <ul id="btncompte" class="btn">
+                <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px;">
+            </ul>
         </div>
     </nav>
      
@@ -98,13 +98,13 @@
             <p>BIENVENU SUR VOTRE PAGE</p>
             
         </div>
-        <!-- <div th:if="${maintenancier.test == 0}" id="MaRebours">
+        <div th:if="${maintenancier.test == 0}" id="MaRebours">
             <p th:text="'Vous êtes en attente de l\'évaluation dans le domaine de ' + ${maintenancier.specialite} + ' temps restant'"></p>
             <p id="CaRebours" ></p>
             <button id="alertButton" style="display: none;">Debuter l'evaluation</button>
             <p id="DateArebours" th:text="${evaluation.date}" style="display: none;"></p>
             <span class="closeEval" onclick="this.parentNode.style.display = 'none';">&times;</span>
-        </div> -->
+        </div>
     
         <br>
         
@@ -133,7 +133,7 @@
                                                 <!-- <h5 class="card-title" th:text="${tache.type.value}"></h5> -->
                                                 <p class="card-text" th:text="${notification.message}"></p>
                                                 <p id="idMaintenancier-disabled" th:value="${notification.idMaintenancier}" style="display: none;"></p>
-                                                <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap"  th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING')'">carte</i>   <!-- Icône de poubelle -->
+                                                <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap"  th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>   <!-- Icône de poubelle -->
                                                 <i class="fas fa-edit fa-2x" style="color:#044602 ;" th:attr="onclick='ValiderTache(\'' + ${notification.id} + '\')'">Choisir</i>
                                             </div>
                                         </div>
@@ -166,7 +166,7 @@
                                         <div class="col-md-8">
                                             <div class="card-body lola">
                                                 <p class="card-text" th:text="${notification.message}"></p>
-                                                <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap" th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',DRIVING)'">carte</i>  
+                                                <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap" th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>  
                                                 <i class="fas fa-edit fa-2x" style="color:#044602 ;" data-bs-toggle="modal" data-bs-target="#ModalBuy" >Terminer</i>
                                             </div>
                                         </div>
@@ -327,7 +327,7 @@
     </div>    
 
     <!-- EVALUATION -->
-    <!-- <div class="container">
+    <div class="container">
         <div class="evaluations" style="display: none;">
             <h3><i class="fa fa-book me-2"></i> Bienvenu a cette nouvelle evaluation</h3>
             <div style="border: #00b2ff solid;"></div> 
@@ -364,10 +364,19 @@
                 </form>
                 
             </div>
+            <button class="my-4" onclick="validerEval()">Envoyer</button>
            
         </div>
-        <button class="my-4" onclick="validerEval()">Envoyer</button>
-    </div> -->
+    </div>
+
+    <!-- LE MENU NOTIFICATION -->
+    <div class="notificationMenu"  style="display: none;">
+        <div th:each="notification :${notifications}">
+            <p> content</p>
+            <p th:text="${notification.message}"></p>
+        </div>
+        <!-- style d'affichage des notifications -->
+    </div>
    
             
     <!-- LE FOOTER -->
@@ -424,15 +433,15 @@
             </div>
             <div class="col-md-10">
                 <div class="mt-3"  style="display: flex; justify-content: center; align-items: center;">
-                    <img th:src="@{/images/COMPTE 1.png}" alt="Icon" class="navbar-icon" style="width:80px;height: 80px;">  
+                    <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:80px;height: 80px;">  
                 </div>
                 <div  style="display: flex; justify-content: center; align-items: center;">
-                    <input type="text" value="name" style="width: 30%;background-color: #021c44; color: #ffffff;">  
+                    <input type="text" th:value="${maintenancier.username}" style="width: 30%;background-color: #021c44; color: #ffffff;">  
                 </div>
                 <br>
                 <br>
                 <div>
-                    <button>Mon profil</button>   
+                    <button><a th:href="@{/RepairIt/Profil/{maintenancier}(maintenancier=${maintenancier.id})}">Mon Profil</a></button>   
                 </div>
                 <br>
                 <div>
@@ -448,6 +457,9 @@
                 </div>
                 <div>
                     <button>Mes filleuls</button>
+                    <select name="" id="" th:each="filleul: ${filleuls}">
+                        <option th:text="${filleul.username}"></option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -457,6 +469,8 @@
    <script th:src="@{/js/Maintenancier.js}"></script>
    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
    <script th:src="@{/js/localisation.js}"></script>
+   <script th:src="@{/js/CRUDMaintenancier.js}"></script>
+   <script th:src="@{/js/Map.js}"></script>
    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script

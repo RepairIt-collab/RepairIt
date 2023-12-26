@@ -38,7 +38,7 @@ function errorCallback(error) {
   }
 
 
-  function initMap(EndLat,EndLon) {
+/*  function initMap(EndLat,EndLon) {
     requestLocationPermission()
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
@@ -73,4 +73,4 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, start, 
             directionsRenderer.setDirections(response);
         })
         .catch((e) => window.alert("Directions request failed due to " + status));
-}
+}*/
