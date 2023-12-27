@@ -1,6 +1,7 @@
 package com.app.FixIt.SERVICE.Maintenance;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -28,5 +29,9 @@ public class ClientService implements ClientDao{
     public Client findById(Long id) {
             Optional<Client> optionalEntity = clientRepository.findById(id);
             return optionalEntity.orElse(null);
+    }
+
+    public List<Client> findAllClients() {
+        return clientRepository.findAll();
     }
 }

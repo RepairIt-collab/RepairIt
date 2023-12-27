@@ -100,37 +100,10 @@ function LicenceC(){
   document.getElementById("Logo-Client").style.display="none";
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  var caseClient = document.getElementById("check1");
-  var validElement = document.getElementById("valid1");
 
-  caseClient.addEventListener("change", function() {
-    if (caseClient.checked) {
-      validElement.disabled = false;
-    } else {
-      validElement.disabled = true;
-    }
-  });
-});
 
 function LicenceM(){
   
   document.getElementById("Lic-Main").style.display="block";
   document.getElementById("Logo-Main").style.display="none";
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-  var caseClient = document.getElementById("check2");
-  var validElement = document.getElementById("valid2");
-
-  caseClient.addEventListener("click",function(){
-    requestLocationPermission()
-  })
-  caseClient.addEventListener("change", function() {
-    if (caseClient.checked) {
-      validElement.disabled = false;
-    } else {
-      validElement.disabled = true;
-    }
-  });
-});
