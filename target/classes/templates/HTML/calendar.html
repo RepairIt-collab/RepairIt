@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <style>
-      /* Style pour le conteneur du calendrier */
+       /* Style pour le conteneur du calendrier */
 .fc {
-  background-color: #021c44;
+  background-color: #f0f6ff;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Style pour la barre d'outils du calendrier */
 .fc-header-toolbar {
-  background-color: #0c4681;
+  background-color: #021c44;
   padding: 10px;
 }
 
@@ -30,7 +30,7 @@
 .fc-toolbar-title {
   font-size: 30px;
   font-weight: bold;
-  color: #ffffff;
+  color: #00b2ff;
   margin: 0;
 }
 
@@ -39,8 +39,8 @@
 #calendar .fc-prev-button,
 #calendar .fc-next-button,
 #calendar .fc-today-button {
-  background-color: #007bff !important;
-  color: #a00606 !important;
+  background-color: #ffffff !important;
+  color: #00b2ff !important;
   border: none !important;
   border-radius: 3px !important;
   padding: 5px 10px !important;
@@ -56,7 +56,8 @@
 /* Style pour les cellules de jour du calendrier */
 .fc-day {
   border: 1px solid #9c0d0d;
-  background-color: #021c44;
+  background-color: #f0f6ff;
+  color:#021c44;
 }
 
 /* Style pour les événements du calendrier */
@@ -88,22 +89,63 @@
               success: function(data) {
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
-                    events: []
+                    events: [],
+                    eventClick: function(info) {
+                        // Récupérer les informations de l'événement
+                        var eventTitle = info.event.title;
+                        var eventStart = info.event.start;
+                        var eventDescription = info.event.extendedProps.description;
+                      //  var eventNom = info.event.extendedProps.nom;
+                        var eventEtat = info.event.extendedProps.etat;
+                        // Afficher les informations dans une popup
+                        alert('Type : ' + eventTitle + '\nDescription : ' + eventDescription+ '\nDate : ' + eventStart+ '\nEtat : ' + eventEtat);
+                      },
                 });
 
                 // Parcourir chaque élément du tableau "data"
                 for (var i = 0; i < data.length; i++) {
                     var eventData = data[i];
                     // Ajouter un nouvel événement au calendrier pour chaque élément du tableau
-                    calendar.addEvent({
+                    if(eventData.etat=="Nouvelle tache")
+                    {
+                      calendar.addEvent({
                         title: eventData.type,
                         start: eventData.date,
                         extendedProps: {
-                             description: 'Demande de reparation'
-                       }
-                    });
+                         //    nom:eventData.nom,
+                             description: eventData.description,
+                             etat:eventData.etat
+                       },
+                        backgroundColor: 'green'
+                      });
+                    }
+                    if(eventData.etat=="Tache en cours")
+                    {
+                      calendar.addEvent({
+                        title: eventData.type,
+                        start: eventData.date,
+                        extendedProps: {
+                         //    nom:eventData.nom,
+                             description: eventData.description,
+                             etat:eventData.etat
+                       },
+                        backgroundColor: 'yellow'
+                      });
+                    }
+                    if(eventData.etat=="Tache terminee")
+                    {
+                      calendar.addEvent({
+                        title: eventData.type,
+                        start: eventData.date,
+                        extendedProps: {
+                         //    nom:eventData.nom,
+                             description: eventData.description,
+                             etat:eventData.etat
+                       },
+                        backgroundColor: 'red'
+                      });
+                    }       
                 }
-
                 calendar.render();
             },
               error: function(jqXHR, textStatus, errorThrown) {

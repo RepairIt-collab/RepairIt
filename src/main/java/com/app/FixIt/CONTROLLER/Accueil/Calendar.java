@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.app.FixIt.DTO.Maintenance.FullCalendar;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Equipements;
+import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.ENTITIES.Maintenance.User;
 import com.app.FixIt.REPOSITORY.Maintenance.ClientRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.EquipementsRepository;
+import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.TachesRepository;
+import com.app.FixIt.REPOSITORY.User.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,7 +34,13 @@ public class Calendar {
     
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+   MaintenancierRepository maintenancierRepository;
 
      @Autowired
     EquipementsRepository equipementsRepository;
@@ -47,20 +56,44 @@ public class Calendar {
         
         Long id = (Long) session.getAttribute("id");
         List<Taches> taches=null;
-       // Equipements equipements=new Equipements();
         if(id != null){
-            Optional<Client> optuser = clientRepository.findById(id);
-            User user = optuser.get();;
-            taches =tachesRepository.findAllByClient((Client)user);    
+            if (clientRepository.findById(id).isPresent()) {
+                Optional<Client> optClientUser = clientRepository.findById(id);
+                if (optClientUser.isPresent()) {
+                    User user = optClientUser.get();
+                    taches = tachesRepository.findAllByClient((Client) user);
+                }
+            }
+            
+            if (maintenancierRepository.findById(id).isPresent()) {
+                Optional<Maintenancier> optMaintenancierUser = maintenancierRepository.findById(id);
+                if (optMaintenancierUser.isPresent()) {
+                    User user = optMaintenancierUser.get();
+                    taches = tachesRepository.findAllByMaintenancier((Maintenancier) user);
+                }
+            }             
         }
         List<FullCalendar> events = new ArrayList<>();
         for (Taches task : taches) {
-          //  equipements=task.getEquipements();
+            //Equipements equipements=task.getEquipements();
             FullCalendar event = new FullCalendar();
-            //event.setNom(equipements.getNom());
+          //  event.setNom(equipements.getNom());
             event.setDate(task.getDate());
             event.setType(task.getType());
-            event.setEtat(task.getEtat());
+            if(task.getEtat()==0)
+            {
+                event.setEtat("Nouvelle tache");
+            }
+             if(task.getEtat()==1)
+            {
+                event.setEtat("Tache en cours");
+            }
+            if(task.getEtat()==2)
+            {
+                event.setEtat("Tache terminee");
+            }
+           
+            event.setDescription(task.getDescription());
             // Autres propriétés de l'événement, si nécessaire
     
             events.add(event);

@@ -478,4 +478,12 @@ section{
     margin-left: 10%;
 }
 
-
+#Statistique input{
+    width: 90%;
+    border-color: #00b2ff;
+    border-radius: 10px;
+    pointer-events: none;
+    font-size: 1.7rem;
+    background-color: #00b2ff;
+    color: #fff;
+}

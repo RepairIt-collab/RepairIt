@@ -423,3 +423,15 @@ footer{
     position: relative;
     z-index: 1; /* Valeur de z-index inférieure à celle de la superposition */
   }
+
+  #PROF button{
+    color: #fff;
+    background-color: #00b2ff;
+  }
+
+  #PROF a{
+    color: #fff;
+    text-decoration: none;
+  }
+
+

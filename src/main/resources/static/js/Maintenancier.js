@@ -5,31 +5,33 @@ document.getElementById("a").addEventListener("click", function () {
   var el3 = document.querySelector(".calendar1");
   var el4 = document.querySelector(".messagerie2");
   var el5 = document.querySelector(".bienvenu");
+  var el7 = document.querySelector(".evaluations");
 
   el1.style.display = "block";
   el2.style.display = "block";
   el3.style.display = "none";
   el4.style.display = "none";
   el5.style.display = "none";
+  el7.style.display = "none";
 
 });
 
-document.getElementById("b").addEventListener("click", function () {
+// document.getElementById("b").addEventListener("click", function () {
 
-  var el1 = document.querySelector(".action");
-  var el2 = document.querySelector(".taches");
-  var el3 = document.querySelector(".calendar1");
-  var el4 = document.querySelector(".messagerie2");
-  var el5 = document.querySelector(".bienvenu");
-  var el6 = document.querySelector(".sous-menu");
+//   var el1 = document.querySelector(".action");
+//   var el2 = document.querySelector(".taches");
+//   var el3 = document.querySelector(".calendar1");
+//   var el4 = document.querySelector(".messagerie2");
+//   var el5 = document.querySelector(".bienvenu");
+//   var el6 = document.querySelector(".sous-menu");
 
-  el1.style.display = "none";
-  el2.style.display = "none";
-  el3.style.display = "block";
-  el4.style.display = "none";
-  el5.style.display = "none";
-  el6.style.display = "none";
-});
+//   el1.style.display = "none";
+//   el2.style.display = "none";
+//   el3.style.display = "block";
+//   el4.style.display = "none";
+//   el5.style.display = "none";
+//   el6.style.display = "none";
+// });
 
 // document.getElementById("c").addEventListener("click", function () {
 
@@ -578,3 +580,8 @@ document.getElementById("btnNotification").addEventListener("click", function ()
   el6.style.display = "none";
   elt7.style.display = "block";
 });
+
+function calender()
+{
+  window.location.href="/RepairIt/Utilisateur/Calendrier";
+}

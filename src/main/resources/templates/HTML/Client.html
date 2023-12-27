@@ -54,7 +54,7 @@
                     <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon mb-3 " style="width: 25px;height: 25px;">
                 </ul>
                 <button id="btncompte" class="btn">
-                    <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px;">
+                    <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px; border-radius: 10px;">
                 </button>
             </div>
         </nav>
@@ -474,10 +474,10 @@
             </div>
             <div class="col-md-10">
                 <div class="mt-3"  style="display: flex; justify-content: center; align-items: center;">
-                    <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:80px;height: 80px;">  
+                    <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:80px;height: 80px; border-radius: 20px;">  
                 </div>
-                <div  style="display: flex; justify-content: center; align-items: center;">
-                    <input type="text" th:value="${client.username}" style="width: 30%;background-color: #021c44; color: #ffffff;">  
+                <div class="my-2" style="display: flex; justify-content: center; align-items: center;">
+                    <input type="text" th:value="${client.username}" style="width: 40%;background-color: #021c44; color: #ffffff; font-size: 1rem;" disabled>  
                 </div>
                 <br>
                 <br>
@@ -487,6 +487,10 @@
                 <br>
                 <div>
                     <button><a th:href="@{/RepairIt/Profil/{clientId}(clientId=${client.id})}">Modifier Mon profil</a></button>
+                </div>
+                <br>
+                <div>
+                    <button><a th:href="@{/RepairIt/Statistique/Client}">Statistique</a></button>
                 </div>
                 <br>
                 <div>

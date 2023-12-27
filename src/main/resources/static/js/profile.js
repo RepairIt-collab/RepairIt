@@ -46,3 +46,7 @@ function PhotoProfile(image,id){
         console.error(error);
     });
   }
+
+  function goBack() {
+    history.back();
+  }

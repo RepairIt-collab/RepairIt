@@ -421,18 +421,60 @@
         <div class="custom-border-top"></div>      
     </div>
     <div class="col-12 text-center mt-4">
-        <p>Comme eux choisissez nous et progressons ensemble!</p>
+        <p>Nos statistiques cles!</p>
     </div>
     <br>
    
    <div id="Statistique">
     <div class="row">
-        <div class="col-md-6">
-            <canvas id="msChart"></canvas>
+        <div class="col-md-5">
+          <img th:src="@{/images/statis.png}" alt="">
         </div>
-        <div class="col-md-6">
-            <br><br><br><br>
-            <canvas id="myChart"></canvas>
+        <div class="col-md-7" style="background-color: #021c44; border-radius: 20px;">
+           <div class="row">
+              <div class="col-md-9 mt-3">
+                <h2 style="color: #00b2ff;">CLIENTS</h2>
+              </div>
+              <div class="col-md-2 mt-3">
+                <input type="text" th:value="${nbclient}">
+              </div>
+           </div>
+           <br>
+           <div class="row">
+              <div class="col-md-9">
+                <h2 style="color: #00b2ff;">MAINTENANCIERS</h2>
+              </div>
+              <div class="col-md-2">
+                <input type="text" th:value="${nbmain}">
+              </div>
+           </div>
+           <br>
+           <div class="row">
+            <div class="col-md-9">
+                <h2 style="color: #00b2ff;">DEMANDES DE MAINTENANCES</h2>
+              </div>
+              <div class="col-md-2">
+                <input type="text" th:value="${nbtache}">
+              </div>
+           </div>
+           <br>
+           <div class="row">
+            <div class="col-md-9">
+                <h2 style="color: #00b2ff;">MAINTENANCES EFFECTUEES</h2>
+              </div>
+              <div class="col-md-2">
+                <input type="text" th:value="${nbrepair}">
+              </div>
+           </div>
+           <br>
+           <div class="row">
+            <div class="col-md-9">
+                <h2 style="color: #00b2ff;">AVIS D'UTILISATEUR</h2>
+              </div>
+              <div class="col-md-2">
+                <input type="text">
+              </div>
+           </div>
         </div>
     </div>
 
@@ -502,11 +544,6 @@
             <div class=" form-group ">
                 <label for="PASSWORD2" class="form-label d-flex justify-content-center"><h3>Mot de Passe</h3></label>
                 <input type="password" class="form-control" id="PASSWORD2" placeholder="Entrer votre Mot de passe">
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                      <i class="fas fa-eye" id="togglePassword"></i>
-                    </span>
-                </div>
             </div>
            </form>  
            <br><br>

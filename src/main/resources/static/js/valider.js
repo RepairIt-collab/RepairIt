@@ -5,7 +5,7 @@ var clients;
 
 $(document).ready(function() {
   $.ajax({
-      url: "/loadClient",
+      url: "/RepairIt/loadClient",
       type: "GET",
       success: function(data) {
           clients = data; // Assigner les données à la constante 
