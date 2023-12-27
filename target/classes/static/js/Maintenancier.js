@@ -108,11 +108,14 @@ function sendNotificationN(notification) {
 
       // Gérer les événements de la notification (clic, fermeture, etc.)
       notification.onclick = function (event) {
+
         // Gérer le clic sur la notification
       };
 
       notification.onclose = function (event) {
+
         // Gérer la fermeture de la notification
+        //ajouter le truc bleu sur l'icone 
       };
 
       // ...
@@ -190,13 +193,6 @@ function ValiderTache(idNotif) {
   idM = document.getElementById("mainmain").textContent;
   const url = "https://127.0.0.1:9001/RepairIt/Client/Maintenance/validerTache";
 
-  // fetch(url, {
-  //     method: 'POST',
-  //     body: {
-  //       idM:idM,
-  //       idNotif:idNotif
-  //     }
-  // })
   const params = new URLSearchParams();
   params.append('idM', idM);
   params.append('idNotif', idNotif);
@@ -262,6 +258,8 @@ function determineImageMimeType(base64String) {
 //CODE POUR L'EVALUATION
 
 function updateCountdown() {
+  var dateDOM=document.getElementById("DateArebours");
+  if(dateDOM != null){
   var dateEntree = new Date(document.getElementById("DateArebours").textContent);
   var currentDate = new Date();
   var timeDifference = dateEntree - currentDate;
@@ -282,7 +280,7 @@ function updateCountdown() {
 
   var date = days + " jours ," + hours + ":" + minutes + ":" + seconds + " restants";
   document.getElementById("CaRebours").textContent = date
-}
+}}
 var countdownInterval = setInterval(updateCountdown, 1000);
 
 
@@ -557,4 +555,26 @@ document.getElementById("return").addEventListener('click',function(){
   document.getElementById("btncompte").style.display="block";
   document.getElementById('PROF').classList.remove("active");
   document.getElementById("content").style.pointerEvents="auto";;
+});
+
+//GERER LE CLIC SUR L'ICONE DE NOTIFICATION
+
+document.getElementById("btnNotification").addEventListener("click", function () {
+
+  var el1 = document.querySelector(".action");
+  var el2 = document.querySelector(".taches");
+  var el3 = document.querySelector(".calendar1");
+  var el4 = document.querySelector(".messagerie2");
+  var el5 = document.querySelector(".bienvenu");
+  var el6 = document.querySelector(".sous-menu");
+  var elt7 = document.querySelector(".notificationMenu");
+  console.log(elt7)
+
+  el1.style.display = "none";
+  el2.style.display = "none";
+  el3.style.display = "none";
+  el4.style.display = "none";
+  el5.style.display = "none";
+  el6.style.display = "none";
+  elt7.style.display = "block";
 });

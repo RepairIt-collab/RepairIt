@@ -43,33 +43,24 @@ function CreerMaintenancier()
    console.log(jsonData);
 }
 
-document.getElementById("valid2").addEventListener('click',CreerMaintenancier)
-
-
-
-// Fonction pour mettre à jour les coordonnées de l'utilisateur
 function updateLocation() {
+    requestLocationPermission()
     // Récupérer la position actuelle du navigateur
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-  
-            // Envoyer les nouvelles coordonnées de l'utilisateur au serveur
-            updateUserLocation(latitude, longitude);
-        });
-    }
+    updateUserLocation(latitude, longitud);
   }
   
   // Fonction pour envoyer les nouvelles coordonnées de l'utilisateur au serveur
   function updateUserLocation(latitude, longitude) {
+    var id = document.getElementById("mainmain").textContent
     var user = {
+        telephone:id,
         latitude: latitude,
         longitude: longitude
     };
   
     // Envoyer les données utilisateur au serveur
-    fetch("/update-location", {
+    const url = "https://127.0.0.1:9001/update-location";
+    fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -85,6 +76,7 @@ function updateLocation() {
         console.log(error);
     });
   }
-  
-  // Planifier la mise à jour des coordonnées toutes les 5 heures (en millisecondes)
-  setInterval(updateLocation, 5 * 60 * 60 * 1000);
+  // Planifier la mise à jour des coordonnées toutes les 5 heures (en millisecondes)e
+  var countdownInterval = setInterval(updateLocation, 5 * 60 * 60 * 1000);
+
+  document.getElementById("valid2").addEventListener('click',CreerMaintenancier)
