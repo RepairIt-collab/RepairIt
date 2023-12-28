@@ -81,6 +81,45 @@ public class Stat {
       return ResponseEntity.ok(liste);      
   }
 
+   @GetMapping("/statclient2")
+  public ResponseEntity<List<Integer>>statclient2(HttpSession session)
+  {
+       List<Integer> liste = new ArrayList<>();
+       List<Integer> indice = new ArrayList<>();
+      // Initialisation de tous les éléments à zéro
+      for (int i = 0; i < 12; i++) {
+          liste.add(i, 0);
+      }
+      for (int i = 0; i < 12; i++) {
+          indice.add(i, 0);
+      }
+
+      Long id = (Long) session.getAttribute("id");
+      List<Taches> taches=null;
+      Optional<Client> optClientUser = clientRepository.findById(id);
+      User user = optClientUser.get();
+      taches = tachesRepository.findAllByClient((Client) user);
+
+      for (Taches task : taches) {
+        if(task.getEtat()==0)
+        {
+            for (int i = 0; i < 12; i++) {
+                  if(task.getDate().getMonthValue()==i+1){
+                     indice.set(i,indice.get(i)+1);
+                     liste.set(i,indice.get(i));
+               }
+            }
+        
+        }
+      }
+
+        for (int i = 0; i < 12; i++) {
+         System.out.print(liste.get(i));
+      }
+
+      return ResponseEntity.ok(liste);      
+  }
+
 
 
     

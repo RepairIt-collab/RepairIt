@@ -16,7 +16,7 @@ document.getElementById('file-picker').addEventListener('change', function (even
         document.getElementById('preview-image').style.display = 'block';
       };
       reader.readAsDataURL(input.files[0]);
-    }0
+    }
 });
 
 

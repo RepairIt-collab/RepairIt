@@ -4,14 +4,14 @@ document.getElementById("nav1").addEventListener("click", function() {
   var el1 = document.querySelector(".sous-menu");
   var el2 = document.querySelector(".maintenance");
   var el3 = document.querySelector(".equipements");
-  var el4 = document.querySelector(".messagerie");
+//  var el4 = document.querySelector(".messagerie");
   var el5 = document.querySelector(".bienvenu");
   var el6 = document.querySelector(".action");
 
   el1.style.display = "block";
   el2.style.display = "block";
   el3.style.display = "none";
-  el4.style.display = "none";
+//  el4.style.display = "none";
   el5.style.display = "none";
   el6.style.display = "block";
 });
@@ -21,13 +21,13 @@ document.getElementById("nav2").addEventListener("click", function() {
   var el1 = document.querySelector(".sous-menu");
   var el2 = document.querySelector(".maintenance");
   var el3 = document.querySelector(".equipements");
-  var el4 = document.querySelector(".messagerie");
+ // var el4 = document.querySelector(".messagerie");
   var el5 = document.querySelector(".bienvenu");
 
   el1.style.display = "none";
   el2.style.display = "none";
   el3.style.display = "block";
-  el4.style.display = "none";
+ // el4.style.display = "none";
   el5.style.display = "none";
   
 });
@@ -37,13 +37,13 @@ document.getElementById("nav3").addEventListener("click", function() {
   var el1 = document.querySelector(".sous-menu");
   var el2 = document.querySelector(".maintenance");
   var el3 = document.querySelector(".equipements");
-  var el4 = document.querySelector(".messagerie");
+ // var el4 = document.querySelector(".messagerie");
   var el5 = document.querySelector(".bienvenu");
 
   el1.style.display = "none";
   el2.style.display = "none";
   el3.style.display = "none";
-  el4.style.display = "block";
+ // el4.style.display = "block";
   el5.style.display = "none";
   
 });

@@ -1,0 +1,32 @@
+<div class="modal fade" id="Modal3" tabindex="-1" aria-labelledby="Modal3Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title me-5" id="Modal3Label">Modification Equipements</h2>
+                <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="equipement2" class="form-label">Nom de l'Equipement</label>
+                        <input type="text" class="form-control" id="equipement2" placeholder="Entrer le nouveau de cet equipement">
+                    </div>
+                    <div id="photo-frame3">.
+                        <button type="button" class="btn btn-primary" onclick="openFilePicker3()"> <i class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+                        <input type="file" id="file-picker3" accept="image/*" style="display: none;">
+                    </div>
+                    <img id="preview-image3" src="#" alt="Aperçu de l'image" style="display: none;">
+                    <br>
+                    <div class="mb-3">
+                        <label for="type-appareil3" class="form-label">Type d'appareil</label>
+                        <input type="text" class="form-control" id="type-appareil3">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" id="ModifEquip" data-bs-dismiss="modal" class="btn btn-primary bg-success">Creer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -146,3 +146,5 @@ function SupprimerEquipement(id) {
           div.remove();
       }
   }
+
+// MODIFICATION D'UNE TACHE

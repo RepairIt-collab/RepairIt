@@ -21,7 +21,9 @@
             <div class="col-md-6">
                 <canvas id="myChart"></canvas>
             </div>
-            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <canvas id="barChart"></canvas>
+            </div>
         </div>
     </div>
   
@@ -34,33 +36,48 @@
               url: '/RepairIt/statclient',
               method: 'GET',
               success: function(datas) {
-                 var data = {
+
+                                // Données du graphique
+                var data = {
                     labels: ['Taches demandees', 'taches en cours', 'Taches terminees'],
                     datasets: [{
-                        label: 'Statistiques des taches de maintenances',
                         data: [datas[0], datas[1], datas[2]],
-                        backgroundColor: 'rgba(75, 192, 192, 0.5)', // Couleur de remplissage des barres
-                        borderColor: 'rgba(75, 192, 192, 1)', // Couleur des bordures des barres
-                        borderWidth: 1 // Largeur des bordures des barres
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                        borderWidth: 1
                     }]
-                    };
+                };
 
-                    // Options du diagramme
-                    var options = {
+                // Options du graphique
+                var options = {
+                    responsive: true,
                     scales: {
-                        y: {
-                        beginAtZero: true // L'axe y commence à 0
+                        r: {
+                            angleLines: {
+                                display: false
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 20
                         }
                     }
-                    };
+                };
 
-                    // Création du diagramme en bâtons
-                    var ctx = document.getElementById('myChart').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                    type: 'bar',
+                // Créer le graphique
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'polarArea',
                     data: data,
                     options: options
-                    });
+                });
+
             },
               error: function(jqXHR, textStatus, errorThrown) {
                  console.log("error");
@@ -68,7 +85,53 @@
           });
       });
    
-    // Données du diagramme
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+         $.ajax({
+              url: '/RepairIt/statclient2',
+              method: 'GET',
+              success: function(datas) {
+
+                   // Données pour le graphique à barres
+                   var data = {
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    datasets: [{
+                        label: 'Demandes de taches mensuelles',
+                        data: [datas[0], datas[1], datas[2], datas[3], datas[4], datas[5], datas[6], datas[7], datas[8], datas[9], datas[10], datas[11]],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)', // Couleur de fond des barres
+                        borderColor: 'rgba(54, 162, 235, 1)', // Couleur de bordure des barres
+                        fill: false // Pas de remplissage en dessous de la ligne
+                    }]
+                };
+
+                // Options du graphique à barres
+                var options = {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                };
+
+                // Création du graphique à barres
+                var ctx = document.getElementById('barChart').getContext('2d');
+                var barChart = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: options
+                });
+
+            },
+              error: function(jqXHR, textStatus, errorThrown) {
+                 console.log("error");
+              }
+          });
+      });
+
+    
+         
 
   </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
