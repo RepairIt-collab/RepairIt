@@ -17,7 +17,7 @@ public class Predict {
     private String saveImage(MultipartFile image) {
         try {
             //String fileName = image.getOriginalFilename();
-            File destinationFile = new File("/home/manu/Desktop/Integration/FixIt/Images/" + "im.png");
+            File destinationFile = new File("/home/orlane/RepairIt/Images/" + "im.png");
             image.transferTo(destinationFile);
             return destinationFile.getAbsolutePath();
             

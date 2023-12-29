@@ -2,9 +2,7 @@ package com.app.FixIt.SERVICE.Maintenance;
 
 import org.springframework.stereotype.Service;
 
-import com.app.FixIt.DAO.*;
 import com.app.FixIt.DAO.Maintenance.EquipementsDAO;
-import com.app.FixIt.ENTITIES.*;
 import com.app.FixIt.ENTITIES.Maintenance.Equipements;
 import com.app.FixIt.REPOSITORY.Maintenance.EquipementsRepository;
 

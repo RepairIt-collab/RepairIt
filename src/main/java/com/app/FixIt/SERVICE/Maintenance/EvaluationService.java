@@ -16,10 +16,13 @@ import com.app.FixIt.REPOSITORY.Maintenance.QuestionsRepository;
 import java.util.Collections;
 @Service
 public class EvaluationService {
-     @Autowired
+    @Autowired
     EvaluationRepository evaluationRepository;
     @Autowired
     QuestionsRepository questionsRepository;
+
+    @Autowired
+    CsvImportRunner csvImportRunner;
     public void eval(){
 
     }
@@ -28,14 +31,16 @@ public class EvaluationService {
         // Evaluation evaluation = evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(), currentDate);
         Evaluation evaluation = evaluationRepository.findFirstByDomain(maintenancier.getSpecialite());
         System.out.println(evaluation.getDate());
-        evaluation.getMaintenanciers().add(maintenancier);
-        System.out.println(evaluation.getMaintenanciers());
+        List<Maintenancier> maintenanciers = new ArrayList<>();
+        maintenanciers.add(maintenancier);
+        evaluation.setMaintenanciers(maintenanciers);
         evaluationRepository.save(evaluation);
     }
 
     public void addQuestions(Evaluation evaluation){
         List<Questions> questions = selectRandomQuestions(20, evaluation.getDomain());
         evaluation.setQuestions(questions);
+        evaluationRepository.save(evaluation);
     }
 
     private List<Questions> selectRandomQuestions(int numQuestions, String domain) {
@@ -66,7 +71,7 @@ public class EvaluationService {
         domain.add("Informatique-Ordinateur");
         domain.add("Plomberie");
         domain.add("Menuiserie");
-        domain.add("Froid et Climatisation");
+        // domain.add("Froid et Climatisation");
         domain.add("Medicale");
         domain.add("Industrielle");
         return domain;
@@ -74,7 +79,7 @@ public class EvaluationService {
     public void expire(String domain){
         LocalDate currentDate = LocalDate.now();  
         List<Evaluation> evaluations = evaluationRepository.findByDomain(domain);
-        if (evaluations == null){
+        if (evaluations.isEmpty()){
             Evaluation eval= new Evaluation();
             eval.setDomain(domain);
             eval.setDate(currentDate.plusDays(30));
@@ -87,11 +92,27 @@ public class EvaluationService {
                 if(compare > 0){
                     Evaluation eval= new Evaluation();
                     eval.setDomain(domain);
-                    eval.setDate(currentDate.plusDays(30));
+                    eval.setDate(currentDate.plusDays(10));
                     addQuestions(eval);
                     evaluationRepository.save(eval);
                 } 
             }
         }
     }
+
+    public void createEvaluationIfDateExpired() throws Exception{
+        csvImportRunner.importcsv();
+        List<String> domains = addDomain();
+        for(String domain : domains){
+            expire(domain);
+        }
+        System.out.println("///////////////////icic aussi");
+        
+    }
+
+
 }
+
+
+
+

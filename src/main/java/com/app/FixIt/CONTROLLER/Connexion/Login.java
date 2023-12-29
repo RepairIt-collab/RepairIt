@@ -18,7 +18,6 @@ import com.app.FixIt.DTO.Maintenance.MaintenancierDTO;
 import com.app.FixIt.DTO.Maintenance.ClientDTO;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
-import com.app.FixIt.REPOSITORY.*;
 import com.app.FixIt.REPOSITORY.Maintenance.ClientRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.SERVICE.Maintenance.ClientService;
@@ -70,7 +69,7 @@ public class Login {
     }
 
     @PostMapping("/Maintenancier")
-    public String LogInM(@RequestParam("username") String username,@RequestParam("password") String Password,Model model,HttpSession session){
+    public String LogInM(@RequestParam("username") String username,@RequestParam("password") String Password,Model model,HttpSession session) throws Exception{
         Maintenancier maintenancier = maintenancierRepository.findFirstByUsernameAndPassword(username, Password);
         System.out.print(maintenancier);
         System.out.println("=====================================maintenancierlogmaintenancier");

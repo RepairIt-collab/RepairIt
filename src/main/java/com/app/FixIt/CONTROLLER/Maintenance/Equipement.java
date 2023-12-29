@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.FixIt.DTO.Maintenance.EquipementDTO;
-import com.app.FixIt.ENTITIES.*;
 import com.app.FixIt.ENTITIES.Maintenance.Equipements;
 import com.app.FixIt.REPOSITORY.Maintenance.EquipementsRepository;
 import com.app.FixIt.SERVICE.Maintenance.EquipementsService;

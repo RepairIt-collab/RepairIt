@@ -175,12 +175,12 @@ function SupprimerTache(id) {
   const url = "https://127.0.0.1:9001/RepairIt/Client/Maintenance/SuprimerTache/" + id;
 
   fetch(url, {
-      method: 'DELETE'
+      method: 'POST'
   })
   .then(response => {
       if (response.ok) {
           console.log("Suppression réussie");
-          return response.text(); // Renvoyer la réponse en tant que texte
+          // return response.text(); // Renvoyer la réponse en tant que texte
       } else {
           throw new Error('Erreur de la requête SupprimerTache');
       }
@@ -193,6 +193,7 @@ function SupprimerTache(id) {
       // Gestion des erreurs
       console.error(error);
   });
+  window.location.reload()
 }
 
 function supprimerTacheDuDOM(Id1) {

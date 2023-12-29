@@ -86,6 +86,13 @@ public class Tache{
     //    tache.setMaintenancier(maintenancierChat);
     // //==================================================================
        tache = tacheService.saveTache(tache);
+       tache = tacheService.saveTache(tache);
+    //    if(tache.getImage()!= null){
+    //    String base64Data = Base64.getEncoder().encodeToString(tache.getImage());
+            
+    //         tache.setImgString(base64Data);
+
+    //     }
        todoTache.setId1(tache.getId());
 
        EquipementsService equipementsService=new EquipementsService(equipementsRepository);
@@ -99,10 +106,10 @@ public class Tache{
 
        
         List<Maintenancier> maintenanciers = maintenancierService.findMaintenancier(tache);
-        System.out.println(maintenanciers);
+        System.out.println("------------"+maintenanciers);
         Notification notif = new Notification();
         notif.setMaintenanciers(maintenanciers);
-        String messageString  = "Taches concernant un "+equipements.getNom() +" de type "+ tache.getType()+" Description du Probleme " + tache.getDescription()+" a realiser au plus tard " + tache.getDate() + "//"+tache.getId();
+        String messageString  = "Taches concernant un "+equipements.getNom() +" de type "+ tache.getType()+" Description du Probleme " + tache.getDescription()+" a realiser au plus tard " + tache.getDate() ;//+ "//"+tache.getId();
         notif.setMessage(messageString);
         notif.setTaches(tache);
         notificationRepository.save(notif);
@@ -110,10 +117,15 @@ public class Tache{
     return notif;
     }
     
-    @DeleteMapping("/SuprimerTache/{id}")
+    @PostMapping("/SuprimerTache/{id}")
     public void DeleteTache(@PathVariable Long id) {
-        TacheService tacheService = new TacheService(tachesRepository);
-        tacheService.DeleteTache(id);
+        Taches taches = tachesRepository.findById(id).orElse(null);
+        Notification notification = notificationRepository.findByTaches(taches);
+        notificationRepository.delete(notification);
+        // TacheService tacheService = new TacheService(tachesRepository);
+        // tacheService.DeleteTache(id);
+        tachesRepository.delete(taches);
+        
 
     }
 

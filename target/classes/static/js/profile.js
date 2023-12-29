@@ -1,12 +1,13 @@
 document.getElementById("editPhoto").addEventListener('click',function(){
-    console.log("helle")
     document.getElementById("inputeditPhoto").click()
 })
 
 document.getElementById('inputeditPhoto').addEventListener('change', function (event) {
     var img =document.getElementById('inputeditPhoto');
     var file = img.files[0]
-    var type =file.name.split('.')[1] 
+    var Ttype =file.name.split('.')
+    var i = Ttype.length;
+    var type = Ttype[i-1]
     console.log(type)
     var id = document.getElementById("userId").textContent
     console.log(id)
@@ -14,8 +15,6 @@ document.getElementById('inputeditPhoto').addEventListener('change', function (e
     
 });
 function PhotoProfile(image,id){
-    var photoProfile = document.getElementById('photoProfile')
-
     const url = "https://127.0.0.1:9001/photoProfile";
     const form = new FormData();
     form.append('image',image);
@@ -39,12 +38,15 @@ function PhotoProfile(image,id){
         var srce = "/images/profile/"+data 
         console.log(document.getElementById('photoprofil'))
         document.getElementById('photoprofil').src=srce;
-        location.reload()
+        var countdownInterval = setInterval(relo, 2 * 1000)
     })
     .catch(error => {
         // Gestion des erreurs
         console.error(error);
     });
+  }
+  function relo(){
+    location.reload()
   }
 
   function goBack() {

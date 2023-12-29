@@ -29,6 +29,7 @@ import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.NotificationRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.QuestionsRepository;
 import com.app.FixIt.SERVICE.Maintenance.ClientService;
+import com.app.FixIt.SERVICE.Maintenance.EvaluationService;
 
 @Controller
 @RequestMapping("/RepairIt")
@@ -55,6 +56,9 @@ public class Maintenance {
     @Autowired
     QuestionsRepository questionsRepository;
 
+    @Autowired
+    EvaluationService evaluationService;
+
 
     @GetMapping("/Client")
     public String Client(Model model,HttpSession session) {
@@ -80,13 +84,14 @@ public class Maintenance {
     }
 
     @GetMapping("/Maintenancier")
-    public String Maintenancier(HttpSession session, Model model) {
+    public String Maintenancier(HttpSession session, Model model) throws Exception{
         Long id = (Long) session.getAttribute("id");
         if(id != null){
             
         Maintenancier maintenancier = maintenancierRepository.findById(id).orElse(null);
             List<Notification> notifications = notificationRepository.findByMaintenanciers(maintenancier);
             Iterable<Notification> notificationsI=notifications;
+            evaluationService.createEvaluationIfDateExpired();
             Evaluation evaluation = evaluationRepository.findByMaintenanciers(maintenancier);
             model.addAttribute("evaluation", evaluation);
             List<Notification> notification2 = notificationRepository.findByIdMaintenancier(id);
@@ -120,33 +125,33 @@ public class Maintenance {
         //chercher si il existe une image constituer du Username+id.type
         //si oui on envoie le nom /images/profile/Username+id.type
         // si non on envoie /images/COMPTE 1.png
-    public String nomImage(String username, Long id){
-        Path currentPath = Paths.get("").toAbsolutePath();
-        Path imagesPath = Paths.get(currentPath.toString(), "src", "main", "resources", "static", "images", "profile");
-        String destinationPath = imagesPath.toString();
-
-        File destinationFolder = new File(destinationPath);
-        String filename = username+""+id+".png";
-        String NameReturn = "/images/COMPTE 1.png";
-
-        if (destinationFolder.exists() && destinationFolder.isDirectory()) {
-            // Afficher tous les fichiers dans la destination
-            File[] files = destinationFolder.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    System.out.println(file.getName());
-                    System.out.println("========"+filename);
-                    if(filename.equals(file.getName())){
-                        NameReturn = "/images/profile/"+filename;
+        public String nomImage(String username, Long id){
+            Path currentPath = Paths.get("").toAbsolutePath();
+            Path imagesPath = Paths.get(currentPath.toString(), "src", "main", "resources", "static", "images", "profile");
+            String destinationPath = imagesPath.toString();
+    
+            File destinationFolder = new File(destinationPath);
+            String filename = username+""+id+".png";
+            String NameReturn = "/images/COMPTE 1.png";
+    
+            if (destinationFolder.exists() && destinationFolder.isDirectory()) {
+                // Afficher tous les fichiers dans la destination
+                File[] files = destinationFolder.listFiles();
+                if (files != null) {
+                    for (File file : files) {
+                        System.out.println(file.getName());
+                        System.out.println("========"+filename);
+                        if(filename.equals(file.getName())){
+                            NameReturn = "/images/profile/"+filename;
+                        }
+    
                     }
-
                 }
+                
+                System.out.println("--------"+NameReturn);
             }
-            
-            System.out.println("--------"+NameReturn);
+            return NameReturn;
         }
-        return NameReturn;
-    }
 
    
 }
