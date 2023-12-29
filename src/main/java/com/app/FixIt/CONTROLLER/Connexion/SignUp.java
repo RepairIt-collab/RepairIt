@@ -80,7 +80,7 @@ public class SignUp {
         newMaintenancier.setlatitude(maintenancier.getlatitude());
         newMaintenancier.setLongitude(maintenancier.getLongitude());
         newMaintenancier.setStatus(true);
-        newMaintenancier.setTest(2);
+        newMaintenancier.setTest(0);
         
         Maintenancier m=maintenancierService.saveMaintenancier(newMaintenancier);
         evaluationService.createEvaluationIfDateExpired();

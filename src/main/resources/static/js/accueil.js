@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#client').modal('show');
   }
 
+  //Popuo Client
   function openPopup1() {
     var popup =document.getElementById("myModal");
     var popup1=document.querySelector("#myModal").querySelector(".justmodal")
@@ -123,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(popup)
   }
 
+  //Popup maintenancier
   function openPopup2() {
     var popup =document.getElementById("myModal2");
     var popup1=document.querySelector("#myModal2").querySelector(".justmodal2")
@@ -147,16 +149,68 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
+// Fonction pour générer un mot de passe aléatoire
+function genererMotDePasse() {
+  const caracteresLettres = 'abcdefghijklmnopqrstuvwxyz';
+  const caracteresChiffres = '0123456789';
+  let motDePasse = '';
+
+  // Générer 6 lettres
+  for (let i = 0; i < 6; i++) {
+    const index = Math.floor(Math.random() * caracteresLettres.length);
+    motDePasse += caracteresLettres[index];
+  }
+
+  // Générer 2 chiffres
+  for (let i = 0; i < 2; i++) {
+    const index = Math.floor(Math.random() * caracteresChiffres.length);
+    motDePasse += caracteresChiffres[index];
+  }
+
+  return motDePasse;
+}
+
+//ENVOI D'EMAIL AU CONTROLLER POUR UNE MODIFICATION
+function EnvoiMail(mail,Mpasse) {
+  const url = `https://127.0.0.1:9001/RepairIt/EnvoieMail/${mail}/${Mpasse}`;
+
+  fetch(url, {
+    method: 'POST'
+  })
+  .then(response => {
+      if (response.ok) {
+          console.log("Modifiaction de l'email");
+          return response.text(); // Renvoyer la réponse en tant que texte
+      } else {
+          throw new Error('Erreur de la requête de modification');
+      }
+  })
+  .then(data => {
+      console.log(data);
+  })
+  .catch(error => {
+      // Gestion des erreurs
+      console.error(error);
+  });
+}
+
+
+
 //ENVOI D'EMAIL EN CAS DE D'OUBLIE DE MOT DE PASSE
-
-
-
 function sendmail()
 {
+  var nombreAleatoire = Math.floor(Math.random() * 5001);
+
+  var tableauMotsDePasse = [];
+  for (let i = 0; i < 5000; i++) {
+    const motDePasse = genererMotDePasse();
+    tableauMotsDePasse.push(motDePasse);
+  }
+  
   const emailData = {
     to: document.getElementById("sendmail").value,
-    subject: 'Sujet de l\'e-mail',
-    text: 'Contenu du message'
+    subject: 'Nouveau mot de passe de votre compte RepairIt',
+    text: `Voici votre nouveau mot de passe : ${tableauMotsDePasse[nombreAleatoire]}. Veuillez le changer si besoin.`
   };
 
   fetch('https://127.0.0.1:9001/sendemail', {
@@ -169,7 +223,7 @@ function sendmail()
   })
     .then(response => {
       if (response.ok) {
-        console.log(response);
+        EnvoiMail(document.getElementById("sendmail").value,tableauMotsDePasse[nombreAleatoire]);
         alert('E-mail envoyé avec succès !');
       } else {
        alert('Une erreur s\'est produite lors de l\'envoi de l\'e-mail.');
@@ -180,17 +234,5 @@ function sendmail()
     });
 }
 
-function MOpen() {
-  document.getElementById("modalcon1").style.display="hidden";
-  document.getElementById("modalcon2").style.display="block";
-}
-
- 
-function isModalOpen() {
-  document.getElementById("modalcon2").style.display="hidden";
-  document.getElementById("modalcon1").style.display="block";
-} 
-
-document.getElementById("close1").addEventListener('click',isModalOpen);
 
 

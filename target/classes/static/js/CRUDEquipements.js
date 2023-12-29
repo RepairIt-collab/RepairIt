@@ -116,7 +116,7 @@ document.getElementById("creerEquip").addEventListener('click',CEquipement);
 
 // SUPPRESSION D'UNE TACHE
 function SupprimerEquipement(id) {
-    const url = "https://127.0.0.1:9001/Client/Equpement/SuprimerEquipements/" + id;
+    const url = "https://127.0.0.1:9001/RepairIt/Client/Equipement/SuprimerEquipements/" + id;
   
     fetch(url, {
         method: 'DELETE'

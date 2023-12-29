@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,9 @@ import com.app.FixIt.REPOSITORY.Maintenance.EvaluationRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.NotificationRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.QuestionsRepository;
+import com.app.FixIt.REPOSITORY.User.UserRepository;
 import com.app.FixIt.SERVICE.Maintenance.ClientService;
+import com.app.FixIt.SERVICE.Maintenance.EquipementsService;
 import com.app.FixIt.SERVICE.Maintenance.EvaluationService;
 
 @Controller
@@ -40,6 +43,9 @@ public class Maintenance {
 
     @Autowired
     ClientService clientService;
+
+     @Autowired
+    UserRepository userRepository;
 
      @Autowired
      Accueil accueil;
@@ -153,5 +159,19 @@ public class Maintenance {
             return NameReturn;
         }
 
+        @PostMapping("/EnvoieMail/{mail}/{Mpasse}")
+        public ResponseEntity<String>  modifMail(@PathVariable String mail,@PathVariable String Mpasse) {
+            List<User> users = userRepository.findAll();
+        
+            for (User user : users) {
+                if (user.getEmail().equals(mail)) {
+                    user.setEmail(mail);
+                    user.setPassword(Mpasse);
+                    userRepository.save(user); // Mise à jour de l'utilisateur dans la base de données
+                    break; // Sortie de la boucle après la mise à jour du premier utilisateur correspondant
+                }
+            }
+            return ResponseEntity.ok("E-mail envoyé avec succès");
+        }
    
 }

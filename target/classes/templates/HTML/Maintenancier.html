@@ -344,8 +344,15 @@
 
             </div>
             <div id="evaluation" th:if="${maintenancier.test == 0}"  th:each="questio:${evaluation.questions}">
-                <p th:text="${questio.question}"></p>
-                <form th:id="'question' + ${questio.id}">
+                <div class="row">
+                    <div class="col-md-1">
+                        <p th:text="${questio.id}" style="background-color: #021c44; font-size: 1.8rem;"></p>
+                    </div>
+                    <div class="col-md-11">
+                        <p th:text="${questio.question}"></p>
+                    </div>
+                </div>
+                <form th:id="'question' + ${questio.id}" style="background-color: #f0f6ff;">
                     <div class="question">
                       <input type="radio"  name="proposition" value="1">
                       <label for="proposition1" th:text="${questio.option1}"></label>
@@ -445,7 +452,7 @@
                 </div>
                 <br>
                 <div>
-                    <button>Modifier Mon profil</button>
+                    <button><a th:href="@{/RepairIt/Update}">Modifier Mon profil</a></button>
                 </div>
                 <br>
                 <div>

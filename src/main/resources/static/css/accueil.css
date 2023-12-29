@@ -479,11 +479,18 @@ section{
 }
 
 #Statistique input{
-    width: 90%;
+    width: 50%;
     border-color: #00b2ff;
     border-radius: 10px;
     pointer-events: none;
     font-size: 1.7rem;
-    background-color: #00b2ff;
+    background-color: #021c44;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Statistique h2{
+    font-size: 1.6rem;
 }

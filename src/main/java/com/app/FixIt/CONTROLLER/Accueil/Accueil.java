@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.FixIt.CONTROLLER.Maintenance.Maintenance;
+import com.app.FixIt.DTO.Maintenance.ClientDTO;
+import com.app.FixIt.DTO.Maintenance.MaintenancierDTO;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.ENTITIES.Maintenance.User;
@@ -20,6 +23,8 @@ import com.app.FixIt.REPOSITORY.Maintenance.ClientRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.TachesRepository;
 import com.app.FixIt.REPOSITORY.User.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -85,7 +90,42 @@ public class Accueil {
         return "HTML/profil";
     }
 
-    
+
+    @GetMapping("/Update")
+    public String update(HttpSession session,Model model,@RequestBody ClientDTO clientdto,@RequestBody MaintenancierDTO maintenancier){
+         Long id = (Long) session.getAttribute("id");
+         Maintenancier main = maintenancierRepository.findById(id).orElse(null);
+         if(main == null){
+            Client client = clientRepository.findById(id).orElse(null);
+            client.setUsername(clientdto.getusername());
+            client.setEmail(clientdto.getEmail());
+            client.setPassword(clientdto.getPassword());
+            client.setTelephone(clientdto.getTelephone());
+            clientRepository.save(client);
+
+            Client UserClient = client;
+            model.addAttribute("userClient", UserClient);
+
+        }
+        else{
+
+            Maintenancier UserMaintenancier = main;
+           
+            UserMaintenancier.setUsername(maintenancier.getNom_utilisateur());
+            UserMaintenancier.setPassword(maintenancier.getPassword());
+            UserMaintenancier.setEmail(maintenancier.getMail());
+            UserMaintenancier.setTelephone(maintenancier.getTelephone());
+            UserMaintenancier.setSpecialite(maintenancier.getSpecialite());
+            if(UserMaintenancier.getSpecialite()!=maintenancier.getSpecialite())
+            {
+                UserMaintenancier.setTest(0);
+            }
+
+            maintenancierRepository.save(UserMaintenancier);
+            model.addAttribute("userMaintenancier", UserMaintenancier);
+        }
+        return "HTML/Modification";
+    }
 
     @GetMapping("/Formation")
     public String Formation()

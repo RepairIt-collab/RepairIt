@@ -425,61 +425,42 @@
     </div>
     <br>
    
-   <div id="Statistique">
-    <div class="row">
-        <div class="col-md-5">
-          <img th:src="@{/images/statis.png}" alt="">
-        </div>
-        <div class="col-md-7" style="background-color: #021c44; border-radius: 20px;">
-           <div class="row">
-              <div class="col-md-9 mt-3">
-                <h2 style="color: #00b2ff;">CLIENTS</h2>
-              </div>
-              <div class="col-md-2 mt-3">
-                <input type="text" th:value="${nbclient}">
-              </div>
-           </div>
-           <br>
-           <div class="row">
-              <div class="col-md-9">
-                <h2 style="color: #00b2ff;">MAINTENANCIERS</h2>
-              </div>
-              <div class="col-md-2">
-                <input type="text" th:value="${nbmain}">
-              </div>
-           </div>
-           <br>
-           <div class="row">
-            <div class="col-md-9">
-                <h2 style="color: #00b2ff;">DEMANDES DE MAINTENANCES</h2>
-              </div>
-              <div class="col-md-2">
-                <input type="text" th:value="${nbtache}">
-              </div>
-           </div>
-           <br>
-           <div class="row">
-            <div class="col-md-9">
-                <h2 style="color: #00b2ff;">MAINTENANCES EFFECTUEES</h2>
-              </div>
-              <div class="col-md-2">
-                <input type="text" th:value="${nbrepair}">
-              </div>
-           </div>
-           <br>
-           <div class="row">
-            <div class="col-md-9">
-                <h2 style="color: #00b2ff;">AVIS D'UTILISATEUR</h2>
-              </div>
-              <div class="col-md-2">
-                <input type="text">
-              </div>
-           </div>
+    <div id="Statistique">
+        <div class="row" style="background-color: #021c44;">
+            <div class="col-md-3 mt-3">
+                <div class="row">
+                    <input type="text" th:value="${nbclient}">
+                </div>
+                <div class="row text-center">
+                    <h2 style="color: #00b2ff;">CLIENTS</h2>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3">
+                <div class="row">
+                    <input type="text" th:value="${nbmain}">
+                </div>
+                <div class="row text-center">
+                    <h2 style="color: #00b2ff;">MAINTENANCIERS</h2>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3">
+                <div class="row">
+                    <input type="text" th:value="${nbtache}">
+                </div>
+                <div class="row text-center">
+                    <h2 style="color: #00b2ff;">DEMANDES DE MAINTENANCES</h2>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3">
+                <div class="row">
+                    <input type="text" th:value="${nbrepair}">
+                </div>
+                <div class="row text-center">
+                    <h2 style="color: #00b2ff;">AVIS D'UTILISATEUR</h2>
+                </div>
+           </div>    
         </div>
     </div>
-
-      
-   </div>
 </div>
     <br>
   
@@ -513,34 +494,13 @@
              <a th:href="@{/RepairIt/SignUp/}" id="ChargerPage">Vous n'avez pas encore de compte?</a>
             </div>
             <div class="col-12 text-center">
-                <a onclick="MOpen()" style="color: #00b2ff;">Mot de passe oublie?</a>                
+                <a data-bs-toggle="modal" data-bs-target="#myModal3" style="color: #00b2ff;">Mot de passe oublie?</a>                
             </div>  
             <br>
         </div>
         <div class="modal-footer">
           <button type="button " id="close1" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
           <button type="button" class="btn btn-secondary bg-success" onclick="ValideConnection()">Valider</button>
-        </div>
-      </div>
-      <div class="modal-content" id="modalcon2" style="display: none;">
-        <div class="modal-header">
-          
-            <div class="col-12 text-center">         
-                <h1 class="modal-title" id="myModalLabel">  <img th:src="@{/images/cadenas 3.png}">SE CONNECTER</h1>
-            </div>               
-        </div>
-        <br><br>
-
-        <div class="modal-body">  
-          <form>  
-            <label for="sendmail">Adresse e-mail</label>
-            <input type="email" id="sendmail" name="email" required>
-           </form>  
-           <br><br>
-        </div>
-        <div class="modal-footer">
-          <button type="button " id="close1" class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-secondary bg-success" onclick="sendmail()">Valider</button>
         </div>
       </div>
     </div>
@@ -573,7 +533,7 @@
            <br><br>
            <div class="col-12 text-center">
              <a th:href="@{/RepairIt/SignUp/}" id="ChargerPage">Vous n'avez pas encore de compte?</a>
-             <!-- <a th:href="">Mot de passe oublie?</a> -->
+             <a data-bs-toggle="modal" data-bs-target="#myModal3" style="color: #00b2ff;">Mot de passe oublie?</a>                
             </div>
             <br>
         </div>
@@ -585,7 +545,32 @@
     </div>
   </div>
 
-    
+  
+  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+            <div class="col-12 text-center">         
+                <h1 class="modal-title" id="myModalLabel">  <img th:src="@{/images/cadenas 3.png}">MODIFIER LE MOT DE PASSE</h1>
+            </div>               
+        </div>
+        <br><br>
+
+        <div class="modal-body">  
+          <form>  
+            <label for="sendmail" class="form-label d-flex justify-content-center"><h3>Adresse Mail</h3></label>
+            <input type="email" class="form-control" placeholder="Entrer votre Adresse Mail" id="sendmail" name="email" required>
+           </form>  
+           <br><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button " class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-secondary bg-success" onclick="sendmail()">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
 
     <!-- LE FOOTER -->
