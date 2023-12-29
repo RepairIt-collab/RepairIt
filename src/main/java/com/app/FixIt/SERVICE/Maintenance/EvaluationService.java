@@ -31,9 +31,16 @@ public class EvaluationService {
         // Evaluation evaluation = evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(), currentDate);
         Evaluation evaluation = evaluationRepository.findFirstByDomain(maintenancier.getSpecialite());
         System.out.println(evaluation.getDate());
-        List<Maintenancier> maintenanciers = new ArrayList<>();
+        // List<Maintenancier> maintenanciers = new ArrayList<>();
+        // maintenanciers.add(maintenancier);
+        
+        if(evaluation.getMaintenanciers() == null){
+            List<Maintenancier> maintenanciers = new ArrayList<>();
         maintenanciers.add(maintenancier);
         evaluation.setMaintenanciers(maintenanciers);
+        } else{
+            evaluation.getMaintenanciers().add(maintenancier);
+        }
         evaluationRepository.save(evaluation);
     }
 
@@ -82,7 +89,7 @@ public class EvaluationService {
         if (evaluations.isEmpty()){
             Evaluation eval= new Evaluation();
             eval.setDomain(domain);
-            eval.setDate(currentDate.plusDays(30));
+            eval.setDate(currentDate.plusDays(10));
             addQuestions(eval);
             evaluationRepository.save(eval);
 

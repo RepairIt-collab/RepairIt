@@ -49,9 +49,11 @@ function initMapC() {
 
 function initMap(EndLat,EndLon,mode) {
     requestLocationPermission()
+    console.log(position)
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
     console.log(document.getElementById("map-maintenacier"))
+    console.log(coo)
     const mapM = new google.maps.Map(document.getElementById("map-maintenacier"), {
         zoom: 17,
         center: { lat: latitude, lng: longitud },

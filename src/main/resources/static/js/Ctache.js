@@ -204,6 +204,12 @@ function supprimerTacheDuDOM(Id1) {
     }
 }
 
+//NOM DE LA TACHE SUR LA PAGE
+
+function getName(){
+  var button = document.querySelectorAll(".accordion-header")
+}
+
 // AFFICHER LES DETAILS D'UNE TACHE
 
 var nav1 = document.querySelector("button#nav1");
