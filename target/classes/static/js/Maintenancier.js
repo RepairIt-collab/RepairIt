@@ -110,8 +110,7 @@ function sendNotificationN(notification) {
 
       // Gérer les événements de la notification (clic, fermeture, etc.)
       notification.onclick = function (event) {
-
-        // Gérer le clic sur la notification
+        document.getElementById("btnNotification").click()
       };
 
       notification.onclose = function (event) {
@@ -153,42 +152,6 @@ function onLoadM() {
     // document.querySelectorAll("i")
   }
 }
-var nav1 = document.querySelector("button#a");
-console.log(nav1)
-nav1.addEventListener("click", function () {
-  $.ajax({
-    url: "/RepairIt/Client/Maintenance/details", // Endpoint de votre fonction Java
-    type: "GET",
-    success: function (response) {
-      console.log(response);
-      var responseHtml = $(response); // Convertir la réponse en objet jQuery
-
-      // Utilisez les sélecteurs jQuery pour extraire les éléments souhaités
-      var selectElement1 = responseHtml.find("div#accordionFlushExample");
-      var extractedHtml1 = selectElement1.html(); // Obtenez le contenu HTML de l'élément extrait
-
-      var targetElement1 = document.querySelectorAll("div#accordionFlushExample")[0];
-      targetElement1.innerHTML = extractedHtml1; // Mettez à jour le contenu de l'élément cible
-
-      // --------------------------------
-      var selectElement2 = responseHtml.find("div#accordionFlushExample").eq(1);
-      var extractedHtml2 = selectElement2.html(); // Obtenez le contenu HTML de l'élément extrait
-
-      var targetElement2 = document.querySelectorAll("div#accordionFlushExample")[1];
-      targetElement2.innerHTML = extractedHtml2; // Mettez à jour le contenu de l'élément cible
-      // -----------------------------------------------
-      var selectElement3 = responseHtml.find("div#accordionFlushExample").eq(2);
-      var extractedHtml3 = selectElement3.html(); // Obtenez le contenu HTML de l'élément extrait
-
-      var targetElement3 = document.querySelectorAll("div#accordionFlushExample")[2];
-      targetElement3.innerHTML = extractedHtml3; // Mettez à jour le contenu de l'élément cible
-      console.log(selectElement1)
-    },
-    error: function () {
-      console.log("Erreur lors de la requête AJAX !");
-    }
-  });
-})
 
 
 function ValiderTache(idNotif) {

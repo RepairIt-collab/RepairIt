@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Notification;
+import com.app.FixIt.ENTITIES.Maintenance.Taches;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface NotificationRepository extends JpaRepository<Notification , Lon
     // List<Notification> findByMaintenanciers(List<Maintenancier> maintenanciers);
     List<Notification> findByMaintenanciers(Maintenancier maintenancier);
     List<Notification> findByIdMaintenancier(Long idMaintenancier);
+    Notification findByTaches(Taches taches);
 }

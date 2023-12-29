@@ -167,6 +167,13 @@ $(document).ready(function() {
           submit.disabled = true;
         }
       });
+      caseClient.addEventListener("change", function() {
+        if (caseClient.checked) {
+          submit.disabled = false;
+        } else {
+          submit.disabled = true;
+        }
+      });
 
 },
 error: function(xhr, status, error) {

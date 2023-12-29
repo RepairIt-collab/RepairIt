@@ -1,5 +1,6 @@
 package com.app.FixIt.CONTROLLER.Accueil;
 
+import com.app.FixIt.ENTITIES.Maintenance.Client;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,29 +69,19 @@ public class Accueil {
         Maintenance maintenance=new Maintenance();
         Long id = Long.parseLong(userId);
         User user = userRepository.findById(id).orElse(null);
+        Maintenancier main = maintenancierRepository.findById(id).orElse(null);
+        if(main == null){
+            Client client = clientRepository.findById(id).orElse(null);
+            Client UserClient = client;
+            model.addAttribute("userClient", UserClient);
+
+        } else{
+            Maintenancier UserMaintenancier = main;
+            model.addAttribute("userMaintenancier", UserMaintenancier);
+        }
         String filename = maintenance.nomImage(user.getUsername(), user.getId());
         model.addAttribute("filename", filename);
         model.addAttribute("userId", userId);
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("userpassword", user.getPassword());
-        model.addAttribute("useremail", user.getEmail());
-        model.addAttribute("usertelephone", user.getTelephone());
-        
-        if (maintenancierRepository.findById(id).isPresent()) {
-            Optional<Maintenancier> optM = maintenancierRepository.findById(id);
-            Maintenancier main = optM.get();
-            model.addAttribute("filename", filename);
-            model.addAttribute("userId", userId);
-            model.addAttribute("usernom", main.getNom_complet());
-            model.addAttribute("username", main.getUsername());
-            model.addAttribute("userpassword", main.getPassword());
-            model.addAttribute("useremail", main.getEmail());
-            model.addAttribute("usertelephone", main.getTelephone());
-            model.addAttribute("userspecialite", main.getSpecialite());
-
-            return "HTML/profil2";
-        }
-
         return "HTML/profil";
     }
 

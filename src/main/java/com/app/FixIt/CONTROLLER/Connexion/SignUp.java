@@ -17,7 +17,6 @@ import com.app.FixIt.DTO.Maintenance.MaintenancierDTO;
 import com.app.FixIt.DTO.Maintenance.ClientDTO;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
-import com.app.FixIt.REPOSITORY.*;
 import com.app.FixIt.REPOSITORY.Maintenance.ClientRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.SERVICE.Maintenance.ClientService;
@@ -67,7 +66,7 @@ public class SignUp {
     }
 
     @PostMapping("/newMaintenancier")
-    public String saveMaintenancier(@RequestBody MaintenancierDTO maintenancier, HttpSession session,Model model){
+    public String saveMaintenancier(@RequestBody MaintenancierDTO maintenancier, HttpSession session,Model model) throws Exception{
         MaintenancierService maintenancierService= new MaintenancierService(maintenancierRepository);
         Maintenancier newMaintenancier= new Maintenancier();
         System.out.println(maintenancier.getNom_complet());
@@ -84,6 +83,7 @@ public class SignUp {
         newMaintenancier.setTest(2);
         
         Maintenancier m=maintenancierService.saveMaintenancier(newMaintenancier);
+        evaluationService.createEvaluationIfDateExpired();
         evaluationService.add(newMaintenancier);
         session.setAttribute("id", m.getId());
         session.setAttribute("name", m.getUsername());

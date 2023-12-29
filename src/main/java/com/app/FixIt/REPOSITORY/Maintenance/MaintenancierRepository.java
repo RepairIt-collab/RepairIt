@@ -16,6 +16,7 @@ public interface MaintenancierRepository extends JpaRepository<Maintenancier, Lo
     Maintenancier findFirstByUsernameAndPassword(String username, String password);
     Maintenancier findFirstByUsername(String username);
     List<Maintenancier> findByStatusAndSpecialite(Boolean status, String specialite);
+    List<Maintenancier> findByStatusAndSpecialiteAndTest(Boolean status, String specialite, Integer test);
     List<Maintenancier> findByTest(int test);
     List<Maintenancier> findByTestAndSpecialite(int test, String specialite);
     @Query("SELECT m FROM Maintenancier m WHERE :idfilleuls IN (m.idfilleuls)")

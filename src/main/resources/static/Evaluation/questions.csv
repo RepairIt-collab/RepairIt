@@ -1,0 +1,180 @@
+1,Quelle est la principale cause d'un écran bleu de la mort (BSOD) ?,Problèmes de mémoire,Virus informatique,Surcharge du processeur,1,Informatique-Ordinateur
+2,Quel composant est responsable du stockage permanent des données sur un ordinateur ?,Disque dur,Mémoire RAM,Processeur,1,Informatique-Ordinateur
+3,Quel outil est utilisé pour tester la connectivité réseau ?,Ping,Traceroute,FTP,1,Informatique-Ordinateur
+4,Quel est le rôle d'un BIOS sur une carte mère ?,Initialiser le matériel,Exécuter le système d'exploitation,Contrôler la mémoire RAM,1,Informatique-Ordinateur
+5,Quel est le meilleur moyen de nettoyer l'intérieur d'un ordinateur portable ?,Utiliser de l'air comprimé,Utiliser un chiffon humide,Utiliser un aspirateur à main,1,Informatique-Ordinateur
+6,Quel type de câble est utilisé pour connecter un ordinateur à un réseau local (LAN) ?,Câble Ethernet,Câble HDMI,Câble USB,1,Informatique-Ordinateur
+7,Quelle est la fonction principale d'un pare-feu ?,Contrôler le trafic réseau,Accélérer les connexions Internet,Gérer les mots de passe,1,Informatique-Ordinateur
+8,Quel est le rôle d'une carte graphique dans un ordinateur ?,Gérer les affichages graphiques,Stocker les données,Contrôler la mémoire vive,1,Informatique-Ordinateur
+9,Quelle est la première étape pour résoudre un problème matériel sur un ordinateur ?,Identifier le problème,Redémarrer l'ordinateur,Vérifier les câbles,1,Informatique-Ordinateur
+10,Qu'est-ce qu'un système d'exploitation ?,Logiciel qui gère les ressources d'un ordinateur,Composant matériel d'un ordinateur,Programme antivirus,1,Informatique-Ordinateur
+11,Quel est le rôle d'une alimentation électrique dans un ordinateur ?,Fournir de l'énergie aux composants,Stocker les données,Contrôler les ventilateurs,1,Informatique-Ordinateur
+12,Qu'est-ce qu'un logiciel malveillant ?,Logiciel conçu pour endommager un ordinateur,Logiciel de sauvegarde,Logiciel de traitement de texte,1,Informatique-Ordinateur
+13,Qu'est-ce qu'un réseau local (LAN) ?,Un réseau limité à une zone géographique restreinte,Un réseau étendu (WAN),Une connexion Internet câblée,1,Informatique-Ordinateur
+14,Quelle est la fonction principale d'un disque dur dans un ordinateur ?,Stocker les données à long terme,Exécuter les programmes,Contrôler la mémoire vive,1,Informatique-Ordinateur
+15,Qu'est-ce qu'un périphérique d'entrée ?,Un périphérique qui envoie des données à l'ordinateur,Un périphérique qui affiche des données,Un périphérique de stockage,1,Informatique-Ordinateur
+16,Qu'est-ce qu'un serveur dans un réseau informatique ?,Un ordinateur qui fournit des services à d'autres ordinateurs,Un logiciel de sécurité,Un câble de connexion réseau,1,Informatique-Ordinateur
+17,Qu'est-ce qu'un protocole IP ?,Protocole de communication Internet,Protocole de sauvegarde,Protocole de chiffrement,1,Informatique-Ordinateur
+18,Quel est le meilleur moyen de protéger un ordinateur contre les virus ?,Utiliser un logiciel antivirus,Débrancher l'ordinateur d'Internet,Désactiver les mises à jour,1,Informatique-Ordinateur
+19,Quel est le rôle d'un processeur dans un ordinateur ?,Exécuter les instructions et les calculs,Gérer les connexions Internet,Contrôler les ventilateurs,1,Informatique-Ordinateur
+20,Quel est le meilleur moyen de protéger ses données personnelles sur un ordinateur ?,Utiliser un mot de passe fort,Partager les données sur les réseaux sociaux,Enregistrer les données sur un disque dur externe,1,Informatique-Ordinateur
+21,Quelle est la cause la plus fréquente d'un écran de téléphone qui ne s'allume pas ?,Problème de batterie,Problème de carte mère,Problème d'écran,3,Informatique-Telephone
+22,Quel composant est responsable de la transmission des signaux sans fil dans un téléphone ?,Processeur,Antenne,Caméra,2,Informatique-Telephone
+23,Quel outil est généralement utilisé pour ouvrir un téléphone lors d'une réparation ?,Tournevis cruciforme,Pincettes,Ventouse,1,Informatique-Telephone
+24,Qu'est-ce qu'un "bootloop" dans le contexte d'un téléphone ?,Un problème de démarrage récurrent,Un écran tactile défectueux,Un câble de charge endommagé,1,Informatique-Telephone
+25,Quel est le composant responsable du rétroéclairage de l'écran d'un téléphone ?,Résistance,Condensateur,Rétroéclairage LED,3,Informatique-Telephone
+26,Qu'est-ce qu'un "IMEI" dans un téléphone ?,Un code de sécurité pour l'accès aux données,Un identifiant unique du téléphone,Un protocole de communication sans fil,2,Informatique-Telephone
+27,Quel est le composant principal responsable du stockage des données dans un téléphone ?,Mémoire RAM,Mémoire ROM,Disque dur,2,Informatique-Telephone
+28,Quel est le problème le plus courant associé à un connecteur de charge défectueux ?,Incapacité de charger le téléphone,Haut-parleur qui ne fonctionne pas,Écran tactile non réactif,1,Informatique-Telephone
+29,Quelle est la méthode la plus courante pour résoudre un téléphone qui surchauffe ?,Remplacement de la batterie,Nettoyage des composants internes,Réinstallation du système d'exploitation,2,Informatique-Telephone
+30,Quel est le composant responsable de la conversion du signal audio en son dans un téléphone ?,Microphone,Haut-parleur,Amplificateur audio,2,Informatique-Telephone
+31,Quel est le composant responsable de la détection des mouvements dans un téléphone ?,Accéléromètre,Gyroscope,Capteur de luminosité,1,Informatique-Telephone
+32,Qu'est-ce qu'une "empreinte digitale" dans le contexte d'un téléphone ?,Un motif de sécurité pour déverrouiller le téléphone,Une marque laissée par le doigt sur l'écran,Un capteur utilisé pour l'identification biométrique,3,Informatique-Telephone
+33,Qu'est-ce qu'un "jailbreak" dans le contexte des téléphones Apple ?,Le processus de déverrouillage du réseau cellulaire d'un téléphone,Le processus de déverrouillage des fonctionnalités restreintes par Apple,Le processus de réinitialisation complète d'un téléphone,2,Informatique-Telephone
+34,Quel est le composant responsable de la conversion du signal numérique en signal analogique dans un téléphone ?,Processeur,Convertisseur numérique-analogique (CNA),Module de communication sans fil,2,Informatique-Telephone
+35,Qu'est-ce qu'un "IMEI" dans un téléphone ?,International Mobile Equipment Identity,Internet Message Exchange Interface,Integrated Mobile Electronic Interface,1,Informatique-Telephone
+36,Qu'est-ce qu'un "brick" dans le contexte d'un téléphone ?,Un composant défectueux qui empêche le démarrage du téléphone,Un téléphone qui ne peut plus être utilisé en raison d'un problème logiciel,Un étui de protection rigide pour téléphone,2,Informatique-Telephone
+37,Quel est le composant responsable de la conversion de la lumière en signal électrique dans un téléphone ?,Écran tactile,Appareil photo,Capteur de lumière (photocapteur),3,Informatique-Telephone
+38,Quelle est la méthode la plus courante pour résoudre un téléphone qui ne capte pas de signal réseau ?,Remplacement de l'antenne du téléphone,Réinitialisation des paramètres réseau,Mise à jour du système d'exploitation,2,Informatique-Telephone
+39,Qu'est-ce qu'un "root" dans le contexte des téléphones Android ?,Le processus de déverrouillage du bootloader d'un téléphone,Le processus de déverrouillage des fonctionnalités avancées d'un téléphone,Le processus de réinitialisation complète d'un téléphone,1,Informatique-Telephone
+40,Quel est le composant responsable de la conversion du signal tactile en signal numérique dans un téléphone ?,Écran LCD,Écran OLED,Écran tactile capacitif,3,Informatique-Telephone
+41,Quelle est la cause la plus courante d'un lave-linge qui ne démarre pas ?,Problème de courant électrique,Problème de programmateur,Problème de pompe de vidange,2,Electromenage
+42,Quel est le composant responsable de la production de chaleur dans un four ?,Résistance,Condensateur,Thermostat,1,Electromenage
+43,Quel outil est généralement utilisé pour démonter un réfrigérateur lors d'une réparation ?,Tournevis,Pince,Clé à molette,1,Electromenage
+44,Qu'est-ce qui peut causer une mauvaise qualité de lavage dans un lave-vaisselle ?,Problème de pompe de vidange,Problème de bras de lavage,Problème de résistance,2,Electromenage
+45,Quel est le composant responsable de la rotation du plateau dans un micro-ondes ?,Moteur à courant continu,Transformateur,Magnétron,1,Electromenage
+46,Qu'est-ce qui peut causer un mauvais refroidissement dans un réfrigérateur ?,Problème de compresseur,Problème de thermostat,Problème de ventilateur,1,Electromenage
+47,Quel est le composant responsable de la génération de vapeur dans un fer à repasser à vapeur ?,Réservoir d'eau,Resistance électrique,Pompe à eau,2,Electromenage
+48,Qu'est-ce qui peut causer une mauvaise extraction de fumée dans une hotte aspirante ?,Problème de filtre à charbon,Problème de moteur,Problème de tuyau d'évacuation,2,Electromenage
+49,Quel est le composant responsable de la rotation du tambour dans un sèche-linge ?,Courroie de transmission,Moteur électrique,Programmateur,2,Electromenage
+50,Qu'est-ce qui peut causer une mauvaise cuisson dans un four à gaz ?,Problème d'allumage,Problème de thermostat,Problème de grille,1,Electromenage
+51,Quel est le composant responsable du brassage de l'air dans un climatiseur ?,Ventilateur,Moteur compresseur,Condensateur,1,Electromenage
+52,Qu'est-ce qui peut causer une fuite d'eau dans un lave-vaisselle ?,Problème de joint d'étanchéité,Problème de pompe de vidange,Problème de résistance,1,Electromenage
+53,Quel est le composant responsable de la génération de chaleur dans un sèche-linge ?,Résistance,Condensateur,Thermostat,1,Electromenage
+54,Qu'est-ce qui peut causer une mauvaise aspiration dans un aspirateur ?,Problème de filtre,Problème de moteur,Problème de brosse,2,Electromenage
+55,Quel est le composant responsable de la rotation du plateau dans un lave-vaisselle ?,Moteur électrique,Programmateur,Bras de lavage,1,Electromenage
+56,Qu'est-ce qui peut causer un mauvais chauffage dans un chauffe-eau électrique ?,Problème de résistance,Problème de thermostat,Problème de vanne de sécurité,1,Electromenage
+57,Quel est le composant responsable de la génération de vapeur dans une cafetière à expresso ?,Réservoir d'eau,Resistance électrique,Pompe à eau,2,Electromenage
+58,Qu'est-ce qui peut causer une mauvaise extraction de l'air dans un sèche-linge ?,Problème de filtre,Problème de moteur,Problème de tuyau d'évacuation,3,Electromenage
+59,Quel est le composant responsable de la génération de froid dans un congélateur ?,Compresseur,Condensateur,Thermostat,1,Electromenage
+60,Qu'est-ce qui peut causer une mauvaise distribution de la chaleur dans un four à convection ?,Problème de ventilateur,Problème de thermostat,Programmeur,1,Electromenage
+61,Quel est le composant responsable d'une surchauffe dans un circuit électrique domestique ?,Disjoncteur,Interrupteur différentiel,Fusible,1,Electricite
+62,Qu'est-ce qui peut causer une panne de courant dans une pièce spécifique d'une maison ?,Problème de prise électrique,Problème de disjoncteur,Problème de fusible,2,Electricite
+63,Quel est le composant responsable de la distribution de l'électricité dans une maison ?,Tableau électrique,Compteur électrique,Prise de courant,1,Electricite
+64,Qu'est-ce qui peut causer une fluctuation de tension dans un circuit électrique domestique ?,Problème de transformateur,Problème de régulateur de tension,Problème de câblage,3,Electricite
+65,Quel est le composant responsable de l'allumage d'une ampoule dans un circuit électrique ?,Interrupteur,Prise de courant,Disjoncteur,1,Electricite
+66,Qu'est-ce qui peut causer un court-circuit dans un circuit électrique domestique ?,Problème de câblage,Problème de disjoncteur,Problème de fusible,1,Electricite
+67,Quel est le composant responsable de la protection contre les surtensions dans un circuit électrique ?,Parafoudre,Disjoncteur,Interrupteur différentiel,1,Electricite
+68,Qu'est-ce qui peut causer une panne totale de courant dans une maison ?,Problème de disjoncteur général,Problème de fusible principal,Problème de compteur électrique,2,Electricite
+69,Quel est le composant responsable de la mesure de la consommation électrique dans une maison ?,Compteur électrique,Tableau électrique,Disjoncteur,1,Electricite
+70,Qu'est-ce qui peut causer des étincelles dans une prise de courant ?,Problème de câblage,Problème de fusible,Problème de prise défectueuse,1,Electricite
+71,Quel est le composant responsable de la génération d'un champ magnétique dans un moteur électrique ?,Bobine d'induction,Condensateur,Résistance,1,Electricite
+72,Qu'est-ce qui peut causer une surcharge électrique dans un circuit domestique ?,Trop d'appareils connectés,Trop de prises de courant,Trop de fusibles,1,Electricite
+73,Quel est le composant responsable de la conversion de courant alternatif en courant continu dans une alimentation électrique ?,Redresseur,Transformateur,Régulateur de tension,1,Electricite
+74,Qu'est-ce qui peut causer une panne de courant dans une maison entière ?,Problème de disjoncteur général,Problème de fusible principal,Problème de compteur électrique,1,Electricite
+75,Quel est le composant responsable de la protection contre les courts-circuits dans un circuit électrique ?,Disjoncteur,Fusible,Interrupteur différentiel,2,Electricite
+76,Qu'est-ce qui peut causer une fluctuation de fréquence dans un circuit électrique ?,Problème de régulateur de tension,Problème de transformateur,Problème de câblage,3,Electricite
+77,Quel est le composant responsable de l'interruption de courant en cas de fuite électrique ?,Interrupteur différentiel,Prise de courant,Disjoncteur,1,Electricite
+78,Qu'est-ce qui peut causer une panne de courant intermittente dans une maison ?,Problème de câblage,Problème de disjoncteur,Problème de fusible,1,Electricite
+79,Quel est le composant responsable de la régulation de tension dans un circuit électrique domestique ?,Régulateur de tension,Disjoncteur,Transformateur,1,Electricite
+80,Qu'est-ce qui peut causer des déclenchements fréquents du disjoncteur dans un circuit électrique domestique ?,Surcharges électriques,Problème de câblage,Problème de fusible,1,Electricite
+81,Qu'est-ce qui peut causer une fuite d'huile dans un moteur ?,Joint d'étanchéité défectueux,Piston endommagé,Sonde de pression défectueuse,1,Mecanique
+82,Quel est le composant responsable de la transmission de puissance dans une boîte de vitesses manuelle ?,Embrayage,Roue dentée,Pignon d'entraînement,1,Mecanique
+83,Qu'est-ce qui peut causer un bruit de grincement dans une suspension de voiture ?,Rotule de suspension usée,Absorbeur de chocs défectueux,Barre stabilisatrice desserrée,1,Mecanique
+84,Quel est le composant responsable de la direction assistée dans une voiture ?,Pompe de direction assistée,Volant de direction,Colonne de direction,1,Mecanique
+85,Qu'est-ce qui peut causer une surchauffe d'un moteur de voiture ?,Problème de radiateur,Problème de pompe à eau,Problème de thermostat,1,Mecanique
+86,Quel est le composant responsable de la transmission de puissance dans une boîte de vitesses automatique ?,Convertisseur de couple,Arbre de transmission,Disque d'embrayage,1,Mecanique
+87,Qu'est-ce qui peut causer une usure anormale des pneus d'une voiture ?,Problème d'alignement des roues,Problème de pression des pneus,Problème d'amortisseurs,1,Mecanique
+88,Quel est le composant responsable de la suspension d'une moto ?,Fourche télescopique,Amortisseur arrière,Roue dentée,1,Mecanique
+89,Qu'est-ce qui peut causer un bruit de cliquetis dans un moteur de voiture ?,Problème d'allumage,Problème de pompe à carburant,Problème de courroie de distribution,1,Mecanique
+90,Quel est le composant responsable de la transmission de mouvement dans un système de freinage de voiture ?,Maître-cylindre,Étrier de frein,Disque de frein,3,Mecanique
+91,Qu'est-ce qui peut causer des vibrations dans le volant d'une voiture ?,Problème d'équilibrage des roues,Problème d'amortisseurs,Problème de rotule de direction,1,Mecanique
+92,Quel est le composant responsable de la transmission de puissance dans une transmission par courroie ?,Poulie motrice,Courroie de transmission,Roue dentée,2,Mecanique
+93,Qu'est-ce qui peut causer un bruit de grincement dans un système de climatisation de voiture ?,Problème de compresseur,Problème de courroie d'entraînement,Problème de condenseur,2,Mecanique
+94,Quel est le composant responsable de la suspension d'un vélo ?,Fourche avant,Amortisseur arrière,Roue dentée,1,Mecanique
+95,Qu'est-ce qui peut causer une usure anormale des plaquettes de frein d'une voiture ?,Problème d'étrier de frein,Problème de disque de frein,Problème de liquide de frein,1,Mecanique
+96,Quel est le composant responsable de la transmission de puissance dans une transmission par chaîne ?,Pignon d'entraînement,Chaîne de transmission,Roue dentée,2,Mecanique
+97,Qu'est-ce qui peut causer une surchauffe de la transmission automatique d'une voiture ?,Problème de radiateur de transmission,Problème de convertisseur de couple,Problème de pompe à huile,1,Mecanique
+98,Quel est le composant responsable de la suspension d'un camion ?,Essieu arrière,Amortisseur arrière,Bras de suspension,3,Mecanique
+99,Qu'est-ce qui peut causer un bruit de grincement dans un système de direction assistée d'une voiture ?,Problème de pompe de direction assistée,Problème de crémaillère de direction,Problème de courroie de direction assistée,2,Mecanique
+94,Quel est le composant responsable de la suspension d'un vélo ?,Amortisseur arrière,Fourche avant,Roue dentée,2,Mecanique
+101,Quelle est la principale cause d'une fuite d'eau dans un robinet ?,Joint d'étanchéité usé,Tuyau fissuré,Corps du robinet défectueux,1,Plomberie
+102,Quel est le composant responsable de la pressurisation de l'eau dans un système de plomberie résidentiel ?,Pompe de surpression,Clapet anti-retour,Compteur d'eau,2,Plomberie
+103,Qu'est-ce qui peut causer une obstruction dans une canalisation ?,Dépôts de calcaire,Débris alimentaires,Corps étranger,3,Plomberie
+104,Quel est le composant responsable de la vidange des eaux usées dans un évier ?,Siphon,Tuyau d'évacuation,Robinet d'arrêt,1,Plomberie
+105,Qu'est-ce qui peut causer une faible pression d'eau dans toute la maison ?,Problème de vanne principale,Problème de pompe de surpression,Problème de tuyaux obstrués,1,Plomberie
+106,Quel est le composant responsable de la régulation de la température de l'eau dans un chauffe-eau électrique ?,Thermostat,Résistance électrique,Anode sacrificielle,1,Plomberie
+107,Qu'est-ce qui peut causer une fuite d'eau dans la base des toilettes ?,Joint de cire endommagé,Tuyau de remplissage défectueux,Soupape de chasse d'eau cassée,1,Plomberie
+108,Quel est le composant responsable de la production de chaleur dans un chauffe-eau à gaz ?,Brûleur,Groupe de sécurité,Sonde de température,1,Plomberie
+109,Qu'est-ce qui peut causer une pression d'eau excessive dans un système de plomberie ?,Problème de régulateur de pression,Problème de soupape de sécurité,Problème de tuyau obstrué,2,Plomberie
+110,Quel est le composant responsable de l'évacuation des eaux usées dans une toilette ?,Siphon,Tuyau de ventilation,Robinet d'arrêt,3,Plomberie
+111,Qu'est-ce qui peut causer une mauvaise odeur provenant d'un évier de cuisine ?,Problème de siphon,Problème de tuyau d'évacuation,Problème de joint d'étanchéité,1,Plomberie
+112,Quel est le composant responsable de la filtration de l'eau dans un système de traitement de l'eau domestique ?,Filtre à eau adoucisseur,Membrane d'osmose inverse,Réservoir de stockage,2,Plomberie
+113,Qu'est-ce qui peut causer une fuite d'eau autour d'une baignoire ?,Joint d'étanchéité usé,Robinet de remplissage défectueux,Soupape de dérivation cassée,1,Plomberie
+114,Quel est le composant responsable de la régulation de la pression de l'eau dans un système de plomberie ?,Réducteur de pression,Clapet anti-retour,Compteur d'eau,1,Plomberie
+115,Qu'est-ce qui peut causer un goutte-à-goutte dans un réservoir de toilettes ?,Flotteur défectueux,Joint de vidange usé,Soupape de chasse d'eau cassée,3,Plomberie
+116,Quel est le composant responsable de la distribution de l'eau dans un réseau de plomberie ?,Tuyau de distribution,Robinet d'arrêt,Compteur d'eau,1,Plomberie
+117,Qu'est-ce qui peut causer une fuite d'eau dans un tuyau de plomberie ?,Joint d'étanchéité défectueux,Tuyau fissuré,Soupape de dérivation cassée,2,Plomberie
+118,Quel est le composant responsable de la régulation de la pression de l'eau dans un chauffe-eau à accumulation ?,Soupape de sécurité,Thermostat,Anode sacrificielle,1,Plomberie
+119,Qu'est-ce quidétermine la quantité d'eau utilisée dans un système de plomberie résidentiel ?,Compteur d'eau,Régulateur de pression,Clapet anti-retour,1,Plomberie
+120,Quel est le composant responsable de l'évacuation des eaux usées dans un évier de salle de bains ?,Siphon,Tuyau de ventilation,Robinet d'arrêt,1,Plomberie
+121,Quel est le matériau le plus couramment utilisé pour la fabrication de portes intérieures ?,Bois,Aluminium,PVC,1,Menuiserie
+122,Qu'est-ce qui peut causer des grincements dans une porte en bois ?,Mauvaise lubrification des charnières,Problème de serrure,Déformation du cadre,1,Menuiserie
+123,Quel est le rôle d'un chambranle dans une porte ?,Encadrement de la porte,Protection contre les intempéries,Amélioration de l'isolation acoustique,1,Menuiserie
+124,Quel est le matériau le plus adapté pour les fenêtres à isolation thermique élevée ?,PVC,Aluminium,Bois,3,Menuiserie
+125,Qu'est-ce qui peut causer des difficultés à ouvrir ou fermer une fenêtre en bois ?,Problème de charnières,Déformation du cadre,Mauvaise isolation thermique,2,Menuiserie
+126,Quel est le composant responsable du mécanisme d'ouverture d'une fenêtre à guillotine ?,Contrepoids,Charnière,Verrou,1,Menuiserie
+127,Qu'est-ce qui peut causer des infiltrations d'air autour d'une porte d'entrée ?,Mauvaise étanchéité,Bris de vitre,Problème de poignée,1,Menuiserie
+128,Quel est le matériau le plus résistant aux intempéries pour les volets extérieurs ?,Aluminium,Bois,PVC,1,Menuiserie
+129,Qu'est-ce qui peut causer des problèmes d'ajustement d'un tiroir de meuble en bois ?,Problème de glissières usées,Mauvaise fixation des poignées,Problème de verrouillage,1,Menuiserie
+130,Quel est le composant responsable du mécanisme d'ouverture d'une fenêtre à battant ?,Gonds,Verrou,Serrure,1,Menuiserie
+131,Qu'est-ce qui peut causer des fissures dans un cadre de fenêtre en aluminium ?,Mauvaise installation,Choc physique,Corrosion,3,Menuiserie
+132,Quel est le matériau le plus léger pour la fabrication de portes extérieures ?,Aluminium,Bois,PVC,1,Menuiserie
+133,Qu'est-ce qui peut causer des difficultés à fermer une porte coulissante en verre ?,Problème de rail de guidage,Problème de charnières,Mauvaise isolation thermique,1,Menuiserie
+134,Quel est le composant responsable du mécanisme de verrouillage d'une porte d'entrée ?,Serrure,Poignée,Charnière,1,Menuiserie
+135,Qu'est-ce qui peut causer des problèmes d'ajustement d'une porte en PVC ?,Mauvaise fixation des charnières,Déformation du cadre,Mauvaise isolation thermique,2,Menuiserie
+136,Quel est le matériau le plus résistant aux termites pour les cadres de fenêtres ?,Aluminium,Bois,PVC,2,Menuiserie
+137,Qu'est-ce qui peut causer des problèmes de fermeture d'une porte de placard coulissante ?,Problème de rail de guidage,Problème de charnières,Mauvaise isolation acoustique,1,Menuiserie
+138,Quel est le composant responsable du mécanisme d'ouverture d'une porte pliante ?,Charnières,Charnières,Verrou,1,Menuiserie
+139,Qu'est-ce qui peut causer des difficultés à verrouiller une serrure de porte en bois ?,Problème de gâche,Poignée défectueuse,Mauvaise isolation thermique,1,Menuiserie
+140,Quel est le matériau le plus durable pour les escaliers intérieurs ?,Bois,Aluminium,PVC,1,Menuiserie
+101,Quelle est la principale cause de l'ulcère gastrique ?,Infection bactérienne,Mauvaise alimentation,Stress,1,Medicale
+102,Quel est l'organe responsable de la production de l'insuline dans le corps humain ?,Le pancréas,Les reins,Le foie,1,Medicale
+103,Quel est le principal symptôme de l'asthme ?,Difficulté respiratoire,Douleur abdominale,Fatigue chronique,1,Medicale
+104,Quelle est la principale cause de la maladie d'Alzheimer ?,Dépôts de plaques de protéines dans le cerveau,Dysfonctionnement hormonal,Mauvaise hygiène de vie,1,Medicale
+105,Quel est le principal rôle des plaquettes sanguines ?,Assurer la coagulation du sang,Transporter l'oxygène dans le corps,Réguler la pression artérielle,1,Medicale
+106,Quel est le traitement le plus courant pour le cancer ?,Chirurgie,Chimiothérapie,Radiothérapie,2,Medicale
+107,Quel est le principal symptôme du diabète de type 2 ?,Niveau élevé de sucre dans le sang,Fièvre persistante,Douleur thoracique,1,Medicale
+108,Quelle est la principale cause des caries dentaires ?,La plaque bactérienne,Une mauvaise hygiène bucco-dentaire,La consommation excessive de sucre,3,Medicale
+109,Quel est l'organe cible de la maladie de Parkinson ?,Le cerveau,Le foie,Le cœur,1,Medicale
+110,Quelle est la principale cause de la bronchite ?,Une infection virale,Le tabagisme,Les allergies,1,Medicale
+111,Quel est le principal symptôme de la maladie de Crohn ?,Douleurs abdominales et diarrhée,Fièvre élevée et frissons,Faiblesse musculaire,1,Medicale
+112,Quelle est la principale fonction des reins dans le corps humain ?,Filtrer les déchets du sang,Réguler la glycémie,Produire des hormones thyroïdiennes,1,Medicale
+113,Quelle est la principale cause de la pneumonie ?,Une infection bactérienne,Un traumatisme pulmonaire,Un déséquilibre hormonal,1,Medicale
+114,Quel est le principal symptôme de la dépression ?,Tristesse persistante et perte d'intérêt,Fatigue extrême et somnolence,Difficulté à se concentrer et à mémoriser,1,Medicale
+115,Quelle est la principale cause de l'hypertension artérielle ?,Hérédité et facteurs génétiques,Mauvaise alimentation et manque d'exercice,Stress chronique,2,Medicale
+116,Quel est le principal symptôme de la maladie d'Alzheimer à un stade avancé ?,Perte de mémoire sévère et confusion,Douleurs articulaires et raideur musculaire,Difficulté à respirer et essoufflement,1,Medicale
+117,Quelle est la principale cause de la cécité dans le monde ?,La cataracte,Le glaucome,La dégénérescence maculaire liée à l'âge,3,Medicale
+118,Quel est le principal symptôme de l'anémie ?,Fatigue et faiblesse,Maux de tête et vertiges,Douleurs abdominales et crampes,1,Medicale
+119,Quelle est la principale cause du cancer du poumon chez les non-fumeurs ?,Exposition à des substances cancérigènes,Facteurs génétiques et héréditaires,Exposition à l'amiante et à la pollution de l'air,3,Medicale
+120,Quelle est la principale fonction de l'ADN dans les cellules ?,Stockage des informations génétiques,Régulation de la température corporelle,Production d'énergie pour les cellules,1,Medicale
+161,Quelle est la principale cause d'une panne électrique dans un appareil industriel ?,Court-circuit,Manque de carburant,Mauvaise connexion Wi-Fi,1,Industrielle
+162,Quel est l'outil le plus couramment utilisé pour mesurer la tension électrique ?,Multimètre,Thermomètre,Luxmètre,1,Industrielle
+163,Quelle est la principale cause d'une fuite d'huile dans un moteur industriel ?,Joint défectueux,Excès de pression atmosphérique,Mauvaise qualité de l'huile,1,Industrielle
+164,Quel est l'élément essentiel d'un système de refroidissement d'un appareil industriel ?,Radiateur,Ventilateur,Sonde de température,2,Industrielle
+165,Quelle est la principale cause d'un dysfonctionnement des capteurs dans un appareil industriel ?,Encrassement,Décalibration,Usure des piles,2,Industrielle
+166,Quel est le composant responsable de la conversion de l'énergie électrique en énergie mécanique dans un moteur industriel ?,Bobine d'induction,Condensateur,Magnétisme permanent,3,Industrielle
+167,Quelle est la principale cause d'une surchauffe dans un circuit électrique industriel ?,Surcharge de courant,Mauvaise isolation des câbles,Excès de poussière,1,Industrielle
+168,Quel est l'élément clé d'un système de freinage hydraulique dans un appareil industriel ?,Maître-cylindre,Disque de frein,Tuyau en caoutchouc,1,Industrielle
+169,Quelle est la principale cause d'une défaillance du système de contrôle dans un appareil industriel ?,Défaut de programmation,Dysfonctionnement du capteur,Problème d'alimentation électrique,1,Industrielle
+170,Quel est l'élément essentiel d'un système de lubrification d'un appareil industriel ?,Pompe à huile,Filtre à air,Réservoir de carburant,1,Industrielle
+171,Quelle est la principale cause d'un bruit excessif dans un moteur industriel ?,Défaut dans les paliers,Bande de roulement usée,Excès de lubrifiant,1,Industrielle
+172,Quel est l'outil le plus couramment utilisé pour détecter les fuites de gaz dans un appareil industriel ?,Détecteur de gaz,Thermohygromètre,Anémomètre,1,Industrielle
+173,Quelle est la principale cause d'un court-circuit dans un appareil industriel ?,Mauvaise isolation des câbles,Excès de poussière,Mauvaise calibration des capteurs,1,Industrielle
+174,Quel est l'élément clé d'un système de transmission dans un appareil industriel ?,Engrenage,Palier,Fusible,1,Industrielle
+175,Quelle est la principale cause d'une panne mécanique dans un appareil industriel ?,Usure des pièces mobiles,Mauvais réglage des paramètres,Excès de tension électrique,1,Industrielle
+176,Quel est l'outil le plus couramment utilisé pour mesurer la pression dans un appareil industriel ?,Manomètre,Thermocouple,Hygromètre,1,Industrielle
+177,Quelle est la principale cause d'une défaillance du système de contrôle de température dans un appareil industriel ?,Capteur défectueux,Erreur de programmation,Mauvais calibrage de l'unité de refroidissement,1,Industrielle
+178,Quel est l'élément essentiel d'un système de filtration dans un appareil industriel ?,Filtre,Électrovanne,Régulateur de pression,1,Industrielle
+179,Quelle est la principale cause d'une défaillance du système de freinage dans un appareil industriel ?,Usure des plaquettes de frein,Mauvais réglage du maître-cylindre,Défaut du système hydraulique,1,Industrielle
+180,Quel est l'outil le plus couramment utilisé pour détecter les vibrations anormales dans un appareil industriel ?,Analyseur de vibrations,Thermohygromètre,Anémomètre,1,Industrielle

@@ -37,12 +37,11 @@ public class MaintenancierService implements MaintenancierDao{
 
     public List<Maintenancier> findMaintenancier(Taches taches){
         Type type = taches.getType();
-        // todoTache.getType().value()
         String domaine = type.value();
         System.out.println("///////////"+domaine);
         double latitudeT = taches.getLatitude();
         double longitudeT = taches.getLongitude();
-        List<Maintenancier> maintenanciers= maintenancierRepository.findByStatusAndSpecialite(true, domaine);
+        List<Maintenancier> maintenanciers= maintenancierRepository.findByStatusAndSpecialiteAndTest(true, domaine,2);
             List<MapDTO> mapsList = new ArrayList<>();
         for (Maintenancier main : maintenanciers){
             MapDTO maps = new MapDTO();
@@ -50,7 +49,6 @@ public class MaintenancierService implements MaintenancierDao{
             maps.setLatitude(main.getlatitude());
             maps.setLongitude(main.getLongitude());
             maps.setDistance(tachesService.calculateDistance(maps.getLatitude(), maps.getLongitude(), latitudeT, longitudeT));
-        //     positions.set(0, main.getlatitude());
             mapsList.add(maps);
 
         }
@@ -59,7 +57,7 @@ public class MaintenancierService implements MaintenancierDao{
         List<MapDTO> sortedList = tachesService.getSmallestDistances(mapsList, cout);
         List<Maintenancier> maintenanciers2 =  new ArrayList<>();
         for (MapDTO map : sortedList){
-            Maintenancier main = findById(map.getId());//new Maintenancier();
+            Maintenancier main = findById(map.getId());
             maintenanciers2.add(main);
 
         }
@@ -74,7 +72,4 @@ public class MaintenancierService implements MaintenancierDao{
     public void saveFormation(){
 
     }
-    // public void findMaintenancierParain(Main){
-
-    // }
 }
