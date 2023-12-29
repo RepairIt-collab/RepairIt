@@ -1,5 +1,6 @@
 let latitude;
 let longitud;
+var coo
 function requestLocationPermission() {
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
@@ -7,6 +8,7 @@ function requestLocationPermission() {
             errorCallback,
             { enableHighAccuracy: true }
         );
+        // return coo;
         
     } else {
         console.log('La géolocalisation n\'est pas prise en charge par ce navigateur.');
@@ -22,9 +24,11 @@ function successCallback(position) {
  longitud = position.coords.longitude;
 
  console.log("Latitude : " + latitude + "\nLongitude : " + longitud);
+//  coo = latitude+"/"+longitud
 
     // Appeler une autre fonction ou effectuer d'autres opérations nécessitant latitude et longitude
     // autreFonction();
+    
 }
 
 function autreFonction() {

@@ -343,7 +343,8 @@
                 </div>
 
             </div>
-            <div id="evaluation" th:if="${maintenancier.test == 0}"  th:each="questio:${evaluation.questions}">
+            <div th:if="${maintenancier.test == 0}">
+            <div id="evaluation"   th:each="questio:${evaluation.questions}">
                 <p th:text="${questio.question}"></p>
                 <form th:id="'question' + ${questio.id}">
                     <div class="question">
@@ -364,6 +365,7 @@
                 </form>
                 
             </div>
+        </div>
             <button class="my-4" onclick="validerEval()">Envoyer</button>
            
         </div>

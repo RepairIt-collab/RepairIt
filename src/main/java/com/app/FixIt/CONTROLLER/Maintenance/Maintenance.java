@@ -20,6 +20,7 @@ import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Evaluation;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Notification;
+import com.app.FixIt.ENTITIES.Maintenance.Questions;
 import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.ENTITIES.Maintenance.Type;
 import com.app.FixIt.ENTITIES.Maintenance.User;
@@ -92,8 +93,13 @@ public class Maintenance {
             List<Notification> notifications = notificationRepository.findByMaintenanciers(maintenancier);
             Iterable<Notification> notificationsI=notifications;
             evaluationService.createEvaluationIfDateExpired();
+            if(maintenancier.getTest() == 0){
+                System.out.println("evaluation.getDomain()+--------+q.getQuestion()");
             Evaluation evaluation = evaluationRepository.findByMaintenanciers(maintenancier);
             model.addAttribute("evaluation", evaluation);
+                for(Questions q : evaluation.getQuestions()){
+            System.out.println(evaluation.getDomain()+"--------"+q.getQuestion());
+            }}
             List<Notification> notification2 = notificationRepository.findByIdMaintenancier(id);
             Iterable<Notification> noIterable = notification2;
             model.addAttribute("notifM", noIterable);

@@ -1,12 +1,12 @@
 package com.app.FixIt.ENTITIES.Maintenance;
 
 public enum Type {
-    ordinateurs("informatique-Ordinateur"),
-	machineALaver("electromenager"),
-    telephone("informatique-Telephone"),
-    voiture("mecanique"),
-    cuisiniereFour("electromenager"),
-    television("electromenager");
+    ordinateurs("Informatique-Ordinateur"),
+	machineALaver("Electromenage"),
+    telephone("Informatique-Telephone"),
+    voiture("Mecanique"),
+    cuisiniereFour("Electromenage"),
+    television("Electromenage");
 
 
 	Type(String key) {
