@@ -147,9 +147,50 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
+//ENVOI D'EMAIL EN CAS DE D'OUBLIE DE MOT DE PASSE
+
+
+
+function sendmail()
+{
+  const emailData = {
+    to: document.getElementById("sendmail").value,
+    subject: 'Sujet de l\'e-mail',
+    text: 'Contenu du message'
+  };
+
+  fetch('https://127.0.0.1:9001/sendemail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(emailData)
+   
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log(response);
+        alert('E-mail envoyé avec succès !');
+      } else {
+       alert('Une erreur s\'est produite lors de l\'envoi de l\'e-mail.');
+      }
+    })
+    .catch(error => {
+      alert('Une erreur s\'est produite :', error);
+    });
+}
+
+function MOpen() {
+  document.getElementById("modalcon1").style.display="hidden";
+  document.getElementById("modalcon2").style.display="block";
+}
 
  
-  
+function isModalOpen() {
+  document.getElementById("modalcon2").style.display="hidden";
+  document.getElementById("modalcon1").style.display="block";
+} 
 
+document.getElementById("close1").addEventListener('click',isModalOpen);
 
 
