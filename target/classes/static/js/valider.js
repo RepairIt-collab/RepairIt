@@ -191,19 +191,6 @@ error: function(xhr, status, error) {
 
 
 
-var C1=document.getElementById("nom");
-C1.addEventListener("input",function() {
-  var ChampC1=document.getElementById("nom");
-  var regex = /[!@#$%^&*();><./|=]/g; // Expression régulière pour un caractère spécial
-  var correspondances = ChampC1.value.match(regex);
-  if (ChampC1.value.length==0 || correspondances) {
-    ChampC1.classList.remove("is-valid");
-    ChampC1.classList.add("is-invalid");
-  } else {
-    ChampC1.classList.add("is-valid");
-    ChampC1.classList.remove("is-invalid");
-  }
-});
 
 var C2=document.getElementById("user2");
 C2.addEventListener("input",function() {
@@ -291,6 +278,20 @@ var C8=document.getElementById("specialite");
 C8.addEventListener("input",function() {
   var ChampC1=document.getElementById("specialite");
   if (ChampC1.value.length==0) {
+    ChampC1.classList.remove("is-valid");
+    ChampC1.classList.add("is-invalid");
+  } else {
+    ChampC1.classList.add("is-valid");
+    ChampC1.classList.remove("is-invalid");
+  }
+});
+
+var C1=document.getElementById("nom");
+C1.addEventListener("input",function() {
+  var ChampC1=document.getElementById("nom");
+  var regex = /[!@#$%^&*();><./|=]/g; // Expression régulière pour un caractère spécial
+  var correspondances = ChampC1.value.match(regex);
+  if (ChampC1.value.length==0 || correspondances) {
     ChampC1.classList.remove("is-valid");
     ChampC1.classList.add("is-invalid");
   } else {

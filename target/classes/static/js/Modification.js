@@ -9,7 +9,7 @@ function ValideClient()
    }
    
    var jsonData = JSON.stringify(Client);
-   const url = "https://127.0.0.1:9001/RepairIt/Update";
+   const url = "https://127.0.0.1:9001/RepairIt/UpdateClient";
 
    fetch(url, {
        method: 'POST',
@@ -19,8 +19,9 @@ function ValideClient()
        body: jsonData
    })
    .then(response => {
-       alert("Modifications reussie");
+       console.log("Modifications reussie");
        if (response.ok) {
+        window.location.href = "/RepairIt/Client"
            return response.json(); // Renvoyer la réponse JSON
        } else {
            throw new Error('Erreur de la requête creerTaches');
@@ -50,7 +51,7 @@ function CreerMaintenancier()
    }
    
    var jsonData = JSON.stringify(Maintenancier);
-   const url = "https://127.0.0.1:9001/RepairIt/Update";
+   const url = "https://127.0.0.1:9001/RepairIt/UpdateMaintenancier";
 
    fetch(url, {
        method: 'POST',
@@ -60,7 +61,9 @@ function CreerMaintenancier()
        body: jsonData
    })
    .then(response => {
-      alert("Modifications reussie");
+      console.log("Modifications reussie");
+
+      window.location.href = "/RepairIt/Maintenancier"
        if (response.ok) {
            return response.json(); // Renvoyer la réponse JSON
        } else {

@@ -1,11 +1,10 @@
 package com.app.FixIt.CONTROLLER.Maintenance;
 
-
 import java.util.Base64;
 import java.util.List;
+import java.time.LocalDate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +29,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/RepairIt/Client/Maintenance")
-public class Tache{
-
+public class Tache {
 
     @Autowired
     private TachesRepository tachesRepository;
@@ -62,120 +60,113 @@ public class Tache{
      * Apres l'avoir recu du front
      * etat: non complete il manque l'id dans les parametres de la requete
      */
-    
+
     @PostMapping("/CreerTache")
     @ResponseBody
-    public Notification creerTache(@RequestBody TacheDto todoTache,HttpSession session){
+    public Notification creerTache(@RequestBody TacheDto todoTache, HttpSession session) {
 
         Long id = (Long) session.getAttribute("id");
         Client client = clientRepository.findById(id).orElse(null);
-       TacheService tacheService = new TacheService(tachesRepository);
-       Taches tache  = new Taches();       
+        TacheService tacheService = new TacheService(tachesRepository);
+        LocalDate localDate = LocalDate.now();
+        Taches tache = new Taches();
         System.out.println(todoTache.getLatitude());
-       tache.setDate(todoTache.getDate());
-       tache.setType(todoTache.getType());
-       System.out.println(todoTache.getType().value());
-       tache.setDescription(todoTache.getDescription());
-       tache.setEtat(0);
-       tache.setLongitude(todoTache.getLongitude());
-       tache.setLatitude(todoTache.getLatitude());
-       tache.setClient(client);
-       tache.setImage(todoTache.getPhoto());
-    // //=============================================Just to test the chat
-    //    Maintenancier maintenancierChat =  maintenancierRepository.findById(93L).get();
-    //    tache.setMaintenancier(maintenancierChat);
-    // //==================================================================
-       tache = tacheService.saveTache(tache);
-       tache = tacheService.saveTache(tache);
-    //    if(tache.getImage()!= null){
-    //    String base64Data = Base64.getEncoder().encodeToString(tache.getImage());
-            
-    //         tache.setImgString(base64Data);
+        tache.setDate(localDate);
+        tache.setType(todoTache.getType());
+        System.out.println(todoTache.getType().value());
+        tache.setDescription(todoTache.getDescription());
+        tache.setEtat(0);
+        tache.setLongitude(todoTache.getLongitude());
+        tache.setLatitude(todoTache.getLatitude());
+        tache.setClient(client);
+        tache.setImage(todoTache.getPhoto());
+        if (todoTache.getNom() != null) {
+            Long idE = Long.parseLong(todoTache.getNom());
+            Equipements equipement = equipementsRepository.findById(idE).orElse(null);
+            tache.setEquipements(equipement);
+            equipement.setEtats(1);
+            equipementsRepository.save(equipement);
+        }
+        tache = tacheService.saveTache(tache);
+        todoTache.setId1(tache.getId());
 
-    //     }
-       todoTache.setId1(tache.getId());
-
-       EquipementsService equipementsService=new EquipementsService(equipementsRepository);
-       Equipements equipements=new Equipements();
-
-       equipements.setPhoto(todoTache.getPhoto());
-       equipements.setNom(todoTache.getNom());
-       equipements.setEtats(0);
-
-       equipements=equipementsService.saveEquipements(equipements);
-
-       
         List<Maintenancier> maintenanciers = maintenancierService.findMaintenancier(tache);
-        System.out.println("------------"+maintenanciers);
+        System.out.println("------------" + maintenanciers);
         Notification notif = new Notification();
         notif.setMaintenanciers(maintenanciers);
-        String messageString  = "Taches concernant un "+equipements.getNom() +" de type "+ tache.getType()+" Description du Probleme " + tache.getDescription()+" a realiser au plus tard " + tache.getDate() ;//+ "//"+tache.getId();
+        String messageString = "Taches concernant un equipement de type " + tache.getType()
+                + " Description du Probleme " + tache.getDescription();
         notif.setMessage(messageString);
         notif.setTaches(tache);
         notificationRepository.save(notif);
-        
-    return notif;
+
+        return notif;
     }
-    
+
     @PostMapping("/SuprimerTache/{id}")
     public void DeleteTache(@PathVariable Long id) {
         Taches taches = tachesRepository.findById(id).orElse(null);
         Notification notification = notificationRepository.findByTaches(taches);
         notificationRepository.delete(notification);
-        // TacheService tacheService = new TacheService(tachesRepository);
-        // tacheService.DeleteTache(id);
         tachesRepository.delete(taches);
-        
 
     }
 
     @GetMapping("/details")
-    public String details(Model model ,HttpSession session){
+    public String details(Model model, HttpSession session) {
 
         Long id = (Long) session.getAttribute("id");
         Client client = clientRepository.findById(id).orElse(null);
         List<Taches> tachess = tachesRepository.findByClient(client);
         Iterable<Taches> taches = tachess;
-        for(Taches tacher : taches){
-        String base64Data = Base64.getEncoder().encodeToString(tacher.getImage());
-            if(tacher.getImage()!= null){
-            tacher.setImgString(base64Data);
+        for (Taches tacher : taches) {
+            String base64Data = Base64.getEncoder().encodeToString(tacher.getImage());
+            if (tacher.getImage() != null) {
+                tacher.setImgString(base64Data);
 
-        }}
-        
+            }
+        }
+
         model.addAttribute("taches", taches);
-        
-        return mainController.Client(model,session);
-        
+
+        return mainController.Client(model, session);
+
     }
 
     @PostMapping("/validerTache")
-    public void validerTache(@RequestParam("idNotif") Long idNotif, @RequestParam("idM") Long idM){
+    public void validerTache(@RequestParam("idNotif") Long idNotif, @RequestParam("idM") Long idM) {
         Notification notification = notificationRepository.findById(idNotif).orElse(null);
-        List<Maintenancier> main = notification.getMaintenanciers();
+        Taches tache = notification.getTaches();
         Maintenancier maintenancier = maintenancierRepository.findById(idM).orElse(null);
-        for(Maintenancier mainmain : main){
-            if(mainmain.getId() == maintenancier.getId()){
-                main.remove(maintenancier);
-                
-            }
-        }
-        // Maintenancier
-        notification.setIdMaintenancier(idM); 
+        tache.setMaintenancier(maintenancier);
+        notification.getMaintenanciers().remove(maintenancier);
+        notification.setIdMaintenancier(idM);
+        tache.setEtat(1);
+        maintenancier.setStatus(false);
+        tachesRepository.save(tache);
+        maintenancierRepository.save(maintenancier);
         notificationRepository.save(notification);
     }
 
     @PostMapping("/soumettrePrix")
-    public void soumettrePrix(@RequestParam("prix") Integer prix){
-        //LOGIQUE DU CODE POUR LE PAYEMENT
+    public void soumettrePrix(@RequestParam("prix") Integer prix, @RequestParam("idT") Long idT) {
+        // LOGIQUE DU CODE POUR LE PAYEMENT
 
     }
 
+    @PostMapping("/terminerTache/{idT}")
+    public void terminerTache(HttpSession session, @PathVariable Long idT) {
+        Long id = (Long) session.getAttribute("id");
+        Maintenancier maintenancier = maintenancierRepository.findById(id).orElse(null);
+        maintenancier.setStatus(true);
+        Taches taches = tachesRepository.findById(idT).orElse(null);
+        taches.setEtat(2);
+        tachesRepository.save(taches);
+        maintenancierRepository.save(maintenancier);
 
+        // TODO: process POST request
 
-    
+        // return entity;
+    }
 
-
-   
 }
-
