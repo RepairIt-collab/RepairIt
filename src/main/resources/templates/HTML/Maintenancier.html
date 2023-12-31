@@ -109,6 +109,7 @@
         <br>
         
         <!-- LE MENU TACHE -->
+        <div th:if="${maintenancier.test == 2}">
         <div class="taches" style="display: none;">
             <div class="nouveau" id="new"> 
                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -133,8 +134,8 @@
                                                 <!-- <h5 class="card-title" th:text="${tache.type.value}"></h5> -->
                                                 <p class="card-text" th:text="${notification.message}"></p>
                                                 <p id="idMaintenancier-disabled" th:value="${notification.idMaintenancier}" style="display: none;"></p>
-                                                <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap"  th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>   <!-- Icône de poubelle -->
-                                                <i class="fas fa-edit fa-2x" style="color:#044602 ;" th:attr="onclick='ValiderTache(\'' + ${notification.id} + '\')'">Choisir</i>
+                                                <i class="fa-solid fa-map" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap"  th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>   <!-- Icône de poubelle -->
+                                                <i class="fas fa-edit fa-2x" style="color:#044602 ;" data-bs-toggle="modal" data-bs-target="#ModalParrain" th:attr="onclick='ValiderTacheId(\'' + ${notification.id} + '\',\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\')'">Choisir</i>
                                             </div>
                                         </div>
                                     </div>
@@ -166,8 +167,8 @@
                                         <div class="col-md-8">
                                             <div class="card-body lola">
                                                 <p class="card-text" th:text="${notification.message}"></p>
-                                                <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap" th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>  
-                                                <i class="fas fa-edit fa-2x" style="color:#044602 ;" data-bs-toggle="modal" data-bs-target="#ModalBuy" th:attr="onclick='validerTacheTache(\'' + ${notification.taches.id} + '\')'" >Terminer</i>
+                                                <i class="fa-solid fa-map" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap" th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>  
+                                                <i class="fas fa-edit fa-2x" style="color:#b4d110 ;" data-bs-toggle="modal" data-bs-target="#ModalBuy" th:attr="onclick='validerTacheTache(\'' + ${notification.taches.id} + '\')'" >Terminer</i>
                                             </div>
                                         </div>
                                     </div>
@@ -212,6 +213,111 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div th:if="${maintenancier.test == 1}">
+        <div class="taches" style="display: none;">
+            <div class="nouveau" id="new"> 
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item"   th:each="notification:${notifParrain}">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                th:data-bs-target="'#flush-collapse'+ ${notification.id}" aria-expanded="false"
+                                aria-controls="flush-collapseOne" th:text="'nouvelle reparation de' +${notification.taches.type}" th:attr="onclick='path(\'' + ${notification.taches.imgString} + '\', \'imageElementsss' + ${notification.id} + '\')'" > 
+                                
+                            </button>
+                        </h2>
+                        <div th:id="'flush-collapse' + ${notification.id}" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementsss'+ ${notification.id}" style="width: 100%; height: 100%;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body lola">
+                                                <!-- <h5 class="card-title" th:text="${tache.type.value}"></h5> -->
+                                                <p class="card-text" th:text="${notification.message}"></p>
+                                                <p id="idMaintenancier-disabled" th:value="${notification.idMaintenancier}" style="display: none;"></p>
+                                                <i class="fa-solid fa-map" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap"  th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>   <!-- Icône de poubelle -->
+                                                <i class="fas fa-edit fa-2x disabled" style="color:#9fc509 ;" th:attr="onclick='ValiderTache(\'' + ${notification.id} + '\')'">Choisir</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="encours" id="cours">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item"  th:each="notification:${notifMP}">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                th:data-bs-target="'#flush-collapse'+ ${notification.id}" aria-expanded="false"
+                                aria-controls="flush-collapseOne" th:text="'reparation de '+${notification.taches.type}" th:attr="onclick='path(\'' + ${notification.taches.imgString} + '\', \'imageElementsss' + ${notification.id} + '\')'" > 
+                                
+                            </button>
+                        </h2>
+                        <div th:id="'flush-collapse' + ${notification.id}" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementsss'+ ${notification.id}" style="width: 100%; height: 100%;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body lola">
+                                                <p class="card-text" th:text="${notification.message}"></p>
+                                                <i class="fa-solid fa-map" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap" th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>  
+                                                <i class="fas fa-check-circle fa-2x disabled" style="color:#ccd514 ;" data-bs-toggle="modal" data-bs-target="#ModalBuy" th:attr="onclick='validerTacheTache(\'' + ${notification.taches.id} + '\')'" >Terminer</i>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="terminer" id="finish">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item" th:each="tache :${monParrain.taches}">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
+                                aria-controls="flush-collapseOne" th:text="'reparation de '+${notification.taches.type}" th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementsss' + ${tache.id} + '\')'" > 
+                                
+                            </button>
+                        </h2>
+                        <div th:id="'flush-collapse' + ${notification.taches.id}" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="" class="img-fluid rounded-start" alt="image-icone" th:id="'imageElementsss'+ ${notification.taches.id}" style="width: 100%; height: 100%;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body lola">
+                                                <h5 class="card-title" th:text="${notification.taches.type.value}"></h5>
+                                                <p class="card-text" th:text="${notification.taches.description}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     
         <!-- LE CALENDER -->
         <div class="calendar1 my-5" id="cal" style="display: none; height: 600px;">
@@ -318,8 +424,8 @@
                     <p id="idPaiement" style="display: none;"></p>
                     <form>
                         <div class="mb-3">
-                            <label for="equipement" class="form-label">Prix de la tache</label>
-                            <input type="text" class="form-control" id="montant" placeholder="Entrer le montant final">
+                            <label for="equipement" class="form-label">Prix de la tache(en XAF)</label>
+                            <input type="number" class="form-control" id="montant" placeholder="Entrer le montant final">
                         </div>
                     </form>
                 </div>
@@ -330,6 +436,10 @@
             </div>
         </div>
     </div>  
+
+    <!-- SELECTIONNER LES FILLEULS QUI VONT ACCOMPAGNER LE PARRAIN -->
+
+    
     
 
     <!-- EVALUATION -->
