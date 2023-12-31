@@ -2,6 +2,8 @@ package com.app.FixIt.CONTROLLER.Connexion;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -90,6 +92,21 @@ public class SignUp {
         return main.Maintenancier(session,model);
     }
 
-   
+    @GetMapping("/loadClient")
+    public ResponseEntity<List<Client>>loadclient()
+    {
+        List<Client> client=null;
+        client=clientRepository.findAll();
 
+        return ResponseEntity.ok(client);
+    }
+
+    @GetMapping("/loadMaintenancier")
+    public ResponseEntity<List<Maintenancier>>loadMaintenancier()
+    {
+        List<Maintenancier> main=null;
+        main=maintenancierRepository.findAll();
+
+        return ResponseEntity.ok(main);
+    }
 }

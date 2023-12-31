@@ -28,14 +28,6 @@ public class Stat {
   @Autowired
   TachesRepository tachesRepository;
 
-  @GetMapping("/loadClient")
-  public ResponseEntity<List<Client>>loadclient()
-  {
-       List<Client> client=null;
-       client=clientRepository.findAll();
-
-       return ResponseEntity.ok(client);
-  }
 
   @GetMapping("/Statistique/Client")
   public String statcli()

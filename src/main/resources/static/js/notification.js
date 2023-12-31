@@ -30,7 +30,7 @@ var stompClient = null;
             // Créer une nouvelle notification
             var options = {
                 body: notification,
-                icon: 'public/images/Outil.png' // Spécifiez le chemin vers l'icône de la notification
+                icon: '/images/Outil.png' // Spécifiez le chemin vers l'icône de la notification
             };
             var notification = new Notification('Nouvelle taches', options);
         
