@@ -11,14 +11,24 @@ import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import java.util.List;
 
 @Repository
-public interface MaintenancierRepository extends JpaRepository<Maintenancier, Long>{
+public interface MaintenancierRepository extends JpaRepository<Maintenancier, Long> {
     List<Maintenancier> findByStatus(Boolean status);
+
     Maintenancier findFirstByUsernameAndPassword(String username, String password);
+
     Maintenancier findFirstByUsername(String username);
+
     List<Maintenancier> findByStatusAndSpecialite(Boolean status, String specialite);
+
     List<Maintenancier> findByStatusAndSpecialiteAndTest(Boolean status, String specialite, Integer test);
+
     List<Maintenancier> findByTest(int test);
+
     List<Maintenancier> findByTestAndSpecialite(int test, String specialite);
+
     @Query("SELECT m FROM Maintenancier m WHERE :idfilleuls IN (m.idfilleuls)")
     List<Maintenancier> findByFilleuls(@Param("idfilleuls") Long idfilleuls);
+
+    @Query("SELECT m FROM Maintenancier m WHERE :idfilleuls IN (m.idfilleuls)")
+    Maintenancier findByFilleulId(@Param("idfilleuls") Long idfilleuls);
 }

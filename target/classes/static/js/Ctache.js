@@ -49,6 +49,14 @@ function creerTache(jsonData) {
           console.log(maintenancier.message)
           sendNotification(maintenancier[i].id,data.message)
           console.log(data.message)
+          var filleul = maintenancier[i].idfilleuls
+          if(filleul != null){
+            for(let j=0;j<filleul.length;j++){
+              var message = data.message
+              message = message+" tache confier a votre parrain"
+              sendNotification(filleul[j],message) 
+            }
+          }
           console.log("okkk")
         }
     })
