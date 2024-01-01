@@ -59,5 +59,13 @@ public class Equipements { // prend le nom de l'equipement sa photo et son etats
     public void setEtats(Integer etats){
          this.etats=etats;
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
    
 }

@@ -434,4 +434,16 @@ footer{
     text-decoration: none;
   }
 
+  /* RATE US */
+
+  .stars {
+    font-size: 30px;
+    color: gray;
+    cursor: pointer;
+  }
+
+  .filled {
+    color: yellow;
+  }
+
 

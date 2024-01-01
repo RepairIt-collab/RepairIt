@@ -44,11 +44,11 @@
                   <br>
                   <div class="collapse navbar-collapse" id="burger1">
                     <ul class="navbar-nav" style="margin-left: 5%;">
-                      <li><a class="nav-item active" id="Me1" href="#"><i class="fa fa-blender"></i>Electromenager</a></li>
-                      <li><a class="nav-item"id="Me2" href="#"><i class="fa fa-cog"></i>Mecanique</a></li>
-                      <li><a class="nav-item" id="Me3" href="#"> <i class="fa fa-mobile"></i>Telephonie</a></li> 
-                      <li><a class="nav-item" id="Me4" href="#"> <i class="fa fa-laptop"></i>Ordinateur</a></li> 
-                      <li><a class="nav-item" id="Me5" href="#"> <i class="fa fa-toolbox"></i>Outils</a></li> 
+                      <li><a class="nav-item active" id="Me1" ><i class="fa fa-blender"></i>Electromenager</a></li>
+                      <li><a class="nav-item"id="Me2" ><i class="fa fa-cog"></i>Mecanique</a></li>
+                      <li><a class="nav-item" id="Me3" > <i class="fa fa-mobile"></i>Telephonie</a></li> 
+                      <li><a class="nav-item" id="Me4" > <i class="fa fa-laptop"></i>Ordinateur</a></li> 
+                      <li><a class="nav-item" id="Me5" > <i class="fa fa-toolbox"></i>Outils</a></li> 
                     </ul>
                   </div>
                 </div>
@@ -58,8 +58,15 @@
           </div>       
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-center">
-              <p style="margin: 10px;" id="cart" ><i class="fa fa-shopping-cart"></i><a href="#" style="font-size: 1rem;"> Panier</a></p>  
-              <p style="margin: 10px;" id="product" class="activer"><i class="fa fa-box"></i><a href="#"  style="font-size: 1rem;"> Produit</a></p>  
+             <div class="row">
+              <p style="margin: 10px;" id="command" ><i class="fa fa-truck"></i><a  style="font-size: 1rem;"> Commande</a></p>  
+              <p style="margin: 10px;" id="accueil" ><i class="fa fa-home"></i><a  onclick="history.back();" style="font-size: 1rem;"> Ma page</a></p>  
+             </div>
+             <div class="row">
+              <p style="margin: 10px;" id="cart" ><i class="fa fa-shopping-basket"></i><a  style="font-size: 1rem;"> Panier</a></p>  
+              <p style="margin: 10px;" id="product" class="activer"><i class="fa fa-box"></i><a   style="font-size: 1rem;"> Produit</a></p>  
+             </div>
+             
         </div>
       </div>
       
@@ -135,33 +142,43 @@
         </div>
         <br>
         <h2>Notre Catalogue</h2>
-          <div id="Electro">
-            <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}">
-                <div class="card mb-4">
-                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
-                  <div class="card-body" >
-                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
-                    <p th:text = "${elt.caracteristique}"></p>
-                    <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                  </div>
-                </div>
-              </div>
-            </div>   
+          <div id="Electro" style="display: none;">
+            
           </div>
           <div id="Mecani" style="display: none;">
             <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique'}">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique' and elt.occupe==false and elt.quantite>0}">
                 <div class="card mb-4">
                   <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
                   <div class="card-body" >
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'btn' + ${elt.id}" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique' and elt.occupe==false and elt.quantite==0}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <div class="row">
+                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'cmd' + ${elt.id}" class="btn btn-warning">Commander</a>
                   </div>
                 </div>
               </div>
@@ -169,15 +186,38 @@
           </div>
           <div id="Tele" style="display: none;">
             <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone'}">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone' and elt.occupe==false and elt.quantite>0}">
                 <div class="card mb-4">
                   <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
                   <div class="card-body" >
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'btn' + ${elt.id}" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone' and elt.occupe==false and elt.quantite==0}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <div class="row">
+                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'cmd' + ${elt.id}" class="btn btn-warning">Commander</a>
                   </div>
                 </div>
               </div>
@@ -185,50 +225,89 @@
           </div>
           <div id="Ordin" style="display: none;">
             <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur'}">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur' and elt.occupe==false and elt.quantite>0} ">
                 <div class="card mb-4">
                   <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
                   <div class="card-body" >
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'btn' + ${elt.id}" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur' and elt.occupe==false and elt.quantite==0}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <div class="row">
+                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'cmd' + ${elt.id}" class="btn btn-warning">Commander</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div id="outi" style="display: none;">
-            <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}">
-                <div class="card mb-4">
-                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
-                  <div class="card-body" >
-                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
-                    <p th:text = "${elt.caracteristique}"></p>
-                    <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
           <!-- Ajoutez d'autres produits ici -->
         </div>
       </div>
     </div>
   </main>
-  <!-- <input type="button" onclick="creation()"> -->
+  <!-- <input type="button" onclick="creation()">  -->
   
   <main id="found" class="container-fluid mt-4" style="display: none; height: 450px;">
     <h2>PRODUITS TROUVES</h2>
   </main>
 
+  <main id="commander" class="container-fluid mt-4" style="display: none; height: 450px;">
+    <h2>MES COMMANDES</h2>
+    <div class="row">
+      <div class="col-md-3 mt-2" th:each = "elt:${commande}">
+        <div class="card mb-4">
+          <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+          <div class="card-body" >
+            <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+            <p th:text = "${elt.prix}"></p>
+            <p th:text = "${elt.quantite}"></p>
+                <a  th:id="'scd' + ${elt.id}" class="btn btn-danger SUPCMD">Retirer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
   <main id="panier" class="container-fluid mt-4" style="display: none;">
     <h2>VOTRE PANIER</h2>
-  
+    <div class="row">
+      <div class="col-md-3 mt-2" th:each = "elt:${panier}">
+        <div class="card mb-4">
+          <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+          <div class="card-body" >
+            <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+            <p th:text = "${elt.prix}"></p>
+            <p th:text = "${elt.quantite}"></p>
+                <a  th:id="'sup' + ${elt.id}" class="btn btn-danger ">Retirer</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -240,6 +319,7 @@
 
   <script th:src="@{/js/Shop.js}"></script>
   <script th:src="@{/js/Generer.js}"></script>
+  <script th:src="@{/js/ManaShop.js}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
 </body>

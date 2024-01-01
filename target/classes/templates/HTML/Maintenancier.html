@@ -167,7 +167,7 @@
                                             <div class="card-body lola">
                                                 <p class="card-text" th:text="${notification.message}"></p>
                                                 <i class="fas fa-trash-alt fa-2x" style="color:#0852ad;" data-bs-toggle="modal" data-bs-target="#ModalMap" th:attr="onclick='initMap(\'' + ${notification.taches.latitude} + '\',\'' + ${notification.taches.longitude} + '\',\'DRIVING\')'">carte</i>  
-                                                <i class="fas fa-edit fa-2x" style="color:#044602 ;" data-bs-toggle="modal" data-bs-target="#ModalBuy" >Terminer</i>
+                                                <i class="fas fa-edit fa-2x" style="color:#044602 ;" data-bs-toggle="modal" data-bs-target="#ModalBuy" th:attr="onclick='validerTacheTache(\'' + ${notification.taches.id} + '\')'" >Terminer</i>
                                             </div>
                                         </div>
                                     </div>
@@ -280,16 +280,20 @@
 
         <!-- LOCALISATION -->
         <div class="modal fade" id="ModalMap" tabindex="-1" aria-labelledby="ModalMapLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg" style="width: 800px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title me-5" id="ModalMapLabel">Localisation du client</h2>
                         <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div> 
                     <div class="modal-body">
+                        <p id="latitudecache" style="display: none;"></p>
+                        <p id="longitudecache" style="display: none;"></p>
                         <div id="floating-panel">
+                            <i class="fa-solid fa-car" onclick="changeMode('car')"></i>
+                            <i class="fa-solid fa-train" onclick="changeMode('train')"></i>
+                            <i class="fa-solid fa-person-walking" onclick="changeMode('walk')"></i>
                             <!-- LES ICONES CORRESPONDANT AU MOYEN DE TRANSPORT -->
-                            <i></i>
                         </div>
                         <div id="map-maintenacier"></div>
                         <div id="sidebar-maintenacier"></div>
@@ -311,6 +315,7 @@
                     <button type="button" class="btn-close bg-primary" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div> 
                 <div class="modal-body">
+                    <p id="idPaiement" style="display: none;"></p>
                     <form>
                         <div class="mb-3">
                             <label for="equipement" class="form-label">Prix de la tache</label>
@@ -324,7 +329,8 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>  
+    
 
     <!-- EVALUATION -->
     <div class="container">
@@ -447,7 +453,7 @@
                 </div>
                 <br>
                 <div>
-                    <button><a th:href="@{/RepairIt/Update}">Modifier Mon profil</a></button>
+                    <button><a th:href="@{/RepairIt/Update/{maintenancier}(maintenancier=${maintenancier.id})}">Modifier Mon profil</a></button>
                 </div>
                 <br>
                 <div>
@@ -473,10 +479,10 @@
    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
    <script th:src="@{/js/localisation.js}"></script>
    <script th:src="@{/js/CRUDMaintenancier.js}"></script>
-   <script th:src="@{/js/Map.js}"></script>
+   <script th:src="@{/js/MapMaintenancier.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4Saw2ilYx8R91q07orwrvjVeqRK8F-Y0&callback=initMapC&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4Saw2ilYx8R91q07orwrvjVeqRK8F-Y0&callback=initMap&v=weekly"
       defer
     ></script>
 </body>

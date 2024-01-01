@@ -16,7 +16,9 @@ $(document).ready(function() {
     ChampC1.addEventListener("input",function() {
       var invFeedback = document.getElementsByClassName("invalid-feedback");
       var ChampC1=document.getElementById("user");
-      clients.forEach(client =>{
+
+      if(clients.length==0)
+      {
         if (ChampC1.value.length==0) {
           invFeedback[0].style.display="none";
           ChampC1.classList.remove("is-valid");
@@ -24,20 +26,40 @@ $(document).ready(function() {
           invFeedback[1].style.display="block";
           
         } 
-        if (client.username==ChampC1.value) {
-          invFeedback[1].style.display="none";
-          ChampC1.classList.remove("is-valid");
-          ChampC1.classList.add("is-invalid");
-          invFeedback[0].style.display="block";
-          
-        } 
-        if (client.username!=ChampC1.value && ChampC1.value.length!=0) {
+        if ( ChampC1.value.length!=0) {
           invFeedback[0].style.display="none";
           invFeedback[1].style.display="none";
           ChampC1.classList.add("is-valid");
           ChampC1.classList.remove("is-invalid");
-                  }
-      })
+          }
+      }
+      else
+      {
+        clients.forEach(client =>{
+          if (ChampC1.value.length==0) {
+            invFeedback[0].style.display="none";
+            ChampC1.classList.remove("is-valid");
+            ChampC1.classList.add("is-invalid");
+            invFeedback[1].style.display="block";
+            
+          } 
+          if (client.username==ChampC1.value) {
+            invFeedback[1].style.display="none";
+            ChampC1.classList.remove("is-valid");
+            ChampC1.classList.add("is-invalid");
+            invFeedback[0].style.display="block";
+            
+          } 
+          if (client.username!=ChampC1.value && ChampC1.value.length!=0) {
+            invFeedback[0].style.display="none";
+            invFeedback[1].style.display="none";
+            ChampC1.classList.add("is-valid");
+            ChampC1.classList.remove("is-invalid");
+                    }
+        })
+
+      }
+    
     });
 
     var ChampC2=document.getElementById("password");
@@ -77,20 +99,14 @@ $(document).ready(function() {
       var regex = /^[\w-]+(\.[\w-]+)*@gmail.com$/;
       var invFeedback = document.getElementsByClassName("invalid-feedback");
 
-      clients.forEach(client =>{
-        if ( regex.test(ChampC3.value) && client.email!=ChampC3.value){
+      if(clients.length==0)
+      {
+        if ( regex.test(ChampC3.value)){
           invFeedback[4].style.display="none";
           ChampC3.classList.remove("is-invalid");
           ChampC3.classList.add("is-valid");
           invFeedback[5].style.display="none";
                   }
-        if ( regex.test(ChampC3.value) && client.email==ChampC3.value){
-          invFeedback[5].style.display="none";
-          ChampC3.classList.add("is-invalid");
-          ChampC3.classList.remove("is-valid");
-          invFeedback[4].style.display="block";
-          
-        }
         if ( !regex.test(ChampC3.value)){
           ChampC3.classList.add("is-invalid");
           ChampC3.classList.remove("is-valid");
@@ -98,7 +114,34 @@ $(document).ready(function() {
           invFeedback[4].style.display="none";
           
         }
-      })
+      }
+      else
+      {
+        clients.forEach(client =>{
+          if ( regex.test(ChampC3.value) && client.email!=ChampC3.value){
+            invFeedback[4].style.display="none";
+            ChampC3.classList.remove("is-invalid");
+            ChampC3.classList.add("is-valid");
+            invFeedback[5].style.display="none";
+                    }
+          if ( regex.test(ChampC3.value) && client.email==ChampC3.value){
+            invFeedback[5].style.display="none";
+            ChampC3.classList.add("is-invalid");
+            ChampC3.classList.remove("is-valid");
+            invFeedback[4].style.display="block";
+            
+          }
+          if ( !regex.test(ChampC3.value)){
+            ChampC3.classList.add("is-invalid");
+            ChampC3.classList.remove("is-valid");
+            invFeedback[5].style.display="block"; 
+            invFeedback[4].style.display="none";
+            
+          }
+        })
+
+      }
+     
     
     });
 
@@ -109,40 +152,59 @@ $(document).ready(function() {
       var correspondances = ChampC4.value.match(regex);
       var invFeedback = document.getElementsByClassName("invalid-feedback");
       
-      clients.forEach(client =>{
+      if(clients.length==0)
+      {
         if (ChampC4.value.length==9 && correspondances && correspondances.length == 9 && (ChampC4.value.substring(0,2)=="62" || ChampC4.value.substring(0,2)=="65" || ChampC4.value.substring(0,2)=="67" || ChampC4.value.substring(0,2)=="69")){
-           if(client.telephone!=ChampC4.value)
-           {
-            ChampC4.classList.remove("is-invalid");
-            ChampC4.classList.add("is-valid");
-            invFeedback[7].style.display="none";
-            invFeedback[6].style.display="none";
-                       }
-           else
-           {
-            ChampC4.classList.add("is-invalid");
-            ChampC4.classList.remove("is-valid");
-            invFeedback[7].style.display="none";
-            invFeedback[6].style.display="block";
-            
-           }      
-        }
-        else{
-          if(client.telephone==ChampC4.value)
-          {
-            ChampC4.classList.add("is-invalid");
+           ChampC4.classList.remove("is-invalid");
+           ChampC4.classList.add("is-valid");
+           invFeedback[7].style.display="none";
+           invFeedback[6].style.display="none";   
+       }
+       else{
+        ChampC4.classList.add("is-invalid");
+        ChampC4.classList.remove("is-valid");
+        invFeedback[7].style.display="block";
+        invFeedback[6].style.display="none"; 
+       }
+
+      }
+      else{
+        clients.forEach(client =>{
+          if (ChampC4.value.length==9 && correspondances && correspondances.length == 9 && (ChampC4.value.substring(0,2)=="62" || ChampC4.value.substring(0,2)=="65" || ChampC4.value.substring(0,2)=="67" || ChampC4.value.substring(0,2)=="69")){
+             if(client.telephone!=ChampC4.value)
+             {
+              ChampC4.classList.remove("is-invalid");
+              ChampC4.classList.add("is-valid");
+              invFeedback[7].style.display="none";
+              invFeedback[6].style.display="none";
+                         }
+             else
+             {
+              ChampC4.classList.add("is-invalid");
               ChampC4.classList.remove("is-valid");
-              invFeedback[7].style.display="block";
-              invFeedback[6].style.display="block";     
+              invFeedback[7].style.display="none";
+              invFeedback[6].style.display="block";
+              
+             }      
           }
           else{
-            ChampC4.classList.add("is-invalid");
-              ChampC4.classList.remove("is-valid");
-              invFeedback[7].style.display="block";
-              invFeedback[6].style.display="none";  
+            if(client.telephone==ChampC4.value)
+            {
+              ChampC4.classList.add("is-invalid");
+                ChampC4.classList.remove("is-valid");
+                invFeedback[7].style.display="block";
+                invFeedback[6].style.display="block";     
+            }
+            else{
+              ChampC4.classList.add("is-invalid");
+                ChampC4.classList.remove("is-valid");
+                invFeedback[7].style.display="block";
+                invFeedback[6].style.display="none";  
+            }
           }
-        }
-      })
+        })
+      }
+      
 
     });
 
@@ -162,36 +224,26 @@ $(document).ready(function() {
       // Ajoutez un gestionnaire d'événements pour l'événement "input"
       formControlElements[i].addEventListener('change', function() {
         // Vérifiez si la classe "is-valid" est présente sur l'élément actuel
-        var isValid = this.classList.contains('is-valid');
-     
-        
-        // Faites quelque chose en fonction de la validité
-        if (isValid) {
-          console.log('La classe "is-valid" est présente.');
-          j=j+1;
-        } 
-        else {
-
-          console.log('La classe "is-valid" est absente.');
-          if(j>=5)
-          {
-            j=j-1;
-          }
-        }
-        console.log(j);
+        var formControl = formulaire.getElementsByClassName('form-control is-valid');
+        console.log(formControl.length);
         caseClient.addEventListener("change", function() {
-          if (caseClient.checked && j==5) {
+          if (caseClient.checked && formControl.length==5) {
             submit.disabled = false;
           } 
           if (!caseClient.checked) {
             submit.disabled = true;
           } 
         });
-      });
-     
+      });    
     }
-  
-   
+    document.addEventListener('DOMContentLoaded', function() {
+      var bouton = document.getElementById("valid1");
+
+      bouton.addEventListener('click', function() {
+        bouton.disabled = true;
+        // Autres actions à effectuer après le clic
+      });
+    });
 
 },
 error: function(xhr, status, error) {
@@ -223,36 +275,76 @@ $(document).ready(function() {
           var ChampC1=document.getElementById("nom");
           var regex = /[!@#$%^&*();><./|=]/g; // Expression régulière pour un caractère spécial
           var correspondances = ChampC1.value.match(regex);
-          mains.forEach(main =>{
-          if (ChampC1.value.length==0 || correspondances) {
-            ChampC1.classList.remove("is-valid");
-            ChampC1.classList.add("is-invalid");
-            invFeedback[1].style.display="block";
-          } else {
-            if(ChampC1.value==main.nom_complet)
-            {
-              console.log("manu");
-              invFeedback[1].style.display="none"; 
-              ChampC1.classList.add("is-invalid");
+
+          if(mains.length==0)
+          {
+            if (ChampC1.value.length==0 || correspondances) {
+              invFeedback[0].style.display="none";
               ChampC1.classList.remove("is-valid");
-              invFeedback[0].style.display="block";
+              ChampC1.classList.add("is-invalid");
+              invFeedback[1].style.display="block";
             }
-            if(ChampC1.value!=main.nom_complet){
-              console.log("mapas");
+            else
+            {
               invFeedback[1].style.display="none"; 
               ChampC1.classList.add("is-valid");
               ChampC1.classList.remove("is-invalid");
               invFeedback[0].style.display="none";
             }
-  
           }
-        });
+          else
+          {
+            mains.forEach(main =>{
+              if (ChampC1.value.length==0 || correspondances) {
+                invFeedback[0].style.display="none";
+                ChampC1.classList.remove("is-valid");
+                ChampC1.classList.add("is-invalid");
+                invFeedback[1].style.display="block";
+              }
+               else {
+                if(ChampC1.value==main.nom_complet)
+                {
+                  invFeedback[1].style.display="none"; 
+                  ChampC1.classList.add("is-invalid");
+                  ChampC1.classList.remove("is-valid");
+                  invFeedback[0].style.display="block";
+                }
+                else{
+                  invFeedback[1].style.display="none"; 
+                  ChampC1.classList.add("is-valid");
+                  ChampC1.classList.remove("is-invalid");
+                  invFeedback[0].style.display="none";
+                }
+      
+              }
+            });
+          }
+       
 
       });
     
       var C2=document.getElementById("user2");
       C2.addEventListener("input",function() {
           var ChampC1=document.getElementById("user2");
+          
+          if(mains.length==0)
+          {
+            if (ChampC1.value.length==0) {
+              invFeedback[2].style.display="none";
+              ChampC1.classList.remove("is-valid");
+              ChampC1.classList.add("is-invalid");
+              invFeedback[3].style.display="block";
+            }
+            else
+            {
+              invFeedback[3].style.display="none"; 
+              ChampC1.classList.add("is-valid");
+              ChampC1.classList.remove("is-invalid");
+              invFeedback[2].style.display="none";
+            }
+          }
+          else{
+               
           mains.forEach(main =>{
             if (ChampC1.value.length==0 ) {
               if(ChampC1.value==main.username)
@@ -286,6 +378,7 @@ $(document).ready(function() {
               }
             }
           })
+          }
        
       });
 
@@ -347,37 +440,55 @@ $(document).ready(function() {
         var ChampC3=document.getElementById("mail2");
         var regex = /^[\w-]+(\.[\w-]+)*@gmail.com$/;
         
-        mains.forEach(main =>{
-          if ( regex.test(ChampC3.value) ){
-            if(ChampC3.value==main.email)
-            {
-               invFeedback[5].style.display="none"; 
-                ChampC3.classList.remove("is-valid");
-                ChampC3.classList.add("is-invalid");
-                invFeedback[4].style.display="block";
-            }
-            else{
-              invFeedback[5].style.display="none"; 
+        if(mains.length==0)
+        {
+          if (!regex.test(ChampC3.value) ){
+            invFeedback[4].style.display="none"; 
+            ChampC3.classList.remove("is-valid");
+            ChampC3.classList.add("is-invalid");
+            invFeedback[5].style.display="block";
+          }
+          else{
+            invFeedback[5].style.display="none"; 
                 ChampC3.classList.remove("is-invalid");
                 ChampC3.classList.add("is-valid");
                 invFeedback[4].style.display="none";
-            }
-          } else {
-                  if(ChampC3.value==main.email)
-            {
-               invFeedback[5].style.display="none"; 
+          }
+        }
+        else{
+          mains.forEach(main =>{
+            if ( regex.test(ChampC3.value) ){
+              if(ChampC3.value==main.email)
+              {
+                 invFeedback[5].style.display="none"; 
+                  ChampC3.classList.remove("is-valid");
+                  ChampC3.classList.add("is-invalid");
+                  invFeedback[4].style.display="block";
+              }
+              else{
+                invFeedback[5].style.display="none"; 
+                  ChampC3.classList.remove("is-invalid");
+                  ChampC3.classList.add("is-valid");
+                  invFeedback[4].style.display="none";
+              }
+            } else {
+                    if(ChampC3.value==main.email)
+              {
+                 invFeedback[5].style.display="none"; 
+                  ChampC3.classList.remove("is-valid");
+                  ChampC3.classList.add("is-invalid");
+                  invFeedback[4].style.display="block";
+              }
+              else{
+                invFeedback[5].style.display="block"; 
                 ChampC3.classList.remove("is-valid");
                 ChampC3.classList.add("is-invalid");
-                invFeedback[4].style.display="block";
+                  invFeedback[4].style.display="none";
+              }
             }
-            else{
-              invFeedback[5].style.display="block"; 
-              ChampC3.classList.remove("is-valid");
-              ChampC3.classList.add("is-invalid");
-                invFeedback[4].style.display="none";
-            }
-          }
-        })
+          })
+        }
+       
        
       });
 
@@ -387,42 +498,58 @@ $(document).ready(function() {
         var regex = /[0-9]/g; // Expression régulière pour correspondre à des chiffres 
         var correspondances = ChampC4.value.match(regex);
         
-        mains.forEach(main =>{
-          if (ChampC4.value.length==9 && correspondances && correspondances.length == 9 && (ChampC4.value.substring(0,2)=="62" || ChampC4.value.substring(0,2)=="65" || ChampC4.value.substring(0,2)=="67" || ChampC4.value.substring(0,2)=="69") ){
-            if(ChampC4.value==main.telephone)
-            {
-              invFeedback[11].style.display="none"; 
-                ChampC4.classList.remove("is-valid");
-                ChampC4.classList.add("is-invalid");
-                invFeedback[10].style.display="block";
-            }
-            else{
-              invFeedback[11].style.display="none"; 
-              ChampC4.classList.remove("is-invalid");
-              ChampC4.classList.add("is-valid");
-              invFeedback[10].style.display="none";
-            }
-          } else {
-            if(ChampC4.value==main.telephone)
-            {
-              invFeedback[10].style.display="block"; 
-                ChampC4.classList.remove("is-valid");
-                ChampC4.classList.add("is-invalid");
-                invFeedback[11].style.display="block";
-            }
-            else{
-              invFeedback[10].style.display="none"; 
-                ChampC4.classList.remove("is-valid");
-                ChampC4.classList.add("is-invalid");
-                invFeedback[11].style.display="block";
-            }
+        if(mains.length==0)
+        {
+          if (ChampC4.value.length==9 && correspondances && correspondances.length == 9 && (ChampC4.value.substring(0,2)=="62" || ChampC4.value.substring(0,2)=="65" || ChampC4.value.substring(0,2)=="67" || ChampC4.value.substring(0,2)=="69") )
+          {
+            invFeedback[11].style.display="none"; 
+            ChampC4.classList.remove("is-invalid");
+            ChampC4.classList.add("is-valid");
+            invFeedback[10].style.display="none";
           }
-        })
-     
-      });
-
-
-       // Sélectionnez tous les éléments avec la classe "form-control"
+          else
+          {
+            invFeedback[10].style.display="none"; 
+            ChampC4.classList.remove("is-valid");
+            ChampC4.classList.add("is-invalid");
+            invFeedback[11].style.display="block";
+          }
+        }
+        else[
+          mains.forEach(main =>{
+            if (ChampC4.value.length==9 && correspondances && correspondances.length == 9 && (ChampC4.value.substring(0,2)=="62" || ChampC4.value.substring(0,2)=="65" || ChampC4.value.substring(0,2)=="67" || ChampC4.value.substring(0,2)=="69") ){
+              if(ChampC4.value==main.telephone)
+              {
+                invFeedback[11].style.display="none"; 
+                  ChampC4.classList.remove("is-valid");
+                  ChampC4.classList.add("is-invalid");
+                  invFeedback[10].style.display="block";
+              }
+              else{
+                invFeedback[11].style.display="none"; 
+                ChampC4.classList.remove("is-invalid");
+                ChampC4.classList.add("is-valid");
+                invFeedback[10].style.display="none";
+              }
+            } else {
+              if(ChampC4.value==main.telephone)
+              {
+                invFeedback[10].style.display="block"; 
+                  ChampC4.classList.remove("is-valid");
+                  ChampC4.classList.add("is-invalid");
+                  invFeedback[11].style.display="block";
+              }
+              else{
+                invFeedback[10].style.display="none"; 
+                  ChampC4.classList.remove("is-valid");
+                  ChampC4.classList.add("is-invalid");
+                  invFeedback[11].style.display="block";
+              }
+            }
+          })
+        ]
+        
+             // Sélectionnez tous les éléments avec la classe "form-control"
     var formulaire = document.getElementById("form2");
     
     // Sélectionnez le bouton "Submit" ou "Valider"
@@ -431,6 +558,7 @@ $(document).ready(function() {
     
     // Sélectionnez tous les éléments avec la classe "form-control"
     var formControlElements = formulaire.getElementsByClassName('form-control');
+  
     submit.disabled = true;
     // Parcourez tous les éléments sélectionnés
     for (var i = 0; i < formControlElements.length; i++) {
@@ -456,7 +584,7 @@ $(document).ready(function() {
         }
         console.log(j);
         caseClient.addEventListener("change", function() {
-          if (caseClient.checked && j==8) {
+          if (caseClient.checked && formControl.length==8) {
             submit.disabled = false;
           } 
           if (!caseClient.checked) {
@@ -466,12 +594,27 @@ $(document).ready(function() {
       });
      
     }
+      });
       },
       error: function(xhr, status, error) {
         console.error(error);
     }
     });
     });
+
+var C1=document.getElementById("nom");
+C1.addEventListener("input",function() {
+  var ChampC1=document.getElementById("nom");
+  var regex = /[!@#$%^&*();><./|=]/g; // Expression régulière pour un caractère spécial
+  var correspondances = ChampC1.value.match(regex);
+  if (ChampC1.value.length==0 || correspondances) {
+    ChampC1.classList.remove("is-valid");
+    ChampC1.classList.add("is-invalid");
+  } else {
+    ChampC1.classList.add("is-valid");
+    ChampC1.classList.remove("is-invalid");
+  }
+});
 
 function LicenceM(){
   

@@ -7,8 +7,9 @@ document.getElementById('file-picker').addEventListener('change', function (even
     var input = event.target;
     var img =document.getElementById('file-picker');
     var file = img.files[0]
-    console.log(file)
-    cnn(file)
+    var idDOM = "type-appareil";
+    console.log(file,idDOM)
+    cnn(file,idDOM)
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -61,7 +62,7 @@ function creerTache(jsonData) {
     });
 }
 
-function cnn(image){
+function cnn(image,id){
 
   const url = "https://127.0.0.1:9001/flask";
   const form = new FormData();
@@ -81,7 +82,9 @@ function cnn(image){
   })
   .then(data => {
       console.log(data);
-      document.getElementById("type-appareil").textContent=data
+      console.log(id)
+      console.log(document.getElementById(id))
+      document.getElementById(id).textContent=data
   })
   .catch(error => {
       // Gestion des erreurs
@@ -145,12 +148,11 @@ function CTache() {
   //   var photoData = Array.from(byteArray); // Convertir le tableau de bytes en un tableau JavaScript standard
     console.log(photoData)
   //   const base64Image = photoData.split(',')[1];
+
     var todoTache = {
-      nom: document.getElementById("equipement").value,
       photo:base64String, // Utiliser le tableau de bytes comme valeur de la propriété "photo"
       type: document.getElementById("type-appareil").textContent,
       description: document.getElementById("description").value,
-      date: document.getElementById("date").value,
       latitude:latitude,
       longitude:longitud,
       
@@ -167,7 +169,7 @@ function CTache() {
 
 document.getElementById("creer").addEventListener('click',CTache);
 
-// MODIFICATION D'UNE TACHE 
+
 
 
 // SUPPRESSION D'UNE TACHE

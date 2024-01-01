@@ -1,4 +1,4 @@
-alert("Hello chat");
+// alert("Hello chat");
 // Au click sur le boutton chat d une tache
 // La requete envoye devra contenir l id de la tache
 
@@ -59,8 +59,8 @@ function DisplayChatContact(data) {
 
             divChat.innerHTML = `<div id="TA${task.id1}" class="chatContent" style="border-radius:15px;">
                                     <div>
-                                        <h4> TACHE ${task.id1}</h4>
-                                        <li>${task.type}</li>
+                                        <h4> REPARATION ${task.type}</h4>
+                                        <li> APPAREIL : ${task.type}</li>
                                         <li>${task.date}</li>
                                         <li>${task.description}</li>
                                     </div>

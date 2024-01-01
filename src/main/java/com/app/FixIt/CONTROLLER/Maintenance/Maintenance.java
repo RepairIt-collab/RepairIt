@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
 
+import com.app.FixIt.BOUTIQUE.entities.Panier;
 import com.app.FixIt.CONTROLLER.Accueil.Accueil;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
+import com.app.FixIt.ENTITIES.Maintenance.Equipements;
 import com.app.FixIt.ENTITIES.Maintenance.Evaluation;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Notification;
@@ -26,6 +28,7 @@ import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.ENTITIES.Maintenance.Type;
 import com.app.FixIt.ENTITIES.Maintenance.User;
 import com.app.FixIt.REPOSITORY.Maintenance.ClientRepository;
+import com.app.FixIt.REPOSITORY.Maintenance.EquipementsRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.EvaluationRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.NotificationRepository;
@@ -34,6 +37,9 @@ import com.app.FixIt.REPOSITORY.User.UserRepository;
 import com.app.FixIt.SERVICE.Maintenance.ClientService;
 import com.app.FixIt.SERVICE.Maintenance.EquipementsService;
 import com.app.FixIt.SERVICE.Maintenance.EvaluationService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/RepairIt")
@@ -66,16 +72,22 @@ public class Maintenance {
     @Autowired
     EvaluationService evaluationService;
 
+    @Autowired
+    EquipementsRepository equipementsRepository;
+
 
     @GetMapping("/Client")
     public String Client(Model model,HttpSession session) {
         Long id = (Long) session.getAttribute("id");
         if(id != null){
         Client client = clientRepository.findById(id).orElse(null);
+        List<Equipements> equipements = equipementsRepository.findByClient(client);
+        // Iterable<Equipements> equIterable = equipements;
         List<Taches> tache = (List<Taches>) model.getAttribute("taches");
         Iterable<Taches> taches = tache;
         String filename = nomImage(client.getUsername(),client.getId());
         model.addAttribute("taches", taches);
+        model.addAttribute("equipements", equipements);
         model.addAttribute("filename",filename);
         model.addAttribute("type", Type.values());
         model.addAttribute("client", client);

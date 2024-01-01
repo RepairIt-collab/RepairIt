@@ -168,6 +168,7 @@ function ValiderTache(idNotif) {
   })
     .then(response => {
       console.log("Données reçues pour creerTaches");
+      window.location.reload()
       if (response.ok) {
 
         return response.json(); // Renvoyer la réponse JSON
@@ -183,6 +184,11 @@ function ValiderTache(idNotif) {
       // Gestion des erreurs
       console.error(error);
     });
+}
+
+function validerTacheTache(id){
+  document.getElementById("idPaiement").textContent=id
+  return id;
 }
 
 function path(imageBytes, id) {
@@ -475,21 +481,24 @@ function validerFilleul(idM, idF) {
 function soumettrePrix() {
   const url = "https://127.0.0.1:9001/soumettrePrix";
   var prix = document.getElementById("montant").value;
-
+ var idT = document.getElementById("idPaiement").textContent
   const params = new URLSearchParams();
   params.append('prix', prix);
+  params.append('idT', idT);
 
   fetch(url, {
     method: 'POST',
     body: params
   })
     .then(response => {
-      console.log("Données reçues pour creerTaches");
+      console.log("Données reçues pour paiement");
+      
       if (response.ok) {
+
 
         return response.json(); // Renvoyer la réponse JSON
       } else {
-        throw new Error('Erreur de la requête creerTaches');
+        throw new Error('Erreur de la requête paiement');
       }
     })
     .then(data => {
@@ -505,6 +514,10 @@ function soumettrePrix() {
       // Gestion des erreurs
       console.error(error);
     });
+}
+
+function terminerTache(){
+
 }
 
 // GERE LE PROFIL
