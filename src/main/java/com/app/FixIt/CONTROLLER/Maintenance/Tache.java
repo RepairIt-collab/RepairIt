@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.app.FixIt.DTO.Mail.EmailDTO;
 import com.app.FixIt.DTO.Maintenance.TacheDto;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Equipements;
@@ -135,35 +136,61 @@ public class Tache {
     }
 
     @PostMapping("/validerTache")
-    public void validerTache(@RequestParam("idNotif") Long idNotif, @RequestParam("idM") Long idM) {
+    public void validerTache(@RequestParam("idNotif") Long idNotif, @RequestParam("idM") Long idM,@RequestParam("idFils") List<Long> idF) {
         Notification notification = notificationRepository.findById(idNotif).orElse(null);
         Taches tache = notification.getTaches();
         Maintenancier maintenancier = maintenancierRepository.findById(idM).orElse(null);
         tache.setMaintenancier(maintenancier);
-        notification.getMaintenanciers().remove(maintenancier);
+        // notification.getMaintenanciers().remove(maintenancier);
         notification.setIdMaintenancier(idM);
         tache.setEtat(1);
         maintenancier.setStatus(false);
         tachesRepository.save(tache);
         maintenancierRepository.save(maintenancier);
         notificationRepository.save(notification);
+        if(idF != null){
+            System.out.println(idF);
+        for(Long elt:idF){
+            Maintenancier mainFils = maintenancierRepository.findById(elt).orElse(null);
+            mainFils.setStatus(false);
+            maintenancierRepository.save(mainFils);
+        }}
     }
 
-    @PostMapping("/soumettrePrix")
-    public void soumettrePrix(@RequestParam("prix") Integer prix, @RequestParam("idT") Long idT) {
+    @PostMapping("/soumettrePrixF")
+    public EmailDTO soumettrePrix(@RequestParam("idT") Long idT,@RequestParam("message") String mess) {
         // LOGIQUE DU CODE POUR LE PAYEMENT
+        // ENVOIE DE L'EMAIL AU CLIENT POUR LA VALIDATION DU PAIEMENT
+        System.out.println("message--------"+mess);
+        Taches tache = tachesRepository.findById(idT).orElse(null);
+        Client client = tache.getClient();
+        String email = client.getEmail();
+        String subjet = "Validation du paiement";
+        EmailDTO emailDTO = new EmailDTO(email, subjet, mess);
+        return emailDTO;
 
     }
 
-    @PostMapping("/terminerTache/{idT}")
-    public void terminerTache(HttpSession session, @PathVariable Long idT) {
-        Long id = (Long) session.getAttribute("id");
-        Maintenancier maintenancier = maintenancierRepository.findById(id).orElse(null);
+    @PostMapping("/terminerTache")
+    public void terminerTache(@RequestParam("idT") Long idT, @RequestParam("idM") Long idM,@RequestParam("prix") Integer prix) {
+        // Long id = (Long) session.getAttribute("id");
+        Maintenancier maintenancier = maintenancierRepository.findById(idM).orElse(null);
         maintenancier.setStatus(true);
         Taches taches = tachesRepository.findById(idT).orElse(null);
         taches.setEtat(2);
+        taches.setCout(prix);
         tachesRepository.save(taches);
         maintenancierRepository.save(maintenancier);
+        List<Long> longs = maintenancier.getIdfilleuls();
+        if(longs != null){
+            for(Long elt : longs){
+                Maintenancier mainF = maintenancierRepository.findById(elt).orElse(null);
+                if(mainF.getStatus() == false){
+                    mainF.setStatus(true);
+                    maintenancierRepository.save(mainF);
+                }
+            }
+        }
 
         // TODO: process POST request
 

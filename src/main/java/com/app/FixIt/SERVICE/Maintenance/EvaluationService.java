@@ -31,13 +31,16 @@ public class EvaluationService {
 
     public void add(Maintenancier maintenancier) {
         LocalDate currentDate = LocalDate.now();
+        expire(maintenancier.getSpecialite());
         // Evaluation evaluation =
         // evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(),
         // currentDate);
-        Evaluation evaluation = evaluationRepository.findFirstByDomain(maintenancier.getSpecialite());
+        Evaluation evaluation = evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(),currentDate);
+        
         System.out.println(evaluation.getDate());
         // List<Maintenancier> maintenanciers = new ArrayList<>();
         // maintenanciers.add(maintenancier);
+
 
         if (evaluation.getMaintenanciers() == null) {
             List<Maintenancier> maintenanciers = new ArrayList<>();
@@ -51,7 +54,8 @@ public class EvaluationService {
 
     public void addQuestions(Evaluation evaluation) {
         List<Questions> questions = selectRandomQuestions(20, evaluation.getDomain());
-        evaluation.setQuestions(questions);
+        if(evaluation.getQuestions().size() == 0){
+        evaluation.setQuestions(questions);}
         evaluationRepository.save(evaluation);
     }
 
@@ -93,6 +97,7 @@ public class EvaluationService {
     public void expire(String domain) {
         LocalDate currentDate = LocalDate.now();
         List<Evaluation> evaluations = evaluationRepository.findByDomain(domain);
+        System.out.println(evaluations);
         if (evaluations.isEmpty()) {
             Evaluation eval = new Evaluation();
             eval.setDomain(domain);
@@ -102,8 +107,11 @@ public class EvaluationService {
 
         } else {
             for (Evaluation evaluation : evaluations) {
+                System.out.println(evaluation.getDomain()+"//////////"+evaluation.getDate());
                 int compare = currentDate.compareTo((evaluation.getDate()));
-                if (compare > 0) {
+                if (compare > 0 || compare == 0) {
+                    System.out.println(compare);
+                    System.out.println(evaluation.getDomain()+"\\\\\\\\\\\\\\\\\\"+evaluation.getDate());
                     Evaluation eval = new Evaluation();
                     eval.setDomain(domain);
                     eval.setDate(currentDate.plusDays(1));
