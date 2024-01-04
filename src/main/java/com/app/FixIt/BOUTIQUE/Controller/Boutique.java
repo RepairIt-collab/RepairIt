@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,6 +79,16 @@ public class Boutique {
     }
 
 
+        
+
+
+
+
+
+
+
+
+
     // ##### PRODUIT ######
           //Ajout d'un produit
     @PostMapping(value = "/Boutique/CreerProduit")
@@ -107,31 +118,76 @@ public class Boutique {
     @PostMapping("/Boutique/AjouterPanier/{numero}/{quantite}")
     public ResponseEntity<String> ajouterProduitPanier(@PathVariable Long numero, @PathVariable Integer quantite, HttpSession session) {
         Long id = (Long) session.getAttribute("id");
-    
+        Boolean compteur=false;
+        Panier panier = panierRepository.findByUserId(id);
+
         Produit produit = produitRepository.findById(numero).orElse(null);
         if (produit == null) {
             return ResponseEntity.ok("Produit non trouvé");
         }
     
         if (produit.getQuantite() < quantite) {
-            Commande commande = commandeRepository.findById(numero).orElse(null);
-            List<Produit> existingProduits = commande.getProduit();
+            Commande commande = commandeRepository.findById(id).orElse(null);
+            List<Produit> existingProduits =commande.getProduit();
+        
+                for(Produit P : existingProduits)
+                    {
+                        if(P.getPhoto().equals(produit.getPhoto()))
+                        {
+                            int surplus = quantite - produit.getQuantite();
+                            P.setQuantite(P.getQuantite() + surplus);
+                            produit.setQuantite(0);
+                            existingProduits.remove(P);
+                            existingProduits.add(P);
+                            Produit Comproduit=produitRepository.findByPhotoAndEstcommande(produit.getPhoto(), true);
+                            Comproduit.setQuantite(P.getQuantite() + surplus);
+                             produitRepository.save(Comproduit);
+                            produitRepository.save(produit);
+                            commande.setProduit(existingProduits);
+                            commandeRepository.save(commande);
+                            
+                            compteur = true;
+                            break;
+                        }
+                    }
+                    if(compteur==false)
+                    {
+                       Produit existingProduit = new Produit();
 
-            Produit existingProduit = new Produit();
-            existingProduit.setPhoto(produit.getPhoto());
-            existingProduit.setCaracteristique(produit.getCaracteristique());
-            existingProduit.setDomaine(produit.getDomaine());
-            existingProduit.setQuantite(quantite);
-            existingProduit.setOccupe(true);
-            existingProduit.setEstcommande(true);
-            existingProduit.setNom(produit.getNom());
-            existingProduit.setPrix(produit.getPrix());
-            
-            produitRepository.save(existingProduit);
-            existingProduits.add(existingProduit);
-            commande.setProduit(existingProduits);
-            commandeRepository.save(commande);
+                        produit.setQuantite(0);
+                        produitRepository.save(produit);
+                        existingProduit.setPhoto(produit.getPhoto());
+                        existingProduit.setCaracteristique(produit.getCaracteristique());
+                        existingProduit.setDomaine(produit.getDomaine());
+                        existingProduit.setQuantite(quantite-produit.getQuantite());
+                        existingProduit.setOccupe(true);
+                        existingProduit.setEstcommande(true);
+                        existingProduit.setNom(produit.getNom());
+                        existingProduit.setPrix(produit.getPrix());
 
+                        produitRepository.save(existingProduit);
+
+                        existingProduits.add(existingProduit);
+                        commande.setProduit(existingProduits);
+                        commandeRepository.save(commande);
+
+                        Produit Propanier=produitRepository.findByPhotoAndEstOccupeAndEstcommande(produit.getPhoto(), true,false );
+                        Propanier.setQuantite(Propanier.getQuantite()+quantite-produit.getQuantite());
+                        produitRepository.save(Propanier);
+
+                        List<Produit> existingProducts =panier.getProduit();
+
+                        for(Produit pan : existingProducts)
+                        {
+                            if(pan.getPhoto().equals(produit.getPhoto()))
+                            {
+                                pan.setQuantite(pan.getQuantite()+quantite-produit.getQuantite());
+                                existingProducts.remove(pan);
+                                existingProducts.add(pan);
+                            }
+                        }
+                    }
+                   
             return ResponseEntity.ok("Quantité insuffisante ajout dans les commande");
         }
         else {
@@ -140,25 +196,46 @@ public class Boutique {
              produit.setEstcommande(false);
              produitRepository.save(produit);
     
-            Panier panier = panierRepository.findByUserId(id);
+           
             if (panier != null) {
                 List<Produit> existingProduits = panier.getProduit();
                 if(produit!=null)
                 {
-                    Produit existingProduit = new Produit();
-                    existingProduit.setPhoto(produit.getPhoto());
-                    existingProduit.setCaracteristique(produit.getCaracteristique());
-                    existingProduit.setDomaine(produit.getDomaine());
-                    existingProduit.setQuantite(quantite);
-                    existingProduit.setOccupe(true);
-                    existingProduit.setEstcommande(false);
-                    existingProduit.setNom(produit.getNom());
-                    existingProduit.setPrix(produit.getPrix());
+                      for(Produit P : existingProduits)
+                    {
+                        if(P.getPhoto().equals(produit.getPhoto()))
+                        {
+                            P.setQuantite(P.getQuantite()+quantite);
+                            existingProduits.remove(P);
+                            existingProduits.add(P);
+                            Produit Propanier=produitRepository.findByPhotoAndEstOccupeAndEstcommande(produit.getPhoto(), true,false );
+                            Propanier.setQuantite(Propanier.getQuantite()+quantite);
+                            produitRepository.save(P);
+                            panier.setProduit(existingProduits);
+                            panierRepository.save(panier);
+
+                            compteur=true;
+                            break;
+                        }
+                    }
                     
-                    produitRepository.save(existingProduit);
-                    existingProduits.add(existingProduit);
-                    panier.setProduit(existingProduits);
-                    panierRepository.save(panier);
+                   if(compteur==false)
+                    {
+                        Produit NoexistingProduit = new Produit();
+                        NoexistingProduit.setPhoto(produit.getPhoto());
+                        NoexistingProduit.setCaracteristique(produit.getCaracteristique());
+                        NoexistingProduit.setDomaine(produit.getDomaine());
+                        NoexistingProduit.setQuantite(quantite);
+                        NoexistingProduit.setOccupe(true);
+                        NoexistingProduit.setEstcommande(false);
+                        NoexistingProduit.setNom(produit.getNom());
+                        NoexistingProduit.setPrix(produit.getPrix());   
+
+                        produitRepository.save(NoexistingProduit);
+                        existingProduits.add(NoexistingProduit);
+                        panier.setProduit(existingProduits);
+                        panierRepository.save(panier);
+                    }
                 }
                
             } else {
@@ -209,6 +286,7 @@ public class Boutique {
     @PostMapping("/Boutique/AjouterCommande/{numero}/{quantite}")
     public ResponseEntity<String> ajouterProduitCommande(@PathVariable Long numero, @PathVariable Integer quantite, HttpSession session) {
           Long id = (Long) session.getAttribute("id");
+          Boolean compteur=false;
     
         Produit produit = produitRepository.findById(numero).orElse(null);
         if (produit == null) {
@@ -221,20 +299,38 @@ public class Boutique {
                 List<Produit> existingProduits = commande.getProduit();
                 if(produit!=null)
                 {
-                    Produit existingProduit = new Produit();
-                    existingProduit.setPhoto(produit.getPhoto());
-                    existingProduit.setCaracteristique(produit.getCaracteristique());
-                    existingProduit.setDomaine(produit.getDomaine());
-                    existingProduit.setQuantite(quantite);
-                    existingProduit.setOccupe(true);
-                    existingProduit.setEstcommande(true);
-                    existingProduit.setNom(produit.getNom());
-                    existingProduit.setPrix(produit.getPrix());
-                    
-                    produitRepository.save(existingProduit);
-                    existingProduits.add(existingProduit);
-                    commande.setProduit(existingProduits);
-                    commandeRepository.save(commande);
+                        for(Produit P : existingProduits)
+                    {
+                        if(P.getPhoto().equals(produit.getPhoto()))
+                        {
+                            P.setQuantite(P.getQuantite()+quantite);
+                            existingProduits.remove(P);
+                            existingProduits.add(P);
+                            produitRepository.save(P);
+                            commande.setProduit(existingProduits);
+                            commandeRepository.save(commande);
+
+                            compteur=true;
+                            break;
+                        }
+                    }
+                    if(compteur==false)
+                    {
+                       Produit existingProduit = new Produit();
+                        existingProduit.setPhoto(produit.getPhoto());
+                        existingProduit.setCaracteristique(produit.getCaracteristique());
+                        existingProduit.setDomaine(produit.getDomaine());
+                        existingProduit.setQuantite(quantite);
+                        existingProduit.setOccupe(true);
+                        existingProduit.setEstcommande(true);
+                        existingProduit.setNom(produit.getNom());
+                        existingProduit.setPrix(produit.getPrix());
+                        
+                        produitRepository.save(existingProduit);
+                        existingProduits.add(existingProduit);
+                        commande.setProduit(existingProduits);
+                        commandeRepository.save(commande);
+                    }
                 }       
           }
         else {

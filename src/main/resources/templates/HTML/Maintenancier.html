@@ -18,7 +18,7 @@
    
  <main id="content">
     <!-- NAV -->
-    <nav class=" navbar navbar-expand-lg position-fixed w-100" style="background-color: #021c44; z-index: 10;">
+    <nav class=" navbar navbar-expand-lg  w-100" style="background-color: #021c44; z-index: 10;">
         <div class="container-fluid">
             <div class="col-md-2">
                 <a th:href="@{/RepairIt/Accueil}" class="navbar-brand" > 
@@ -62,8 +62,8 @@
     </nav>
      
         <!-- LE SOUS MENU -->
-        <div id="smen1"class="sous-menu" >
-            <div class="action" style="display: none;">
+        <div id="smen1" class="sous-menu" style="display: none;">
+            <div class="action" >
                 <div class="row">
                     <div class="col-md-4 ms-3" style="margin-top: 5.7rem;">
                         <p>TACHE DE MANTENANCE</p>  
@@ -324,65 +324,7 @@
     
         </div>
         <br>
-        <!-- MESSAGE  -->
-        <div class="messagerie2" style="display: none;">
-            <div class="row my-5">
-                <div class="col-md-4 ms-3">
-                    <div class="row my-3">
-                        <div class="col-md-1">
-                            <i class="fa fa-search fa-2x" style="color: #00b2ff;" aria-hidden="false"> </i>
-                        </div>  
-                        <div class="col-md-10">
-                            <input type="text" placeholder="Recherche">
-                        </div> 
-                    </div> 
-                    <br>
-                    <div class="contact2 my-3" style="max-height: max-content;">
-                        <h3 style="color: #00b2ff;">TACHES</h3>
-                        <div style="border: #00b2ff solid;"></div> 
-                    </div>
-                </div>
-                <div class="col-md-7 ms-4">
-                    <div class="container message2">
-                        <div id="chat2" class="row">
-                            <div class="maintenancier">
-                                <div class="sender2">Jane Smith</div>
-                                 <div class="timestamp2">10/29/2023 1:15 PM</div>
-                                <div class="content2">Ça va bien, merci ! Et toi ?</div>
-                             </div>
-                             <br>
-                             <div class="maintenancier">
-                                <div class="sender2">Jane Smith</div>
-                                 <div class="timestamp2">10/29/2023 1:15 PM</div>
-                                <div class="content2">Ça va bien, merci ! Et toi ?</div>
-                             </div>
-                             <div class="maintenancier1">
-                                <div class="sender">Jane Smith</div>
-                                 <div class="timestamp">10/29/2023 1:15 PM</div>
-                                <div class="content">Ça va bien, merci ! Et toi ?</div>
-                             </div>
-                        </div>
-                    </div>
-                 
-                    <br>
-                    <div id="send2" class="row">
-                        <div class="col-md-1">
-                            <div> 
-                                <button ><i class="fa fa-camera fa-2x"></i></button>
-                            </div>
-                        </div>
-                        <div class="col-md-9 ms-2">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
-                        </div>
-                        <div class="col-md-1 ms-5">
-                            <button id="envoi2"><i class="fa fa-paper-plane fa-2x"></i></button>
-                        </div>
-                    </div>
-                    
-                </div>
-                <span id="mainmain" th:text="${maintenancier.id}"></span>
-            </div>
-        </div>
+       
 
         <!-- LOCALISATION -->
         <div class="modal fade" id="ModalMap" tabindex="-1" aria-labelledby="ModalMapLabel" aria-hidden="true">
@@ -459,6 +401,7 @@
                 </div>
 
             </div>
+            <span id="mainmain" th:text="${maintenancier.id}" style="display: none;"></span>
             <div th:if="${maintenancier.test == 0}">
             <div id="evaluation"   th:each="questio:${evaluation.questions}">
                 <p th:text="${questio.question}"></p>

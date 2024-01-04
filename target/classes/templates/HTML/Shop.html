@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="icon" th:href="@{/images/Outil.png}">
   <link rel="stylesheet" th:href="@{/css/Shop.css}">
+  <script src="https://js.stripe.com/v3/"></script>
+  <script th:src="@{/paiement/public/checkout.js}"></script>
+
 </head>
 <body>
   <!-- Header -->
@@ -270,8 +273,29 @@
       </div>
     </div>
   </main>
-  <!-- <input type="button" onclick="creation()">  -->
+  <input type="button" onclick="creation()"> 
   
+  <!-- ANIMATION POUR LE PANIER -->
+  <div id="AnimePa" class="panierAnim" style="display: none;">
+      <p style="margin-top: 4%; margin-left: 20%; font-size: 3rem; color: #00b2ff;"> ENVOI EN COURS DANS VOTRE PANIER</p>
+      <div class="row" style="margin-top: 10%;">
+        <div class="col-md-3">
+          <i style="color:#00b2ff" id="panierplane" class="fa fa-paper-plane fa-3x mt-5"></i>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-5">
+          <i style="color:#00b2ff" class="fa fa-shopping-basket fa-10x"></i> 
+        </div>
+      </div>
+      <div>
+        <p id="SendSuccs" style="margin-bottom: 5%;  margin-left: 20%; font-size: 2.2rem; color: #fff; display: none;background-color: green;">ENVOYE AVEC SUCCES</p>
+      </div>
+  </div>
+
+
+
   <main id="found" class="container-fluid mt-4" style="display: none; height: 450px;">
     <h2>PRODUITS TROUVES</h2>
   </main>
@@ -308,6 +332,45 @@
         </div>
       </div>
     </div>
+    <button id="payer" class="btn btn-success">Payer le panier</button>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+            <p>Prix Total</p>
+        </div>
+        <div class="row">
+          <div id="productsPaid" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item" th:each="elt, iterStat : ${panier}" th:classappend="${iterStat.first} ? 'active' : ''">
+                  <img th:src="${elt.photo}" style="width: 400px;height: 300px;">
+                  <h5 th:text="${elt.nom}"></h5>  
+                </div>
+              </div>
+            <button class="carousel-control-prev " type="button" data-bs-target="#productsPaid" data-bs-slide="prev" style="margin-top: 5cap;">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productsPaid" data-bs-slide="next"style="margin-top: 5cap; widht: 4px;">
+              <span class="carousel-control-next-icon" aria-hidden="false"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-6">
+        <form id="payment-form">
+          <div id="payment-element">
+            <!--Stripe.js injects the Payment Element-->
+          </div>
+          <button id="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay now</span>
+          </button>
+          <div id="payment-message" class="hidden"></div>
+        </form>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -317,6 +380,7 @@
     </div>
   </footer>
 
+  <script th:src="@{/js/anime.min.js}"></script>
   <script th:src="@{/js/Shop.js}"></script>
   <script th:src="@{/js/Generer.js}"></script>
   <script th:src="@{/js/ManaShop.js}"></script>

@@ -12,8 +12,31 @@ boutons.forEach(function(bouton) {
     xhr.onreadystatechange = function() {
       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
         console.log(xhr.responseText);
+        
+        document.getElementById("AnimePa").style.display="block";
+
+        anime({
+          targets: '#panierplane',
+          translateX: 600,
+          direction: 'alternate',
+          loop: true,
+          easing: 'steps(5)'
+        });
+
+        setTimeout(function() {
+          document.getElementById("SendSuccs").style.display = "block";
+        }, 3000);
+        
+        // Recharger la page après que l'animation soit terminée
+        setTimeout(function() {
+        
+          document.getElementById("AnimePa").style.display = "none";
+
+          window.location.reload();
+        }, 5000);
       }
     };
+    xhr.setRequestHeader("Cache-Control", "no-cache");
     xhr.send();
   });
 });
@@ -33,6 +56,7 @@ btn.forEach(function(bouton) {
         console.log(xhr.responseText);
       }
     };
+    xhr.setRequestHeader("Cache-Control", "no-cache"); 
     xhr.send();
   });
 });
@@ -53,6 +77,7 @@ botn.forEach(function(bouton) {
         console.log(xhr.responseText);
       }
     };
+    xhr.setRequestHeader("Cache-Control", "no-cache"); 
     xhr.send();
   });
 });
@@ -72,6 +97,7 @@ bton.forEach(function(bouton) {
         console.log(xhr.responseText);
       }
     };
+    xhr.setRequestHeader("Cache-Control", "no-cache"); 
     xhr.send();
   });
 });

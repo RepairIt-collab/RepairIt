@@ -3,6 +3,7 @@ package com.app.FixIt.BOUTIQUE.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 import com.app.FixIt.BOUTIQUE.entities.Produit;
 
 
@@ -16,6 +17,8 @@ public interface ProduitRepository extends JpaRepository<Produit,Long>{
     static Produit findByName(String nom) {
         return null;
     }
+    Produit findByPhotoAndEstcommande(String photo,Boolean estcommande);
+    Produit findByPhotoAndEstOccupeAndEstcommande( String photo,Boolean estoccupe,Boolean estcommande);
 
     
 }

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.FixIt.BOUTIQUE.entities.Commande;
 import com.app.FixIt.BOUTIQUE.entities.Panier;
+import com.app.FixIt.BOUTIQUE.repository.CommandeRepository;
 import com.app.FixIt.BOUTIQUE.repository.PanierRepository;
 import com.app.FixIt.CONTROLLER.Maintenance.Maintenance;
 import com.app.FixIt.DTO.Maintenance.MaintenancierDTO;
@@ -42,6 +44,9 @@ public class SignUp {
     private PanierRepository panierRepository;
 
     @Autowired
+    private CommandeRepository commandeRepository;
+
+    @Autowired
     Maintenance main;
 
     @Autowired 
@@ -66,6 +71,12 @@ public class SignUp {
         Panier panier = new Panier();
         panier.setUser(newClient);
         panierRepository.save(panier);
+
+        Commande commande= new Commande();
+        commande.setUser(newClient);
+        commandeRepository.save(commande);
+        System.out.println(commande.getId());
+        
         Client c = clientService.saveClient(newClient);
         session.setAttribute("id", c.getId());
         session.setAttribute("name", c.getUsername());
@@ -97,6 +108,10 @@ public class SignUp {
         Panier panier = new Panier();
         panier.setUser(newMaintenancier);
         panierRepository.save(panier);
+
+        Commande commande= new Commande();
+        commande.setUser(newMaintenancier);
+        commandeRepository.save(commande);
 
         evaluationService.createEvaluationIfDateExpired();
         evaluationService.add(newMaintenancier);

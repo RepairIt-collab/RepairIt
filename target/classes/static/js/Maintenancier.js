@@ -1,16 +1,14 @@
 document.getElementById("a").addEventListener("click", function () {
 
-  var el1 = document.querySelector(".action");
+  var el1=document.querySelector(".sous-menu");
   var el2 = document.querySelector(".taches");
   var el3 = document.querySelector(".calendar1");
-  var el4 = document.querySelector(".messagerie2");
   var el5 = document.querySelector(".bienvenu");
   var el7 = document.querySelector(".evaluations");
 
   el1.style.display = "block";
   el2.style.display = "block";
   el3.style.display = "none";
-  el4.style.display = "none";
   el5.style.display = "none";
   el7.style.display = "none";
 
@@ -52,18 +50,15 @@ document.getElementById("a").addEventListener("click", function () {
 
 document.getElementById("f").addEventListener("click", function () {
 
-  var el1 = document.querySelector(".action");
-  var el2 = document.querySelector(".taches");
+
+ // var el2 = document.querySelector(".taches");
   var el3 = document.querySelector(".calendar1");
-  var el4 = document.querySelector(".messagerie2");
   var el5 = document.querySelector(".bienvenu");
   var el6 = document.querySelector(".sous-menu");
   var el7 = document.querySelector(".evaluations");
 
-  el1.style.display = "none";
-  el2.style.display = "none";
+ // el2.style.display = "none";
   el3.style.display = "none";
-  el4.style.display = "none";
   el5.style.display = "none";
   el6.style.display = "none";
   el7.style.display = "block";
@@ -386,7 +381,7 @@ function eval() {
   alertButton.style.display = "block"
   alertButton.classList.add('alert-button');
   alertButton.addEventListener("click", function () {
-    document.getElementById("e").click
+    document.getElementById("f").click
   })
 }
 
@@ -663,19 +658,16 @@ document.getElementById("return").addEventListener('click', function () {
 
 document.getElementById("btnNotification").addEventListener("click", function () {
 
-  var el1 = document.querySelector(".action");
+  
   var el2 = document.querySelector(".taches");
   var el3 = document.querySelector(".calendar1");
-  var el4 = document.querySelector(".messagerie2");
   var el5 = document.querySelector(".bienvenu");
   var el6 = document.querySelector(".sous-menu");
   var elt7 = document.querySelector(".notificationMenu");
   console.log(elt7)
 
-  el1.style.display = "none";
   el2.style.display = "none";
   el3.style.display = "none";
-  el4.style.display = "none";
   el5.style.display = "none";
   el6.style.display = "none";
   elt7.style.display = "block";
