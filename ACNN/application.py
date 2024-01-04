@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 from keras.models import load_model
 
+
 # Initialize Flask application
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ app = Flask(__name__)
 def prediction():
     
     image = request.get_data(as_text=True)
-    model = load_model('/home/orlane/RepairIt/fix_it.h5')
+    model = load_model('/home/manu/Desktop/Integration/FixIt/fix_it.h5')
     classes=['cuisiniereFour', 'machineALaver', 'ordinateurs', 'telephone', 'television', 'voiture']
     img = tf.keras.utils.load_img(
         image, target_size=(180, 180)

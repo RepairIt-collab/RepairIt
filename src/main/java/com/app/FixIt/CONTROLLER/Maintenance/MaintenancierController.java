@@ -8,15 +8,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.FixIt.DTO.Mail.EmailDTO;
 import com.app.FixIt.DTO.Maintenance.MaintenancierDTO;
+import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
+import com.app.FixIt.ENTITIES.Maintenance.Notification;
+import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.app.FixIt.REPOSITORY.Maintenance.TachesRepository;
+
 
 @RestController
 public class MaintenancierController {
     @Autowired
     MaintenancierRepository maintenancierRepository;
+
+    @Autowired
+    TachesRepository tachesRepository;
 
     @PostMapping("/update-location")
     public void update_location(@RequestBody MaintenancierDTO user) {
@@ -52,4 +60,26 @@ public class MaintenancierController {
         return listMaintenanciers;
 
     }
+
+    @PostMapping("/newNotif")
+    public Notification postMethodName(@RequestBody Notification entity) {
+        //TODO: process POST request
+        
+        return entity;
+    }
+
+        @PostMapping("/soumettrePrix")
+    public EmailDTO soumettrePrix(@RequestParam("idT") Long idT,@RequestParam("message") String mess) {
+        // LOGIQUE DU CODE POUR LE PAYEMENT
+        // ENVOIE DE L'EMAIL AU CLIENT POUR LA VALIDATION DU PAIEMENT
+        System.out.println("message--------"+mess);
+        Taches tache = tachesRepository.findById(idT).orElse(null);
+        Client client = tache.getClient();
+        String email = client.getEmail();
+        String subjet = "Validation du paiement";
+        EmailDTO emailDTO = new EmailDTO(email, subjet, mess);
+        return emailDTO;
+
+    }
+    
 }

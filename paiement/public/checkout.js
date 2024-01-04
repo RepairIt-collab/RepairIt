@@ -1,3 +1,22 @@
+//OBTENIR LES DONNES DE L'URL
+
+// Récupérer les valeurs des paramètres de requête
+const urlParams = new URLSearchParams(window.location.search);
+const prix = urlParams.get('prix');
+const idT = urlParams.get('idT');
+const idM = urlParams.get('idM');
+var myId
+if(idM != null){
+  myId = idM
+}
+
+console.log(idT)
+console.log(prix)
+console.log(idM)
+// Utiliser les valeurs des données
+// Faire quelque chose avec les valeurs des données
+
+
 // This is your test publishable API key.
 const stripe = Stripe("pk_test_51OJ8k3IyLHKyHjYEgQvOCCYVfJcCUZCLKuNtOPhaff7CvTRCRNSw6S30ul6heufRN0HsMHc7kS4VsK7vRxOJ1ajU00X5OrHKcf");
 
@@ -21,6 +40,7 @@ async function initialize() {
     body: JSON.stringify({ items }),
   });
   const { clientSecret } = await response.json();
+  console.log(clientSecret)
 
   const appearance = {
     theme: 'stripe',
@@ -34,7 +54,7 @@ async function initialize() {
   const paymentElement = elements.create("payment", paymentElementOptions);
   paymentElement.mount("#payment-element");
 }
-
+var emailAddress = "annaelledetchoua@gmail.com"
 async function handleSubmit(e) {
   e.preventDefault();
   setLoading(true);
@@ -76,7 +96,8 @@ async function checkStatus() {
 
   switch (paymentIntent.status) {
     case "succeeded":
-      showMessage("Payment succeeded!");
+      // showMessage("Payment succeeded!");
+      terminerPayement()
       break;
     case "processing":
       showMessage("Your payment is processing.");
@@ -102,6 +123,41 @@ function showMessage(messageText) {
     messageContainer.classList.add("hidden");
     messageContainer.textContent = "";
   }, 4000);
+}
+
+//FONCTION POUR TERMINER LE PAYEMENT
+function terminerPayement(){
+  e.preventDefault();
+  showMessage("Payment succeeded!");
+  const url = "https://127.0.0.1:9001/RepairIt/Client/Maintenance/terminerTache";
+
+  const params = new URLSearchParams();
+  params.append('idM', idM);
+  params.append('idT', idT);
+  params.append('prix',prix)
+
+  fetch(url, {
+    method: 'POST',
+    body: params
+  })
+    .then(response => {
+      console.log("Données reçues pour creerTaches");
+      window.location.reload()
+      if (response.ok) {
+        window.location.href = "https://127.0.0.1:9001/RepairIt/Client";
+        return response.json(); // Renvoyer la réponse JSON
+      } else {
+        throw new Error('Erreur de la requête creerTaches');
+      }
+    })
+    .then(responseBody => {
+      // Utilisez le corps de la réponse ici
+      console.log("***********" + responseBody);
+    })
+    .catch(error => {
+      // Gestion des erreurs
+      console.error(error);
+    });
 }
 
 // Show a spinner on payment submission

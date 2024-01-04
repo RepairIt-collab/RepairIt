@@ -70,6 +70,10 @@ function creerTache(jsonData) {
     });
 }
 
+function newNotif(){
+  const url = "https://127.0.0.1:9001newNotif";
+}
+
 function cnn(image,id){
 
   const url = "https://127.0.0.1:9001/flask";
@@ -203,7 +207,7 @@ function SupprimerTache(id) {
       // Gestion des erreurs
       console.error(error);
   });
-  window.location.reload()
+  // window.location.reload()
 }
 
 function supprimerTacheDuDOM(Id1) {

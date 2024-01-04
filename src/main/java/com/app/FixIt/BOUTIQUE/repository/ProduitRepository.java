@@ -18,7 +18,7 @@ public interface ProduitRepository extends JpaRepository<Produit,Long>{
         return null;
     }
     Produit findByPhotoAndEstcommande(String photo,Boolean estcommande);
-    Produit findByPhotoAndEstOccupeAndEstcommande( String photo,Boolean estoccupe,Boolean estcommande);
+    Produit findByPhotoAndOccupeAndEstcommande( String photo,Boolean occupe,Boolean estcommande);
 
     
 }

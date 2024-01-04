@@ -154,8 +154,7 @@ public class Boutique {
                     {
                        Produit existingProduit = new Produit();
 
-                        produit.setQuantite(0);
-                        produitRepository.save(produit);
+                       
                         existingProduit.setPhoto(produit.getPhoto());
                         existingProduit.setCaracteristique(produit.getCaracteristique());
                         existingProduit.setDomaine(produit.getDomaine());
@@ -171,7 +170,7 @@ public class Boutique {
                         commande.setProduit(existingProduits);
                         commandeRepository.save(commande);
 
-                        Produit Propanier=produitRepository.findByPhotoAndEstOccupeAndEstcommande(produit.getPhoto(), true,false );
+                        Produit Propanier=produitRepository.findByPhotoAndOccupeAndEstcommande(produit.getPhoto(), true,false );
                         Propanier.setQuantite(Propanier.getQuantite()+quantite-produit.getQuantite());
                         produitRepository.save(Propanier);
 
@@ -181,11 +180,13 @@ public class Boutique {
                         {
                             if(pan.getPhoto().equals(produit.getPhoto()))
                             {
-                                pan.setQuantite(pan.getQuantite()+quantite-produit.getQuantite());
+                                pan.setQuantite(pan.getQuantite()+produit.getQuantite()-quantite+produit.getQuantite());
                                 existingProducts.remove(pan);
                                 existingProducts.add(pan);
                             }
                         }
+                        produit.setQuantite(0);
+                        produitRepository.save(produit);
                     }
                    
             return ResponseEntity.ok("Quantité insuffisante ajout dans les commande");
@@ -208,7 +209,7 @@ public class Boutique {
                             P.setQuantite(P.getQuantite()+quantite);
                             existingProduits.remove(P);
                             existingProduits.add(P);
-                            Produit Propanier=produitRepository.findByPhotoAndEstOccupeAndEstcommande(produit.getPhoto(), true,false );
+                            Produit Propanier=produitRepository.findByPhotoAndOccupeAndEstcommande(produit.getPhoto(), true,false );
                             Propanier.setQuantite(Propanier.getQuantite()+quantite);
                             produitRepository.save(P);
                             panier.setProduit(existingProduits);

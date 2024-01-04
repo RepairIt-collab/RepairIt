@@ -2,8 +2,11 @@ com/app/FixIt/REPOSITORY/Maintenance/TachesRepository.class
 com/app/FixIt/CONTROLLER/Cnn/Predict.class
 com/app/FixIt/REPOSITORY/Maintenance/QuestionsRepository.class
 com/app/FixIt/REPOSITORY/Maintenance/EvaluationRepository.class
+com/app/FixIt/SERVICE/Maintenance/EquipementsService.class
 com/app/FixIt/ENTITIES/Maintenance/Maintenancier.class
+com/app/FixIt/CONTROLLER/RateUs/RateUsController.class
 com/app/FixIt/CHATAPP/chatRoom/ChatRoom.class
+com/app/FixIt/CONTROLLER/Maintenance/Tache.class
 com/app/FixIt/REPOSITORY/Maintenance/ClientRepository.class
 com/app/FixIt/CONTROLLER/Connexion/Login.class
 com/app/FixIt/ENTITIES/Maintenance/Questions.class
@@ -12,7 +15,9 @@ com/app/FixIt/CONTROLLER/Connexion/SignUp.class
 com/app/FixIt/CHATAPP/chat/ChatMessageService.class
 com/app/FixIt/CONTROLLER/Maintenance/MaintenancierController.class
 com/app/FixIt/STATISTIQUE/Stat.class
+com/app/FixIt/CONTROLLER/Mail/EmailController.class
 com/app/FixIt/FixItApplication.class
+com/app/FixIt/SERVICE/Mail/EmailService.class
 com/app/FixIt/SERVICE/Maintenance/ClientService.class
 com/app/FixIt/REPOSITORY/Maintenance/EquipementsRepository.class
 com/app/FixIt/REPOSITORY/User/UserRepository.class
@@ -22,6 +27,7 @@ com/app/FixIt/Websocket/WebSocketController.class
 com/app/FixIt/DAO/Maintenance/TacheDAO.class
 com/app/FixIt/ENTITIES/Maintenance/Type.class
 com/app/FixIt/DAO/Maintenance/ClientDao.class
+com/app/FixIt/REPOSITORY/RateUsRepository.class
 com/app/FixIt/Websocket/WebSocketConfig.class
 com/app/FixIt/DTO/Maintenance/MapDTO.class
 com/app/FixIt/CONTROLLER/Accueil/Calendar.class
@@ -32,11 +38,14 @@ com/app/FixIt/SERVICE/Maintenance/EvaluationService.class
 com/app/FixIt/DTO/Maintenance/FullCalendar.class
 com/app/FixIt/ENTITIES/Maintenance/Evaluation.class
 com/app/FixIt/DAO/Maintenance/EquipementsDAO.class
+com/app/FixIt/ENTITIES/RateUs.class
 com/app/FixIt/CHATAPP/chat/ChatMessage.class
 com/app/FixIt/CONTROLLER/Maintenance/EvaluationController.class
 com/app/FixIt/CHATAPP/chatRoom/ChatRoomService.class
+com/app/FixIt/CONTROLLER/Maintenance/Equipement.class
 com/app/FixIt/CONTROLLER/Boutique/Boutique.class
 com/app/FixIt/DAO/Maintenance/MaintenancierDao.class
+com/app/FixIt/SERVICE/Maintenance/CsvImportRunner.class
 com/app/FixIt/PAIEMENT/MtnApiConfig.class
 com/app/FixIt/CHATAPP/chatRoom/ChatRoomRepository.class
 com/app/FixIt/ENTITIES/Maintenance/Taches.class
@@ -50,6 +59,7 @@ com/app/FixIt/CONTROLLER/Accueil/Accueil.class
 com/app/FixIt/REPOSITORY/Maintenance/MaintenancierRepository.class
 com/app/FixIt/SSL/HttpsConfig.class
 com/app/FixIt/DTO/Maintenance/EquipementDTO.class
+com/app/FixIt/DTO/Mail/EmailDTO.class
 com/app/FixIt/DTO/Maintenance/ClientDTO.class
 com/app/FixIt/CHATAPP/chat/ChatController.class
 com/app/FixIt/CONTROLLER/Maintenance/Maintenance.class

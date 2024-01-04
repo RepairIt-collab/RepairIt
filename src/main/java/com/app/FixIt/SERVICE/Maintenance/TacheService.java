@@ -86,7 +86,7 @@ public class TacheService implements TacheDAO {
         public int getFiftyPercent(List<MapDTO> objectList) {
             int size = objectList.size();
             int fiftyPercent = (int) Math.round(size * 0.5);
-            return fiftyPercent;
+            return size;
         }
 
 

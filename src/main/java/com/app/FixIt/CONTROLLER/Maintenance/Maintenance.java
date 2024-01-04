@@ -102,7 +102,7 @@ public class Maintenance {
             Maintenancier maintenancier = maintenancierRepository.findById(id).orElse(null);
             List<Notification> notifications = notificationRepository.findByMaintenanciers(maintenancier);
             Iterable<Notification> notificationsI = notifications;
-            evaluationService.createEvaluationIfDateExpired();
+            // evaluationService.createEvaluationIfDateExpired();
             if (maintenancier.getTest() == 0) {
                 System.out.println("evaluation.getDomain()+--------+q.getQuestion()");
                 Evaluation evaluation = evaluationRepository.findByMaintenanciers(maintenancier);
@@ -126,14 +126,27 @@ public class Maintenance {
                 model.addAttribute("filleuls", filleul);
             }
             if (maintenancier.getTest() == 1) {
-                Maintenancier monParrain = maintenancierRepository.findByFilleulId(id);
-                List<Notification> notifParrain = notificationRepository.findByMaintenanciers(monParrain);
-                Iterable<Notification> notifParrainI = notifParrain;
-                model.addAttribute("notifParrain", notifParrainI);
-                List<Notification> notification2P = notificationRepository.findByIdMaintenancier(monParrain.getId());
-                Iterable<Notification> noIterableP = notification2P;
-                model.addAttribute("notifMP", noIterableP);
-                model.addAttribute("monParrain", monParrain);
+                List<Maintenancier> mains = maintenancierRepository.findAll();
+                // Maintenancier monParrain;
+                for(Maintenancier monParrain:mains){
+                    List<Long> Llong= monParrain.getIdfilleuls();
+                    if(Llong != null){
+                    if(Llong.contains(id)){
+                        List<Notification> notifParrain = notificationRepository.findByMaintenanciers(monParrain);
+                        Iterable<Notification> notifParrainI = notifParrain;
+                        model.addAttribute("notifParrain", notifParrainI);
+                        List<Notification> notification2P = notificationRepository.findByIdMaintenancier(monParrain.getId());
+                        if(maintenancier.getStatus() == false){
+                        Iterable<Notification> noIterableP = notification2P;
+                        model.addAttribute("notifMP", noIterableP);}
+                        model.addAttribute("monParrain", monParrain);
+                        String parrain = "estNotNul";
+                model.addAttribute("parrain", parrain);
+                    }}
+                }
+
+                // Maintenancier monParrain = maintenancierRepository.findByFilleulId(id);
+                
 
             }
             String filename = nomImage(maintenancier.getUsername(), maintenancier.getId());

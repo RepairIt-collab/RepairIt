@@ -1,7 +1,9 @@
 
 //MAPS DU MAINTENANCIER
-var malatitude, malongitude;
-
+var malatitude, malongitude,latClient,lonClient;
+lonClient=malongitude
+latClient=malatitude
+const moyen="DRIVING";
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
     malatitude = position.coords.latitude;
@@ -10,9 +12,20 @@ if (navigator.geolocation) {
 } else {
   console.log("La géolocalisation n'est pas supportée par votre navigateur.");
 }
-function initMap(EndLat,EndLon,mode) {
-    document.getElementById("latitudecache").value=EndLat
-    document.getElementById("longitudecache").value=EndLon
+
+function receiveMap(EndLat,EndLon,mode){
+  latClient=EndLat
+  lonClient = EndLon
+  console.log(mode)
+  initMap()
+  var modal = new bootstrap.Modal(document.getElementById("ModalMap"));
+modal.show();
+}
+function initMap() {
+  console.log(latClient)
+  console.log(lonClient)
+    document.getElementById("latitudecache").value=latClient
+    document.getElementById("longitudecache").value=lonClient
     requestLocationPermission()
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
@@ -24,9 +37,9 @@ function initMap(EndLat,EndLon,mode) {
     });
 
     directionsRenderer.setMap(mapM);
-    directionsRenderer.setPanel(document.getElementById("sidebar-maintenacier"));
+    // directionsRenderer.setPanel(document.getElementById("sidebar-maintenacier"));
 
-    // console.log(document.getElementById("map-maintenacier"))
+    console.log(document.getElementById("map-maintenacier"))
     const control = document.getElementById("floating-panel");
 
     mapM.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
@@ -34,10 +47,11 @@ function initMap(EndLat,EndLon,mode) {
     // const control = document.getElementById("floating-panel");
 
     // mapM.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-
+    console.log("ok")
     const start = new google.maps.LatLng(malatitude, malongitude);
-    const end = new google.maps.LatLng(EndLat, EndLon);
-    calculateAndDisplayRoute(directionsService, directionsRenderer, start, end);
+    const end = new google.maps.LatLng(latClient, lonClient);
+    console.log("okok")
+    calculateAndDisplayRoute(directionsService, directionsRenderer, start, end, moyen);
 
 }
 
@@ -47,13 +61,13 @@ function changeMode(mode){
     initMap(EndLat,EndLon,mode)
 }
 
-function calculateAndDisplayRoute(directionsService, directionsRenderer, start, end) {
+function calculateAndDisplayRoute(directionsService, directionsRenderer, start, end, moyen) {
 
     directionsService
         .route({
             origin: start,
             destination: end,
-            travelMode: google.maps.TravelMode.DRIVING,
+            travelMode: google.maps.TravelMode[moyen],
         })
         .then((response) => {
             directionsRenderer.setDirections(response);
@@ -61,7 +75,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, start, 
         .catch((e) => console.log("Directions request failed due to " + status));
 }
 
-// window.initMap = initMap;
+$('#ModalMap').on('shown.bs.modal', function () {
+  initMap();
+});
+
+window.initMap = initMap;
 
 /**
  *  function initMap() {

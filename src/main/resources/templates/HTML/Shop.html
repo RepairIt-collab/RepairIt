@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-md-2">
           <div class="container mt-4">
-            <a th:href="@{/RepairIt/Accueil}" class="navbar-brand "> 
+            <a data-bs-toggle="modal" data-bs-target="#myModal3" class="navbar-brand "> 
                   <img th:src="@{/images/Outil.png}"> 
                   <img th:src="@{/images/Repair-It Boutique.png}" style="width: 180px;height: 35px;">
             </a>
@@ -251,8 +251,8 @@
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <div class="row">
-                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
-                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                      <div class="col-md-5"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-7"><p style="color: red; font-size: 0.6rem;">le stock est epuise</p></div>
                     </div>
                     <div class="row mb-2">
                       <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
@@ -273,7 +273,7 @@
       </div>
     </div>
   </main>
-  <input type="button" onclick="creation()"> 
+
   
   <!-- ANIMATION POUR LE PANIER -->
   <div id="AnimePa" class="panierAnim" style="display: none;">
@@ -294,12 +294,12 @@
       </div>
   </div>
 
-
-
   <main id="found" class="container-fluid mt-4" style="display: none; height: 450px;">
     <h2>PRODUITS TROUVES</h2>
   </main>
 
+
+  <!-- LES COMMANDES -->
   <main id="commander" class="container-fluid mt-4" style="display: none; height: 450px;">
     <h2>MES COMMANDES</h2>
     <div class="row">
@@ -317,6 +317,8 @@
     </div>
   </main>
 
+
+<!-- LE PANIER -->
   <main id="panier" class="container-fluid mt-4" style="display: none;">
     <h2>VOTRE PANIER</h2>
     <div class="row">
@@ -372,6 +374,135 @@
       </div>
     </div>
   </main>
+
+
+
+     <!-- POP UP ADMINISTRATEUR -->
+     <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModal3Label" aria-hidden="true" >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+              <div class="col-12 text-center">         
+                  <h1 class="modal-title" id="myModalLabel">  <img th:src="@{/images/cadenas 3.png}" style="width: 60px;height: 40px;">MODE ADMINISTRATEUR</h1>
+              </div>               
+          </div>
+          <br><br>
+  
+          <div class="modal-body">  
+            <form>  
+              <label for="passadmin" class="form-label d-flex justify-content-center"><h3>Mot de passe</h3></label>
+              <input type="password" class="form-control" placeholder="Entrer le mot de passe de l'admin" id="passadmin" required>
+             </form>  
+             <br><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button " class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-secondary bg-success" onclick="ValiderAdmin()">Valider</button>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    <!-- LA PARTIE ADMINISTRATEUR  -->
+    <main id="Admin" style="display: none; height: 550px; overflow-y: scroll">
+      <div style="background-color: #021c44;">
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+           <h3><span>R</span>epair-<span>I</span>t <span>B</span>outique <span>A</span>dministrateur</h3>
+        </div> 
+    
+      </div>
+      <input type="button" onclick="creation()"> 
+
+
+      <!-- AJOUTER UN PRODUIT -->
+      <div id="AjouEquip">
+        <h2>AJOUT ET MODIFICATION D'UN EQUIPEMENTS</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-primary"> <i
+              class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+           <input type="file" id="image" accept="image/*" style="display: none;">
+           
+            <!-- Ici je veux qu'on selectionne une photo la photo et alors enregistrer dans le dossier 
+            imgshop en fonction de son type et le nom de la photo + l'extension est mis sur input 
+            d'id text 1 -->
+          </div>
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="test1" class="form-label">Photo</label>
+                <input type="text" class="form-control" id="text1">
+              </div>
+              <div class="mb-3">
+                <label for="test2" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="text2">
+              </div>
+              <div class="mb-3">
+                <label for="test3" class="form-label">Caracteristique</label>
+                <input type="text" class="form-control" id="text3">
+              </div>
+              <div class="mb-3">
+                <label for="test4" class="form-label">Prix</label>
+                <input type="text" class="form-control" id="text4">
+              </div>
+              <div class="mb-3">
+                <label for="test5" class="form-label">Quantite</label>
+                <input type="text" class="form-control" id="text5">
+              </div>
+              <div class="mb-3">
+                <label for="test6" class="form-label">Domaine</label>
+                <input type="text" class="form-control" id="text6">
+              </div>
+              <button class="btn btn-primary">Valider</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- SUPPRIMER UN PRODUIT -->
+      <div id="SuppEqui">
+        <h2>SUPPRIMER UN EQUIPEMENT</h2>
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+          <form>
+            <div class="mb-3">
+              <label for="test01" class="form-label">Identifiant</label>
+              <input type="text" class="form-control" id="text1" width="30%">
+            </div>
+            <div class="row">
+
+              <div class="col-md-6">   
+                <div class="mb-3">
+                  <label for="test02" class="form-label">Nom</label>
+                  <input type="text" class="form-control" id="text02">
+                </div>
+                <div class="mb-3">
+                  <label for="test03" class="form-label">Caracteristique</label>
+                  <input type="text" class="form-control" id="text03">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="test06" class="form-label">Domaine</label>
+                  <input type="text" class="form-control" id="text06">
+                </div>
+                <div class="mb-3">
+                  <label for="test05" class="form-label">Quantite</label>
+                  <input type="text" class="form-control" id="text05">
+                </div>
+              </div>
+            </div>
+            <div style="width: 300px;height: 200px;">
+                <img th:src="@{/images/Repair-It Boutique.png}" style="width: 299px;height: 199px;" alt="">
+            </div>
+            <button class="btn btn-danger">supprimer</button>
+          </form>
+       </div> 
+      </div>
+
+    </main>
+
+
 
   <!-- Footer -->
   <footer class="text-white py-4" style="background-color: #021c44;">

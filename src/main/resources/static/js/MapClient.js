@@ -4,6 +4,7 @@ if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
     malatitude = position.coords.latitude;
     malongitude = position.coords.longitude;
+
   });
 } else {
   console.log("La géolocalisation n'est pas supportée par votre navigateur.");
@@ -15,9 +16,9 @@ function OpenMap() {
     // requestLocationPermission()
     requestLocationPermission()
     initMapC()
-    console.log("Utilisation de latitude et longitude : " + latitude + ", " + longitud);
+    console.log("Utilisation de latitude et longitude : " + malatitude + ", " + malongitude);
 
-    console.log("Latitude : " + latitude + "\nLongitude : " + longitud);
+    console.log("Latitude : " + malatitude + "\nLongitude : " + malongitude);
 }
 
 var map;

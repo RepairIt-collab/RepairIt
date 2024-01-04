@@ -136,7 +136,7 @@
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
-                                        aria-controls="flush-collapseOne" th:text="${tache.id}"
+                                        aria-controls="flush-collapseOne" th:text="'Tache '+${tache.type.value}"
                                         th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElements' + ${tache.id} + '\')'">
 
                                     </button>
@@ -181,7 +181,7 @@
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
-                                        aria-controls="flush-collapseOne" th:text="${tache.id}"
+                                        aria-controls="flush-collapseOne" th:text="'Tache '+${tache.type.value}"
                                         th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementss' + ${tache.id} + '\')'">
 
                                     </button>
@@ -222,7 +222,7 @@
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         th:data-bs-target="'#flush-collapse'+ ${tache.id}" aria-expanded="false"
-                                        aria-controls="flush-collapseOne" th:text="${tache.id}"
+                                        aria-controls="flush-collapseOne" th:text="'Tache '+${tache.type.value}"
                                         th:attr="onclick='path(\'' + ${tache.imgString} + '\', \'imageElementsss' + ${tache.id} + '\')'">
 
                                     </button>

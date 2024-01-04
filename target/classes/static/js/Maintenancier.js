@@ -1,16 +1,20 @@
 document.getElementById("a").addEventListener("click", function () {
+  onLoadM()
 
   var el1=document.querySelector(".sous-menu");
   var el2 = document.querySelector(".taches");
   var el3 = document.querySelector(".calendar1");
   var el5 = document.querySelector(".bienvenu");
   var el7 = document.querySelector(".evaluations");
+  var elt7 = document.querySelector(".notificationMenu");
 
   el1.style.display = "block";
   el2.style.display = "block";
   el3.style.display = "none";
   el5.style.display = "none";
   el7.style.display = "none";
+  el6.style.display = "block"
+  elt7.style.display = "none";
 
 });
 
@@ -56,14 +60,17 @@ document.getElementById("f").addEventListener("click", function () {
   var el5 = document.querySelector(".bienvenu");
   var el6 = document.querySelector(".sous-menu");
   var el7 = document.querySelector(".evaluations");
+  var elt8 = document.querySelector("#MaRebours")
+  var elt7 = document.querySelector(".notificationMenu");
 
  // el2.style.display = "none";
   el3.style.display = "none";
   el5.style.display = "none";
   el6.style.display = "none";
   el7.style.display = "block";
+  elt8.style.display = "none";
+  elt7.style.display = "none";
   heureEval()
-  setInterval(heureEval, 1000 * 60);
 });
 
 
@@ -100,7 +107,7 @@ function sendNotificationN(notification) {
         body: notification,
         icon: 'public/images/Outil.png' // Spécifiez le chemin vers l'icône de la notification
       };
-      var notification = new Notification('Nouvelle taches', options);
+      var notification = new Notification('Notification', options);
 
 
       // Gérer les événements de la notification (clic, fermeture, etc.)
@@ -109,7 +116,8 @@ function sendNotificationN(notification) {
       };
 
       notification.onclose = function (event) {
-
+        var messageIcon = document.querySelector(".message-icon");
+        messageIcon.classList.toggle("has-badge");
         // Gérer la fermeture de la notification
         //ajouter le truc bleu sur l'icone 
       };
@@ -117,6 +125,13 @@ function sendNotificationN(notification) {
       // ...
     }
   }
+}
+
+function sendNotification(userId,message) {
+  var destination = '/app/notification/' + userId;
+  // var message = 'Notification pour l\'utilisateur ' + userId;
+
+  stompClient.send(destination, {}, message);
 }
 
 function disconnect() {
@@ -142,7 +157,7 @@ function onLoadM() {
     var parent = idMaintenancier.parentNode
     var iN = parent.querySelectorAll("i")
     for (let j = 0; j < iN.length; j++) {
-      iN[j].disabled = true
+      iN[j].remove()
     }
     // document.querySelectorAll("i")
   }
@@ -171,29 +186,20 @@ function ValiderTacheId(idF,lat,long) {
     })
     .then(data => {
       if(data != null){
-      //   const modalContent = data.map(item => `
-      //   <div class="mb-3">
-      //     <input type="checkbox" >
-      //     <label for="filleuls" class="form-label">${item.username}</label>
-      //     <p id="filleuldistance"></p>
-      //     <p id="filleullatitude" style="display: none;">${item.latitude}</p>
-      //     <p id="filleullongitude" style="display: none;">${item.longitude}</p>
-      //   </div>
-      // `).join('');
       const modalContent = data.map(item => {
         const latitude = item.latitude; // Convertit la latitude en nombre
         const longitude = item.longitude; // Convertit la longitude en nombre
         const distance = calculateDistance(latitude, longitude,lat,long); // Appelle la fonction pour calculer la distance
+
       
         return `
           <div class="mb-3">
-            <input type="checkbox">
-            <label for="filleuls" class="form-label">${item.username}</label>
-            <p id="filleuldistance">${distance}</p>
+            <input name="mesfilleuls" type="checkbox">
+            <p style="display: none;" id="mesfilleuls">${item.id}</p>
+            <label for="mesfilleuls" class="form-label">${item.username}+''+${distance}</label>
           </div>
         `;
       }).join('');
-      
       
       const modalHTML = `
         <div class="modal fade" id="ModalParrain" tabindex="-1" aria-labelledby="ModalParrainLabel" aria-hidden="true">
@@ -217,15 +223,10 @@ function ValiderTacheId(idF,lat,long) {
         </div>
       `;
 
-//       const modalContainer = document.createElement('div');
-// modalContainer.innerHTML = modalHTML;
-// document.body.appendChild(document.getElementById("ModalParrain"));
 const modalContainer = document.createElement('div');
 modalContainer.innerHTML = modalHTML;
 
-// Accéder à l'élément enfant du modalContainer
-const modalElement = modalContainer.firstChild;
-// console.log(modalElement)
+
 
 // Ajouter le modalElement au document
 document.body.appendChild(modalContainer);
@@ -262,7 +263,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   const a = Math.sin(diffLat / 2) ** 2 + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(diffLon / 2) ** 2;
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const distance = earthRadius * c;
-  var dist = "A "+distance +"Km du client..."
+  var dist = " A "+distance +"Km du client..."
 
   return dist;
 }
@@ -273,12 +274,20 @@ function degToRad(degrees) {
 }
 
 function ValiderTache(idNotif) {
+  var mesfilleuls = document.querySelector("#ModalParrain").querySelector("form")
+  var inputcheck = mesfilleuls.querySelector('input[name="mesfilleuls"]:checked');
+  var tabId= []
+  if(inputcheck){
+    tabId.push(mesfilleuls.querySelector("#mesfilleuls").textContent)
+  }
+  console.log(tabId)
   idM = document.getElementById("mainmain").textContent;
   const url = "https://127.0.0.1:9001/RepairIt/Client/Maintenance/validerTache";
 
   const params = new URLSearchParams();
   params.append('idM', idM);
   params.append('idNotif', idNotif);
+  params.append('idFils',tabId)
 
   fetch(url, {
     method: 'POST',
@@ -357,7 +366,6 @@ function updateCountdown() {
     if (timeDifference <= 0) {
       clearInterval(countdownInterval);
       eval()
-      console.log('Compte à rebours terminé !');
       return;
     }
 
@@ -381,7 +389,7 @@ function eval() {
   alertButton.style.display = "block"
   alertButton.classList.add('alert-button');
   alertButton.addEventListener("click", function () {
-    document.getElementById("f").click
+    document.getElementById("f").click()
   })
 }
 
@@ -389,7 +397,6 @@ function validerEval() {
   var evaluation = document.querySelectorAll("#evaluation")
   const questions = [];
   var idM = document.getElementById("mainmain").textContent
-  console.log(idM)
   for (let j = 0; j < evaluation.length; j++) {
     var formulaire = evaluation[j].querySelector("form")
 
@@ -404,17 +411,37 @@ function validerEval() {
   var question = JSON.stringify(questions)
   sendResult(idM, question)
 }
-var minutes = 20
+
 function heureEval() {
 
   input = document.getElementById("EvalHour");
 
-  input.textContent = minutes + " min"
-  minutes--
-  console.log(input)
-  if (minutes == 0) {
-    validerEval()
-  }
+  
+
+  var minutes = 10; // Nombre de minutes du compte à rebours
+  var seconds = 0; // Nombre de secondes du compte à rebours
+
+  var countdownInterval = setInterval(function() {
+    // Afficher les minutes et les secondes
+    input.textContent = minutes + " min" + seconds + " sec"
+
+    // Décrémenter les secondes
+    seconds--;
+
+    // Si les secondes atteignent 0, décrémenter les minutes
+    if (seconds < 0) {
+      seconds = 59;
+      minutes--;
+    }
+
+    // Si le compte à rebours est terminé
+    if (minutes === 0 && seconds === 0) {
+      clearInterval(countdownInterval);
+      validerEval()
+    }
+  }, 1000); // Répéter toutes les 1 seconde (1000 millisecondes)
+
+ 
 }
 
 
@@ -453,19 +480,76 @@ function sendResult(idM, question) {
       }
     })
     .then(data => {
-      if (data.test == 0) {
-        console.log("desole");
-        console.log(data.notes)
-      } else if (data.test == 1) {
+      document.getElementById("composition").style.display = "none";
+var modalContent;
+var modalHTML;
 
-        console.log(data.notes)
-        findParrain(data.id)
-        console.log("tu as passer")
-        // sendNotification()
+if (data.test == 0) {
+  modalContent = `
+    <div class="mb-3">
+      <h4>😓😓😓Desole ${data.username} vous n'avez pas passer l'evaluation</h4>
+    </div>
+  `;
+} else if (data.test == 1) {
+  findParrain(data.id);
+  modalContent = `
+    <div class="mb-3">
+      <p> 🥳 🥳 🥳Felicitation ${data.username}</p>
+      <p>Vous venez de passer le test avec une note de ${data.notes}/20 </p>
+      <p>Vous serez assigner a un parrain avec qui vous effectuerez ensemble ces prochaines taches jusqu'a ce qu'il valide votre test</p>
+      <p>Toutes les taches que vous verez seront celles de votre parrain</p>
+      <p>Il pourra decider que  vous l'accompagner ou non</p>
+    </div>
+  `;
+} else if (data.test == 2) {
+  modalContent = `
+    <div class="mb-3">
+      <p>😱 😱Waouh 🥳 🥳 🥳Felicitation ${data.username}</p>
+      <p>Vous venez de passer le test haut la main avec une note de ${data.notes}/20 </p>
+      <p>Vous etes desormais l'un de nos maintenancier et vous pouvez commmencer a recevoir des demandes de service en toute surete</p>
+    </div>
+  `;
+}
 
-      }
-      // Traitement des données renvoyées par le serveur
+modalHTML = `
+  <div class="modal fade" id="ModalResult" tabindex="-1" aria-labelledby="ModalResultLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title me-5" id="ModalResultLabel">Resultat de l'evaluation</h2>
+        </div>
+        <div class="modal-body">
+          <form>
+            ${modalContent}
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="creerR" onclick="window.location.href = '/RepairIt/Maintenancier';" data-bs-dismiss="modal" class="btn btn-primary bg-success">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
 
+if (data.test == 0) {
+  var modalContainerE = document.createElement('div');
+  modalContainerE.innerHTML = modalHTML;
+  document.body.appendChild(modalContainerE);
+} else if (data.test == 1) {
+  var modalContainerP = document.createElement('div');
+  modalContainerP.innerHTML = modalHTML;
+  document.body.appendChild(modalContainerP);
+} else if (data.test == 2) {
+  var modalContainerW = document.createElement('div');
+  modalContainerW.innerHTML = modalHTML;
+  document.body.appendChild(modalContainerW);
+
+ idM = document.getElementById("mainmain").textContent;
+}
+
+// Traitement des données renvoyées par le serveur
+var modal = new bootstrap.Modal(document.getElementById("ModalResult"));
+modal.show();
     })
     .then(responseBody => {
       // Utilisez le corps de la réponse ici
@@ -489,7 +573,7 @@ function findParrain(id) {
   params.append('id', id);
 
   fetch(url, {
-    method: 'GET',
+    method: 'POST',
 
     body: params
   })
@@ -507,8 +591,8 @@ function findParrain(id) {
       console.log(data);
       var maintenancier = data.maintenanciers
       for (let i = 0; i < maintenancier.length; i++) {
-        sendNotification(maintenancier[i].id, maintenancier.message)
-        console.log("okkk")
+        var message = maintenancier.message.split("///")[0]
+        sendNotification(maintenancier[i].id, message)
       }
       // Traitement des données renvoyées par le serveur
 
@@ -530,7 +614,7 @@ function validerParrainage(idM, idF) {
   params.append('idF', idF);
 
   fetch(url, {
-    method: 'GET',
+    method: 'POST',
     body: params
   })
     .then(response => {
@@ -543,7 +627,11 @@ function validerParrainage(idM, idF) {
       }
     })
     .then(data => {
-
+      var maintenancier = data.maintenanciers
+      for (let i = 0; i < maintenancier.length; i++) {
+        var message = maintenancier.message
+        sendNotification(maintenancier[i].id, message)
+      }
       // Traitement des données renvoyées par le serveur
 
     })
@@ -559,13 +647,17 @@ function validerParrainage(idM, idF) {
 
 
 function validerFilleul(idM, idF) {
+  var modal = new bootstrap.Modal(document.getElementById("ModalFilleul"));
+      modal.show();
+      var validFils = document.getElementById("validFils")
+      validFils.addEventListener('click',function(){
   const url = "https://127.0.0.1:9001/validerFilleul";
   const params = new URLSearchParams();
   params.append('idM', idM);
   params.append('idF', idF);
 
   fetch(url, {
-    method: 'GET',
+    method: 'POST',
     body: params
   })
     .then(response => {
@@ -578,6 +670,11 @@ function validerFilleul(idM, idF) {
       }
     })
     .then(data => {
+      var maintenancier = data.maintenanciers
+      for (let i = 0; i < maintenancier.length; i++) {
+        var message = maintenancier.message
+        sendNotification(maintenancier[i].id, message)
+      }
 
       // Traitement des données renvoyées par le serveur
 
@@ -590,6 +687,7 @@ function validerFilleul(idM, idF) {
       // Gestion des erreurs
       console.error(error);
     });
+  })
 }
 
 
@@ -599,28 +697,30 @@ function validerFilleul(idM, idF) {
 
 function soumettrePrix() {
   const url = "https://127.0.0.1:9001/soumettrePrix";
+  var idM = document.getElementById("mainmain").textContent
   var prix = document.getElementById("montant").value;
   var idT = document.getElementById("idPaiement").textContent
+  var message = `<p style="font-size: 16px; color: #333;">Vous allez valider la tache d'id ${idT}  : <a href="http://localhost:4242/checkout.html?prix=${prix}&idT=${idT}&idM=${idM}" style="text-decoration: none; color: #0099ff;">Cliquez ici</a> pour valider.</p>`
   const params = new URLSearchParams();
-  params.append('prix', prix);
   params.append('idT', idT);
+  params.append('message',message);
 
   fetch(url, {
     method: 'POST',
     body: params
   })
     .then(response => {
-      console.log("Données reçues pour paiement");
-
       if (response.ok) {
 
-
-        return response.json(); // Renvoyer la réponse JSON
+        console.log("Données reçues pour paiement");
+          return response.json(); // Renvoyer la réponse JSON
       } else {
-        throw new Error('Erreur de la requête paiement');
+          throw new Error('Erreur de la requête creerTaches');
       }
     })
     .then(data => {
+      console.log("sendEmail")
+      terminerTacheSendEmail(data)
 
       // Traitement des données renvoyées par le serveur
 
@@ -635,8 +735,26 @@ function soumettrePrix() {
     });
 }
 
-function terminerTache() {
-
+function terminerTacheSendEmail(emailDTO) {
+  console.log(emailDTO)
+  const url = "https://127.0.0.1:9001/sendemail"
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(emailDTO)
+   
+  })
+    .then(response => {
+      if (response.ok) {
+      } else {
+       alert('Une erreur s\'est produite lors de l\'envoi de l\'e-mail.');
+      }
+    })
+    .catch(error => {
+      alert('Une erreur s\'est produite :', error);
+    });
 }
 
 // GERE LE PROFIL
@@ -671,6 +789,24 @@ document.getElementById("btnNotification").addEventListener("click", function ()
   el5.style.display = "none";
   el6.style.display = "none";
   elt7.style.display = "block";
+  var notif = elt7.querySelectorAll(".notification")
+  notif.forEach(not =>{
+    var messageElement = not.querySelector('.message');
+    var taches = messageElement.textContent.split("///")
+    var m = taches.length
+    messageElement.textContent=taches[0]
+    var tache = taches[m-1]
+    if(m > 1){
+      idM = document.getElementById("mainmain").textContent;
+      var content = not.querySelector(".content").querySelector(".buttonNotif")
+      var message=`
+      <button class="my-4" onclick="validerParrainage(${idM},${tache})">Envoyer</button>
+      `
+      content.innerHTML=message
+    }
+  })
+
+
 });
 
 function calender() {

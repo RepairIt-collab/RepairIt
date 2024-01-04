@@ -158,3 +158,46 @@ footer p{
   #payment-element {
     margin-bottom: 24px;
   }
+
+  .modal.fade{
+    width: 100%;
+    height: 100%; 
+}
+
+.modal-body{
+    width: 100%;
+    height: 100%; 
+    background-color: #021c44;
+}
+
+.modal-content{
+    background-color: #021c44;
+}
+
+.modal-content h1{
+    color: #00b2ff;
+}
+
+.modal-content h3{
+    color: #00b2ff;
+}
+
+.modal-content a{
+    color: #00b2ff;
+}
+.containerDiv{
+    display: none;
+}
+.modal-content a:hover{    
+    color: #fff;
+}
+
+#Admin h3{
+    color:#fff;
+    font-size: 2.1rem;
+}
+
+#Admin span{
+    color: #00b2ff;
+    font-size: 2.8rem;
+}

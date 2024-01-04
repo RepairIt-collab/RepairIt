@@ -148,3 +148,24 @@ function increment(index) {
       valeurInput.value = valeur - 1;
     }
   }
+
+  function ValiderAdmin(){
+   
+     var password=document.getElementById("passadmin").value;
+
+     var xhr = new XMLHttpRequest();
+     var url = `https://127.0.0.1:9001/RepairIt/Boutique/Administrator/${password}`;
+     xhr.open("POST", url, true);
+     xhr.onreadystatechange = function() {
+       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+         console.log(xhr.responseText);
+
+         document.getElementById("Admin").style.display="block";
+         document.getElementById("Menu").style.display="none";
+         document.getElementById("produit").style.display="none";
+       }
+     };
+     xhr.setRequestHeader("Cache-Control", "no-cache"); 
+     xhr.send();
+
+  }

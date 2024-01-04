@@ -7,6 +7,5 @@ import com.app.FixIt.BOUTIQUE.entities.Commande;
 
 public interface CommandeRepository extends JpaRepository<Commande ,Long>{
     Commande findByUserId(Long userId);
-    Commande findByPhotoAndEstcommande(String photo,Boolean estcommande);
-    Commande findByPhotoAndEstOccupeAndEstcommande( String photo,Boolean estoccupe,Boolean estcommande);
+    
 }

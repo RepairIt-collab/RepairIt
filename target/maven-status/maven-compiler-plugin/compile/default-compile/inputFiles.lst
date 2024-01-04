@@ -22,7 +22,9 @@
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/SSL/HttpsConfig.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/DTO/Maintenance/ClientDTO.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/SERVICE/Maintenance/ClientService.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CONTROLLER/Mail/EmailController.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/REPOSITORY/Maintenance/NotificationRepository.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/REPOSITORY/RateUsRepository.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/DAO/Maintenance/ClientDao.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CHATAPP/chat/ChatMessage.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CHATAPP/chat/ChatMessageRepository.java
@@ -30,9 +32,13 @@
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CHATAPP/chat/ChatController.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/ENTITIES/Maintenance/Questions.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/REPOSITORY/Maintenance/QuestionsRepository.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/DTO/Mail/EmailDTO.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CONTROLLER/Maintenance/Maintenance.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CONTROLLER/RateUs/RateUsController.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/ENTITIES/Maintenance/Type.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/DAO/Maintenance/TacheDAO.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/SERVICE/Mail/EmailService.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/SERVICE/Maintenance/CsvImportRunner.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/FixItApplication.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/STATISTIQUE/Stat.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CONTROLLER/Maintenance/EvaluationController.java
@@ -53,6 +59,7 @@
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CONTROLLER/Profile/photoProfile.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CONTROLLER/Maintenance/Tache.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CHATAPP/chat/ChatNotification.java
+/home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/ENTITIES/RateUs.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/ENTITIES/Maintenance/Equipements.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/DAO/Maintenance/EquipementsDAO.java
 /home/orlane/Anna/RepairIt/src/main/java/com/app/FixIt/CHATAPP/chat/ChatMessageService.java
