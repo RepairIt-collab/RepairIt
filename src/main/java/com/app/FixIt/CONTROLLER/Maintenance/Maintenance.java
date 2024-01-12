@@ -1,6 +1,7 @@
 package com.app.FixIt.CONTROLLER.Maintenance;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.io.File;
 import java.nio.file.Path;
@@ -32,7 +33,6 @@ import com.app.FixIt.REPOSITORY.Maintenance.NotificationRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.QuestionsRepository;
 import com.app.FixIt.REPOSITORY.User.UserRepository;
 import com.app.FixIt.SERVICE.Maintenance.ClientService;
-import com.app.FixIt.SERVICE.Maintenance.EquipementsService;
 import com.app.FixIt.SERVICE.Maintenance.EvaluationService;
 
 @Controller
@@ -101,10 +101,21 @@ public class Maintenance {
             Maintenancier maintenancier = maintenancierRepository.findById(id).orElse(null);
             List<Notification> notifications = notificationRepository.findByMaintenanciers(maintenancier);
             Iterable<Notification> notificationsI = notifications;
-            // evaluationService.createEvaluationIfDateExpired();
+            for(Notification notif:notificationsI){
+                if(notif.getTaches() != null){
+                String base64Data = Base64.getEncoder().encodeToString(notif.getTaches().getImage());
+                if (notif.getTaches().getImage() != null) {
+                    notif.getTaches().setImgString(base64Data);
+                }
+            }}
+
             if (maintenancier.getTest() == 0) {
+                // LocalDateTime localDate = LocalDateTime.now();
+                // evaluationService.createEvaluationIfDateExpired();
+                // evaluationService.add(maintenancier);
                 System.out.println("evaluation.getDomain()+--------+q.getQuestion()");
-                Evaluation evaluation = evaluationRepository.findByMaintenanciers(maintenancier);
+                // Evaluation evaluation = evaluationRepository.findByMaintenanciersAndDateGreaterThanOrderByDateAsc(maintenancier,localDate);
+                Evaluation evaluation = evaluationService.evaluationLast(maintenancier);
                 model.addAttribute("evaluation", evaluation);
                 for (Questions q : evaluation.getQuestions()) {
                     System.out.println(evaluation.getDomain() + "--------" + q.getQuestion());
@@ -112,6 +123,13 @@ public class Maintenance {
             }
             List<Notification> notification2 = notificationRepository.findByIdMaintenancier(id);
             Iterable<Notification> noIterable = notification2;
+            for(Notification notif:noIterable){
+                if(notif.getTaches() != null){
+                String base64Data = Base64.getEncoder().encodeToString(notif.getTaches().getImage());
+                if (notif.getTaches().getImage() != null) {
+                    notif.getTaches().setImgString(base64Data);
+                }
+            }}
             model.addAttribute("notifM", noIterable);
             System.out.println(notification2);
             List<Long> listfilleul = maintenancier.getIdfilleuls();
@@ -133,10 +151,24 @@ public class Maintenance {
                     if(Llong.contains(id)){
                         List<Notification> notifParrain = notificationRepository.findByMaintenanciers(monParrain);
                         Iterable<Notification> notifParrainI = notifParrain;
+                        for(Notification notif:notifParrainI){
+                            if(notif.getTaches() != null){
+                            String base64Data = Base64.getEncoder().encodeToString(notif.getTaches().getImage());
+                            if (notif.getTaches().getImage() != null) {
+                                notif.getTaches().setImgString(base64Data);
+                            }}
+                        }
                         model.addAttribute("notifParrain", notifParrainI);
                         List<Notification> notification2P = notificationRepository.findByIdMaintenancier(monParrain.getId());
                         if(maintenancier.getStatus() == false){
                         Iterable<Notification> noIterableP = notification2P;
+                        for(Notification notif:noIterableP){
+                            if(notif.getTaches() != null){
+                            String base64Data = Base64.getEncoder().encodeToString(notif.getTaches().getImage());
+                            if (notif.getTaches().getImage() != null) {
+                                notif.getTaches().setImgString(base64Data);
+                            }
+                        }}
                         model.addAttribute("notifMP", noIterableP);}
                         model.addAttribute("monParrain", monParrain);
                         String parrain = "estNotNul";

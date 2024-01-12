@@ -32,21 +32,21 @@ document.getElementById("nav2").addEventListener("click", function () {
 
 });
 
-document.getElementById("nav3").addEventListener("click", function () {
-  console.log("nav3");
-  var el1 = document.querySelector(".sous-menu");
-  var el2 = document.querySelector(".maintenance");
-  var el3 = document.querySelector(".equipements");
-  // var el4 = document.querySelector(".messagerie");
-  var el5 = document.querySelector(".bienvenu");
+// document.getElementById("nav3").addEventListener("click", function () {
+//   console.log("nav3");
+//   var el1 = document.querySelector(".sous-menu");
+//   var el2 = document.querySelector(".maintenance");
+//   var el3 = document.querySelector(".equipements");
+//   // var el4 = document.querySelector(".messagerie");
+//   var el5 = document.querySelector(".bienvenu");
 
-  el1.style.display = "none";
-  el2.style.display = "none";
-  el3.style.display = "none";
-  // el4.style.display = "block";
-  el5.style.display = "none";
+//   el1.style.display = "none";
+//   el2.style.display = "none";
+//   el3.style.display = "none";
+//   // el4.style.display = "block";
+//   el5.style.display = "none";
 
-});
+// });
 
 //// MASQUER LES MENU DES PAGES CLIENTS AU NIVEAU du block Maintenances
 

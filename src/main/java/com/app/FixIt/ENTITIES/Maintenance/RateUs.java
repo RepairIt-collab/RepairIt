@@ -1,6 +1,4 @@
-package com.app.FixIt.ENTITIES;
-
-import com.app.FixIt.ENTITIES.Maintenance.User;
+package com.app.FixIt.ENTITIES.Maintenance;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

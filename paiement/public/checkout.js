@@ -1,29 +1,17 @@
-//OBTENIR LES DONNES DE L'URL
-
-// Récupérer les valeurs des paramètres de requête
-const urlParams = new URLSearchParams(window.location.search);
-const prix = urlParams.get('prix');
-const idT = urlParams.get('idT');
-const idM = urlParams.get('idM');
-var myId
-if(idM != null){
-  myId = idM
-}
-
-console.log(idT)
-console.log(prix)
-console.log(idM)
-// Utiliser les valeurs des données
-// Faire quelque chose avec les valeurs des données
-
-
 // This is your test publishable API key.
 const stripe = Stripe("pk_test_51OJ8k3IyLHKyHjYEgQvOCCYVfJcCUZCLKuNtOPhaff7CvTRCRNSw6S30ul6heufRN0HsMHc7kS4VsK7vRxOJ1ajU00X5OrHKcf");
 
+const urlParamsfirst = new URLSearchParams(window.location.search);
+const prix = urlParamsfirst.get('prix');
+const idT = urlParamsfirst.get('idT');
+const idM = urlParamsfirst.get('idM');
+
 // The items the customer wants to buy
-const items = [{ id: "xl-tshirt" }];
+const items = [{ id: "xl-tshirt" },
+];
 
 let elements;
+
 
 initialize();
 checkStatus();
@@ -32,6 +20,8 @@ document
   .querySelector("#payment-form")
   .addEventListener("submit", handleSubmit);
 
+
+
 // Fetches a payment intent and captures the client secret
 async function initialize() {
   const response = await fetch("/create-payment-intent", {
@@ -39,7 +29,9 @@ async function initialize() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ items }),
   });
-  const { clientSecret } = await response.json();
+  
+  const { clientSecret } =  await response.json();
+  
   console.log(clientSecret)
 
   const appearance = {
@@ -54,6 +46,7 @@ async function initialize() {
   const paymentElement = elements.create("payment", paymentElementOptions);
   paymentElement.mount("#payment-element");
 }
+
 var emailAddress = "annaelledetchoua@gmail.com"
 async function handleSubmit(e) {
   e.preventDefault();
@@ -63,7 +56,8 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "http://localhost:4242/checkout.html",
+      // return_url: "http://localhost:4242/checkout.html",
+      return_url: 'http://localhost:4242/checkout.html?prix='+prix+'&idT='+idT+'&idM='+idM,
       receipt_email: emailAddress,
     },
   });
@@ -96,8 +90,9 @@ async function checkStatus() {
 
   switch (paymentIntent.status) {
     case "succeeded":
-      // showMessage("Payment succeeded!");
-      terminerPayement()
+      showMessage("Payment succeeded!");
+      console.log(prix,idT,idM)
+      terminerPayement(idM,idT,prix)
       break;
     case "processing":
       showMessage("Your payment is processing.");
@@ -125,30 +120,26 @@ function showMessage(messageText) {
   }, 4000);
 }
 
-//FONCTION POUR TERMINER LE PAYEMENT
-function terminerPayement(){
-  e.preventDefault();
-  showMessage("Payment succeeded!");
-  const url = "https://127.0.0.1:9001/RepairIt/Client/Maintenance/terminerTache";
 
+//FONCTION POUR TERMINER LE PAYEMENT
+function terminerPayement(main,tache,price){
+  // e.preventDefault();
+  // showMessage("Payment succeeded!");
+  const url = "https://127.0.0.1:9001/terminerTache";
+console.log("okokokokoko")
   const params = new URLSearchParams();
-  params.append('idM', idM);
-  params.append('idT', idT);
-  params.append('prix',prix)
+  params.append('idM', main);
+  params.append('idT', tache);
+  params.append('prix',price)
 
   fetch(url, {
     method: 'POST',
+    mode: 'no-cors',
     body: params
   })
     .then(response => {
       console.log("Données reçues pour creerTaches");
-      window.location.reload()
-      if (response.ok) {
-        window.location.href = "https://127.0.0.1:9001/RepairIt/Client";
-        return response.json(); // Renvoyer la réponse JSON
-      } else {
-        throw new Error('Erreur de la requête creerTaches');
-      }
+      window.location.href = "https://127.0.0.1:9001/RepairIt/Client";
     })
     .then(responseBody => {
       // Utilisez le corps de la réponse ici

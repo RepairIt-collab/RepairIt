@@ -18,72 +18,68 @@
 </head>
 
 <body class="bg ocustom-bg2">
-
-    <main id="content">
-        <!-- NAV -->
-        <nav class=" navbar navbar-expand-lg position-fixed w-100" style="background-color: #021c44; z-index: 10;">
-            <div class="container-fluid">
-                <div class="col-md-2">
-                    <a th:href="@{/RepairIt/Accueil}" class="navbar-brand">
-                        <img th:src="@{/images/Outil.png}">
-                        <img th:src="@{/images/Repair-It 1.png}">
-                        <i class=""></i>
-                    </a>
-                </div>
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"
-                    style="background-color: #00b2ff;">
-                    <span class="fas fa-wrench" style="color: #021c44;"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="menu">
-                    <ul class="navbar-nav m">
-                        <li class="nav-item">
-                            <button id="a" class="nav-link"> Taches</button>
-                        </li>
-                        <li class="nav-item me-3">
-                            <button class="nav-link " onclick="calender()">Calendrier</button>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a th:href="@{/pageChat}" id="c" class="nav-link ">Message</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <button id="d" class="nav-link ">Boutique</button>
-                        </li>
-                        <li class="nav-item me-3" id="composition" style="display: none;">
-                            <button id="f" class="nav-link ">Evaluation</button>
-                        </li>
-                    </ul>
-                </div>
-                <ul class="navbar-nav mt-3">
-                    <img th:src="@{/images/ecrou.png}" alt="Icon" class="navbar-icon mb-3 ms-2"
-                        style="width: 20px;height: 20px;">
+   
+ <main id="content">
+    <!-- NAV -->
+    <nav class=" navbar navbar-expand-lg  w-100" style="background-color: #021c44; z-index: 10;">
+        <div class="container-fluid">
+            <div class="col-md-2">
+                <a th:href="@{/RepairIt/Accueil}" class="navbar-brand" > 
+                    <img th:src="@{/images/Outil.png}"> 
+                    <img th:src="@{/images/Repair-It 1.png}">
+                    <i class=""></i>
+                </a>
+            </div>            
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" style="background-color: #00b2ff;">
+                <span class="fas fa-wrench" style="color: #021c44;"></span>
+            </button>
+             <div class="collapse navbar-collapse justify-content-center" id="menu">
+                <ul class="navbar-nav m">
+                    <li class="nav-item">
+                        <button id="a" class="nav-link"> Taches</button>
+                    </li>
+                    <li class="nav-item me-3">
+                        <button  class="nav-link " onclick="calender()">Calendrier</button>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a  th:href="@{/pageChat}" id="c" class="nav-link " >Message</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <button id="d" class="nav-link ">Boutique</button>
+                    </li>
+                    <li class="nav-item me-3" id="composition" style="display: none;">
+                        <button id="f" class="nav-link ">Evaluation</button>
+                    </li>
                 </ul>
-                <ul class="navbar-nav mt-3" id="btnNotification">
-                    <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon mb-3 "
-                        style="width: 25px;height: 25px;">
-                </ul>
-                <ul id="btncompte" class="btn">
-                    <img th:src="@{${filename}}" alt="Icon" class="navbar-icon message-icon"
-                        style="width:40px;height: 40px; border-radius: 10px;">
-                </ul>
-            </div>
-        </nav>
-
+             </div>
+             <ul class="navbar-nav mt-3" >
+                <img th:src="@{/images/ecrou.png}" alt="Icon" class="navbar-icon mb-3 ms-2" style="width: 20px;height: 20px;">
+            </ul>
+            <ul class="navbar-nav mt-3" id="btnNotification">
+                <img th:src="@{/images/mail.jpg}" alt="Icon" class="navbar-icon mb-3 " style="width: 25px;height: 25px;">
+            </ul>
+            <ul id="btncompte" class="btn">
+                <img th:src="@{${filename}}" alt="Icon" class="navbar-icon" style="width:40px;height: 40px; border-radius: 10px;">
+            </ul>
+        </div>
+    </nav>
+     
         <!-- LE SOUS MENU -->
-        <div id="smen1" class="sous-menu">
-            <div class="action" style="display: none;">
+        <div id="smen1" class="sous-menu" style="display: none;">
+            <div class="action" >
                 <div class="row">
                     <div class="col-md-4 ms-3" style="margin-top: 5.7rem;">
                         <p>TACHE DE MANTENANCE</p>
                     </div>
                     <div id="bord" class="border me-3" style="margin-left: -6%;"></div>
                     <div class="col-md-3" style="margin-top: 2.5rem; ">
-                        <div class="row my-3 ">
+                        <div class="row my-3 " id="newPlaces" style="cursor: pointer;">
                             <h5 style="color: darkgreen;"><i class="fas fa-plus-circle"></i> Nouvelles Tâches</h5>
                         </div>
-                        <div class="row my-3 ">
+                        <div class="row my-3 " id="coursPlaces" style="cursor: pointer;">
                             <h5 style="color: darkgoldenrod;"><i class="fas fa-spinner"></i> Tâches en Cours</h5>
                         </div>
-                        <div class="row my-3 ">
+                        <div class="row my-3 " id="finishPlaces" style="cursor: pointer;">
                             <h5 style="color: darkred;"><i class="fas fa-check-circle"></i>Tâches Terminées</h5>
                         </div>
                     </div>
@@ -118,6 +114,7 @@
         <br>
 
         <!-- LE MENU TACHE -->
+        <span id="mainmain" th:text="${maintenancier.id}" style="display: none;"></span>
         <div th:if="${maintenancier.test == 2}">
             <div class="taches" style="display: none;">
                 <div class="nouveau" id="new">
@@ -393,65 +390,7 @@
 
         </div>
         <br>
-        <!-- MESSAGE  -->
-        <div class="messagerie2" style="display: none;">
-            <div class="row my-5">
-                <div class="col-md-4 ms-3">
-                    <div class="row my-3">
-                        <div class="col-md-1">
-                            <i class="fa fa-search fa-2x" style="color: #00b2ff;" aria-hidden="false"> </i>
-                        </div>
-                        <div class="col-md-10">
-                            <input type="text" placeholder="Recherche">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="contact2 my-3" style="max-height: max-content;">
-                        <h3 style="color: #00b2ff;">TACHES</h3>
-                        <div style="border: #00b2ff solid;"></div>
-                    </div>
-                </div>
-                <div class="col-md-7 ms-4">
-                    <div class="container message2">
-                        <div id="chat2" class="row">
-                            <div class="maintenancier">
-                                <div class="sender2">Jane Smith</div>
-                                <div class="timestamp2">10/29/2023 1:15 PM</div>
-                                <div class="content2">Ça va bien, merci ! Et toi ?</div>
-                            </div>
-                            <br>
-                            <div class="maintenancier">
-                                <div class="sender2">Jane Smith</div>
-                                <div class="timestamp2">10/29/2023 1:15 PM</div>
-                                <div class="content2">Ça va bien, merci ! Et toi ?</div>
-                            </div>
-                            <div class="maintenancier1">
-                                <div class="sender">Jane Smith</div>
-                                <div class="timestamp">10/29/2023 1:15 PM</div>
-                                <div class="content">Ça va bien, merci ! Et toi ?</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-                    <div id="send2" class="row">
-                        <div class="col-md-1">
-                            <div>
-                                <button><i class="fa fa-camera fa-2x"></i></button>
-                            </div>
-                        </div>
-                        <div class="col-md-9 ms-2">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
-                        </div>
-                        <div class="col-md-1 ms-5">
-                            <button id="envoi2"><i class="fa fa-paper-plane fa-2x"></i></button>
-                        </div>
-                    </div>
-
-                </div>
-                <span id="mainmain" th:text="${maintenancier.id}" style="display: none;"></span>
-            </div>
-        </div>
+       
 
         <!-- LOCALISATION -->
         <div class="modal fade" id="ModalMap" tabindex="-1" aria-labelledby="ModalMapLabel" aria-hidden="true">
@@ -505,7 +444,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary bg-danger"
                             data-bs-dismiss="modal">Fermer</button>
-                        <button type="button" id="creer" onclick="soumettrePrix()" data-bs-dismiss="modal"
+                        <button type="button" onclick="soumettrePrix()" data-bs-dismiss="modal"
                             class="btn btn-primary bg-success">Soumetre</button>
                     </div>
                 </div>

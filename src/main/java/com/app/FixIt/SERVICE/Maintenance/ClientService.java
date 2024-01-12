@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.app.FixIt.DAO.Maintenance.ClientDao;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
-import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.REPOSITORY.Maintenance.ClientRepository;
 
 @Service

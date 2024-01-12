@@ -2,7 +2,7 @@ from keras.models import load_model
 import tensorflow as tf
 import numpy as np
 def Prediction(image):
-    model = load_model('/home/orlane/RepairIt/fix_it.h5')
+    model = load_model('/home/orlane/Documents/RepairIt/fix_it.h5')
     classes=['cuisiniereFour', 'machineALaver', 'ordinateurs', 'telephone', 'television', 'voiture']
     img = tf.keras.utils.load_img(
         predic, target_size=(180, 180)

@@ -70,4 +70,22 @@ public class Equipement {
         // }
     }
 
+
+    public ResponseEntity<EquipementDTO> updataEquipement(Long id,@RequestBody EquipementDTO equipementDTO) {
+
+            // EquipementsService equipementsService = new EquipementsService(equipementsRepository);
+            Equipements equipement = equipementsRepository.findById(id).orElse(null);
+
+            equipement.setNom(equipementDTO.getNom());
+            equipement.setEtats(2);
+            equipement.setPhoto(equipementDTO.getPhoto());
+            equipement.setType(equipementDTO.getType());
+            equipementsRepository.save(equipement);
+        
+
+        return ResponseEntity.ok(equipementDTO);
+    
+    }
+
+
 }

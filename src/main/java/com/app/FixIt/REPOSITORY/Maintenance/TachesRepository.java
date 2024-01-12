@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Taches;
+import com.app.FixIt.ENTITIES.Maintenance.Type;
+
 
 @Repository
 public interface TachesRepository extends JpaRepository<Taches, Long>{
@@ -15,4 +17,6 @@ public interface TachesRepository extends JpaRepository<Taches, Long>{
     List<Taches> findAllByClient(Client user);
 
     List<Taches> findAllByMaintenancier(Maintenancier user);
+
+    List<Taches> findByEtatAndType(Integer etat, Type type);
 }

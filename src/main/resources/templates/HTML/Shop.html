@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="icon" th:href="@{/images/Outil.png}">
   <link rel="stylesheet" th:href="@{/css/Shop.css}">
+  <script src="https://js.stripe.com/v3/"></script>
+  <script th:src="@{/paiement/public/checkout.js}"></script>
+
 </head>
 <body>
   <!-- Header -->
@@ -17,7 +20,7 @@
       <div class="row">
         <div class="col-md-2">
           <div class="container mt-4">
-            <a th:href="@{/RepairIt/Accueil}" class="navbar-brand "> 
+            <a data-bs-toggle="modal" data-bs-target="#myModal3" class="navbar-brand "> 
                   <img th:src="@{/images/Outil.png}"> 
                   <img th:src="@{/images/Repair-It Boutique.png}" style="width: 180px;height: 35px;">
             </a>
@@ -44,11 +47,11 @@
                   <br>
                   <div class="collapse navbar-collapse" id="burger1">
                     <ul class="navbar-nav" style="margin-left: 5%;">
-                      <li><a class="nav-item active" id="Me1" href="#"><i class="fa fa-blender"></i>Electromenager</a></li>
-                      <li><a class="nav-item"id="Me2" href="#"><i class="fa fa-cog"></i>Mecanique</a></li>
-                      <li><a class="nav-item" id="Me3" href="#"> <i class="fa fa-mobile"></i>Telephonie</a></li> 
-                      <li><a class="nav-item" id="Me4" href="#"> <i class="fa fa-laptop"></i>Ordinateur</a></li> 
-                      <li><a class="nav-item" id="Me5" href="#"> <i class="fa fa-toolbox"></i>Outils</a></li> 
+                      <li><a class="nav-item active" id="Me1" ><i class="fa fa-blender"></i>Electromenager</a></li>
+                      <li><a class="nav-item"id="Me2" ><i class="fa fa-cog"></i>Mecanique</a></li>
+                      <li><a class="nav-item" id="Me3" > <i class="fa fa-mobile"></i>Telephonie</a></li> 
+                      <li><a class="nav-item" id="Me4" > <i class="fa fa-laptop"></i>Ordinateur</a></li> 
+                      <li><a class="nav-item" id="Me5" > <i class="fa fa-toolbox"></i>Outils</a></li> 
                     </ul>
                   </div>
                 </div>
@@ -58,8 +61,15 @@
           </div>       
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-center">
-              <p style="margin: 10px;" id="cart" ><i class="fa fa-shopping-cart"></i><a href="#" style="font-size: 1rem;"> Panier</a></p>  
-              <p style="margin: 10px;" id="product" class="activer"><i class="fa fa-box"></i><a href="#"  style="font-size: 1rem;"> Produit</a></p>  
+             <div class="row">
+              <p style="margin: 10px;" id="command" ><i class="fa fa-truck"></i><a  style="font-size: 1rem;"> Commande</a></p>  
+              <p style="margin: 10px;" id="accueil" ><i class="fa fa-home"></i><a  onclick="history.back();" style="font-size: 1rem;"> Ma page</a></p>  
+             </div>
+             <div class="row">
+              <p style="margin: 10px;" id="cart" ><i class="fa fa-shopping-basket"></i><a  style="font-size: 1rem;"> Panier</a></p>  
+              <p style="margin: 10px;" id="product" class="activer"><i class="fa fa-box"></i><a   style="font-size: 1rem;"> Produit</a></p>  
+             </div>
+             
         </div>
       </div>
       
@@ -135,33 +145,43 @@
         </div>
         <br>
         <h2>Notre Catalogue</h2>
-          <div id="Electro">
-            <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}">
-                <div class="card mb-4">
-                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
-                  <div class="card-body" >
-                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
-                    <p th:text = "${elt.caracteristique}"></p>
-                    <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                  </div>
-                </div>
-              </div>
-            </div>   
+          <div id="Electro" style="display: none;">
+            
           </div>
           <div id="Mecani" style="display: none;">
             <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique'}">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique' and elt.occupe==false and elt.quantite>0}">
                 <div class="card mb-4">
                   <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
                   <div class="card-body" >
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'btn' + ${elt.id}" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'mecanique' and elt.occupe==false and elt.quantite==0}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <div class="row">
+                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'cmd' + ${elt.id}" class="btn btn-warning">Commander</a>
                   </div>
                 </div>
               </div>
@@ -169,15 +189,38 @@
           </div>
           <div id="Tele" style="display: none;">
             <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone'}">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone' and elt.occupe==false and elt.quantite>0}">
                 <div class="card mb-4">
                   <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
                   <div class="card-body" >
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'btn' + ${elt.id}" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'telephone' and elt.occupe==false and elt.quantite==0}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <div class="row">
+                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'cmd' + ${elt.id}" class="btn btn-warning">Commander</a>
                   </div>
                 </div>
               </div>
@@ -185,51 +228,281 @@
           </div>
           <div id="Ordin" style="display: none;">
             <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur'}">
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur' and elt.occupe==false and elt.quantite>0} ">
                 <div class="card mb-4">
                   <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
                   <div class="card-body" >
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'btn' + ${elt.id}" class="btn btn-primary">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" th:each = "elt:${p1}" th:if="${elt.domaine.domaine == 'ordinateur' and elt.occupe==false and elt.quantite==0}">
+                <div class="card mb-4">
+                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+                  <div class="card-body" >
+                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+                    <p th:text = "${elt.caracteristique}"></p>
+                    <div class="row">
+                      <div class="col-md-5"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-7"><p style="color: red; font-size: 0.6rem;">le stock est epuise</p></div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
+                      <div class="col-md-2"><button th:onclick="'increment(\'' + ${elt.id} + '\')'" style="width: 90%;">+</button></div>
+                      <div class="col-md-2"> <button th:onclick="'decrement(\'' + ${elt.id} + '\')'" style="width: 90%;">-</button></div>    
+                    </div>
+                        <a  th:id="'cmd' + ${elt.id}" class="btn btn-warning">Commander</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div id="outi" style="display: none;">
-            <div class="row">
-              <div class="col-md-3" th:each = "elt:${p1}">
-                <div class="card mb-4">
-                  <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
-                  <div class="card-body" >
-                    <h5 class="card-title" th:text = "${elt.nom}"></h5>  
-                    <p th:text = "${elt.caracteristique}"></p>
-                    <p th:text = "${elt.prix}"></p>
-                    <!-- <li>QUANTITE :<p th:text = "${elt.quantite}"></p></li> -->
-                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
           <!-- Ajoutez d'autres produits ici -->
         </div>
       </div>
     </div>
   </main>
-  <!-- <input type="button" onclick="creation()"> -->
+
   
+  <!-- ANIMATION POUR LE PANIER -->
+  <div id="AnimePa" class="panierAnim" style="display: none;">
+      <p style="margin-top: 4%; margin-left: 20%; font-size: 3rem; color: #00b2ff;"> ENVOI EN COURS DANS VOTRE PANIER</p>
+      <div class="row" style="margin-top: 10%;">
+        <div class="col-md-3">
+          <i style="color:#00b2ff" id="panierplane" class="fa fa-paper-plane fa-3x mt-5"></i>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-5">
+          <i style="color:#00b2ff" class="fa fa-shopping-basket fa-10x"></i> 
+        </div>
+      </div>
+      <div>
+        <p id="SendSuccs" style="margin-bottom: 5%;  margin-left: 20%; font-size: 2.2rem; color: #fff; display: none;background-color: green;">ENVOYE AVEC SUCCES</p>
+      </div>
+  </div>
+
   <main id="found" class="container-fluid mt-4" style="display: none; height: 450px;">
     <h2>PRODUITS TROUVES</h2>
   </main>
 
+
+  <!-- LES COMMANDES -->
+  <main id="commander" class="container-fluid mt-4" style="display: none; height: 450px;">
+    <h2>MES COMMANDES</h2>
+    <div class="row">
+      <div class="col-md-3 mt-2" th:each = "elt:${commande}">
+        <div class="card mb-4">
+          <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+          <div class="card-body" >
+            <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+            <p th:text = "${elt.prix}"></p>
+            <p th:text = "${elt.quantite}"></p>
+                <a  th:id="'scd' + ${elt.id}" class="btn btn-danger SUPCMD">Retirer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+<!-- LE PANIER -->
   <main id="panier" class="container-fluid mt-4" style="display: none;">
     <h2>VOTRE PANIER</h2>
-  
+    <div class="row">
+      <div class="col-md-3 mt-2" th:each = "elt:${panier}">
+        <div class="card mb-4">
+          <img card="card-img-top" th:src = "${elt.photo}" style="width: 300px;height: 200px;">
+          <div class="card-body" >
+            <h5 class="card-title" th:text = "${elt.nom}"></h5>  
+            <p th:text = "${elt.prix}"></p>
+            <p th:text = "${elt.quantite}"></p>
+                <a  th:id="'sup' + ${elt.id}" class="btn btn-danger ">Retirer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="payer" class="btn btn-success">Payer le panier</button>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+            <p>Prix Total</p>
+        </div>
+        <div class="row">
+          <div id="productsPaid" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item" th:each="elt, iterStat : ${panier}" th:classappend="${iterStat.first} ? 'active' : ''">
+                  <img th:src="${elt.photo}" style="width: 400px;height: 300px;">
+                  <h5 th:text="${elt.nom}"></h5>  
+                </div>
+              </div>
+            <button class="carousel-control-prev " type="button" data-bs-target="#productsPaid" data-bs-slide="prev" style="margin-top: 5cap;">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productsPaid" data-bs-slide="next"style="margin-top: 5cap; widht: 4px;">
+              <span class="carousel-control-next-icon" aria-hidden="false"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-6">
+        <form id="payment-form">
+          <div id="payment-element">
+            <!--Stripe.js injects the Payment Element-->
+          </div>
+          <button id="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay now</span>
+          </button>
+          <div id="payment-message" class="hidden"></div>
+        </form>
+      </div>
+    </div>
   </main>
+
+
+
+     <!-- POP UP ADMINISTRATEUR -->
+     <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModal3Label" aria-hidden="true" >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+              <div class="col-12 text-center">         
+                  <h1 class="modal-title" id="myModalLabel">  <img th:src="@{/images/cadenas 3.png}" style="width: 60px;height: 40px;">MODE ADMINISTRATEUR</h1>
+              </div>               
+          </div>
+          <br><br>
+  
+          <div class="modal-body">  
+            <form>  
+              <label for="passadmin" class="form-label d-flex justify-content-center"><h3>Mot de passe</h3></label>
+              <input type="password" class="form-control" placeholder="Entrer le mot de passe de l'admin" id="passadmin" required>
+             </form>  
+             <br><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button " class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-secondary bg-success" onclick="ValiderAdmin()">Valider</button>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    <!-- LA PARTIE ADMINISTRATEUR  -->
+    <main id="Admin" style="display: none; height: 550px; overflow-y: scroll">
+      <div style="background-color: #021c44;">
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+           <h3><span>R</span>epair-<span>I</span>t <span>B</span>outique <span>A</span>dministrateur</h3>
+        </div> 
+    
+      </div>
+      <input type="button" onclick="creation()"> 
+
+
+      <!-- AJOUTER UN PRODUIT -->
+      <div id="AjouEquip">
+        <h2>AJOUT ET MODIFICATION D'UN EQUIPEMENTS</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-primary"> <i
+              class="fa fa-camera fa-2x" aria-hidden="true"></i> Photo</button>
+           <input type="file" id="image" accept="image/*" style="display: none;">
+           
+            <!-- Ici je veux qu'on selectionne une photo la photo et alors enregistrer dans le dossier 
+            imgshop en fonction de son type et le nom de la photo + l'extension est mis sur input 
+            d'id text 1 -->
+          </div>
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="test1" class="form-label">Photo</label>
+                <input type="text" class="form-control" id="text1">
+              </div>
+              <div class="mb-3">
+                <label for="test2" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="text2">
+              </div>
+              <div class="mb-3">
+                <label for="test3" class="form-label">Caracteristique</label>
+                <input type="text" class="form-control" id="text3">
+              </div>
+              <div class="mb-3">
+                <label for="test4" class="form-label">Prix</label>
+                <input type="text" class="form-control" id="text4">
+              </div>
+              <div class="mb-3">
+                <label for="test5" class="form-label">Quantite</label>
+                <input type="text" class="form-control" id="text5">
+              </div>
+              <div class="mb-3">
+                <label for="test6" class="form-label">Domaine</label>
+                <input type="text" class="form-control" id="text6">
+              </div>
+              <button class="btn btn-primary">Valider</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- SUPPRIMER UN PRODUIT -->
+      <div id="SuppEqui">
+        <h2>SUPPRIMER UN EQUIPEMENT</h2>
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+          <form>
+            <div class="mb-3">
+              <label for="test01" class="form-label">Identifiant</label>
+              <input type="text" class="form-control" id="text1" width="30%">
+            </div>
+            <div class="row">
+
+              <div class="col-md-6">   
+                <div class="mb-3">
+                  <label for="test02" class="form-label">Nom</label>
+                  <input type="text" class="form-control" id="text02">
+                </div>
+                <div class="mb-3">
+                  <label for="test03" class="form-label">Caracteristique</label>
+                  <input type="text" class="form-control" id="text03">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="test06" class="form-label">Domaine</label>
+                  <input type="text" class="form-control" id="text06">
+                </div>
+                <div class="mb-3">
+                  <label for="test05" class="form-label">Quantite</label>
+                  <input type="text" class="form-control" id="text05">
+                </div>
+              </div>
+            </div>
+            <div style="width: 300px;height: 200px;">
+                <img th:src="@{/images/Repair-It Boutique.png}" style="width: 299px;height: 199px;" alt="">
+            </div>
+            <button class="btn btn-danger">supprimer</button>
+          </form>
+       </div> 
+      </div>
+
+    </main>
+
+
 
   <!-- Footer -->
   <footer class="text-white py-4" style="background-color: #021c44;">
@@ -238,8 +511,10 @@
     </div>
   </footer>
 
+  <script th:src="@{/js/anime.min.js}"></script>
   <script th:src="@{/js/Shop.js}"></script>
   <script th:src="@{/js/Generer.js}"></script>
+  <script th:src="@{/js/ManaShop.js}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
 </body>

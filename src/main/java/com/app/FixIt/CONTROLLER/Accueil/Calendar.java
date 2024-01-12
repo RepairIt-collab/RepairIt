@@ -9,11 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.FixIt.DTO.Maintenance.FullCalendar;
 import com.app.FixIt.ENTITIES.Maintenance.Client;
-import com.app.FixIt.ENTITIES.Maintenance.Equipements;
 import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.ENTITIES.Maintenance.User;

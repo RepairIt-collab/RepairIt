@@ -11,12 +11,10 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.FixIt.DAO.Maintenance.TacheDAO;
 import com.app.FixIt.DTO.Maintenance.MapDTO;
-import com.app.FixIt.ENTITIES.Maintenance.Maintenancier;
 import com.app.FixIt.ENTITIES.Maintenance.Taches;
 import com.app.FixIt.REPOSITORY.Maintenance.TachesRepository;
 @Service
@@ -85,7 +83,7 @@ public class TacheService implements TacheDAO {
         }
         public int getFiftyPercent(List<MapDTO> objectList) {
             int size = objectList.size();
-            int fiftyPercent = (int) Math.round(size * 0.5);
+            // int fiftyPercent = (int) Math.round(size * 0.5);
             return size;
         }
 

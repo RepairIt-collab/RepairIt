@@ -2,6 +2,8 @@ package com.app.FixIt.CONTROLLER.Connexion;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.FixIt.BOUTIQUE.entities.Commande;
+import com.app.FixIt.BOUTIQUE.entities.Panier;
+import com.app.FixIt.BOUTIQUE.repository.CommandeRepository;
+import com.app.FixIt.BOUTIQUE.repository.PanierRepository;
 import com.app.FixIt.CONTROLLER.Maintenance.Maintenance;
 import com.app.FixIt.DTO.Maintenance.MaintenancierDTO;
 import com.app.FixIt.DTO.Maintenance.ClientDTO;
@@ -33,6 +38,12 @@ public class SignUp {
     private ClientRepository clientRepository;
     @Autowired
     private MaintenancierRepository maintenancierRepository;
+
+     @Autowired
+    private PanierRepository panierRepository;
+
+    @Autowired
+    private CommandeRepository commandeRepository;
 
     @Autowired
     Maintenance main;
@@ -56,6 +67,15 @@ public class SignUp {
         newClient.setPassword(client.getPassword());
         newClient.setTelephone(client.getTelephone());
         clientRepository.save(newClient);
+        Panier panier = new Panier();
+        panier.setUser(newClient);
+        panierRepository.save(panier);
+
+        Commande commande= new Commande();
+        commande.setUser(newClient);
+        commandeRepository.save(commande);
+        System.out.println(commande.getId());
+        
         Client c = clientService.saveClient(newClient);
         session.setAttribute("id", c.getId());
         session.setAttribute("name", c.getUsername());
@@ -81,15 +101,39 @@ public class SignUp {
         newMaintenancier.setLongitude(maintenancier.getLongitude());
         newMaintenancier.setStatus(true);
         newMaintenancier.setTest(0);
-        
+ 
         Maintenancier m=maintenancierService.saveMaintenancier(newMaintenancier);
-        evaluationService.createEvaluationIfDateExpired();
+        
+        Panier panier = new Panier();
+        panier.setUser(newMaintenancier);
+        panierRepository.save(panier);
+
+        Commande commande= new Commande();
+        commande.setUser(newMaintenancier);
+        commandeRepository.save(commande);
+
+        evaluationService.createEvaluationIfDateExpired(m.getSpecialite());
         evaluationService.add(newMaintenancier);
         session.setAttribute("id", m.getId());
         session.setAttribute("name", m.getUsername());
         return main.Maintenancier(session,model);
     }
 
-   
+    @GetMapping("/loadClient")
+    public ResponseEntity<List<Client>>loadclient()
+    {
+        List<Client> client=null;
+        client=clientRepository.findAll();
 
+        return ResponseEntity.ok(client);
+    }
+
+    @GetMapping("/loadMaintenancier")
+    public ResponseEntity<List<Maintenancier>>loadMaintenancier()
+    {
+        List<Maintenancier> main=null;
+        main=maintenancierRepository.findAll();
+
+        return ResponseEntity.ok(main);
+    }
 }
