@@ -201,3 +201,15 @@ footer p{
     color: #00b2ff;
     font-size: 2.8rem;
 }
+
+.card-body{
+    background-color: #021c44;
+}
+
+.card-body p{
+  color: #00b2ff;
+}
+
+.card-body h5{
+    color: #00b2ff;
+  }

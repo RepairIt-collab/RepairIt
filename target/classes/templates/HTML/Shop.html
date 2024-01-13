@@ -173,8 +173,8 @@
                     <h5 class="card-title" th:text = "${elt.nom}"></h5>  
                     <p th:text = "${elt.caracteristique}"></p>
                     <div class="row">
-                      <div class="col-md-6"> <p th:text = "${elt.prix}"></p></div>
-                      <div class="col-md-6"><p style="color: red; font-size: 1rem;">le stock est epuise</p></div>
+                      <div class="col-md-4"> <p th:text = "${elt.prix}"></p></div>
+                      <div class="col-md-8"><p style="color: red; font-size: 0.9rem;">le stock est epuise</p></div>
                     </div>
                     <div class="row mb-2">
                       <div class="col-md-8"> <input type="text" th:id="'valeur' + ${elt.id}" value="0" style="width: 100%;"></div>
@@ -334,45 +334,7 @@
         </div>
       </div>
     </div>
-    <button id="payer" class="btn btn-success">Payer le panier</button>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="row">
-            <p>Prix Total</p>
-        </div>
-        <div class="row">
-          <div id="productsPaid" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item" th:each="elt, iterStat : ${panier}" th:classappend="${iterStat.first} ? 'active' : ''">
-                  <img th:src="${elt.photo}" style="width: 400px;height: 300px;">
-                  <h5 th:text="${elt.nom}"></h5>  
-                </div>
-              </div>
-            <button class="carousel-control-prev " type="button" data-bs-target="#productsPaid" data-bs-slide="prev" style="margin-top: 5cap;">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#productsPaid" data-bs-slide="next"style="margin-top: 5cap; widht: 4px;">
-              <span class="carousel-control-next-icon" aria-hidden="false"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-        
-      </div>
-      <div class="col-md-6">
-        <form id="payment-form">
-          <div id="payment-element">
-            <!--Stripe.js injects the Payment Element-->
-          </div>
-          <button id="submit">
-            <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text">Pay now</span>
-          </button>
-          <div id="payment-message" class="hidden"></div>
-        </form>
-      </div>
-    </div>
+    <a th:href="@{Boutique/Paiement}" id="payer" class="btn btn-success">Payer le panier</a>
   </main>
 
 
@@ -412,11 +374,11 @@
         </div> 
     
       </div>
-      <input type="button" onclick="creation()"> 
-
-
-      <!-- AJOUTER UN PRODUIT -->
-      <div id="AjouEquip">
+      
+       <!-- <input type="button" onclick="creation()">  -->
+       
+       <!-- AJOUTER UN PRODUIT -->
+       <div id="AjouEquip">
         <h2>AJOUT ET MODIFICATION D'UN EQUIPEMENTS</h2>
         <div class="row">
           <div class="col-md-6">
@@ -458,10 +420,10 @@
             </form>
           </div>
         </div>
-      </div>
-      <br>
-      <!-- SUPPRIMER UN PRODUIT -->
-      <div id="SuppEqui">
+       </div>
+       <br>
+       <!-- SUPPRIMER UN PRODUIT -->
+       <div id="SuppEqui">
         <h2>SUPPRIMER UN EQUIPEMENT</h2>
         <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
           <form>

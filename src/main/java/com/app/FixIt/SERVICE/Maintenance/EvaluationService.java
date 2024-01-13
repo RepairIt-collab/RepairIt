@@ -54,8 +54,9 @@ public class EvaluationService {
 
     public void addQuestions(Evaluation evaluation) {
         List<Questions> questions = selectRandomQuestions(20, evaluation.getDomain());
-        if(evaluation.getQuestions().size() == 0){
-        evaluation.setQuestions(questions);}
+        if (evaluation.getQuestions() == null || evaluation.getQuestions().size() == 0) {
+            evaluation.setQuestions(questions);
+        }
         evaluationRepository.save(evaluation);
     }
 

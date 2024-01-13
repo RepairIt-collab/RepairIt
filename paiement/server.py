@@ -26,11 +26,12 @@ def calculate_order_amount(items):
 def create_payment():
     try:
         data = json.loads(request.data)
+        amount = int(data['amount'])  # Récupérer la valeur de l'entier 'amount'
+        
         # Create a PaymentIntent with the order amount and currency
         intent = stripe.PaymentIntent.create(
-            amount=calculate_order_amount(data['items']),
+            amount=amount,
             currency='usd',
-            # In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
             automatic_payment_methods={
                 'enabled': True,
             },

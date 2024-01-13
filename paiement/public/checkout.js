@@ -34,10 +34,12 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
+  const amount = 1000; // Entier que vous souhaitez envoyer
+
   const response = await fetch("/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ amount }),
   });
   const { clientSecret } = await response.json();
   console.log(clientSecret)

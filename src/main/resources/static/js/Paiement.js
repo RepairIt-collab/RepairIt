@@ -1,4 +1,3 @@
-// This is your test publishable API key.
 const stripe = Stripe("pk_test_51OJ8k3IyLHKyHjYEgQvOCCYVfJcCUZCLKuNtOPhaff7CvTRCRNSw6S30ul6heufRN0HsMHc7kS4VsK7vRxOJ1ajU00X5OrHKcf");
 
 // The items the customer wants to buy
@@ -7,7 +6,6 @@ const items = [{ id: "xl-tshirt" }];
 let elements;
 
 initialize();
-checkStatus();
 
 document
   .querySelector("#payment-form")
@@ -15,17 +13,19 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
+  const amount = 1000; // Entier que vous souhaitez envoyer
+
   const response = await fetch("/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ amount }),
   });
   const { clientSecret } = await response.json();
 
   const appearance = {
     theme: 'stripe',
   };
-  elements = stripe.elements({ appearance, clientSecret });
+  elements = stripe.elements({ appearance });
 
   const paymentElementOptions = {
     layout: "tabs",
@@ -35,6 +35,7 @@ async function initialize() {
   paymentElement.mount("#payment-element");
 }
 
+var emailAddress = "ethemanuelivan@gmail.com";
 async function handleSubmit(e) {
   e.preventDefault();
   setLoading(true);
@@ -48,18 +49,15 @@ async function handleSubmit(e) {
     },
   });
 
-  // This point will only be reached if there is an immediate error when
-  // confirming the payment. Otherwise, your customer will be redirected to
-  // your `return_url`. For some payment methods like iDEAL, your customer will
-  // be redirected to an intermediate site first to authorize the payment, then
-  // redirected to the `return_url`.
-  if (error.type === "card_error" || error.type === "validation_error") {
-    showMessage(error.message);
+  if (error) {
+    // Handle error
+    console.log(error);
+    setLoading(false);
   } else {
-    showMessage("An unexpected error occurred.");
+    // Payment succeeded
+    console.log("Payment succeeded");
+    setLoading(false);
   }
-
-  setLoading(false);
 }
 
 // Fetches the payment intent status after payment submission
