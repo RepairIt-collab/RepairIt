@@ -68,17 +68,63 @@ function DisplayChatContact(data) {
                                         ${task.selectedUsername}
                                     </div>
                                 </div>`;
-            divChat.addEventListener("click", () => {
+            divChat.addEventListener("click", function(){
                 TaskId = task.id1;
                 selectedUsername = task.selectedUsername;
                 console.log(TaskId + clientUsername + selectedUsername);
                 fetchAndDisplayUserChat();
+                var envoie = this.parentNode.parentNode
+                var button = envoie.querySelector("#send")
+                button.style.display= "";
+                var listMessage = this.parentNode.querySelectorAll(".chatContent");
+                for(let r = 0 ;r < listMessage.length ; r++){
+                    console.log(listMessage[r].parentNode)
+                    listMessage[r].parentNode.classList.remove('alert-button')
+                }
+                this.classList.add('alert-button');
+                console.log(listMessage)
             });
+        
             Taches.appendChild(divChat);
         }
+            if(task.etat == 2){
+                var divChat = document.createElement("div");
+            // divChat.classList.add("chatContent");
+
+            divChat.innerHTML = `<div id="TA${task.id1}" class="chatContent" style="border-radius:15px;">
+                                    <div>
+                                        <h4> REPARATION ${task.type}</h4>
+                                        <li> APPAREIL : ${task.type}</li>
+                                        <li>${task.date}</li>
+                                        <li>${task.description}</li>
+                                    </div>
+                                    <div id="other${task.id1}" style="visibility: hidden;">
+                                        ${task.selectedUsername}
+                                    </div>
+                                </div>`;
+            divChat.addEventListener("click", function(){
+                TaskId = task.id1;
+                selectedUsername = task.selectedUsername;
+                console.log(TaskId + clientUsername + selectedUsername);
+                fetchAndDisplayUserChat();
+                var envoie = this.parentNode.parentNode
+                var button = envoie.querySelector("#send")
+                button.style.display= "none";
+                console.log(button)
+                var listMessage = this.parentNode.querySelectorAll(".chatContent")
+                for(let r = 0 ;r < listMessage.length ; r++){
+                    console.log(listMessage[r].parentNode)
+                    listMessage[r].parentNode.classList.remove('alert-button')
+                }
+                this.classList.add('alert-button');
+                console.log(listMessage)
+            });
+        
+            Taches.appendChild(divChat);
+            }
+        
     })
 }
-
 //Je veux charger et afficher les messages relatifs a une tache
 async function fetchAndDisplayUserChat(){
 

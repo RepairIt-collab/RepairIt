@@ -1,6 +1,5 @@
 package com.app.FixIt.DTO.Maintenance;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository

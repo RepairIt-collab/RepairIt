@@ -1,6 +1,6 @@
 package com.app.FixIt.ENTITIES.Maintenance;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -9,8 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-
+ 
 @Entity
 public class Evaluation {
     @Id
@@ -19,9 +18,9 @@ public class Evaluation {
     
     @ManyToMany(cascade = CascadeType.ALL) 
     private List<Maintenancier> maintenanciers;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL) 
     private List<Questions> questions;
-    private LocalDate date;
+    private LocalDateTime date;
     private String domain;
     public Long getId() {
         return id;
@@ -47,10 +46,10 @@ public class Evaluation {
     public void setQuestions(List<Questions> questions) {
         this.questions = questions;
     }
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

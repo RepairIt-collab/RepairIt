@@ -142,3 +142,21 @@ span{
   input{
     width: 90%;
   }
+
+
+  /* CODE POUR L'ALLERT DU BOUTON DE MESSAGE LORS QU'ON A CLIQUER DESSUS */
+.alert-button {
+  background-color: #00b2ff;
+  cursor: pointer;
+  border-radius: 10px;
+  animation: alertAnimation 0.5s infinite alternate;
+}
+
+@keyframes alertAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}

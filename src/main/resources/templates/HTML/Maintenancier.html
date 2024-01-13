@@ -73,13 +73,13 @@
                     </div>
                     <div id="bord" class="border me-3" style="margin-left: -6%;"></div>
                     <div class="col-md-3" style="margin-top: 2.5rem; ">
-                        <div class="row my-3 ">
+                        <div class="row my-3 " id="newPlaces" style="cursor: pointer;">
                             <h5 style="color: darkgreen;"><i class="fas fa-plus-circle"></i> Nouvelles Tâches</h5>
                         </div>
-                        <div class="row my-3 ">
+                        <div class="row my-3 " id="coursPlaces" style="cursor: pointer;">
                             <h5 style="color: darkgoldenrod;"><i class="fas fa-spinner"></i> Tâches en Cours</h5>
                         </div>
-                        <div class="row my-3 ">
+                        <div class="row my-3 " id="finishPlaces" style="cursor: pointer;">
                             <h5 style="color: darkred;"><i class="fas fa-check-circle"></i>Tâches Terminées</h5>
                         </div>
                     </div>
@@ -114,6 +114,7 @@
         <br>
 
         <!-- LE MENU TACHE -->
+        <span id="mainmain" th:text="${maintenancier.id}" style="display: none;"></span>
         <div th:if="${maintenancier.test == 2}">
             <div class="taches" style="display: none;">
                 <div class="nouveau" id="new">
@@ -443,7 +444,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary bg-danger"
                             data-bs-dismiss="modal">Fermer</button>
-                        <button type="button" id="creer" onclick="soumettrePrix()" data-bs-dismiss="modal"
+                        <button type="button" onclick="soumettrePrix()" data-bs-dismiss="modal"
                             class="btn btn-primary bg-success">Soumetre</button>
                     </div>
                 </div>

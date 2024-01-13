@@ -81,5 +81,39 @@ public class MaintenancierController {
         return emailDTO;
 
     }
+
+
+    //TERMINER UNE TACHE
+    @PostMapping("/terminerTache")
+    public void terminerTache(@RequestParam("idT") Long idT, @RequestParam("idM") Long idM,@RequestParam("prix") Integer prix) {
+        Maintenancier maintenancier = maintenancierRepository.findById(idM).orElse(null);
+        maintenancier.setStatus(true);
+        Taches taches = tachesRepository.findById(idT).orElse(null);
+        taches.setEtat(2);
+        taches.setCout(prix);
+        if(maintenancier.getTaches() == null){
+            List<Taches> taches2 = new ArrayList<>();
+            taches2.add(taches);
+            maintenancier.setTaches(taches2);
+        } else{
+            maintenancier.getTaches().add(taches);
+        }
+        tachesRepository.save(taches);
+        maintenancierRepository.save(maintenancier);
+        List<Long> longs = maintenancier.getIdfilleuls();
+        if(longs != null){
+            for(Long elt : longs){
+                Maintenancier mainF = maintenancierRepository.findById(elt).orElse(null);
+                if(mainF.getStatus() == false){
+                    mainF.setStatus(true);
+                    maintenancierRepository.save(mainF);
+                }
+            }
+        }
+
+        // TODO: process POST request
+
+        // return entity;
+    }
     
 }

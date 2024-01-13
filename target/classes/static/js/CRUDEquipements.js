@@ -67,10 +67,10 @@ function creerEquipement(jsonData) {
                                      <i onclick="SupprimerEquipement(${data.id})" class="fas fa-trash-alt fa-2x" style="color:#ad0808;"></i>   <!-- Icône de poubelle -->
                                 </div>
                                 <div class="col-md-3">
-                                    <i  class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
+                                    <i onclick="UpdateInfo('${data.type}','${data.nom}','${idP}','${data.id}')" class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
                                 </div>
                                 <div class="col-md-3">
-                                <i onclick="Reparer(${data.type},${data.nom},${idP},${data.id})" class="fas fa-wrench fa-2x" style="color:#00b2ff;"></i>
+                                <i onclick="Reparer('${data.type}','${data.nom}','${idP}','${data.id}')" class="fas fa-wrench fa-2x" style="color:#00b2ff;"></i>
                                 </div>
                              </div>
                            </div>
@@ -119,7 +119,7 @@ function CEquipement() {
 
 document.getElementById("creerEquip").addEventListener('click', CEquipement);
 
-// SUPPRESSION D'UNE TACHE
+// SUPPRESSION D'UN EQUIPEMENT
 function SupprimerEquipement(id) {
     const url = "https://127.0.0.1:9001/RepairIt/Client/Equipement/SuprimerEquipements/" + id;
 
@@ -152,31 +152,34 @@ function supprimerEquipDOM(Id1) {
     }
 }
 
-// CREATION D'UNE TACHE A L'AIDE DE L'EQUIPEMENT
+// CREATION D'UNE TACHE A L'AIDE DE L'EQUIPEMENT(REPARER UN EQUIPEMENT)
 
 function Reparer(type, nom, id, idE) {
-    // var popup =document.getElementById("Modal1");
-    // popup.style.display = "block"
-    // popup.classList.add("show")
-    // var img = document.getElementById(id).src
-    // var photo = img.split("base64,")[1]
-    // path(photo,"preview-image")
-    // document.getElementById('preview-image').style.display = 'block';
-    // document.getElementById("type-appareil").textContent=type
-    // document.getElementById("photo-frame").style.display='none';
-
-    //Reparer("telephone","my self","imgEquip5")
-    var todoTache = {
-        photo: photo, 
-        type: type,
-        description: "appareil " + nom + " deffectueux",
-        latitude: latitude,
-        longitude: longitud,
-        nom: idE
-    };
-
+    var popup =document.getElementById("Modal1");
+    var modal = new bootstrap.Modal(document.getElementById("Modal1"));
+    modal.show();   
+    var img = document.getElementById(id).src
+    var photo = img.split("base64,")[1]
+    path(photo,"preview-image")
+    document.getElementById('preview-image').style.display = 'block';
+    document.getElementById("type-appareil").textContent=type
+    document.getElementById("photo-frame").style.display='none';
+    
+    var cree = popup.querySelector("#creer")
+    cree.addEventListener('click',function(e){
+        e.preventDefault();
+        var todoTache = {
+            photo: photo, 
+            type: type,
+            description: document.getElementById('description').value,
+            latitude: latitude,
+            longitude: longitud,
+            nom: nom+"///"+idE
+        };
     var jsonData = JSON.stringify(todoTache);
-        creerTache(jsonData);
+
+        creerTache(jsonData)
+    })
 
 }
 
@@ -184,7 +187,6 @@ function Reparer(type, nom, id, idE) {
 
 //AFFICHER LES EQUIPEMENT AU CHARGEMENT
 function loadEquipement() {
-    // alert("ok")
     const url = "https://127.0.0.1:9001/RepairIt/Client/Equipement/loadEquipement";
 
     fetch(url, {
@@ -258,7 +260,6 @@ function loadEquipement() {
                          <br>
                          <div class="row">
                             <div class="col-md-3">
-                                <i  class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
                             </div>
                             
                          </div>
@@ -292,10 +293,10 @@ function loadEquipement() {
                                  <i onclick="SupprimerEquipement(${data[i].id})" class="fas fa-trash-alt fa-2x" style="color:#ad0808;"></i>   <!-- Icône de poubelle -->
                             </div>
                             <div class="col-md-3">
-                                <i  class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
+                                <i onclick="UpdateInfo('${data[i].type}','${data[i].nom}','${idP}','${data[i].id}')" class="fas fa-edit fa-2x" style="color:#044602 ;"></i> <!-- Icône de modification -->
                             </div>
                             <div class="col-md-3">
-                                <i onclick="Reparer(${data[i].type},${data[i].nom},${idP})" class="fas fa-wrench fa-2x" style="color:#00b2ff;"></i>
+                                <i onclick="Reparer('${data[i].type}','${data[i].nom}','${idP}','${data[i].id}')" class="fas fa-wrench fa-2x" style="color:#00b2ff;"></i>
                             </div>
                          </div>
                        </div>
@@ -310,8 +311,6 @@ function loadEquipement() {
                 // div.innerHTML = message;
                 div.appendChild(message);
             }
-            // Traitement des données renvoyées par le serveur
-            // console.log(data);
         })
         .catch(error => {
             // Gestion des erreurs
@@ -319,76 +318,6 @@ function loadEquipement() {
         });
 }
 
-
-
-//REPARER UN EQUIPEMENT
-
-
-
-
 window.onload(loadEquipement())
 
-
-
-/**
- * <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item" th:each="equipement: ${equipements}">
-                                <h2 class="accordion-header" th:if="${equipement.etats == 0}">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        th:data-bs-target="'#flush-collapse'+ ${equipement.id}" aria-expanded="false"
-                                        aria-controls="flush-collapseOne"
-                                        th:attr="onclick='path(\'' + ${equipement.photo} + '\', \'equipementElementsss' + ${equipement.id} + '\')'"
-                                        style="color: #ad0808;"> Gater
-
-                                    </button>
-                                </h2>
-                                <h2 class="accordion-header" th:if="${equipement.etats == 1}">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        th:data-bs-target="'#flush-collapse'+ ${equipement.id}" aria-expanded="false"
-                                        aria-controls="flush-collapseOne"
-                                        th:attr="onclick='path(\'' + ${equipement.photo} + '\', \'equipementElementsss' + ${equipement.id} + '\')'"
-                                        style="color: #365bf0;">Reparation en cours...
-
-                                    </button>
-                                </h2>
-                                <h2 class="accordion-header" th:if="${equipement.etats == 2}">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        th:data-bs-target="'#flush-collapse'+ ${equipement.id}" aria-expanded="false"
-                                        aria-controls="flush-collapseOne"
-                                        th:attr="onclick='path(\'' + ${equipement.photo} + '\', \'equipementElementsss' + ${equipement.id} + '\')'"
-                                        style="color: #08ad2e;">Reparer
-
-                                    </button>
-                                </h2>
-                                <div th:id="'flush-collapse' + ${equipement.id}" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <div class="card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-4">
-                                                    <img src="" class="img-fluid rounded-start" alt="image-icone"
-                                                        th:id="'equipementElementsss'+ ${equipement.id}"
-                                                        style="width: 100%; height: 100%;">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body lola">
-                                                        <!-- <div th:if="${equipement.type == null}">
-                                                            <p class="card-text" th:text="${equipement.nom}"></p>
-                                                        </div> -->
-                                                        <!-- <div th:if="{equipement.type != null}"> -->
-                                                        <h5 class="card-title" th:text="${equipement.type.value}"></h5>
-                                                        <p class="card-text" th:text="${equipement.nom}"></p>
-                                                        <i class="fas fa-trash-alt fa-2x" style="color:#983232;"
-                                                            th:attr="onclick='reparer(\'' + ${equipement.id} + '\',\'' + ${equipement.nom} + '\',\'' + ${equipement.photo} + '\')'"></i>
-                                                        <!-- </div> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
- */
 

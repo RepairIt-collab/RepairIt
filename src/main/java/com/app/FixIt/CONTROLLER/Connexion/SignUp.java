@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.FixIt.BOUTIQUE.entities.Commande;
 import com.app.FixIt.BOUTIQUE.entities.Panier;
@@ -113,7 +112,7 @@ public class SignUp {
         commande.setUser(newMaintenancier);
         commandeRepository.save(commande);
 
-        evaluationService.createEvaluationIfDateExpired();
+        evaluationService.createEvaluationIfDateExpired(m.getSpecialite());
         evaluationService.add(newMaintenancier);
         session.setAttribute("id", m.getId());
         session.setAttribute("name", m.getUsername());

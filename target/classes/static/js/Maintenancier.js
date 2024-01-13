@@ -13,8 +13,10 @@ document.getElementById("a").addEventListener("click", function () {
   el3.style.display = "none";
   el5.style.display = "none";
   el7.style.display = "none";
-  el6.style.display = "block"
   elt7.style.display = "none";
+  buttonclic();
+  document.getElementById("newPlaces").click()
+
 
 });
 
@@ -73,7 +75,74 @@ document.getElementById("f").addEventListener("click", function () {
   heureEval()
 });
 
+//CODE POUR GERER LE CLIC SUR LES BOUTONS DE TACHES(NOUVELLES,EN COURS,FINIS)
+function buttonclic(){
+var newTaches = document.getElementById("new")
+var enCours = document.getElementById("cours")
+var finish = document.getElementById("finish")
+var newTacheselt = document.getElementById("newPlaces")
+var enCourselt = document.getElementById("coursPlaces")
+var finishelt = document.getElementById("finishPlaces")
+newTacheselt.addEventListener('click',function(){
+  var text = this.querySelector("h5")
+  var paren = this.parentNode.parentNode
+  if(paren.querySelectorAll("h5").length == 3){
+  var text1=document.createElement("h5")
+  text1.innerHTML=text.innerHTML
+  paren.appendChild(text1)
+  } else{
+    console.log("apris")
+    var text1=paren.querySelectorAll("h5")[3]
+    console.log(text1)
+    text1.innerHTML=text.innerHTML
+    
+    // paren.appendChild(text1)
+  }
+  enCours.style.display='none'
+  finish.style.display='none'
+  newTaches.style.display='';
+  //ajouter la subrillance sur l'endroit cliquer
+})
+enCourselt.addEventListener('click',function(){
+  var text = this.querySelector("h5")
+  var paren = this.parentNode.parentNode
+  if(paren.querySelectorAll("h5").length == 3){
+  var text1=document.createElement("h5")
+  text1.innerHTML=text.innerHTML
+  paren.appendChild(text1)
+  } else{
+    console.log("apris")
+    var text1=paren.querySelectorAll("h5")[3]
+    text1.innerHTML=text.innerHTML
+    console.log(text1)
+    // paren.appendChild(text1)
+  }
+  newTaches.style.display='none'
+  finish.style.display='none'
+  enCours.style.display='';
+  //ajouter la subrillance sur l'endroit cliquer
+})
+finishelt.addEventListener('click',function(){
+  var text = this.querySelector("h5")
+  var paren = this.parentNode.parentNode
+  if(paren.querySelectorAll("h5").length == 3){
+  var text1=document.createElement("h5")
+  text1.innerHTML=text.innerHTML
+  paren.appendChild(text1)
+  } else{
+    console.log("apris")
+    var text1=paren.querySelectorAll("h5")[3]
+    text1.innerHTML=text.innerHTML
+    console.log(text1)
+    // paren.appendChild(text1)
+  }
+  enCours.style.display='none'
+  newTaches.style.display='none'
+  finish.style.display='';
+  //ajouter la subrillance sur l'endroit cliquer
+})
 
+}
 
 
 //CODE POUR GERER LA RECEPTION DE NOTIFFICATION VIA LES WEBSOCKETS
@@ -105,7 +174,7 @@ function sendNotificationN(notification) {
       // Créer une nouvelle notification
       var options = {
         body: notification,
-        icon: 'public/images/Outil.png' // Spécifiez le chemin vers l'icône de la notification
+        icon: document.getElementById("btnNotification").src// Spécifiez le chemin vers l'icône de la notification
       };
       var notification = new Notification('Notification', options);
 
@@ -113,10 +182,13 @@ function sendNotificationN(notification) {
       // Gérer les événements de la notification (clic, fermeture, etc.)
       notification.onclick = function (event) {
         document.getElementById("btnNotification").click()
+        window.location.href = document.referrer;
+        window.location.reload()
       };
 
       notification.onclose = function (event) {
         var messageIcon = document.querySelector(".message-icon");
+        console.log(messageIcon)
         messageIcon.classList.toggle("has-badge");
         // Gérer la fermeture de la notification
         //ajouter le truc bleu sur l'icone 
@@ -800,7 +872,7 @@ document.getElementById("btnNotification").addEventListener("click", function ()
       idM = document.getElementById("mainmain").textContent;
       var content = not.querySelector(".content").querySelector(".buttonNotif")
       var message=`
-      <button class="my-4" onclick="validerParrainage(${idM},${tache})">Envoyer</button>
+      <button class="my-4" onclick="validerParrainage(${idM},${tache})"Valider</button>
       `
       content.innerHTML=message
     }

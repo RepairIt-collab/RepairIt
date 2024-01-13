@@ -21,7 +21,6 @@ import com.app.FixIt.REPOSITORY.Maintenance.EquipementsRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.MaintenancierRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.NotificationRepository;
 import com.app.FixIt.REPOSITORY.Maintenance.TachesRepository;
-import com.app.FixIt.SERVICE.Maintenance.EquipementsService;
 import com.app.FixIt.SERVICE.Maintenance.MaintenancierService;
 import com.app.FixIt.SERVICE.Maintenance.TacheService;
 import com.app.FixIt.Websocket.WebSocketController;
@@ -74,7 +73,7 @@ public class Tache {
         System.out.println(todoTache.getLatitude());
         tache.setDate(localDate);
         tache.setType(todoTache.getType());
-        System.out.println(todoTache.getType().value());
+        System.out.println("*****************"+todoTache.getDescription());
         tache.setDescription(todoTache.getDescription());
         tache.setEtat(0);
         tache.setLongitude(todoTache.getLongitude());
@@ -82,26 +81,31 @@ public class Tache {
         tache.setClient(client);
         tache.setImage(todoTache.getPhoto());
         if (todoTache.getNom() != null) {
-            Long idE = Long.parseLong(todoTache.getNom());
+            Long idE = Long.parseLong(todoTache.getNom().split("///")[1]);
             Equipements equipement = equipementsRepository.findById(idE).orElse(null);
             tache.setEquipements(equipement);
-            equipement.setEtats(1);
+            equipement.setEtats(0);
             equipementsRepository.save(equipement);
+            tache.setEquipements(equipement);
         }
         tache = tacheService.saveTache(tache);
         todoTache.setId1(tache.getId());
 
         List<Maintenancier> maintenanciers = maintenancierService.findMaintenancier(tache);
-        // List<Maintenancier> maintenanciersfilleuls =
         System.out.println("------------" + maintenanciers);
         Notification notif = new Notification();
         notif.setMaintenanciers(maintenanciers);
+        notif.setTaches(tache);
+        if(todoTache.getNom()!= null){
+        String messageString = "Taches concernant l'equipement '"+ todoTache.getNom().split("///")[0] +"' de type " + tache.getType()
+                + " Description du Probleme " + tache.getDescription();
+        notif.setMessage(messageString);
+    } else{
         String messageString = "Taches concernant un equipement de type " + tache.getType()
                 + " Description du Probleme " + tache.getDescription();
         notif.setMessage(messageString);
-        notif.setTaches(tache);
+    }
         notificationRepository.save(notif);
-
         return notif;
     }
 
@@ -141,11 +145,15 @@ public class Tache {
         Taches tache = notification.getTaches();
         Maintenancier maintenancier = maintenancierRepository.findById(idM).orElse(null);
         tache.setMaintenancier(maintenancier);
-        // notification.getMaintenanciers().remove(maintenancier);
         notification.setIdMaintenancier(idM);
         tache.setEtat(1);
         maintenancier.setStatus(false);
         tachesRepository.save(tache);
+        if(tache.getEquipements() != null){
+            Equipements equipements = tache.getEquipements();
+            equipements.setEtats(1);
+            equipementsRepository.save(equipements);
+        }
         maintenancierRepository.save(maintenancier);
         notificationRepository.save(notification);
         if(idF != null){
@@ -171,30 +179,44 @@ public class Tache {
 
     }
 
-    @PostMapping("/terminerTache")
-    public void terminerTache(@RequestParam("idT") Long idT, @RequestParam("idM") Long idM,@RequestParam("prix") Integer prix) {
-        // Long id = (Long) session.getAttribute("id");
-        Maintenancier maintenancier = maintenancierRepository.findById(idM).orElse(null);
-        maintenancier.setStatus(true);
-        Taches taches = tachesRepository.findById(idT).orElse(null);
-        taches.setEtat(2);
-        taches.setCout(prix);
-        tachesRepository.save(taches);
-        maintenancierRepository.save(maintenancier);
-        List<Long> longs = maintenancier.getIdfilleuls();
-        if(longs != null){
-            for(Long elt : longs){
-                Maintenancier mainF = maintenancierRepository.findById(elt).orElse(null);
-                if(mainF.getStatus() == false){
-                    mainF.setStatus(true);
-                    maintenancierRepository.save(mainF);
-                }
-            }
+    @PostMapping("/updateTache/{idT}")
+    public Notification updateTache(@PathVariable Long idT,@RequestBody TacheDto todoTache){
+        Taches tache = tachesRepository.findById(idT).orElse(null);
+        Notification notif = notificationRepository.findByTaches(tache);
+        LocalDate localDate = LocalDate.now();
+        tache.setDate(localDate);
+        tache.setType(todoTache.getType());
+        tache.setDescription(todoTache.getDescription());
+        tache.setEtat(0);
+        tache.setLongitude(todoTache.getLongitude());
+        tache.setLatitude(todoTache.getLatitude());
+        tache.setImage(todoTache.getPhoto());
+        if (todoTache.getNom() != null) {
+            Long idE = Long.parseLong(todoTache.getNom().split("///")[1]);
+            Equipements equipement = equipementsRepository.findById(idE).orElse(null);
+            tache.setEquipements(equipement);
+            equipement.setEtats(0);
+            equipementsRepository.save(equipement);
+            tache.setEquipements(equipement);
         }
-
-        // TODO: process POST request
-
-        // return entity;
+        tachesRepository.save(tache);
+        List<Maintenancier> maintenanciers = maintenancierService.findMaintenancier(tache);
+        notif.setMaintenanciers(maintenanciers);
+        notif.setTaches(tache);
+        if(todoTache.getNom()!= null){
+        String messageString = "Taches concernant l'equipement "+ todoTache.getNom().split("///")[0] +" de type " + tache.getType()
+                + " Description du Probleme " + tache.getDescription();
+        notif.setMessage(messageString);
+    } else{
+        String messageString = "Taches concernant un equipement de type " + tache.getType()
+                + " Description du Probleme " + tache.getDescription();
+        notif.setMessage(messageString);
     }
+        notificationRepository.save(notif);
+        
+        return notif;
+    }
+
+
 
 }

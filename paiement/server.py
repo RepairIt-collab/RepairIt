@@ -16,6 +16,7 @@ app = Flask(__name__, static_folder='public',
             static_url_path='', template_folder='public')
 
 def calculate_order_amount(items):
+    print(items)
     # Replace this constant with a calculation of the order's amount
     # Calculate the order total on the server to prevent
     # people from directly manipulating the amount on the client
@@ -37,7 +38,8 @@ def create_payment():
             },
         )
         return jsonify({
-            'clientSecret': intent['client_secret']
+            'clientSecret': intent['client_secret'],
+            'items':data['items']
         })
     except Exception as e:
         return jsonify(error=str(e)), 403

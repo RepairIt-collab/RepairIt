@@ -1,6 +1,7 @@
 package com.app.FixIt.SERVICE.Maintenance;
 
-import java.time.LocalDate;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,25 +31,27 @@ public class EvaluationService {
     }
 
     public void add(Maintenancier maintenancier) {
-        LocalDate currentDate = LocalDate.now();
+        // LocalDateTime currentDate = LocalDateTime.now();
         expire(maintenancier.getSpecialite());
-        // Evaluation evaluation =
-        // evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(),
-        // currentDate);
-        Evaluation evaluation = evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(),currentDate);
+        // Evaluation evaluation = evaluationRepository.findFirstByDomainAndDateGreaterThanOrderByDateAsc(maintenancier.getSpecialite(),currentDate);
+        Evaluation evaluation = findByDomainAndEvalDate(maintenancier.getSpecialite());
         
         System.out.println(evaluation.getDate());
-        // List<Maintenancier> maintenanciers = new ArrayList<>();
-        // maintenanciers.add(maintenancier);
-
-
         if (evaluation.getMaintenanciers() == null) {
             List<Maintenancier> maintenanciers = new ArrayList<>();
             maintenanciers.add(maintenancier);
             evaluation.setMaintenanciers(maintenanciers);
         } else {
+            Boolean isPresent = false;
+            List<Maintenancier> mainList = evaluation.getMaintenanciers();
+            for(Maintenancier main : mainList){
+                if(maintenancier == main){
+                    isPresent = true;//le maintenancier apartient deja a une evaluation en cours
+                }
+            }
+            if(isPresent == false){
             evaluation.getMaintenanciers().add(maintenancier);
-        }
+        }}
         evaluationRepository.save(evaluation);
     }
 
@@ -96,40 +99,100 @@ public class EvaluationService {
     }
 
     public void expire(String domain) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDatetime = LocalDateTime.now();
         List<Evaluation> evaluations = evaluationRepository.findByDomain(domain);
         System.out.println(evaluations);
         if (evaluations.isEmpty()) {
-            Evaluation eval = new Evaluation();
-            eval.setDomain(domain);
-            eval.setDate(currentDate.plusDays(1));
-            addQuestions(eval);
-            evaluationRepository.save(eval);
+            System.out.println("evaluation empty");
+            Evaluation evalu = new Evaluation();
+            evalu.setDomain(domain);
+            evalu.setDate(currentDatetime.plusMinutes(3));
+            evaluationRepository.save(evalu);
+            addQuestions(evalu);
 
         } else {
+            System.out.println("evaluation is not empty");
             for (Evaluation evaluation : evaluations) {
                 System.out.println(evaluation.getDomain()+"//////////"+evaluation.getDate());
-                int compare = currentDate.compareTo((evaluation.getDate()));
+                int compare = currentDatetime.compareTo((evaluation.getDate()));
                 if (compare > 0 || compare == 0) {
                     System.out.println(compare);
                     System.out.println(evaluation.getDomain()+"\\\\\\\\\\\\\\\\\\"+evaluation.getDate());
                     Evaluation eval = new Evaluation();
                     eval.setDomain(domain);
-                    eval.setDate(currentDate.plusDays(1));
-                    addQuestions(eval);
+                    eval.setDate(currentDatetime.plusMinutes(3));
                     evaluationRepository.save(eval);
+                    addQuestions(eval);
                 }
             }
         }
     }
 
-    public void createEvaluationIfDateExpired() throws Exception {
+    public void createEvaluationIfDateExpired(String domain) throws Exception {
         csvImportRunner.importcsv();
-        List<String> domains = addDomain();
-        for (String domain : domains) {
             expire(domain);
-        }
         System.out.println("///////////////////icic aussi");
+
+    }
+
+
+    public Evaluation findByDomainAndEvalDate(String specialite){
+        LocalDateTime closestDateTime = null;
+        Duration closestDuration = null;
+        LocalDateTime now = LocalDateTime.now();
+        Evaluation evalfinal = new Evaluation();
+        List<Evaluation> evaluations = evaluationRepository.findByDomain(specialite);
+        for(Evaluation evaluation:evaluations){
+            LocalDateTime dateTime = evaluation.getDate();
+            if (dateTime.isAfter(now)) { // Vérifie si la date est dans le futur
+                Duration duration = Duration.between(now, dateTime);
+                if (closestDateTime == null || duration.compareTo(closestDuration) < 0) {
+                    closestDateTime = dateTime;
+                    closestDuration = duration;
+                    evalfinal = evaluation;
+                }
+            }
+        }
+        return evalfinal;
+
+    }
+
+    public Evaluation evaluationLast(Maintenancier maintenancier){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime nearestFutureDateTime = null;
+        LocalDateTime nearestPastDateTime = null;
+        Evaluation evalfinalFutur = new Evaluation();
+        Evaluation evalfinalPasse = new Evaluation();
+        List<Evaluation> evaluations = evaluationRepository.findByMaintenanciers(maintenancier);
+        System.out.println(evaluations);
+        for(Evaluation evaluation:evaluations){
+            LocalDateTime dateTime = evaluation.getDate();
+            System.out.println(dateTime);
+             // Vérifie si la date est dans le futur
+                if (dateTime.isAfter(currentDateTime)) {
+                    System.out.println("futur");
+                if (nearestFutureDateTime == null || dateTime.isBefore(nearestFutureDateTime)) {
+                    System.out.println("futur    futur");
+                    nearestFutureDateTime = dateTime;
+                    evalfinalFutur = evaluation;
+                }
+            } else {
+                System.out.println("passee");
+                if (nearestPastDateTime == null || dateTime.isAfter(nearestPastDateTime)) {
+                    System.out.println("passee        passee");
+                    nearestPastDateTime = dateTime;
+                    evalfinalPasse = evaluation;
+                }
+            }
+            }
+        
+        System.out.println(nearestFutureDateTime);
+        System.out.println(nearestPastDateTime);
+        if (nearestFutureDateTime != null) {
+            return evalfinalFutur;
+        } else {
+            return evalfinalPasse;
+        }
 
     }
 
