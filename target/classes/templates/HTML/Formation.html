@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" th:href="@{/images/Outil.png}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>Formation</title>
+  <link rel="stylesheet" th:href="@{/css/formation.css}">
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-custom">
+  
+    <div id="Menu" >
+      <div class="row">
+        <div class="col-md-2">
+          <div class="container my-2">
+            <a href="@{/RepairIt/Accueil}" class="navbar-brand"> 
+                  <img th:src="@{/images/Outil.png}"> 
+                  <img th:src="@{/images/RepairFormation.png}" style="width: 180px;height: 40px;">
+            </a>
+           </div>
+        </div>
+        <div class="col-md-8">
+        </div>
+      </div>
+      
+      
+    </div>
+  </header>
+
+
+  <!-- Contenu principal -->
+  <main id="formation" class="container" >
+    <div class="row" >
+        <div class="col-md-12 mt-5 text-center">
+            <div class="d-flex">
+                <input class="form-control me-2" id="recherche" placeholder="Entrez un terme cle" style="width: 70%; margin-left: 15%; background-color: #f0f6ff;">
+                <button class="btn btn-outline-success" id="Search">Search</button>
+            </div>
+        </div>
+        <div id="suggest" class="mb-2" style="display: none;">
+          <ul style="list-style: none;" id="suggestionsList"></ul>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-2">
+            <p style="margin-left: 30%; font-size: 1.5rem;">Formation</p>
+        </div>
+        <div class="col-md-1 lu">
+            <div style="border: #00b2ff solid; background-color: #00b2ff; width: 10px; height: 97%;"></div> 
+        </div>
+        <div class="col-md-9">
+            <div id="EL" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-bolt fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>ELECTRICITE</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>La formation en électricité ouvre la voie à une carrière prometteuse dans le domaine des systèmes électriques, en vous permettant d'acquérir les compétences essentielles pour réussir.</p>
+                    </div>
+                    <button id="D1" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="ME" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-cogs fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>MECANIQUE</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>Description 1</p>
+                    </div>
+                    <button id="D2" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="TE" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-phone fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>TELEPHONE</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>Description 1</p>
+                    </div>
+                    <button id="D3" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="OR" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-laptop fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>ORDINATEUR</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>La formation en maintenance d'ordinateur ouvre la voie à une carrière passionnante dans la technologie. Devenez un expert en dépannage informatique et saisissez des opportunités incroyables </p>
+                    </div>
+                    <button id="D4" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="EG" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-blender fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>ELECTROMENAGER</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>Description 1</p>
+                    </div>
+                    <button id="D5" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="PL" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-faucet fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>PLOMBERIE</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>Description 1</p>
+                    </div>
+                    <button id="D6" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="MN" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-hammer fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>MENUISERIE</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>Description 1</p>
+                    </div>
+                    <button id="D7" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+            <div id="FC" class="Domaine">
+                <div class="row">
+                    <div class="col-md-1">
+                         <i class="fa fa-snowflake fa-3x mt-3"></i>
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <h3>FROID ET CLIMATISATION</h3>
+                        <div style="border: #00b2ff solid;"></div> 
+                        <p>Description 1</p>
+                    </div>
+                    <button id="D8" class="btn btn-success my-2">Demarrer</button>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+  </main>
+
+
+
+ <!-- ELECTRICITE -->
+  <main id="Div1" class="container-fluid" style="display: none;" >
+    <div class="row">
+      <div class="col-md-2" id="mems"  style="background-color: #021c44; display: none; ">
+        <i id="retour" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+        <div class="mems"> 
+          <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+          <li> <a class="dropdown-item" data-bs-target="#Electri" data-bs-slide-to="2" href="#">Option 1</a></li>
+          <li><a class="dropdown-item" href="#">Option 2</a></li>
+          <li><a class="dropdown-item" href="#">Option 3</a></li>
+        </div >
+      </div>
+      <div class="col-md-12" id="DIVEL">
+        <div id="Domaine_name">
+          <div class="row">
+              <div class="col-md-1">
+                  <div class="dropdown mt-3">  
+                      <button class="btn btn custom-btn" type="button" id="ButtonSelec">
+                          <i class="fa fa-list" style="color: #fff;"></i>
+                      </button>
+                  </div>  
+              </div>
+              <div class="col-md-11">
+                  <input type="text" value="ELECTRICITE" style="font-size: 3rem;" disable>
+                  <br><br>
+              </div>
+          </div>   
+       </div>
+       <div class="navigation">
+           <div class="row">
+            <div class="col-md-6">
+              <i class="fa fa-arrow-left" data-bs-target="#Electri" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+            </div>
+            <div class="col-md-6">
+              <i class="fa fa-arrow-right " data-bs-target="#Electri" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+            </div>
+           </div>
+       </div>
+       <div id="Electri" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#Electri" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Electri" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Electri" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+                  <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+                  <p>Description</p>
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{@{/PDF/text3.pdf}}" type="application/pdf">  
+                  </div>
+  
+            </div>
+            <div class="carousel-item">
+              <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+              <p>Description</p>
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <embed th:src="@{@{/PDF/text3.pdf}}" type="application/pdf">  
+              </div>
+
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{@{/PDF/text3.pdf}}" type="application/pdf">  
+                </div>
+            </div>
+          </div>
+        </div>  
+       <br>
+      </div>
+    </div>
+   
+  </main>
+
+  <!-- MECANIQUE -->
+   <main id="Div2" class="container-fluid" style="display: none;" >
+    <div class="row">
+      <div class="col-md-2" id="mems2"  style="background-color: #021c44; display: none; ">
+        <i id="retour2" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+        <div class="mems">
+         <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Mecan" data-bs-slide-to="2" href="#">Option 1</a></li>
+         <li><a class="dropdown-item" href="#">Option 2</a></li>
+         <li><a class="dropdown-item" href="#">Option 3</a></li>
+       </div >
+      </div>
+      <div class="col-md-10">
+        <div id="Domaine_name">
+          <div class="row">
+              <div class="col-md-1">
+                  <div class="dropdown mt-3">  
+                   <button class="btn btn custom-btn" type="button" id="ButtonSelec2">
+                     <i class="fa fa-list" style="color: #fff;"></i>
+                    </button>
+                  </div>  
+              </div>
+              <div class="col-md-11">
+                  <input type="text" value="MECANIQUE" style="font-size: 3rem;" disable>
+                  <br><br>
+              </div>
+          </div>   
+       </div>
+       <div class="navigation">
+        <div class="row">
+         <div class="col-md-6">
+           <i class="fa fa-arrow-left" data-bs-target="#Mecan" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+         </div>
+         <div class="col-md-6">
+           <i class="fa fa-arrow-right " data-bs-target="#Mecan" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+         </div>
+        </div>
+      </div>
+       
+       <div id="Mecan" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#Mecan" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Mecan" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Mecan" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+                  <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+                  <p>Description</p>
+                   <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{@{/PDF/text3.pdf}}" type="application/pdf">  
+                </div>
+  
+            </div>
+            <div class="carousel-item">
+              <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+            </div>
+          </div>
+        </div>  
+       <br>
+      </div>
+    </div>
+    
+  </main>
+
+ <!-- TEELEPH0NE -->
+  <main id="Div3" class="container-fluid" style="display: none;" >
+    <div class="row">
+      <div class="col-md-2" id="mems3"  style="background-color: #021c44; display: none; ">
+        <i id="retour3" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+        <div class="mems">
+         <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Mecan" data-bs-slide-to="2" href="#">Option 1</a></li>
+         <li><a class="dropdown-item" href="#">Option 2</a></li>
+         <li><a class="dropdown-item" href="#">Option 3</a></li>
+       </div >
+      </div>
+      <div class="col-md-10">
+        <div id="Domaine_name">
+          <div class="row">
+              <div class="col-md-1">
+                  <div class="dropdown mt-3">  
+                     <button class="btn btn custom-btn" type="button" id="ButtonSelec3">
+                     <i class="fa fa-list" style="color: #fff;"></i>
+                    </button>  
+                  </div>  
+              </div>
+              <div class="col-md-11">
+                  <input type="text" value="TELEPHONIE" style="font-size: 3rem;" disable>
+                  <br><br>
+              </div>
+          </div>   
+       </div>
+       <div class="navigation">
+        <div class="row">
+         <div class="col-md-6">
+           <i class="fa fa-arrow-left" data-bs-target="#Tel" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+         </div>
+         <div class="col-md-6">
+           <i class="fa fa-arrow-right " data-bs-target="#Tel" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+         </div>
+        </div>
+      </div>
+       
+       <div id="Tel" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#Tel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Tel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Tel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+                  <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+                  <p>Description</p>
+                   <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+  
+            </div>
+            <div class="carousel-item">
+              <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+            </div>
+          </div>
+        </div>  
+       <br>
+      </div>
+    </div>
+  
+  </main>
+
+  <!-- ORDINATEUR -->
+  <main id="Div4" class="container-fluid" style="display: none;" >
+    <div class="row">
+      <div class="col-md-2" id="mems4"  style="background-color: #021c44; display: none; ">
+        <i id="retour4" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+        <div class="mems">
+         <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="0" href="#">Elements de base de l'ordinateur(1)</a></li>
+         <li><a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="1" href="#">Elements de base de l'ordinateur(2)</a></li>
+         <li><a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="2" href="#">Autres elements de l'ordinateur</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="3" href="#">Fonctionnement</a></li>
+         <li><a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="4" href="#">Fonctionnalités des elements</a></li>
+         <li><a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="5" href="#">Etapes de maintenance</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="6" href="#">Pannes reccurentes(1)</a></li>
+         <li><a class="dropdown-item" data-bs-target="#Ordina" data-bs-slide-to="7" href="#">Pannes reccurentes(2)</a></li>
+        </div >
+      </div>
+      <div class="col-md-12">
+        <div id="Domaine_name">
+          <div class="row">
+              <div class="col-md-1">
+                  <div class="dropdown mt-3">  
+                    <button class="btn btn custom-btn" type="button" id="ButtonSelec4">
+                     <i class="fa fa-list" style="color: #fff;"></i>
+                    </button>
+                  </div>  
+              </div>
+              <div class="col-md-11">
+                  <input type="text" value="ORDINATEUR" style="font-size: 3rem;" disable>
+                  <br><br>
+              </div>
+          </div>   
+       </div>
+       <div class="navigation">
+        <div class="row">
+         <div class="col-md-6">
+           <i class="fa fa-arrow-left" data-bs-target="#Ordina" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+         </div>
+         <div class="col-md-6">
+           <i class="fa fa-arrow-right " data-bs-target="#Ordina" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+         </div>
+        </div>
+       </div>
+       
+       <div id="Ordina" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="5" aria-label="Slide 6"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="6" aria-label="Slide 7"></button>
+          <button type="button" data-bs-target="#Ordina" data-bs-slide-to="7" aria-label="Slide 8"></button>
+        </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <input type="text" value="Elements de base de l'ordinateur(1)" style="color: #00b2ff;">
+              <p>La leçon sur les éléments de base d'un ordinateur explore les composants essentiels qui permettent à un ordinateur de fonctionner. Cette leçon fournit une introduction claire et concise aux différentes parties d'un ordinateur et à leur rôle dans le processus de traitement des données. La leçon couvrira également les périphériques d'entrée et de sortie.</p>
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/1-Elements de base(1).pdf}" type="application/pdf">  
+                  </div>
+            </div>
+            <div class="carousel-item">
+              <input type="text" value="Elements de base de l'ordinateur(2)" style="color: #00b2ff;">
+              <p>La leçon sur les éléments de base d'un ordinateur explore les composants essentiels qui permettent à un ordinateur de fonctionner. Cette leçon fournit une introduction claire et concise aux différentes parties d'un ordinateur et à leur rôle dans le processus de traitement des données. La leçon couvrira également les périphériques d'entrée et de sortie </p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                <embed th:src="@{/PDF/2-Elements de base(2).pdf}" type="application/pdf">  
+              </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Autres elements de l'ordinateur" style="color: #00b2ff;">
+              <p>Nous commencerons ici par explorer les composants supplémentaires qui jouent un rôle essentiel dans le fonctionnement et l'expérience globale de l'ordinateur. Cette leçon approfondit les différents éléments qui complètent les composants de base d'un ordinateur.</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                <embed th:src="@{/PDF/3-Autres elements.pdf}" type="application/pdf">  
+              </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Fonctionnement" style="color: #00b2ff;">
+              <p>Ici nous plongerons au cœur même de la machine, expliquant en détail le processus interne qui permet à un ordinateur de fonctionner. Cette leçon fournit une compréhension approfondie des principes fondamentaux qui régissent le fonctionnement d'un ordinateur.</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/4-Fonctionnement.pdf}" type="application/pdf">  
+                </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Fonctionnalités des elements" style="color: #00b2ff;">
+              <p>Cette leçon sur le fonctionnement et l'utilité des éléments vous donnera une compréhension approfondie des composants qui constituent un ordinateur et de leur rôle dans le fonctionnement global du système. </p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/5-Fonctionnalités des elements.pdf}" type="application/pdf">  
+                </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Etapes de maintenance" style="color: #00b2ff;">
+              <p>Faisons le tour des différentes étapes nécessaires pour assurer la maintenance efficace d'un ordinateur. Cette leçon fournit un guide pratique pour effectuer des tâches de maintenance régulières afin de maintenir les performances et la fiabilité de l'ordinateur.</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/6-Etapes de maintenance.pdf}" type="application/pdf">  
+                </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Pannes reccurentes(1)" style="color: #00b2ff;">
+              <p>Pour finir explorons les problèmes courants auxquels les utilisateurs d'ordinateurs sont souvent confrontés. Cette leçon fournit une compréhension approfondie des pannes récurrentes et des solutions possibles pour résoudre ces problèmes.</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/7-Pannes reccurentes(1).pdf}" type="application/pdf">  
+                </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Pannes reccurentes(2)" style="color: #00b2ff;">
+              <p>Pour finir explorons les problèmes courants auxquels les utilisateurs d'ordinateurs sont souvent confrontés. Cette leçon fournit une compréhension approfondie des pannes récurrentes et des solutions possibles pour résoudre ces problèmes.</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/8-Pannes reccurentes(2).pdf}" type="application/pdf">  
+                </div>
+            </div>
+          </div>
+        </div>  
+       <br>
+      </div>
+    </div>
+  </main>
+
+  <!-- ELECTROMENAGER -->
+  <main id="Div5" class="container-fluid" style="display: none;" >
+    <div class="row">
+      <div class="col-md-2" id="mems5"  style="background-color: #021c44; display: none; ">
+        <i id="retour5" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+        <div class="mems">
+         <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Mecan" data-bs-slide-to="2" href="#">Option 1</a></li>
+         <li><a class="dropdown-item" href="#">Option 2</a></li>
+         <li><a class="dropdown-item" href="#">Option 3</a></li>
+       </div >
+      </div>
+      <div class="col-md-10">
+        <div id="Domaine_name">
+          <div class="row">
+              <div class="col-md-1">
+                  <div class="dropdown mt-3">  
+                   <button class="btn btn custom-btn" type="button" id="ButtonSelec5">
+                     <i class="fa fa-list" style="color: #fff;"></i>
+                    </button>
+                  </div>  
+              </div>
+              <div class="col-md-11">
+                  <input type="text" value="ELECTROMENAGER" style="font-size: 3rem;" disable>
+                  <br><br>
+              </div>
+          </div>   
+       </div>
+       <div class="navigation">
+        <div class="row">
+         <div class="col-md-6">
+           <i class="fa fa-arrow-left" data-bs-target="#Electrome" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+         </div>
+         <div class="col-md-6">
+           <i class="fa fa-arrow-right " data-bs-target="#Electrome" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+         </div>
+        </div>
+       </div>
+       
+       <div id="Electrome" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#Electrome" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Electrome" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Electrome" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active" >
+                  <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+                  <p>Description</p>
+                   <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+  
+            </div>
+            <div class="carousel-item">
+              <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+            </div>
+          </div>
+        </div>  
+       <br>
+      </div>
+    </div>
+ 
+  </main>
+
+ <!-- PLOMBERIE -->
+ <main id="Div6" class="container-fluid" style="display: none;">
+
+    <div class="row">
+      <div class="col-md-2" id="mems6"  style="background-color: #021c44; display: none; ">
+        <i id="retour6" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+           <div class="mems">
+              <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+              <li> <a class="dropdown-item" data-bs-target="#Mecan" data-bs-slide-to="2" href="#">Option 1</a></li>
+              <li><a class="dropdown-item" href="#">Option 2</a></li>
+              <li><a class="dropdown-item" href="#">Option 3</a></li>
+           </div >
+         </div>
+      <div class="col-md-10">
+        <div id="Domaine_name">
+          <div class="row">
+            <div class="col-md-1">
+              <div class="dropdown mt-3">
+                <button class="btn btn custom-btn" type="button" id="ButtonSelec6">
+                  <i class="fa fa-list" style="color: #fff;"></i>
+                 </button>
+              </div>
+            </div>
+            <div class="col-md-11">
+              <input type="text" value="PLOMBERIE" style="font-size: 3rem;" disable>
+              <br><br>
+            </div>
+          </div>
+        </div>
+        <div class="navigation">
+          <div class="row">
+           <div class="col-md-6">
+             <i class="fa fa-arrow-left" data-bs-target="#Plomb" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+           </div>
+           <div class="col-md-6">
+             <i class="fa fa-arrow-right " data-bs-target="#Plomb" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+           </div>
+          </div>
+         </div>
+      
+        <div id="Plomb" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#Plomb" data-bs-slide-to="0" class="active" aria-current="true"
+              aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Plomb" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Plomb" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+            </div>
+            <div class="carousel-item">
+              <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+            </div>
+            <div class="carousel-item ">
+              <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+              <p>Description</p>
+               <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>  
+</main>
+
+ <!-- MENUISERIE -->
+ <main id="Div7" class="container-fluid" style="display: none;" >
+  <div class="row">
+    <div class="col-md-2" id="mems7"  style="background-color: #021c44; display: none; ">
+      <i id="retour7" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+      <div class="mems">
+         <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Mecan" data-bs-slide-to="2" href="#">Option 1</a></li>
+         <li><a class="dropdown-item" href="#">Option 2</a></li>
+         <li><a class="dropdown-item" href="#">Option 3</a></li>
+      </div >
+    </div>
+    <div class="col-md-10">
+      <div id="Domaine_name">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="dropdown mt-3">  
+                  <button class="btn btn custom-btn" type="button" id="ButtonSelec7">
+                   <i class="fa fa-list" style="color: #fff;"></i>
+                  </button>
+                </div>  
+            </div>
+            <div class="col-md-11">
+                <input type="text" value="MENUISERIE" style="font-size: 3rem;" disable>
+                <br><br>
+            </div>
+        </div>   
+     </div>
+     <div class="navigation">
+      <div class="row">
+       <div class="col-md-6">
+         <i class="fa fa-arrow-left" data-bs-target="#Menui" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+       </div>
+       <div class="col-md-6">
+         <i class="fa fa-arrow-right " data-bs-target="#menui" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+       </div>
+      </div>
+     </div>
+     
+     <div id="Menui" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#Menui" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#Menui" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#Menui" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" >
+                <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+                <p>Description</p>
+                 <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+
+          </div>
+          <div class="carousel-item">
+            <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+            <p>Description</p>
+             <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+          </div>
+          <div class="carousel-item ">
+            <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+            <p>Description</p>
+             <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+              </div>
+          </div>
+        </div>
+      </div>  
+     <br>
+    </div>
+  </div>
+</main>
+
+<!-- FROID ET CLIMATISATION -->
+<main id="Div8" class="container-fluid" style="display: none;" >
+  <div class="row">
+    <div class="col-md-2" id="mems8"  style="background-color: #021c44; display: none; ">
+      <i id="retour8" class="fa fa-arrow-left" style="color: #00b2ff; margin-left: 4%;"></i>
+      <div class="mems">
+         <li><a class="dropdown-item" th:href="@{/RepairIt/Formation}"><i class="fa fa-home"></i> Accueil</a></li>
+         <li> <a class="dropdown-item" data-bs-target="#Mecan" data-bs-slide-to="2" href="#">Option 1</a></li>
+         <li><a class="dropdown-item" href="#">Option 2</a></li>
+         <li><a class="dropdown-item" href="#">Option 3</a></li>
+      </div >
+    </div>
+    <div class="col-md-10">
+      <div id="Domaine_name">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="dropdown mt-3">  
+                  <button class="btn btn custom-btn" type="button" id="ButtonSelec8">
+                   <i class="fa fa-list" style="color: #fff;"></i>
+                  </button>
+                </div>  
+            </div>
+            <div class="col-md-11">
+                <input type="text" value="FROID ET CLIMATISATION" style="font-size: 3rem;" disable>
+                <br><br>
+            </div>
+        </div>   
+     </div>
+     <div class="navigation">
+      <div class="row">
+       <div class="col-md-6">
+         <i class="fa fa-arrow-left" data-bs-target="#Frocli" data-bs-slide="prev" style="margin-left: 20%; color: #021c44;"></i>
+       </div>
+       <div class="col-md-6">
+         <i class="fa fa-arrow-right " data-bs-target="#Frocli" data-bs-slide="next" style="margin-left: 80%; color: #021c44;"></i>
+       </div>
+      </div>
+     </div>
+     
+     <div id="Frocli" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#Frocli" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#Frocli" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#Frocli" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+                <input type="text" value="Nom de la Lecon 1" style="color: #00b2ff;">
+                <p>Description</p>
+                 <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+
+          </div>
+          <div class="carousel-item">
+            <input type="text" value="Nom de la Lecon 2" style="color: #00b2ff;">
+            <p>Description</p>
+             <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+                </div>
+          </div>
+          <div class="carousel-item ">
+            <input type="text" value="Nom de la Lecon 3" style="color: #00b2ff;">
+            <p>Description</p>
+             <div style="display: flex; justify-content: center; align-items: center;">
+                    <embed th:src="@{/PDF/text3.pdf}" type="application/pdf">  
+              </div>
+          </div>
+        </div>
+      </div>  
+     <br>
+    </div>
+  </div>
+ 
+</main>
+
+ 
+
+  <!-- Footer -->
+  <footer class="text-white py-4" style="background-color: #021c44;">
+    <div class="container">
+      <p class="text-center">&copy; 2023 <span>R</span>epait-<span>I</span>t <span>F</span>ormation. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script th:src="@{/js/anime.min.js}"></script>
+  <script th:src="@{/js/Formation.js}"></script>
+  <script th:src="@{/js/Recherche.js}"></script>
+  <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

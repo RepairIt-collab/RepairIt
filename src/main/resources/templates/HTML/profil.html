@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Profil.css}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <title>Profil</title>
+</head>
+
+<body style="height:560px;">
+    <div id="Aide" style="background-color: #021c44;">
+        <div class="my-2" style="display: flex; justify-content: center; align-items: center;">
+            <h3><span>R</span>epair-<span>I</span>t <span>P</span>rofil</h3>
+        </div>
+    </div>
+    <div class="my-2" style="display: flex; justify-content: left; align-items: center;">
+        <a style="font-size: 1.5rem;" onclick="goBack()"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <br>
+    <div id="messagerie" class="messagerie" style="height:450px;">
+        <div class="row my-5">
+            <div class="col-md-4 ms-3" style="height: 60%;">
+                <div class="row my-3">
+                    <img th:src="@{${filename}}" alt="Profile" id="photoprofil" class="navbar-icon"
+                        style="width:140px;height: 140px;">
+                </div>
+                <button id="editPhoto">modifier la photo de profile</button>
+                <input type="file" name="" accept="image/*" id="inputeditPhoto" style="display: none;">
+                <p th:text="${userId}" id="userId"></p>
+                <br>
+
+            </div>
+            <div class="col-md-7 ms-4" style="height:450px; overflow-x: scroll;">
+                <div th:if="${userMaintenancier == null}">
+                    <div>
+                        <h2>NOM D'UTILISATEUR</h2>
+                        <input type="text" th:value="${userClient.username}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>MOT DE PASSE</h2>
+                        <input type="password" th:value="${userClient.password}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>ADRESSE E-MAIL</h2>
+                        <input type="text" th:value="${userClient.email}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>TELEPHONE</h2>
+                        <input type="text" th:value="${userClient.telephone}">
+                    </div>
+                </div>
+                <div th:if="${userClient == null}">
+                    <div>
+                        <h2>NOM </h2>
+                        <input type="text" th:value="${userMaintenancier.nom_complet}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>NOM D'UTILISATEUR</h2>
+                        <input type="text" th:value="${userMaintenancier.username}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>MOT DE PASSE</h2>
+                        <input type="password" th:value="${userMaintenancier.password}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>ADRESSE E-MAIL</h2>
+                        <input type="text" th:value="${userMaintenancier.email}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>TELEPHONE</h2>
+                        <input type="text" th:value="${userMaintenancier.telephone}">
+                    </div>
+                    <br>
+                    <div>
+                        <h2>SPECIALITE</h2>
+                        <input type="text" th:value="${userMaintenancier.specialite}">
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    
+    <script th:src="@{/js/profile.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

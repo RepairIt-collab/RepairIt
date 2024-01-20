@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/Outil.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/accueil.css}"/>
+    <title>Contrat_Clientr</title>
+</head>
+<body>
+    <div id="Apropos" style="background-color: #021c44;">
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+           <h3><span>R</span>epair-<span>I</span>t <span>C</span>ontract</h3>
+        </div> 
+    </div>
+
+    <div id="contract" class="container">
+        <div id="con_Main" class="contract">
+            <div class="my-5"  style="display: flex; justify-content: center; align-items: center;">
+              <h1>BIENVENUE SUR <span>R</span>EPAIR-<span>I</span>T CONTRACT</h1>    
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img th:src="@{/images/contract-1.png}" alt="">    
+            </div>
+            <div class="my-5"  style="display: flex; justify-content: center; align-items: center;">
+                <h2>CONTRACT CLIENT</h2>    
+            </div>
+            <p>
+                Ce document constitue une licence logicielle entre [Repair-It] (ci-après dénommé "Licencié") et le client (ci-après dénommé "Vous") pour l'utilisation du logiciel fourni par le Licencié. Les termes et conditions suivants régissent l'utilisation du logiciel :
+                <br>
+                 <br>
+                 1-AUTORISATION D'UTILISATION DE LA LOCALISATION:
+                <li> En acceptant cette licence, le Client autorise le Licencié à accéder à sa localisation géographique à des fins spécifiques liées au fonctionnement du logiciel. Cette autorisation est nécessaire pour fournir des services basés sur la localisation, tels que des fonctionnalités de navigation ou de recherche de points d'intérêt.
+                </li>
+                <br>
+                <br>
+                 <p>2-RETRAIT DU COMPTE BANCAIRE :</p> 
+                <li>Le Client reconnaît et accepte que le logiciel puisse être utilisé pour effectuer des retraits de son compte bancaire, conformément aux instructions et aux autorisations données par le Client. Le Licencié s'engage à mettre en place des mesures de sécurité appropriées pour protéger les transactions financières du Client.</li>
+                <br>
+                <br>
+                <p>3-CONFIDENTIALITE DES INFORMATIONS :</p>
+                <li>Le Licencié s'engage à ne pas divulguer les informations confidentielles du Client à des tiers, sauf si cela est expressément autorisé par le Client ou requis par la loi. Les informations confidentielles comprennent, sans s'y limiter, les données personnelles, les informations financières et toutes les autres informations sensibles fournies par le Client dans le cadre de l'utilisation du logiciel.
+                </li>
+                <br>
+                <br>
+                <p>4-CONFIDENTIALITES VIS A VIS DES MAINTENANCIERS</p>
+                <li>Le Client s'engage à ne pas partager son numéro de téléphone ou toute autre information personnelle avec les maintenanciers ou tout autre personnel du Licencié intervenant dans la maintenance ou l'assistance technique du logiciel. Le Licencié prendra toutes les mesures raisonnables pour s'assurer que ses employés ou sous-traitants respectent cette exigence de confidentialité.
+                </li>
+                <br>
+                <br>
+                <p>5-RESPONSABILITES ET LIMITATIONS</p>
+                <li>Le Client reconnaît que l'utilisation du logiciel comporte certains risques inhérents, et le Licencié ne peut être tenu responsable des dommages directs, indirects, accessoires, spéciaux ou consécutifs découlant de l'utilisation du logiciel, y compris les pertes financières ou les atteintes à la vie privée.
+                </li>
+                <br>
+                <br>
+                <p>6-DUREE ET RESILIATION</p>
+                <li>Cette licence est valide pour une durée indéterminée, sauf résiliation anticipée. Le Licencié se réserve le droit de résilier cette licence en cas de non-respect des termes et conditions énoncés.
+                </li>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

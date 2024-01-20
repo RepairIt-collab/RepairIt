@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/Outil.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/se connecter.css}">
+    <title>se connecter</title>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+
+</head>
+<body style=" background-color:#021c44;">
+    
+  <!-- MENU SELECTION -->
+  <h1 class="text-center">QUEL COMPTE VOULEZ-VOUS CREER?</h1>
+  <div class="containerDiv text-center" id="Connection" style="background-color:rgba(0, 0, 0, 0);">
+   
+    <div class="row my-3 justify-content-center" style="background-color:#021c44;" >
+        <div class="col-md-4">
+           <img th:src="@{/images/C1.png}"> <br>
+           <button id="bt1">CLIENTS</button>
+        </div>
+        <div class="col-md-4">
+          <img th:src="@{/images/C2.png}"> <br>
+          <button id="bt2" >MAINTENANCIER</button>
+        </div>
+        <div class="col-md-4">
+          <img th:src="@{/images/C4.png}"> <br>
+          <button id="bt3">PARTICULIER</button>
+        </div>
+    </div>
+  </div>
+  <div class="custom-border-top my-2 "></div> 
+  <br>
+
+      <div id="connect">
+        <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+          <h5>BIENVENUE SUR <span>R</span>epair-<span>I</span>t <span>C</span>ONNECTION</h5>    
+       </div> 
+       <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+          <img th:src="@{/images/repair.png}" alt="">
+       </div> 
+       <div class="my-2"  style="display: flex; justify-content: center; align-items: center;">
+        <p>Creez vos comptes en toute simplicite sur notre page de connection</p>
+      </div> 
+      
+      </div>
+
+      <!-- PAGE CONNECTION CLIENT -->
+     <div class="row my-2" id="one">
+       <div class="col-md-6">  
+        <div id="form1" class="ms-3">
+            <div class="form-group"> 
+              <label for="user" class="form-label "><h3>Nom d'Utilisateur </h3></label> 
+              <input type="text" class="form-control " id="user" placeholder="Entrer votre Nom d'Utilisateur"> 
+              <div class="valid-feedback">
+                Champ bien remplis
+              </div>
+              <div class="invalid-feedback">
+                Valeur déja utilisé
+              </div>
+              <div class="invalid-feedback">
+                Champ vide
+              </div>   
+            </div> 
+
+            <br>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class=" form-group "> 
+                  <label for="password" class="form-label "><h3>Mot de Passe</h3></label> 
+                  <input type="password" class="form-control" id="password" placeholder="Entrer votre Mot de passe" > 
+                  <div class="valid-feedback">
+                    Champ bien remplis
+                  </div>
+                  <div class="invalid-feedback">
+                    Au moins 8 lettres avec au moins 2 chiffres ou caracteres speciaux
+                  </div>
+                </div> 
+              </div>
+              <div class="col-md-6">
+                <div class=" form-group"> 
+                  <label for="password01" class="form-label "><h3>Confirmer Mot de Passe</h3></label> 
+                  <input type="password" class="form-control" id="password01" placeholder="Entrer votre Mot de passe"> 
+                  <div class="valid-feedback">
+                    Champ bien remplis
+                  </div>
+                  <div class="invalid-feedback">
+                    Mot de passe incorrect
+                  </div>
+                </div> 
+              </div>
+            </div>
+
+            <br> 
+
+            <div class="form-group"> 
+              <label for="mail" class="form-label "><h3>Adresse E-mail</h3></label> 
+              <input type="email" class="form-control " id="mail" placeholder="Entrer votre adresse e-mail">
+              <div class="valid-feedback">
+                Champ bien remplis
+              </div>
+              <div class="invalid-feedback">
+                Valeur déja utilisé
+              </div>
+              <div class="invalid-feedback">
+                Adresse E-mail invalide
+              </div>
+            </div>
+            
+            <br>
+
+            <div class="form-group"> 
+              <label for="tel" class="form-label "><h3>Numero de Telephone</h3></label> 
+              <input type="text" class="form-control " id="tel" placeholder="Entrer votre numero de telephone">
+              <div class="valid-feedback">
+                Champ bien remplis
+              </div>
+              <div class="invalid-feedback">
+                Valeur déja utilisé
+              </div>
+              <div class="invalid-feedback">
+                Entrer un numero de telephone valide.
+              </div>
+            </div>
+
+            <div class="my-4">
+                <p>Pour lire le contrat et specifification cliquer ici <a href="#" onclick="LicenceC()">Licence</a></p>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="check1">
+              <label class="form-check-label" for="check1">
+                 <p> J'accepte les termes du contrat. </p>
+              </label>
+            </div> 
+           <div>
+             <button id="valid1" class="btn btn-secondary bg-success my-3" disabled>Valider</button>
+           </div>      
+          </div>
+       </div> 
+       <div class="col-md-6">
+           <div id="Logo-Client">
+            <img th:src="@{/images/repair.png}" alt="">
+            <h2>Bienvenue chez notre service de maintenance</h2>
+            <p>Nous sommes ravis de vous accompagner dans vos besoins de maintenance. Veuillez remplir le formulaire ci-dessous pour créer un nouveau client.</p>
+          </div>
+          <div id="Lic-Client" style="display: none;">
+            <h1>LICENCE CLIENT</h1>
+            <textarea  style="width: 100%; height: 530px; color:#021c44; resize: none;" readonly>
+    Ce document constitue une licence logicielle entre [Repair-It] (ci-après dénommé "Licencié") et le client (ci-après dénommé "Vous") pour l'utilisation du logiciel fourni par le Licencié. Les termes et conditions suivants régissent l'utilisation du logiciel :
+    
+        Autorisation d'utilisation de la localisation :
+        En acceptant cette licence, le Client autorise le Licencié à accéder à sa localisation géographique à des fins spécifiques liées au fonctionnement du logiciel. Cette autorisation est nécessaire pour fournir des services basés sur la localisation, tels que des fonctionnalités de navigation ou de recherche de points d'intérêt.
+    
+        Retraits du compte bancaire :
+        Le Client reconnaît et accepte que le logiciel puisse être utilisé pour effectuer des retraits de son compte bancaire, conformément aux instructions et aux autorisations données par le Client. Le Licencié s'engage à mettre en place des mesures de sécurité appropriées pour protéger les transactions financières du Client.
+    
+        Confidentialité des informations :
+        Le Licencié s'engage à ne pas divulguer les informations confidentielles du Client à des tiers, sauf si cela est expressément autorisé par le Client ou requis par la loi. Les informations confidentielles comprennent, sans s'y limiter, les données personnelles, les informations financières et toutes les autres informations sensibles fournies par le Client dans le cadre de l'utilisation du logiciel.
+    
+        Confidentialité vis-à-vis des maintenanciers :
+        Le Client s'engage à ne pas partager son numéro de téléphone ou toute autre information personnelle avec les maintenanciers ou tout autre personnel du Licencié intervenant dans la maintenance ou l'assistance technique du logiciel. Le Licencié prendra toutes les mesures raisonnables pour s'assurer que ses employés ou sous-traitants respectent cette exigence de confidentialité.
+    
+        Responsabilités et limitations :
+        Le Client reconnaît que l'utilisation du logiciel comporte certains risques inhérents, et le Licencié ne peut être tenu responsable des dommages directs, indirects, accessoires, spéciaux ou consécutifs découlant de l'utilisation du logiciel, y compris les pertes financières ou les atteintes à la vie privée.
+    
+        Durée et résiliation :
+        Cette licence est valide pour une durée indéterminée, sauf résiliation anticipée. Le Licencié se réserve le droit de résilier cette licence en cas de non-respect des termes et conditions énoncés.
+    
+    En acceptant cette licence logicielle, le Client reconnaît avoir lu, compris et accepté les termes et conditions énoncés ci-dessus. Cette licence constitue l'accord complet entre les parties et remplace tout autre accord antérieur, écrit ou verbal, relatif au logiciel.
+            </textarea>
+          </div>
+       </div>   
+     </div> 
+     
+     <!-- PAGE DE CONNECTION MAINTENANCIER -->
+     <div class="row my-2" id="two">
+        <div class="col-md-6">
+          <div id="form2" class="ms-3">
+            <div class="form-group"> 
+                <label for="nom" class="form-label "><h3>Nom et Prenom </h3></label> 
+                <input type="text" class="form-control " id="nom" placeholder="Entrer votre Nom et Prenom"> 
+                <div class="valid-feedback">
+                  Champ bien remplis
+                </div>
+                <div class="invalid-feedback">
+                  Valeur déja utilisé
+                </div>
+                <div class="invalid-feedback">
+                 Champ vide ou Contient des caracteres speciaux
+                </div> 
+            </div> 
+             
+             <br> 
+
+             <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group"> 
+                      <label for="user2" class="form-label "><h3>Nom d'Utilisateur </h3></label> 
+                      <input type="text" class="form-control " id="user2" placeholder="Entrer votre Nom d'Utilisateur"> 
+                      <div class="valid-feedback">
+                        Champ bien remplis
+                      </div>
+                      <div class="invalid-feedback">
+                        Valeur déja utilisé
+                      </div>
+                      <div class="invalid-feedback">
+                        Champ vide
+                      </div>
+                  </div>
+                    
+                    <br> 
+                  </div>
+
+                  <div class="col-md-5">
+                    <div class="form-group"> 
+                      <label for="mail2" class="form-label "><h3>Adresse E-mail</h3></label> 
+                      <input type="email" class="form-control " id="mail2" placeholder="Entrer votre adresse E-mail">
+                      <div class="valid-feedback">
+                        Champ bien remplis
+                      </div>
+                      <div class="invalid-feedback">
+                        Valeur déja utilisé
+                      </div>
+                      <div class="invalid-feedback">
+                        Addresse E-mail non valide
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                   
+                  <div class="col-md-3">
+                    <label for="sexe" class="form-label"> <h3>Sexe</h3></label><br>
+                    <select id="sexe" class="form-control" name="sexe">
+                      <option value="Selectionner votre sexe" selected disabled>Selectionner votre sexe</option>
+                      <option value="homme">Homme</option>
+                      <option value="femme">Femme</option>
+                    </select>
+                    <div class="valid-feedback">
+                      Champ bien remplis
+                    </div>
+                    <div class="invalid-feedback">
+                      Champ vide
+                    </div>
+                  </div>
+
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                     <div class=" form-group "> 
+                      <label for="password2" class="form-label "><h3>Mot de Passe</h3></label> 
+                      <input type="password" class="form-control" id="password2" placeholder="Entrer votre Mot de passe"> 
+                      <div class="valid-feedback">
+                        Champ bien remplis
+                      </div>
+                      <div class="invalid-feedback">
+                        Au moins 8 lettres avec au moins 2 chiffres ou caracteres speciaux
+                      </div>
+                    </div> <br> 
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class=" form-group "> 
+                     <label for="password02" class="form-label "><h3>Confirmer Mot de Passe</h3></label> 
+                     <input type="password" class="form-control" id="password02" placeholder="Entrer votre Mot de passe"> 
+                     <div class="valid-feedback">
+                      Champ bien remplis
+                    </div>
+                    <div class="invalid-feedback">
+                      Mot de passe incorrect
+                    </div>
+                    </div> <br> 
+                 </div>
+               
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                    <label for="specialite" class="form-label"> <h3>Specialite</h3></label><br>
+                    <select id="specialite" class="form-control" name="specialite">
+                      <option value="Selectionner votre specialite" selected disabled>Selectionner votre Specialite</option>
+                      <option value="Electricite">Electricite</option>
+                      <option value="Electromenage">Electromenage</option>
+                      <option value="Mecanique">Mecanique</option>
+                      <option value="Informatique-Telephone">Informatique-Telephone</option>
+                      <option value="Informatique-Ordinateur">Informatique-Ordinateur</option>
+                      <option value="Plomberie">Plomberie</option>
+                      <option value="Menuiserie">Menuiserie</option>
+                      <option value="Froid et Climatisation">Froid et Climatisation</option>
+                      <option value="Medicale">Medicale</option>
+                      <option value="Industrielle">Industrielle</option>
+                    </select>
+                    <div class="valid-feedback">
+                      Champ bien remplis
+                    </div>
+                    <div class="invalid-feedback">
+                      Champ vide
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group"> 
+                      <label for="tel2" class="form-label "><h3>Telephone</h3></label> 
+                      <input type="text" class="form-control " id="tel2" placeholder="Entrer votre numero de telephone">
+                      <div class="valid-feedback">
+                        Champ bien remplis
+                      </div>
+                      <div class="invalid-feedback">
+                        Valeur déja utilisé
+                      </div>
+                      <div class="invalid-feedback">
+                        Numero de telephone incorrect
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="my-4">
+                  <p>Pour lire le contrat et specifification cliquer ici <a href="#" onclick="LicenceM()">Licence</a></p>
+              </div>
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="check2">
+                <label class="form-check-label" for="check2">
+                   <p> J'accepte les termes du contrat. </p>
+                </label>
+               </div> 
+
+                <div>
+                  <button id="valid2" class="btn btn-secondary bg-success my-3" disabled>Valider</button>
+                </div> 
+          </div>
+        </div>
+
+        <div class="col-md-6" >
+          <div id="Logo-Main">
+            <img th:src="@{/images/repair.png}" alt="">
+            <h2>Bienvenue chez notre service de maintenance</h2>
+            <p>Nous sommes ravis de vous accueillir dans notre plate-forme. Veuillez remplir le formulaire ci-dessous pour devenir un de nos maintenancier.</p>
+          </div>
+          <div id="Lic-Main" style="display: none;">
+            <h1>LICENCE MAINTENANCIER</h1>
+            <textarea  style="width: 100%; height: 530px; color:#021c44; resize: none;" readonly>
+    Ce document constitue une licence logicielle entre [Repair-It] (ci-après dénommé "Licencié") et le Maintenancier (ci-après dénommé "Vous) pour l'utilisation du logiciel fourni par le Licencié. Les termes et conditions suivants régissent l'utilisation du logiciel :
+    
+        
+
+    Accès et Utilisation de la Plateforme :
+    a. La Plateforme fournira au Maintenancier un accès à des clients potentiels pour des services de maintenance.
+    b. Le Maintenancier garantit que toutes les informations fournies à la Plateforme, y compris sa localisation, ses informations personnelles et son compte Orange Money, sont véridiques et à jour.
+    c. Le Maintenancier s'engage à ne pas divulguer les informations personnelles des clients à des tiers sans leur consentement préalable.
+
+    Conduite et Rendement :
+    a. Le Maintenancier s'engage à fournir des services de maintenance de haute qualité, conformément aux normes professionnelles en vigueur.
+    b. Toute mauvaise conduite, telle que des comportements irrespectueux envers les clients, des retards injustifiés ou des pratiques commerciales déloyales, pourra entraîner l'expulsion immédiate du Maintenancier de la Plateforme.
+    c. Le Maintenancier accepte que la Plateforme surveille régulièrement son rendement et se réserve le droit de résilier le présent Contrat en cas de rendement insatisfaisant.
+
+    Paiement et Commission :
+    a. En contrepartie de l'accès aux clients fourni par la Plateforme, le Maintenancier accepte de verser à la Plateforme une commission de 20 % sur son chiffre d'affaires mensuel généré grâce aux clients de la Plateforme.
+    b. Le Maintenancier s'engage à fournir à la Plateforme des rapports de chiffre d'affaires mensuels précis et complets, calculés conformément aux directives de la Plateforme.
+
+    Responsabilités :
+    a. La Plateforme agit uniquement en tant qu'intermédiaire entre les clients et les Maintenanciers et ne sera pas tenue responsable des éventuelles mauvaises réparations ou de tout autre préjudice causé par le Maintenancier.
+    b. Le Maintenancier est responsable de toute réparation effectuée et garantit la qualité des services fournis.
+
+    Achats de Pièces :
+    a. Toute acquisition de pièces ou de fournitures nécessaires pour effectuer les réparations sera effectuée exclusivement à travers la boutique en ligne de la Plateforme, sauf accord préalable avec la Plateforme.
+
+    Durée et Résiliation :
+    a. Le présent Contrat entre en vigueur à la date de signature et reste en vigueur jusqu'à résiliation.
+    b. Chaque partie peut résilier le Contrat en cas de violation substantielle de l'une des obligations décrites dans le présent Contrat, moyennant un préavis écrit de [60] jours.
+
+En signant ci-dessous, les parties reconnaissent avoir lu, compris et accepté les termes et conditions du présent Contrat de Licence pour les Maintenanciers.
+            </textarea>
+          </div>
+        </div>
+
+     </div>
+    
+
+     <!-- PAGE DE CONNECTION ENTREPRISE-->
+    <div class="row my-2" id="three">
+          <div class="col-md-6">
+              <div id="form3" class="ms-3">     
+                <div class="form-group"> 
+                  <label for="user3" class="form-label "><h3>Nom d'Entreprise</h3></label> 
+                  <input type="text" class="form-control " id="user3" placeholder="Entrer Le nom de votre Entreprise"> 
+                </div> <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class=" form-group "> 
+                      <label for="password3" class="form-label "><h3>Mot de Passe</h3></label> 
+                      <input type="password" class="form-control" id="password3" placeholder="Entrer votre Mot de passe"> 
+                    </div> <br> 
+                  </div>
+                  <div class="col-md-6">
+                    <label for="Domaine" class="form-label"> <h3>Domaine</h3></label><br>
+                    <select id="Domaine" name="Domaine">
+                      <option value="Selectionner votre Domaine" selected disabled>Selectionner votre Domaine</option>
+                      <option value="Hotellerie">Hotellerie</option>
+                      <option value="Medicale">Medicale</option>
+                      <option value="Industrielle">Industrielle</option>
+                      <option value="PME">PME</option>
+                      <option value="Autres">Autres</option>
+                    </select> 
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="form-group"> 
+                      <label for="mail3" class="form-label "><h3>Adresse E-mail</h3></label> 
+                      <input type="email" class="form-control " id="mail3" placeholder="Entrer votre adresse E-mail">
+                    </div>
+                    <br>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group"> 
+                      <label for="tel3" class="form-label "><h3>Telephone</h3></label> 
+                      <input type="text" class="form-control " id="tel3" placeholder="Entrer votre numero de telephone">
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button  id="valid3"  class="btn btn-secondary bg-success my-3" type="submit" >Valider</button>
+                 </div> 
+                </div>
+         </div>
+         <div class="col-md-6">
+            <img th:src="@{/images/repair.png}" alt="">
+            <h2>Bienvenue chez notre service de maintenance</h2>
+            <p>Nous sommes ravis de vous accompagner dans vos besoins de maintenance. Veuillez remplir le formulaire ci-dessous pour dvenir un de nos particuliers.</p>
+        </div>
+    </div>
+
+
+      <script th:src="@{/js/connecter.js}"></script>
+      <script th:src="@{/js/CRUDclient.js}"></script>
+      <script th:src="@{/js/localisation.js}"></script>
+      <script th:src="@{/js/CRUDMaintenancier.js}"></script>
+      <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+      <script th:src="@{/js/valider.js}"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+   </body>
+</html>

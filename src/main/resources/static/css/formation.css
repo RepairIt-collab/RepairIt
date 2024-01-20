@@ -1,0 +1,211 @@
+@media screen and (max-width: 768px) {
+    p {
+      font-size: 14px; /* Taille de police pour les écrans plus petits */
+      line-height: 1.3; /* Hauteur de ligne pour les écrans plus petits */
+    }
+  }
+
+@font-face {
+ font-family: 'Margarine';
+ src: url('Margarine-Regular.ttf') format('truetype');
+}
+
+body{
+    font-family: 'Margarine';
+    overflow-x: hidden;
+}
+
+.bg-custom{
+    background-color: #021c44;
+}
+
+.bg-custom p{
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.bg-custom a{
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+button{
+  color: #fff;
+  background-color: #00b2ff;
+  border-radius: 10px;
+}
+
+input{
+    background-color: #f0f6ff;
+}
+
+#formation.container{
+    width: 100%;
+    height: 520px;
+    overflow-y: scroll;
+}
+
+.fa.fa{
+    color: #021c44;
+    margin-left: 20%;
+}
+
+.Domaine{
+    background-color: #d9e8ff;
+    border-radius: 20px;
+}
+
+.Domaine h3{
+   color: #021c44;
+}
+
+.Domaine .btn{
+    width:85px;
+    margin-left: 70%;
+}
+
+.col-md-1.lu{
+  width: 40px;
+}
+
+
+main h2{
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: #021c44;
+}
+ 
+aside{
+      height: 100%;
+      overflow-y: auto;
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+    background-color: rgb(103, 169, 255);
+    font-size: 1.5rem;
+    color: #fff;
+    width: 80%;
+}
+
+#menu p{
+    font-size:1.2rem;
+    color: #fff;
+}
+
+.list-group-item:hover {
+    background-color: #00b2ff; 
+}
+
+.carousel-inner img{
+    height: 380px;
+}
+
+.card button{
+    background-color: #00b2ff;
+    width: 10%;
+    margin-left: 15%;
+    border-radius: 20px;
+}
+
+.card-body{
+    background-color: transparent;
+}
+
+footer span{
+  color: #00b2ff;
+}
+
+footer p{
+    font-size: 1.3rem;
+}
+
+.nav-link.active{
+    color: #00b2ff;
+}
+
+#Domaine_name input{
+    font-size: 2rem;
+    background-color: #fff;
+    color: #021c44;
+    border: none;
+    pointer-events: none;
+}
+
+.carousel.slide input{
+    font-size: 2rem;
+    background-color: #fff;
+    color: #021c44;
+    border: none;
+    pointer-events: none;
+    width: 100%;
+}
+
+.carousel-control-prev{
+    height:5%;
+    width:20px; 
+    background-color: #021c44; 
+    margin-top: 15%;
+    margin-left: 5%;
+}
+  
+.carousel-control-next{
+    height:5%;
+    width:20px; 
+    background-color: #021c44; 
+    margin-top: 15%;
+    margin-right: 5%;
+}
+
+.col-md-1 button{
+    background-color: #021c44;
+}
+
+.col-md-1 button:hover{
+    background-color: #00b2ff;
+}
+
+.container-fluid .mems{
+    margin-top: 10%; 
+    background-color: #021c44;
+}
+
+.container-fluid .mems li{
+    font-size: 0.8rem;
+    color:#fff;
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+
+.container-fluid .mems li:hover{
+    color: #00b2ff;
+}
+
+
+.container-fluid .mems .fa.fa{
+    color: #00b2ff;
+}
+
+embed{
+    width: 80%; 
+    height: 400px;
+}
+
+li{
+    color:#021c44;
+   justify-content: left;
+}
+
+#suggest{
+    background-color: #f0f6ff; 
+    height: 100px; 
+    overflow-y: scroll;
+    width: 68.9%; 
+    margin-left: 15.6%;
+}
+
+#formation p{
+    color: #021c44;
+}

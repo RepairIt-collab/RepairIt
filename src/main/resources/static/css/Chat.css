@@ -1,0 +1,162 @@
+@font-face {
+    font-family: 'Margarine';
+    src: url('Margarine-Regular.ttf') format('truetype');
+   }
+
+body{
+    font-family:'Margarine';
+}
+
+/* Messagegie */
+.messagerie .col-md-4{
+    border-radius: 20px;
+    border: #021c44 solid;
+    background-color: #021c44;
+}
+
+li{
+    list-style: none;
+}
+
+h3{
+    color: #ffffff;
+}
+
+span{
+    color: #00b2ff;
+}
+
+#chat{
+    border-radius: 20px;
+    overflow-y: scroll;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #E4EFFF;
+}
+.container.message{
+    background-color: #E4EFFF;
+    border-radius: 20px;
+}
+
+.contact{
+    overflow-y: auto;
+}
+
+.messagerie .col-md-10 input{
+    border-radius: 10px;
+    height: 30px;
+}
+
+.fa.fa-camera{
+    height: 10px;
+    width: 20px;
+    color: #00b2ff;
+    
+}
+
+.fa.fa-paper-plane{
+    color: #00b2ff;
+}
+
+#send button {
+   background-color: #021c44;
+   height: 40px;
+   width: 70px; 
+   border-radius: 10px; 
+}
+
+#send button#envoi {
+    background-color: #021c44;
+    height: 40px;
+    width: 55px; 
+    border-radius: 60px; 
+ }
+
+#send textarea{
+    width: 95%; 
+    border-radius: 10px;
+    font-size: 1.1rem; 
+    height: 30px;
+    overflow-y: scroll;
+    resize: none;
+ }
+
+.maintenancier{
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #dcf8c6;
+}
+
+.maintenancier1{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f1b4b4;
+}
+
+.chatContent{
+    background-color: #00b2ff;
+    height: 20%;
+    margin:5%;
+ }
+
+ .receiver{
+    background-color: rgb(255, 196, 196);
+    border-radius: 15px;
+    width: 100%;
+  }
+  
+  .message{
+      background-color: #b3ffb0;
+       border-radius: 15px;
+       width: 100%;
+  }
+
+  .receiver li{
+    list-style: none;
+    font-size: 1.2rem;
+  }
+
+  .message li{
+    list-style: none;
+    font-size: 1.2rem;
+  }
+
+  .message.align-right {
+    text-align: right;
+  }
+  
+  .receiver.align-left {
+    text-align: left;
+  }
+
+  .message h5{
+    font-size: 0.6rem;
+  }
+
+  .receiver h5{
+    font-size: 0.6rem;
+  }
+
+  input{
+    width: 90%;
+  }
+
+
+  /* CODE POUR L'ALLERT DU BOUTON DE MESSAGE LORS QU'ON A CLIQUER DESSUS */
+.alert-button {
+  background-color: #00b2ff;
+  cursor: pointer;
+  border-radius: 10px;
+  animation: alertAnimation 0.5s infinite alternate;
+}
+
+@keyframes alertAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}

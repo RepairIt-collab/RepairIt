@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public/images/Outil.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Information.css}"/>
+    <script th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
+    <title>Repair-It</title>
+</head>
+<body class="bg custom-bg2">
+    
+    <!-- NAV -->
+    <nav class=" navbar navbar-expand-lg position-fixed w-100" style="background-color: #021c44; z-index: 10;">
+        <div class="container-fluid">
+            <div class="col-md-2">
+                <a href="@{/Accueil}" class="navbar-brand"> 
+                    <img th:src="@{public/images/Outil.png}"> 
+                    <img th:src="@{public/images/Repair-It 1.png}">
+                    <i class=""></i>
+                </a>
+            </div>            
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" style="background-color: #00b2ff;">
+                <span class="fas fa-wrench" style="color: #021c44;"></span>
+            </button>
+             <div class="collapse navbar-collapse justify-content-center" id="menu">
+                <ul class="navbar-nav m">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link " id="B0"> Maintenance</a>
+                    </li>
+
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link" id="B1">Particulier</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link" id="B2">Maintenancier</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link" id="B4">Formation</a>
+                    </li>                 
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link" id="B3">Boutique</a>
+                    </li>
+                </ul>
+             </div>
+             <ul class="navbar-nav m-md-auto">
+                <li class="nav-items">
+                    <a href="#" class="nav-link "> Aide</a>
+                </li>
+            </ul>
+             <button class="btn btn custom-btn" onclick="openPopup()">
+                 <img th:src="@{public/images/cadena-2.png}">
+                 <a href="#">Se Connecter</a>
+             </button>
+        </div>
+    </nav>
+
+    <br><br>
+
+     <!-- CHARGEMENT -->
+  <div id="loading" style="display: none;">                 
+    <i class="fas fa-cog fa-spin fa-5x" style="color: #00b2ff;"></i>
+  </div>
+
+    
+      <!-- CONTENU INFORMATION MAINTENANCE -->
+    <div class="container">
+        <div id="intro" class="my-5" style="display: flex; justify-content: center; align-items: center;">
+            <h1>Bienvenu sur la page informative de <span>R</span>epair-<span>I</span>t</h1>    
+        </div>
+        <div  style="display: flex; justify-content: center; align-items: center;">
+                <img th:src="@{public/images/repair.png}">     
+        </div>
+        <br><br>
+        <div id="intro">
+            <p>
+                  Votre application web complète pour la gestion de la maintenance, le recrutement de maintenanciers, la vente et la formation. Repait-It est conçu pour répondre à tous vos besoins en matière de maintenance, en vous offrant une solution centralisée et efficace pour gérer toutes les facettes de votre activité.
+Que vous soyez une entreprise cherchant à optimiser la maintenance de vos équipements, un professionnel de la maintenance à la recherche d'opportunités de travail, ou même un particulier souhaitant obtenir des services de maintenance fiables, Repait-It est là pour vous accompagner.
+            </p>
+            <p>
+                Notre application vous permet de rechercher et de recruter des maintenanciers qualifiés, grâce à notre base de données complète regroupant des profils vérifiés et compétents. Vous pouvez également publier et consulter des offres de maintenance, facilitant ainsi la mise en relation entre les propriétaires d'équipements et les professionnels de la maintenance.
+            </p>
+            <p>
+                En plus de la gestion des ressources humaines, Repait-It vous offre également un système de suivi des tâches de maintenance, vous permettant de planifier, d'organiser et de suivre les interventions de maintenance de manière efficace. Vous pouvez gérer les demandes de maintenance, attribuer des tâches aux maintenanciers, suivre l'avancement des travaux et générer des rapports détaillés.
+            </p> 
+            <p>
+                Mais ce n'est pas tout ! Repait-It propose également une fonctionnalité de vente d'équipements de maintenance et d'outils spécialisés. Vous pouvez consulter notre catalogue en ligne, comparer les produits et effectuer des achats en toute simplicité, en bénéficiant de notre réseau de fournisseurs fiables et de produits de qualité.
+            </p>
+            <p>
+                Enfin, nous sommes conscients de l'importance de la formation continue dans le domaine de la maintenance.
+            </p>
+             <p>C'est pourquoi Repait-It propose également une plateforme de formation en ligne, où vous pouvez accéder à des cours et à des ressources pédagogiques pour améliorer vos compétences et rester à jour avec les dernières avancées de l'industrie.
+Nous sommes ravis de vous accueillir dans l'univers Repait-It, où la gestion de la maintenance devient plus simple, plus efficace et plus performante. Explorez toutes les fonctionnalités de notre application et laissez-nous vous accompagner dans votre parcours de maintenance, de recrutement, de vente et de formation.
+            </p>
+        </div>
+    </div>
+ 
+
+    <div id="contenu" class="container" style="display: none;">
+        <div class="col-12 text-center mt-5 ">
+            <h1>Bienvenu sur <span>R</span>epair-<span>I</span>t</h1>
+            <div class="custom-border-top"></div> 
+            <p class="mt-2">votre logiciel de Gestion de maintenance base sur l’expertise camerounaise</p>   
+        </div>
+        <div class="container-fluid">
+            <div class="row my-5">
+               <div class="col-md-8 my-5">
+                  <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                     <div class="card-body">
+                        <h4 class="my-4">Automatiser vos taches de maintenances</h4>
+                         <p class="card-text">
+                            Nous permettons de gérer vos taches de maintenance avec facilite tout en tenant compte de votre disponibilité et 
+                            vos délais de temps Notre logiciel met en place un système de chat qui vous permet de définir avec votre convenance l’opération de maintenance.
+                        </p>
+                        <a href="#" class="btn my-custom-button5">Demarrer </a>
+                      </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <img th:src="@{public/images/calendrier.png}">
+               </div>
+            </div>
+            <div class="custom-border-top2"></div>
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <img th:src="@{public/images/maintenance-1.png}">
+                </div>
+                <div class="col-md-6 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">Effectuer vos operations de maintenances quelque soit l’appareils</h4>
+                          <p class="card-text">
+                             Notre application de gestion de maintenance couvre les domaines mécaniques ,électriques et informatiques.
+                             <ul>
+                                <li>Voiture en panne?</li>
+                                <li> système électrique ne fonctionnant plus correctement?</li>
+                                <li> Equipements électriques gâtées?</li> 
+                             </ul> 
+                          </p> 
+                         <p> Nous vous inquiète pas et faites nous confiance nous avons la solution a tout vos problèmes de maintenances. </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4"> Faciliter vous l’achat de pièces défectueuses</h4>
+                          <p class="card-text">
+                            Notre boutique vous permet de remplacer les équipements défectueux. Si vous avez besoin de 
+                            pièce ou d’appareil nos sommes a votre disposition.(voir <a href="Boutique.html" id="B">Boutique</a> pour plus d’information).
+                         </p>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img th:src="@{public/images/panier-1.png}">
+                </div>
+             </div> 
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-5">
+                    <img th:src="@{public/images/commentaire-1.png}">
+                </div>
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4"> Participer a notre développement</h4>
+                          <p class="card-text">
+                            Apres vos aches de maintenance vous avez la possibilité de laisser des commentaires 
+                            et notre système de notation nous permet d’évaluer en temps réel la qualité des services 
+                            offert par nos maintenancier.
+                         </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+        </div>    
+    </div> 
+
+      <!-- CONTENU INFORMATION ENTREPRISE -->
+    <div id="contenu1" class="container" style="display: none;">
+        <div class="col-12 text-center mt-5 ">
+            <h1><span>R</span>epair-<span>I</span>t pour les particuliers</h1>
+            <div class="custom-border-top"></div> 
+            <p class="mt-2">votre logiciel de Gestion de maintenance pour vos entreprises base sur l’expertise camerounaise</p>   
+        </div>
+        <div class="container-fluid">
+            <div class="row my-5">
+               <div class="col-md-8 my-5">
+                  <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                     <div class="card-body">
+                        <h4 class="my-4"> Le service de maintenance dans le secteur de la Sante </h4>
+                         <p class="card-text">
+                           Vu l’importance de la sante dans le quotidien de nos vies notre logiciel accompagne
+                             les établissements de sante en leur proposant nos meilleurs maintenanciers afin de garantir en permanence 
+                             le soin des appareils de sante et les véhicules servant d’ambulances .
+                        </p>
+                        <a href="#" class="btn my-custom-button5">Demarrer </a>
+                      </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <img th:src="@{public/images/gestion-1.png}">
+               </div>
+            </div>
+            <div class="custom-border-top2"></div>
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <img th:src="@{public/images/global-1.png}">
+                </div>
+                <div class="col-md-6 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">service de maintenance dans le secteur de l’industrie.</h4>
+                          <p class="card-text">
+                            Nous mettons a disposition nos techniciens pour la gestion la maintenance des divers appareils industriels 
+                            afin de booster la productivité de vos entreprise.
+                             </p>
+                            <a href="#" class="btn my-custom-button5">Demarrer </a>
+                       </div>
+                    </div>
+                </div>
+             </div>
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">  Service de maintenance pour les entreprises.</h4>
+                          <p class="card-text">
+                           Etes vous dans les domaines de l’hôtellerie, restauration ou alors une entreprise indépendante ou une PME?
+                           Pas de soucis faites nous confiance. Nous assurons vos services de maintenance avec la meilleure des qualités.             
+                         </p>
+                         <a href="#" class="btn my-custom-button5">Demarrer </a>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img th:src="@{public/images/boutique-1.png}">
+                </div>
+             </div> 
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-5">
+                    <img th:src="@{public/images/contract-1.png}">
+                </div>
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">  Définissez les termes de vos contracts de maintenances.</h4>
+                          <p class="card-text">
+                          Pour nos particulier nous avons mis sur pieds des contrats de maintenance afin de garantir le suivi effectif
+                           de toute les taches de maintenance. Il prend en compte le diagnostique de vos appareils avant et après la panne.
+                          (voir la section <a href="#">contrat</a>).
+                         </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+        </div>    
+    </div>
+
+      <!-- CONTENU INFORMATION MANITENANCIER -->
+    <div id="contenu2" class="container" style="display: none;">
+        <div class="col-12 text-center mt-5 ">
+            <h1><span>R</span>epair-<span>I</span>t pour les maintenanciers</h1>
+            <div class="custom-border-top"></div> 
+            <p class="mt-2">Intégrer notre communauté des meilleurs maintenanciers du pays</p>   
+        </div>
+        <div class="container-fluid">
+            <div class="row my-5">
+               <div class="col-md-8 my-5">
+                  <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                     <div class="card-body">
+                        <h4 class="my-4">  Intégrer notre communauté </h4>
+                         <p class="card-text">
+                            Nous permettons a ceux présentant des capacités de maintenance d’appliquer leurs acquis en profitant de notre vaste
+                             communauté de consommateur potentielle ayant besoin de leur service.           
+                        </p>
+                        <a href="#" class="btn my-custom-button5">Integrer</a>
+                      </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <img th:src="@{public/images/cv-1.png}">
+               </div>
+            </div>
+            <div class="custom-border-top2"></div>
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <img th:src="@{public/images/maintenancier-1.png}">
+                </div>
+                <div class="col-md-6 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">  Faites de la maintenance quelque soit votre domaine</h4>
+                          <p class="card-text">
+                            Nous intégrons dans notre logiciel des maintenanciers ayant des compétences quelque soit sa spécialité de 
+                            prédilection afin de permettre a nos maintenancier de pleinement exprimer leur potentielle.                      
+                         </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">  Encadrez les futurs maintenanciers</h4>
+                          <p class="card-text">
+                            Vous avez la possibilité de devenir encadreurs afin de partager votre savoir faire aux personnes désireuses
+                             d’apprendre.            
+                         </p>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img th:src="@{public/images/encadrer-1.png}">
+                </div>
+             </div> 
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-5">
+                    <img th:src="@{public/images/temps-1.png}">
+                </div>
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">  Travaillez tout en gardant votre flexibilité et liberté.</h4>
+                          <p class="card-text">
+                           En effet le maintenancier garde son autonomie et peut grâce a notre système de gestion d’effectuer une 
+                           tache ou la décliner. C’est lui qui reste maitre de son emploie de temps          
+                         </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+        </div>    
+    </div>
+
+      <!-- CONTENU INFORMATION BOUTIQUE -->
+    <div id="contenu3" class="container" style="display: none;">
+        <div class="col-12 text-center mt-5 ">
+            <h1>Bienvenu dans la boutique <span>R</span>epair-<span>I</span>t</h1>
+            <div class="custom-border-top"></div> 
+            <p class="mt-2">Faites vos achat en toute tranquillité et avec facilite</p>   
+        </div>
+        <div class="container-fluid">
+            <div class="row my-5">
+               <div class="col-md-8 my-5">
+                  <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                     <div class="card-body">
+                        <h4 class="my-4">   Réaliser vos achat dans notre boutique en ligne  </h4>
+                         <p class="card-text">
+                            Repait-It  met a la disposition de ses clients une E-boutique leurs permettant d’acheter des composant pour 
+                            compléter la maintenance ou bien alors ou des appareils pour satisfaire leur intérêts.
+                        </p>
+                        <a href="#" class="btn my-custom-button5">Acheter </a>
+                      </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <img th:src="@{public/images/achat-1.png}">
+               </div>
+            </div>
+            <div class="custom-border-top2"></div>
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <img th:src="@{public/images/produit-1.png}">
+                </div>
+                <div class="col-md-6 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">Trouvez ce dont vous avez besoin.</h4>
+                          <p class="card-text">
+                            Grace a notre catalogue enrichie et detaille trouvez les equipements et composants dont vous avez besoin. Dans le cas ou vous ne trouvez pas ce que
+                             vous voulez nous commanderons et nous vous informerons de la disponibilte de cet equipements.  
+                             </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4"> Faites vous livrer dans de Bref délais</h4>
+                          <p class="card-text">
+                            Notre service de livraison s’occupera d’acheminer votre achat de la façon
+                             la plus rapide possible dans tout l’étendue du territoire camerounais.                                         
+                         </p>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img th:src="@{public/images/livrer-1.png}">
+                </div>
+             </div> 
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-5">
+                    <img th:src="@{public/images/payer-1.png}">
+                </div>
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">  Payer vos achats de façon plus flexible.</h4>
+                          <p class="card-text">
+                            Nous permettons a tout de faire son achat selon la facon qui lui est le plus adequat. 
+                            Nos paiement peuvent se faire en diverse facon selon la possibilte et les moyens du client.                                                       
+                         </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+        </div>    
+    </div>
+
+      <!-- CONTENU INFORMATION FORMATION -->
+    <div id="contenu4" class="container" style="display: none;">
+        <div class="col-12 text-center mt-5 ">
+            <h1>Bienvenu sur <span>R</span>epair-<span>I</span>t Formation</h1>
+            <div class="custom-border-top"></div> 
+            <p class="mt-2">Formez-vous avec toute simplicite</p>   
+        </div>
+        <div class="container-fluid">
+            <div class="row my-5">
+               <div class="col-md-8 my-5">
+                  <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                     <div class="card-body">
+                        <h4 class="my-4"> Découvrez notre catalogue de document  </h4>
+                         <p class="card-text">
+                            Repait-It met a la disposition de ses clients souhaitant se former 
+                            des documents qui auront pour but de faciliter le processus d’apprentissage de la maintenance comme métier.
+                        </p>
+                        <a href="#" class="btn my-custom-button5">S'inscrire </a>
+                      </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <img th:src="@{public/images/catalogue-1.png}">
+               </div>
+            </div>
+            <div class="custom-border-top2"></div>
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <img th:src="@{public/images/video-1.png}">
+                </div>
+                <div class="col-md-6 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4">Découvrez nos vidéos de formations</h4>
+                          <p class="card-text">
+                      Nous offrons aussi des vidéos de formations dans les divers branches de la maintenances .
+                      Ces vidéos participent également dans la formation théorique en complétant l’apport des documents.
+                             </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4"> La théorie c’est bien mais la pratique c’est encore mieux</h4>
+                          <p class="card-text">
+                            Hormis la formation pratique nous offrons aussi la possibilité a nos apprenants de se former aux contacts de nos maintenanciers.
+                             Ils pourront apprendre les facettes du métiers sous le contrôle de leur encadreur.                                         
+                         </p>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img th:src="@{public/images/pratique-1.png}">
+                </div>
+             </div> 
+             <div class="custom-border-top2"></div>
+             <div class="row my-5">
+                <div class="col-md-5">
+                    <img th:src="@{public/images/rejoindre-1.png}">
+                </div>
+                <div class="col-md-7 my-5">
+                   <div class="card bg-transparent border-0" style="width: 40rem; border-color: none; background-color: #f0f6ff;">
+                      <div class="card-body">
+                         <h4 class="my-4"> Rejoignez notre communauté de maintenancier</h4>
+                          <p class="card-text">
+                            Nous permettons a nos meilleurs formants d’intégrer notre communauté de maintenancier sans toute suivre la période d’essai.
+                             Nous les mettons sur le marche de l’emploie afin qu’ils puissent mettre en valeur leurs compétences.                            
+                         </p>
+                       </div>
+                    </div>
+                </div>
+             </div>
+        </div>    
+    </div>
+
+    
+
+              <!-- POP-UP CONNECTION -->
+
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      
+                        <div class="col-12 text-center">
+                            
+                            <h1 class="modal-title" id="myModalLabel">  <img th:src="@{public/images/cadenas 3.png}">SE CONNECTER</h1>
+                        </div>               
+                    </div>
+                    <br><br>
+                    <div class="modal-body">  
+                      <form>  
+                        <div class="form-group ">
+                            <label for="UTILISATEUR" class="form-label d-flex justify-content-center"><h3>Nom D'Utilisateur/Id Entreprise</h3></label>
+                            <input type="text" class="form-control" id="UTILISATEUR" placeholder="Entrer le Nom d'Utilisateur/Id Entreprise">
+                        </div> 
+                        <br><br>
+                        <div class=" form-group ">
+                            <label for="PASSWORD" class="form-label d-flex justify-content-center"><h3>Mot de Passe</h3></label>
+                            <input type="password" class="form-control" id="PASSWORD" placeholder="Entrer votre Mot de passe">
+                        </div>
+                       </form>  
+                       <br><br>
+                       <div class="col-12 text-center">
+                         <a th:href="@{/connexion}">Vous n'avez pas encore de compte?</a>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button " class="btn btn-secondary bg-danger" data-bs-dismiss="modal">Fermer</button>
+                      <button type="button" onclick="ValideConnection()" class="btn btn-secondary bg-success" data-bs-dismiss="modal">Valider</button>
+                    </div>
+                  </div>
+                </div>
+   </div>
+
+       <!-- LE FOOTER -->
+  <footer>
+    <div class="container-fluid bg custom-bg4 ">
+         <div class="row mt-5 justify-content-center text-center">
+            <div class="col-md-8 mt-5">
+                <img th:src="@{public/images/Repair-It.png}"></a>
+            </div>
+         </div>
+         <div class="row mt-5 ">
+            <div class="col-md-3 my-3">
+                <h4>A PROPOS</h4>
+                 <ul class="mark">
+                    <li><a>Qui sommes nous?</a></li>
+                    <li><a>Notre equipe</a></li>
+                    <li><a>Nos objectifs</a></li>
+                    <li><a>Notre histoire</a></li> 
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>NOS SERVICES</h4>
+                <ul class="mark">
+                    <li><a>Pour nos Clients</a></li>
+                    <li><a>Pour les Maintenanciers</a></li>
+                    <li><a>Pour les Particuliers</a></li>
+                    <li><a>Notre Boutique</a></li>
+                    <li><a>La Formation</a></li>
+                    <li><a>le service Premium</a></li>
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>CONTRAT D'UTILISATION</h4>
+                <ul class="mark">
+                    <li><a>Contrat Pour les maintenancier</a></li>
+                    <li><a>Contrat client</a></li>
+                    <li><a>Contrat de paiement</a></li>
+                    <li><a>Contrat pour la formation</a></li>
+                    <li><a>Contrat pour les particulier</a></li>
+                 </ul>
+            </div>
+            <div class="col-md-3 my-3">
+                <h4>NOS INFORMATIONS</h4>
+                <ul class="mark">
+                    <li><a><img th:src="@{public/images/telephone.jpg}"> +237 621572708 </a></li> 
+                    <img th:src="@{public/images/mail.jpg}"><input type="email" value=" repairituy1@gmail.com ">
+                    <li><a><img th:src="@{public/images/localisation.jpg}"> BP9048 NGOA-EKELLE </a></li> 
+                 </ul>
+            </div>
+         </div>
+         <div class="row mt-5 justify-content-center text-center">
+            <div class="col-md-8">
+                <P style="color: #00b2ff; font-size: 20px;">Nous suivre</P>
+            </div>
+            <div class="col-md-8 mt-2">
+                <a href="#" class="fab fa-facebook fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-linkedin fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-whatsapp fa-3x " style="color: white;"></a>
+                <a href="#"class="fab fa-github fa-3x " style="color: white;"></a>
+                <a href="#" class="fab fa-youtube fa-3x " style="color: white;"></a>
+            </div>
+         </div>
+        
+    </div>
+
+  </footer>
+
+   <script th:src="@{/javascript/accueil.js}"></script> 
+   <script th:src="@{/javascript/valider.js}"></script>
+   <script th:src="@{/javascript/connecter.js}"></script>
+   <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
