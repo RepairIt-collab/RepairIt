@@ -98,8 +98,9 @@
         </div>
 
         <div class="bienvenu">
-            <p>BIENVENU SUR VOTRE PAGE</p>
-
+            <div style="margin-top:15%;">
+                <img th:src="@{/images/repair.png}" style="max-width:100%;height:auto;">     
+             </div>
         </div>
         <div th:if="${maintenancier.test == 0}" id="MaRebours">
             <p
@@ -625,11 +626,7 @@
                 </div>
                 <br>
                 <div>
-                    <button>Historiques des Taches</button>
-                </div>
-                <br>
-                <div>
-                    <button>Mes chats</button>
+                    <button><a th:href="@{/RepairIt/Statistique/Client}">Statistique</a></button>
                 </div>
                 <br>
                 <div class="dropdown">

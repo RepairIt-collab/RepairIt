@@ -442,3 +442,15 @@ footer{
   .has-badge::after {
     display: block;
   }
+
+  
+  #PROF button{
+    color: #fff;
+    background-color: #00b2ff;
+    border-radius: 10px;
+  }
+
+  #PROF a{
+    color: #fff;
+    text-decoration: none;
+  }

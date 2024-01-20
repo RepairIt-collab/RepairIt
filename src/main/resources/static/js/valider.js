@@ -561,23 +561,8 @@ $(document).ready(function() {
       // Ajoutez un gestionnaire d'événements pour l'événement "input"
       formControlElements[i].addEventListener('change', function() {
         // Vérifiez si la classe "is-valid" est présente sur l'élément actuel
-        var isValid = this.classList.contains('is-valid');
-     
-        
-        // Faites quelque chose en fonction de la validité
-        if (isValid) {
-          console.log('La classe "is-valid" est présente.');
-          j=j+1;
-        } 
-        else {
-
-          console.log('La classe "is-valid" est absente.');
-          if(j>=8)
-          {
-            j=j-1;
-          }
-        }
-        console.log(j);
+        var formControl = formulaire.getElementsByClassName('form-control is-valid');
+        console.log(formControl.length);
         caseClient.addEventListener("change", function() {
           if (caseClient.checked && formControl.length==8) {
             submit.disabled = false;
@@ -586,9 +571,16 @@ $(document).ready(function() {
             submit.disabled = true;
           } 
         });
-      });
-     
+      });    
     }
+    document.addEventListener('DOMContentLoaded', function() {
+      var bouton = document.getElementById("valid2");
+
+      bouton.addEventListener('click', function() {
+        bouton.disabled = true;
+        // Autres actions à effectuer après le clic
+      });
+    });
       });
       },
       error: function(xhr, status, error) {
@@ -617,18 +609,3 @@ function LicenceM(){
   document.getElementById("Logo-Main").style.display="none";
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  var caseClient = document.getElementById("check2");
-  var validElement = document.getElementById("valid2");
-
-  caseClient.addEventListener("click",function(){
-    requestLocationPermission()
-  })
-  caseClient.addEventListener("change", function() {
-    if (caseClient.checked) {
-      validElement.disabled = false;
-    } else {
-      validElement.disabled = true;
-    }
-  });
-});

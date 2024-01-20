@@ -427,6 +427,7 @@ footer{
   #PROF button{
     color: #fff;
     background-color: #00b2ff;
+    border-radius: 10px;
   }
 
   #PROF a{
